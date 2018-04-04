@@ -10,10 +10,13 @@
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.5",
     "@fortawesome/fontawesome-free-brands": "^5.0.9",
+    "@fortawesome/fontawesome-free-regular": "^5.0.9",
     "@fortawesome/fontawesome-free-solid": "^5.0.9",
+    "@fortawesome/vue-fontawesome": "^0.0.22",
     "buefy": "^0.6.5",
     "bulma": "^0.6.2",
     "fontawesome": "^4.7.2",
+    "particles.js": "^2.0.0",
     "register-service-worker": "^1.0.0",
     "typed.js": "^2.0.6",
     "vue": "^2.5.13",

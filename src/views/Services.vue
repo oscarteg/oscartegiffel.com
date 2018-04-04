@@ -1,4 +1,6 @@
 <template>
+<div class="container">
+  <Skills/>
   <div class="tile is-ancestor">
     <div class="tile is-vertical is-8">
       <div class="tile">
@@ -43,11 +45,17 @@
         </div>
       </article>
     </div>
-  </div>
+  </div>    
+</div>
 </template>
 
 <script>
+import Skills from "@/components/Skills";
+
 export default {
-  name: "Services"
+  name: "Services",
+  components: {
+    Skills
+  }
 };
 </script>

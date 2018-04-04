@@ -1,6 +1,7 @@
 <template>
-  <header>
-    <section class="hero gradient is-fullheight is-bold">
+  <header class="header">
+    <Particlejs />
+    <section class="hero is-fullheight is-bold">
       <div class="hero-head">
         <NavBar />
       </div>
@@ -44,13 +45,15 @@
 <script>
 import Navigation from "@/components/Navigation";
 import NavBar from "@/components/Navbar";
+import Particlejs from "@/components/Particlejs";
 import Typed from "typed.js";
 
 export default {
   name: "Hero",
   components: {
     Navigation,
-    NavBar
+    NavBar,
+    Particlejs
   },
   mounted() {
     new Typed("#typed-element", {
@@ -62,15 +65,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.gradient {
-  /* bg-shape: */
-  // background-image: linear-gradient(
-  //   31deg,
-  //   rgba(255, 149, 137, 0) 0%,
-  //   #2374ab 87%
-  // );
-  background-image: url(/assets/img/bg-shape.svg);
-}
-</style>
