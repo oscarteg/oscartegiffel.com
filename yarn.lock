@@ -621,6 +621,28 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@fortawesome/fontawesome-common-types@^0.1.3":
+  version "0.1.3"
+  resolved "https://npm.fontawesome.com/002F3B2F-2D5C-480D-9543-B6670F159CF8/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.1.3.tgz#8475e0f2d1ad1f858c4ec2e76ed9a2456a09ad83"
+
+"@fortawesome/fontawesome-free-brands@^5.0.9":
+  version "5.0.9"
+  resolved "https://npm.fontawesome.com/002F3B2F-2D5C-480D-9543-B6670F159CF8/@fortawesome/fontawesome-free-brands/-/fontawesome-free-brands-5.0.9.tgz#6023e29636a6d97a67a36b7e3f4af20f3d1526b0"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.1.3"
+
+"@fortawesome/fontawesome-free-solid@^5.0.9":
+  version "5.0.9"
+  resolved "https://npm.fontawesome.com/002F3B2F-2D5C-480D-9543-B6670F159CF8/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-5.0.9.tgz#456155a1cd82a0342ffe6a869d5a54fdadd78548"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.1.3"
+
+"@fortawesome/fontawesome@^1.1.5":
+  version "1.1.5"
+  resolved "https://npm.fontawesome.com/002F3B2F-2D5C-480D-9543-B6670F159CF8/@fortawesome/fontawesome/-/fontawesome-1.1.5.tgz#c7cfafdd3364245626293cc670357f9fb8487170"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.1.3"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1329,6 +1351,12 @@ browserslist@^3.0.0, browserslist@^3.2.0:
     caniuse-lite "^1.0.30000821"
     electron-to-chromium "^1.3.41"
 
+buefy@^0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.6.5.tgz#84e76e9101085dbbc84e66e755aff75030078553"
+  dependencies:
+    bulma "^0.6.2"
+
 buffer-from@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.0.0.tgz#4cb8832d23612589b0406e9e2956c17f06fdf531"
@@ -1356,6 +1384,10 @@ builtin-modules@^1.0.0:
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
+
+bulma@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.6.2.tgz#f4b1d11d5acc51a79644eb0a2b0b10649d3d71f5"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -2904,6 +2936,10 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
+
+fontawesome@^4.7.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/fontawesome/-/fontawesome-4.7.2.tgz#7f0c72ac7a6b029d3375bacb23522d9acfc50a52"
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -7034,6 +7070,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-awesome@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/vue-awesome/-/vue-awesome-3.0.0.tgz#0b0b37488dd4b7e4b9a269d0e9173cd5ab65ff0f"
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -7092,6 +7132,10 @@ vue-template-es2015-compiler@^1.6.0:
 vue@^2.5.13:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
+
+vuex-loading@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/vuex-loading/-/vuex-loading-0.2.6.tgz#8e77bc28ad786c62fbb0ca595900db2ae2c9e510"
 
 vuex@^3.0.1:
   version "3.0.1"
