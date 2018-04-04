@@ -4,13 +4,21 @@
 // Heading: Poppins
 // Body: Anonymous pro
 
-$family-primary: "Poppins";
+$family-primary: "Anonymous Pro";
 
 // Color scheme
-// Blue: #3423A6
-// Russan violet: #231651
-// Tulip: #FF8484
-// Medium Turqoise: #4DCCBD
-// Lapis Lazuli: #2374AB
+$color-scheme-blue: #3423a6;
+$color-scheme-violet: #231651;
+$color-scheme-tulip: #ff8484;
+$color-scheme-turqiose: #4dccbd;
+$color-scheme-lazuli: #2374ab;
 
 $primary: #3423a6;
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Poppins";
+}

@@ -1,56 +1,21 @@
 <template>
   <header>
-    <section class="hero hero-gradient is-fullheight is-large is-bold">
+    <section class="hero gradient is-fullheight is-bold">
       <div class="hero-head">
-        <nav class="navbar">
-          <div class="container">
-            <div class="navbar-brand">
-              <a class="navbar-item" href="../">
-                <img src="https://picsum.photos/50/100/?random" alt="Logo">
-              </a>
-              <span class="navbar-burger burger" data-target="navbarMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-            <div id="navbarMenu" class="navbar-menu">
-              <div class="navbar-end">
-                <div class="tabs is-right">
-                  <ul>
-                    <li class="is-active">
-                      <a>Home</a>
-                    </li>
-                    <li>
-                      <a href="">Examples</a>
-                    </li>
-                    <li>
-                      <a href="">Features</a>
-                    </li>
-                    <li>
-                      <a href="">Team</a>
-                    </li>
-                    <li>
-                      <a href="">Help</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
+        <NavBar />
       </div>
       <div class="hero-body">
         <div class="container has-text-centered">
           <div class="columns is-vcentered">
             <div class="column is-5">
-              <figure class="image is-4by3">
-                <img src="https://picsum.photos/800/600/?random" alt="Description">
-              </figure>
+              <div class="box">
+                <figure class="image is-square">
+                  <img src="https://picsum.photos/800/600/?random" alt="Description">
+                </figure>
+              </div>
             </div>
             <div class="column is-6 is-offset-1">
-              <h1 class="title is-2">
-                Superhero Scaffolding
+              <h1 id="typed-element" class="title is-2">
               </h1>
               <h2 class="subtitle is-4">
                 Let this cover page describe a product or service.
@@ -67,12 +32,8 @@
       </div>    
       <div class="hero-foot">
         <div class="container">
-          <div class="tabs is-centered">
-            <ul>
-              <li>
-                <a>And this at the bottom</a>
-              </li>
-            </ul>
+          <div class="tabs is-centered is-boxed is-fullwidth">
+            <Navigation />
           </div>
         </div>
       </div>
@@ -81,7 +42,35 @@
 </template>
 
 <script>
+import Navigation from "@/components/Navigation";
+import NavBar from "@/components/Navbar";
+import Typed from "typed.js";
+
 export default {
-  name: "Hero"
+  name: "Hero",
+  components: {
+    Navigation,
+    NavBar
+  },
+  mounted() {
+    new Typed("#typed-element", {
+      strings: ["Developer", "Dont know what i am"],
+      typeSpeed: 250,
+      loop: true,
+      showCursor: false
+    });
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.gradient {
+  /* bg-shape: */
+  // background-image: linear-gradient(
+  //   31deg,
+  //   rgba(255, 149, 137, 0) 0%,
+  //   #2374ab 87%
+  // );
+  background-image: url(/assets/img/bg-shape.svg);
+}
+</style>

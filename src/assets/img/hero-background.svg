@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="827px" height="495px" viewBox="0 0 827 495" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>bg-shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="89.0921579%" y1="93.4046155%" x2="39.3012533%" y2="12.6441639%" id="linearGradient-1">
+            <stop stop-color="#2374AB" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#2374AB" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-197.000000, 0.000000)" fill="url(#linearGradient-1)">
+            <path d="M133,-92 L998.903587,-92 L1141.14811,209.887452 L646.470556,482.63444 C601.810544,507.258326 545.775306,494.329919 516.417757,452.628759 L133,-92 Z" id="bg-shape"></path>
+        </g>
+    </g>
+</svg>

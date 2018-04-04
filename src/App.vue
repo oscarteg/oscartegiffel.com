@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="has-navbar-fixed-top">
     <Hero />
-    <router-view/>
+    <router-view class="section"/>
   </div> 
 </template>
 <script>
