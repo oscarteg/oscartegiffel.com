@@ -3,7 +3,7 @@ import Router from "vue-router";
 
 import Home from "@/views/Home";
 import About from "@/views/About";
-import Service from "@/views/Service";
+import Services from "@/views/Services";
 import Resume from "@/views/Resume";
 import Work from "@/views/Work";
 import Contact from "@/views/Contact";
@@ -21,8 +21,8 @@ export default new Router({
     },
     {
       path: "/wat-ik-doe",
-      name: "service",
-      component: Service
+      name: "services",
+      component: Services
     },
     {
       path: "/cv",
