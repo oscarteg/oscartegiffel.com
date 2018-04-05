@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
 		<div class="tile is-ancestor">
 			<div class="tile is-parent">
 				<article class="tile is-child box">
@@ -128,5 +128,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Home"
+};
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/sass/variables";
+
+.tile:hover:not(.is-parent):not(.is-ancestor) {
+  color: $primary;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+</style>

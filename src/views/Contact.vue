@@ -1,7 +1,14 @@
 <template>
-  <h1>Contact</h1>
+  <ContactForm />
 </template>
 
 <script>
-export default {};
+import ContactForm from "@/components/ContactForm";
+
+export default {
+  name: "Contact",
+  components: {
+    ContactForm
+  }
+};
 </script>

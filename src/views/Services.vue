@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div>
   <Skills/>
   <div class="tile is-ancestor">
     <div class="tile is-vertical is-8">

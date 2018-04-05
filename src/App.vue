@@ -1,7 +1,7 @@
 <template>
   <div>
     <Hero />
-    <router-view class="section"/>
+    <router-view class="section box container"  />
     <Footer />
   </div> 
 </template>
