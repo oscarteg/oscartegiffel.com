@@ -1,5 +1,5 @@
 <template>
-  <div id='particles'></div>
+  <div id='particles' class="is-overlay"></div>
 </template>
 
 <script>
@@ -131,12 +131,3 @@ export default {
   }
 };
 </script>
-
-<style>
-#particles canvas {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-</style>

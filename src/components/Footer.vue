@@ -3,11 +3,14 @@
   <div class="container">
     <div class="content has-text-centered">
         <div class="columns">
-            <div class="column contact">
+            <div class="column ">
                 <p><font-awesome-icon icon="envelope"/><a href="mailto:oscar@tegiffel.com"> oscar[at]tegiffel[dot]com</a>
                 <p><font-awesome-icon icon="mobile"/><a href="tel:0031652789990"> +31 6 52789990</a></p>
                 <p><font-awesome-icon :icon="['fab', 'telegram']"/><a href="https://t.me/oscarteg"> @oscarteg</a></p>
                 <p><font-awesome-icon :icon="['fab', 'whatsapp']"/><a href="https://api.whatsapp.com/send?phone=31652789990"> +31 6 52789990</a></p>
+            </div>
+            <div class="column">
+              <Skills />
             </div>
         </div>
         <section class="section">
@@ -25,13 +28,20 @@
                   <a href="https://www.linkedin.com/in/otegiffel/"><font-awesome-icon :icon="['fab', 'linkedin']"/></a>
               </div>
               <div class="column">
-                <button class="button is-primary is-outlined" @click="jobStatus">
-                 <font-awesome-icon icon="briefcase" pull="left"/> job status
-                </button>                
+                            
               </div>
               <div class="column">
                 Copyright © 2018 Oscar te Giffel | All Rights Reserved.
               </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="columns">
+            <div class="column">
+              <button class="button is-primary is-outlined" @click="jobStatus">
+                 <font-awesome-icon icon="briefcase" pull="left"/> job status
+                </button>    
+            </div>
           </div>
         </section>
     </div>
@@ -44,12 +54,14 @@ import {
   FontAwesomeIcon,
   FontAwesomeLayers
 } from "@fortawesome/vue-fontawesome";
+import Skills from "@/components/Skills";
 
 export default {
   name: "Footer",
   components: {
     FontAwesomeIcon,
-    FontAwesomeLayers
+    FontAwesomeLayers,
+    Skills
   },
   methods: {
     jobStatus() {

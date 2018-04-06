@@ -1,16 +1,19 @@
 <template>
-<div>
-    <div class="field is-grouped is-grouped-multiline">
-        <div class="control" v-for="skill in skills" :key="skill.name">
-            <div class="tags has-addons ">
-                <span class="tag is-medium is-primary">{{ skill.name }}</span>
-                <span class="tag is-medium">
-                    <font-awesome-icon icon="star" v-for="(rating, index) in skill.rating" :key="index"/>
-                </span>
-            </div>
+  <div class="skills ha">
+    <div class="control field" v-for="skill in skills" :key="skill.name">
+      <div class="field">
+        <div class="tags has-addons">
+            <span class="tag is-primary">{{ skill.name }}</span>
+            <span class="tag is-warning" v-if="skill.frameworks">
+              {{ skill.frameworks.join('/')}}
+            </span>
+            <span class="tag ">
+                <font-awesome-icon icon="star" v-for="(rating, index) in skill.rating" :key="index"/>
+            </span>
+        </div>
         </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -35,7 +38,17 @@ export default {
         },
         {
           name: "Javascript",
-          rating: 3
+          frameworks: ["React", "VueJS"],
+          rating: 4
+        },
+        {
+          name: "Php",
+          frameworks: ["Laravel"],
+          rating: 4
+        },
+        {
+          name: "Java",
+          rating: 4
         }
       ]
     };

@@ -20,7 +20,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/wat-ik-doe",
+      path: "/wat-ik-kan",
       name: "services",
       component: Services
     },

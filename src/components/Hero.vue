@@ -11,7 +11,7 @@
             <div class="column is-5">
               <div class="box">
                 <figure class="image is-square">
-                  <img src="https://picsum.photos/800/600/?random" alt="Description">
+                  <img src="https://picsum.photos/600/600/?random" alt="Description">
                 </figure>
               </div>
             </div>

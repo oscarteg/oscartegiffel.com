@@ -1,6 +1,5 @@
 <template>
 <div>
-  <Skills/>
   <div class="tile is-ancestor">
     <div class="tile is-vertical is-8">
       <div class="tile">
@@ -50,12 +49,7 @@
 </template>
 
 <script>
-import Skills from "@/components/Skills";
-
 export default {
-  name: "Services",
-  components: {
-    Skills
-  }
+  name: "Services"
 };
 </script>
