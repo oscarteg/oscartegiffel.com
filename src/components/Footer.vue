@@ -1,43 +1,47 @@
 <template>
 <footer class="footer">
   <div class="container">
-    <div class="content has-text-centered">
-        <div class="columns">
-            <div class="column ">
-                <p><font-awesome-icon icon="envelope"/><a href="mailto:oscar@tegiffel.com"> oscar[at]tegiffel[dot]com</a>
-                <p><font-awesome-icon icon="mobile"/><a href="tel:0031652789990"> +31 6 52789990</a></p>
-                <p><font-awesome-icon :icon="['fab', 'telegram']"/><a href="https://t.me/oscarteg"> @oscarteg</a></p>
-                <p><font-awesome-icon :icon="['fab', 'whatsapp']"/><a href="https://api.whatsapp.com/send?phone=31652789990"> +31 6 52789990</a></p>
+    <div class="content">
+        <div class="columns is-centered">
+            <div class="column is-one-quarter">
+              <div class="has-text-centered">
+                <p><font-awesome-icon class="fa-fw" icon="envelope"/><a href="mailto:oscar@tegiffel.com"> oscar[at]tegiffel[dot]com</a>
+                <p><font-awesome-icon class="fa-fw" icon="mobile"/><a href="tel:0031652789990"> +31 6 52789990</a></p>
+                <p><font-awesome-icon class="fa-fw" :icon="['fab', 'telegram']"/><a href="https://t.me/oscarteg"> @oscarteg</a></p>
+                <p><font-awesome-icon class="fa-fw" :icon="['fab', 'whatsapp']"/><a href="https://api.whatsapp.com/send?phone=31652789990"> +31 6 52789990</a></p>
+              </div>
             </div>
-            <div class="column">
-              <Skills />
+            <div class="column is-one-quarter">
+              <div class="has-text-centered">
+                <Skills />
+              </div>
             </div>
         </div>
         <section class="section">
-          <div class="columns">
-            <div class="column fa-2x fa-fw socials">
-                  <a href="https://facebook.com/oscarteg"><font-awesome-icon :icon="['fab', 'facebook-square']"/></a>
-                  <a href="https://twitter.com/oscartegiffel"><font-awesome-icon :icon="['fab', 'twitter-square']"/></a>
-                  <a href="https://github.com/oscarteg"><font-awesome-icon :icon="['fab', 'github-square']"/></a>
-                  <a href="https://gitlab.com/oscarteg">
-                      <font-awesome-layers >
-                          <font-awesome-icon icon="square" />
-                          <font-awesome-icon :icon="['fab', 'gitlab']" transform="shrink-6" style="color: white;" />
-                      </font-awesome-layers>
-                  </a>
-                  <a href="https://www.linkedin.com/in/otegiffel/"><font-awesome-icon :icon="['fab', 'linkedin']"/></a>
+          <div class="columns is-centered">
+            <div class="column">
+              <div class="socials fa-2x has-text-centered">
+                <a href="https://facebook.com/oscarteg"><font-awesome-icon :icon="['fab', 'facebook-square']"/></a>
+                <a href="https://twitter.com/oscartegiffel"><font-awesome-icon :icon="['fab', 'twitter-square']"/></a>
+                <a href="https://github.com/oscarteg"><font-awesome-icon :icon="['fab', 'github-square']"/></a>
+                <a href="https://gitlab.com/oscarteg">
+                    <font-awesome-layers >
+                        <font-awesome-icon icon="square" />
+                        <font-awesome-icon :icon="['fab', 'gitlab']" transform="shrink-6" style="color: white;" />
+                    </font-awesome-layers>
+                </a>
+                <a href="https://www.linkedin.com/in/otegiffel/"><font-awesome-icon :icon="['fab', 'linkedin']"/></a>
               </div>
-              <div class="column">
-                            
-              </div>
-              <div class="column">
-                Copyright © 2018 Oscar te Giffel | All Rights Reserved.
-              </div>
+            </div>
+            
+            <div class="column">
+              Copyright © 2018 Oscar te Giffel | All Rights Reserved.
+            </div>
           </div>
         </section>
         <section class="section">
           <div class="columns">
-            <div class="column">
+            <div class="column is-centered">
               <button class="button is-primary is-outlined" @click="jobStatus">
                  <font-awesome-icon icon="briefcase" pull="left"/> job status
                 </button>    
@@ -83,6 +87,6 @@ export default {
 
 <style lang="scss" scoped>
 .socials > a {
-  margin: 5px;
+  margin: 0.1em;
 }
 </style>

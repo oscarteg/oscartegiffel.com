@@ -13,9 +13,11 @@
     "@fortawesome/fontawesome-free-regular": "^5.0.9",
     "@fortawesome/fontawesome-free-solid": "^5.0.9",
     "@fortawesome/vue-fontawesome": "^0.0.22",
+    "animate.css": "^3.6.1",
     "buefy": "^0.6.5",
     "bulma": "^0.6.2",
     "fontawesome": "^4.7.2",
+    "lodash": "^4.17.5",
     "particles.js": "^2.0.0",
     "register-service-worker": "^1.0.0",
     "typed.js": "^2.0.6",
@@ -23,8 +25,7 @@
     "vue-awesome": "^3.0.0",
     "vue-i18n": "^7.6.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "vuex-loading": "^0.2.6"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.6",

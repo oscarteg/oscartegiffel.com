@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Buefy from "buefy";
-import VueLoading from "vuex-loading";
 import fontawesome from "@fortawesome/fontawesome";
 import brands from "@fortawesome/fontawesome-free-brands";
 import solid from "@fortawesome/fontawesome-free-solid";
 import regular from "@fortawesome/fontawesome-free-regular";
 import VueI18n from "vue-i18n";
+import _ from "lodash";
 
 import App from "./App.vue";
 import router from "./router";
@@ -34,7 +34,15 @@ const i18n = new VueI18n({
   messages // set locale messages
 });
 
-// Add buefy
+/*
+
+Add styling to Vue
+
+Buefy 
+Fontawesome
+Vue loading
+
+*/
 Vue.use(Buefy, {
   defaultIconPack: "fas"
 });
@@ -42,8 +50,13 @@ Vue.use(Buefy, {
 // Add libraries to fontawesome
 fontawesome.library.add(brands, solid, regular);
 
-// Vue loading
-Vue.use(VueLoading);
+/*
+ Adding utils
+
+ Lodash
+*/
+
+Vue.prototype.$_ = _;
 
 Vue.config.productionTip = false;
 
@@ -51,8 +64,5 @@ new Vue({
   router,
   store,
   i18n,
-  vueLoading: new VueLoading({
-    useVuex: true
-  }),
   render: h => h(App)
 }).$mount("#app");

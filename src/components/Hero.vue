@@ -16,16 +16,15 @@
               </div>
             </div>
             <div class="column is-6 is-offset-1">
-              <h1 id="typed-element" class="title is-2">
-              </h1>
+              <TypedJs :strings="['developer']" />
               <h2 class="subtitle is-4">
                 Let this cover page describe a product or service.
               </h2>
               <br>
               <p class="has-text-centered">
-                <a class="button is-medium is-primary is-outlined">
+                <button class="button is-medium is-primary is-outlined">
                   Learn more
-                </a>
+                </button>
               </p>
             </div>
           </div>
@@ -46,22 +45,15 @@
 import Navigation from "@/components/Navigation";
 import NavBar from "@/components/Navbar";
 import Particlejs from "@/components/Particlejs";
-import Typed from "typed.js";
+import TypedJs from "@/components/Typedjs";
 
 export default {
   name: "Hero",
   components: {
     Navigation,
     NavBar,
-    Particlejs
-  },
-  mounted() {
-    new Typed("#typed-element", {
-      strings: ["Developer", "Dont know what i am"],
-      typeSpeed: 250,
-      loop: true,
-      showCursor: false
-    });
+    Particlejs,
+    TypedJs
   }
 };
 </script>

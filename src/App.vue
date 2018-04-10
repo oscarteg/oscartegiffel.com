@@ -1,7 +1,12 @@
 <template>
   <div>
     <Hero />
-    <router-view class="section box container"  />
+    <transition mode="out-in" 
+      enter-active-class="animated fadeInLeft"
+      leave-active-class="animated fadeOutRight"
+      >
+      <router-view class="section container"  />
+    </transition>
     <Footer />
   </div> 
 </template>

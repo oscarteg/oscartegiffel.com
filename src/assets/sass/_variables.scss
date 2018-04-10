@@ -10,10 +10,23 @@ $family-primary: "Anonymous Pro";
 $color-scheme-blue: #3423a6;
 $color-scheme-violet: #231651;
 $color-scheme-tulip: #ff8484;
-$color-scheme-turqiose: #4dccbd;
+$color-scheme-turquoise: #4dccbd;
 $color-scheme-lazuli: #2374ab;
 
-$primary: #3423a6;
+// $primary: $turquoise
+// $link: $blue
+// $info: $cyan
+// $success: $green
+// $warning: $yellow
+// $danger: $red
+// $dark: $grey-darker
+// $text: $grey-dark
+
+$primary: $color-scheme-blue;
+$info: $color-scheme-tulip;
+$link: $color-scheme-lazuli;
+$info: $color-scheme-turquoise;
+
 
 h1,
 h2,

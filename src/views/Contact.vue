@@ -1,5 +1,8 @@
 <template>
+<div class="content">
+  <h1>Neem contact op</h1>
   <ContactForm />
+</div>
 </template>
 
 <script>

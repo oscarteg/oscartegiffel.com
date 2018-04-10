@@ -1,48 +1,48 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import Home from "@/views/Home";
-import About from "@/views/About";
-import Services from "@/views/Services";
-import Resume from "@/views/Resume";
-import Work from "@/views/Work";
+import AboutMe from "@/views/AboutMe";
+import WhatICan from "@/views/WhatICan";
+import WhatIHaveLearned from "@/views/WhatIHaveLearned";
+import WhatIHaveDone from "@/views/WhatIHaveDone";
 import Contact from "@/views/Contact";
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
-  linkExactActiveClass: "is-active",
+  linkExactActiveClass: "is-active ",
   routes: [
     {
-      path: "/",
-      name: "home",
-      component: Home
+      path: "/over-mij",
+      name: "AboutMe",
+      component: AboutMe
     },
     {
       path: "/wat-ik-kan",
-      name: "services",
-      component: Services
+      name: "WhatICan",
+      component: WhatICan
     },
     {
-      path: "/cv",
-      name: "resume",
-      component: Resume
+      path: "/wat-ik-heb-geleerd",
+      name: "WhatIHaveLearned",
+      component: WhatIHaveLearned
     },
     {
-      path: "/ervaring",
-      name: "work",
-      component: Work
-    },
-    {
-      path: "/over-mij",
-      name: "about",
-      component: About
+      path: "/wat-ik-heb-gedaan",
+      name: "WhatIHaveDone",
+      component: WhatIHaveDone
     },
     {
       path: "/contact",
-      name: "contact",
+      name: "Contact",
       component: Contact
+    },
+    {
+      path: "/",
+      redirect: {
+        name: "AboutMe"
+      }
     }
   ]
 });

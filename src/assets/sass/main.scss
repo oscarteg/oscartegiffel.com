@@ -1,7 +1,9 @@
-@import "./variables";
+@import "./_variables";
+@import "./_mixins";
 
 @import "~bulma/bulma";
 @import "~buefy/src/scss/buefy";
+@import "~animate.css/animate.min";
 
 // Hovering underline on link
 .content a {
@@ -19,17 +21,38 @@
     left: 0;
     background-color: $color-scheme-tulip;
     transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+    transition: transform 0.5s ease-out;
   }
-  &:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+  &:hover {
+    &::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
   }
 }
 
 // Button hovering
-button:hover {
-  color: $primary;
-  transform: translateY(-1px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+button {
+  transition: all 0.5s;
+  &:hover {
+    @include hovering-shadow();
+  }
+}
+
+.tile .is-child {
+  transition: all 0.5s;
+  &:hover {
+    @include hovering-shadow();
+  }
+}
+
+.box {
+  transition: all 0.5s;
+  &:hover {
+    @include hovering-shadow();
+  }
+}
+
+.title {
+  font-family: "Poppins";
 }
