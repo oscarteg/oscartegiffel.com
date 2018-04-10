@@ -1,5 +1,5 @@
 <template>
-    <div class="title is-2">
+    <div class="title">
         <span>Ik ben <span id="typed-element"></span></span>
     </div>
 </template>
@@ -25,8 +25,7 @@ export default {
       backSpeed: 100,
       loop: true,
       showCursor: true,
-      //   loopCount: 5,
-      fadeOut: true
+      loopCount: 5
     });
   }
 };
@@ -35,17 +34,11 @@ export default {
 <style lang="scss" scoped>
 .typed-cursor {
   opacity: 1;
-  font-size: 2.5rem;
-  animation: typedjsBlink 0.7s infinite;
-  -webkit-animation: typedjsBlink 0.7s infinite;
-  animation: typedjsBlink 0.7s infinite;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
 }
-@keyframes typedjsBlink {
-  50% {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes typedjsBlink {
+@keyframes blink {
   0% {
     opacity: 1;
   }
@@ -56,10 +49,26 @@ export default {
     opacity: 1;
   }
 }
-.typed-fade-out {
-  opacity: 0;
-  transition: opacity 0.25s;
-  -webkit-animation: 0;
-  animation: 0;
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

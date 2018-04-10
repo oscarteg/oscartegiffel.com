@@ -1,25 +1,22 @@
 <template>
 <div> 
-  <div class="spinner" v-if="loading">
-  <div class="double-bounce1"></div>
-  <div class="double-bounce2"></div>
-</div>
+  <PreLoader v-if="loading" />
   <div v-cloak v-if="!loading">
-    
+    <Hero />
     <transition mode="out-in" 
+      class="transition"
       enter-active-class="animated fadeInLeft"
-      leave-active-class="animated fadeOutRight"
-      >
-      <Hero />
+      leave-active-class="animated fadeOutRight">
       <router-view class="section container"  />
     </transition>
     <Footer />
   </div> 
-  </div>
+</div>
 </template>
 <script>
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
+import PreLoader from "@/components/PreLoader";
 
 export default {
   name: "App",
@@ -30,11 +27,11 @@ export default {
   },
   components: {
     Hero,
-    Footer
+    Footer,
+    PreLoader
   },
   created() {
     setTimeout(() => {
-      console.log(this);
       this.loading = false;
     }, 1000);
   }
@@ -42,57 +39,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-import [v-cloak] {
+[v-cloak] {
   display: none;
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-
-  position: relative;
-  margin: 100px auto;
-}
-
-.double-bounce1,
-.double-bounce2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #333;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  -webkit-animation: sk-bounce 2s infinite ease-in-out;
-  animation: sk-bounce 2s infinite ease-in-out;
-}
-
-.double-bounce2 {
-  -webkit-animation-delay: -1s;
-  animation-delay: -1s;
-}
-
-@-webkit-keyframes sk-bounce {
-  0%,
-  100% {
-    -webkit-transform: scale(0);
-  }
-  50% {
-    -webkit-transform: scale(1);
-  }
-}
-
-@keyframes sk-bounce {
-  0%,
-  100% {
-    transform: scale(0);
-    -webkit-transform: scale(0);
-  }
-  50% {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-  }
+.loading {
+  background: black;
+  align-items: center;
+  justify-content: center;
 }
 </style>

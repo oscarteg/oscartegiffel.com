@@ -1,10 +1,12 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Poppins|Anonymous+Pro");
+@import url("https://fonts.googleapis.com/css?family=Poppins|Anonymous+Pro|Fira+Mono");
 
 // Heading: Poppins
 // Body: Anonymous pro
 
-$family-primary: "Anonymous Pro";
+$family-monospace: "Anonymous Pro";
+
+$family-primary: $family-monospace;
 
 // Color scheme
 $color-scheme-blue: #3423a6;
@@ -26,7 +28,6 @@ $primary: $color-scheme-blue;
 $info: $color-scheme-tulip;
 $link: $color-scheme-lazuli;
 $info: $color-scheme-turquoise;
-
 
 h1,
 h2,

@@ -1,5 +1,5 @@
 <template>
-  <div id='particles' class="is-overlay"></div>
+  <div id='particles' :class="classes"></div>
 </template>
 
 <script>
@@ -7,7 +7,9 @@ import "particles.js";
 
 export default {
   name: "ParticlesJS",
-
+  props: {
+    classes: String
+  },
   mounted() {
     this.$nextTick(() => {
       this.initParticlesJS();
@@ -20,20 +22,20 @@ export default {
       particlesJS("particles", {
         particles: {
           number: {
-            value: 355,
+            value: 50,
             density: {
               enable: true,
-              value_area: 789.1476416322727
+              value_area: 800
             }
           },
           color: {
-            value: "#000fff"
+            value: "#ffffff"
           },
           shape: {
             type: "circle",
             stroke: {
               width: 0,
-              color: "#000fff"
+              color: "#000000"
             },
             polygon: {
               nb_sides: 5
@@ -45,37 +47,37 @@ export default {
             }
           },
           opacity: {
-            value: 0.48927153781200905,
+            value: 0.5,
             random: false,
             anim: {
-              enable: true,
-              speed: 0.2,
-              opacity_min: 0,
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
               sync: false
             }
           },
           size: {
-            value: 2,
+            value: 3,
             random: true,
             anim: {
-              enable: true,
-              speed: 2,
-              size_min: 0,
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
               sync: false
             }
           },
           line_linked: {
-            enable: false,
+            enable: true,
             distance: 150,
-            color: "#000fff",
+            color: "#ffffff",
             opacity: 0.4,
             width: 1
           },
           move: {
             enable: true,
-            speed: 0.2,
+            speed: 6,
             direction: "none",
-            random: true,
+            random: false,
             straight: false,
             out_mode: "out",
             bounce: false,
@@ -90,12 +92,12 @@ export default {
           detect_on: "canvas",
           events: {
             onhover: {
-              enable: true,
-              mode: "bubble"
+              enable: false,
+              mode: "grab"
             },
             onclick: {
               enable: true,
-              mode: "push"
+              mode: "repulse"
             },
             resize: true
           },
@@ -107,10 +109,10 @@ export default {
               }
             },
             bubble: {
-              distance: 83.91608391608392,
-              size: 1,
-              duration: 3,
-              opacity: 1,
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
               speed: 3
             },
             repulse: {

@@ -1,7 +1,8 @@
 <template>
   <header class="header">
-    <Particlejs />
-    <section class="hero is-fullheight is-bold">
+    <Particlejs classes="is-overlay"/>
+    <!-- <div class="background-image is-overlay"/> -->
+    <section class="hero is-fullheight is-bold background-image" >
       <div class="hero-head">
         <NavBar />
       </div>
@@ -16,7 +17,7 @@
               </div>
             </div>
             <div class="column is-6 is-offset-1">
-              <TypedJs :strings="['developer']" />
+              <TypedJs :strings="['developer', 'homo']" />
               <h2 class="subtitle is-4">
                 Let this cover page describe a product or service.
               </h2>
@@ -57,3 +58,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.background-image {
+  background: url("../assets/img/hero-background.svg") no-repeat right top;
+  // background-size: cover;
+  // z-index: 10000;
+}
+</style>
