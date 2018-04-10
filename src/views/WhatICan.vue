@@ -9,7 +9,7 @@
               <p class="title">
                 <font-awesome-icon :icon="['fas', 'server']"/>
                 Devops</p>
-              <p class="subtitle">Docker, Ansbible, Linux</p>
+              <p class="subtitle"></p>
               <div class="content">
                 <p>In de loop van tijd heb ik ervaring opgebouwd met verschillende onderdelen van devops. Ik heb geëxperimenteerd met Docker en Ansible voor me eigen projecten. Daarnaast heb ik zowel LAMP als LEMP servers opgezet. Ik kan me goed een weg vinden in Linux.</p>
               </div>
@@ -26,8 +26,8 @@
               </div>
             </article>
           </div>
-          </div>
-          <div class="tile">
+        </div>
+        <div class="tile">
           <div class="tile is-parent">
             <article class="tile is-child box">
               <p class="title">
