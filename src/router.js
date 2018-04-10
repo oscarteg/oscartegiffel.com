@@ -10,7 +10,9 @@ import Contact from "@/views/Contact";
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  // TODO: Set to history mode https://router.vuejs.org/en/essentials/history-mode.html
+  // Fix 404 issue
+  // mode: "history",
   linkExactActiveClass: "is-active ",
   routes: [
     {

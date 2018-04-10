@@ -1,12 +1,11 @@
 @import "./_variables";
-@import "./_mixins";
-
 @import "~bulma/bulma";
 @import "~buefy/src/scss/buefy";
 @import "~animate.css/animate.min";
+@import "./_mixins";
 
 // Hovering underline on link
-.content a {
+a {
   text-decoration: none;
   display: inline-block;
   position: relative;

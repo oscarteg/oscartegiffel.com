@@ -1,92 +1,49 @@
 <template>
 <footer class="footer">
   <div class="container">
-    <div class="content">
-        <div class="columns is-centered">
-            <div class="column is-one-quarter">
-              <div class="has-text-centered">
-                <p><font-awesome-icon class="fa-fw" icon="envelope"/><a href="mailto:oscar@tegiffel.com"> oscar[at]tegiffel[dot]com</a>
-                <p><font-awesome-icon class="fa-fw" icon="mobile"/><a href="tel:0031652789990"> +31 6 52789990</a></p>
-                <p><font-awesome-icon class="fa-fw" :icon="['fab', 'telegram']"/><a href="https://t.me/oscarteg"> @oscarteg</a></p>
-                <p><font-awesome-icon class="fa-fw" :icon="['fab', 'whatsapp']"/><a href="https://api.whatsapp.com/send?phone=31652789990"> +31 6 52789990</a></p>
-              </div>
-            </div>
-            <div class="column is-one-quarter">
-              <div class="has-text-centered">
-                <Skills />
-              </div>
-            </div>
+    <section class="section">
+      <div class="level">
+        <!-- Left side -->
+          <div class="level-item">
+            <socials />
+          </div>
+          <div class="level-item">
+            <communication />
         </div>
-        <section class="section">
-          <div class="columns is-centered">
-            <div class="column">
-              <div class="socials fa-2x has-text-centered">
-                <a href="https://facebook.com/oscarteg"><font-awesome-icon :icon="['fab', 'facebook-square']"/></a>
-                <a href="https://twitter.com/oscartegiffel"><font-awesome-icon :icon="['fab', 'twitter-square']"/></a>
-                <a href="https://github.com/oscarteg"><font-awesome-icon :icon="['fab', 'github-square']"/></a>
-                <a href="https://gitlab.com/oscarteg">
-                    <font-awesome-layers >
-                        <font-awesome-icon icon="square" />
-                        <font-awesome-icon :icon="['fab', 'gitlab']" transform="shrink-6" style="color: white;" />
-                    </font-awesome-layers>
-                </a>
-                <a href="https://www.linkedin.com/in/otegiffel/"><font-awesome-icon :icon="['fab', 'linkedin']"/></a>
-              </div>
-            </div>
-            
-            <div class="column">
-              Copyright © 2018 Oscar te Giffel | All Rights Reserved.
-            </div>
-          </div>
-        </section>
-        <section class="section">
-          <div class="columns">
-            <div class="column is-centered">
-              <button class="button is-primary is-outlined" @click="jobStatus">
-                 <font-awesome-icon icon="briefcase" pull="left"/> job status
-                </button>    
-            </div>
-          </div>
-        </section>
-    </div>
+      </div>
+      <div class="level">
+          <skills />
+        </div>
+      <div class="level has-text-centered">
+        <div class="level-item">
+          <copyright />
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-item">
+          <job-status />
+        </div>
+      </div>
+    </section>
   </div>
 </footer>
 </template>
 
 <script>
-import {
-  FontAwesomeIcon,
-  FontAwesomeLayers
-} from "@fortawesome/vue-fontawesome";
 import Skills from "@/components/Skills";
+import JobStatus from "@/components/JobStatus";
+import Copyright from "@/components/Copyright";
+import Communication from "@/components/Communication";
+import Socials from "@/components/Socials";
 
 export default {
   name: "Footer",
   components: {
-    FontAwesomeIcon,
-    FontAwesomeLayers,
-    Skills
-  },
-  methods: {
-    jobStatus() {
-      this.$snackbar.open({
-        message: "Op dit moment ben ik bezet met werk",
-        type: "is-danger",
-        position: "is-top",
-        duration: 5000,
-        actionText: "klik hier om te mailen",
-        onAction: () => {
-          window.location.href = "mailto:oscar+werk@tegiffel.com?subject=Werk";
-        }
-      });
-      // this.isLoading = false;
-    }
+    Skills,
+    Copyright,
+    JobStatus,
+    Communication,
+    Socials
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.socials > a {
-  margin: 0.1em;
-}
-</style>
