@@ -25,17 +25,17 @@ export default {
             value: 50,
             density: {
               enable: true,
-              value_area: 800
+              value_area: 1443
             }
           },
           color: {
-            value: "#ffffff"
+            value: "#333"
           },
           shape: {
             type: "circle",
             stroke: {
               width: 0,
-              color: "#000000"
+              color: "#333"
             },
             polygon: {
               nb_sides: 5
@@ -57,32 +57,32 @@ export default {
             }
           },
           size: {
-            value: 3,
+            value: 10,
             random: true,
             anim: {
-              enable: false,
-              speed: 40,
-              size_min: 0.1,
+              enable: true,
+              speed: 2.4362316369040355,
+              size_min: 5.684540486109416,
               sync: false
             }
           },
           line_linked: {
             enable: true,
             distance: 150,
-            color: "#ffffff",
+            color: "#333",
             opacity: 0.4,
             width: 1
           },
           move: {
             enable: true,
-            speed: 6,
-            direction: "none",
-            random: false,
+            speed: 4,
+            direction: "top",
+            random: true,
             straight: false,
             out_mode: "out",
             bounce: false,
             attract: {
-              enable: false,
+              enable: true,
               rotateX: 600,
               rotateY: 1200
             }
@@ -92,11 +92,11 @@ export default {
           detect_on: "canvas",
           events: {
             onhover: {
-              enable: false,
+              enable: true,
               mode: "grab"
             },
             onclick: {
-              enable: true,
+              enable: false,
               mode: "repulse"
             },
             resize: true
@@ -116,7 +116,7 @@ export default {
               speed: 3
             },
             repulse: {
-              distance: 200,
+              distance: 203.01930307533627,
               duration: 0.4
             },
             push: {
