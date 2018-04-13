@@ -5,8 +5,9 @@
     <Hero />
     <transition mode="out-in" 
       class="transition"
-      enter-active-class="animated fadeInLeft"
-      leave-active-class="animated fadeOutRight">
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+      >
       <router-view class="section container"  />
     </transition>
     <Footer />
@@ -43,9 +44,9 @@ export default {
   display: none;
 }
 
-.loading {
-  background: black;
-  align-items: center;
-  justify-content: center;
+.animated {
+  -webkit-animation-duration: 200ms;
+  -moz-animation-duration: 200ms;
+  animation-duration: 200ms;
 }
 </style>
