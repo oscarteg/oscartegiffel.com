@@ -1,5 +1,15 @@
 <template>
-    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div class="atom-spinner">
+  <div class="spinner-inner">
+    <div class="spinner-line"></div>
+    <div class="spinner-line"></div>
+    <div class="spinner-line"></div>
+    <!--Chrome renders little circles malformed :(-->
+    <div class="spinner-circle">
+      &#9679;
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -10,88 +20,78 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/sass/_variables";
-.lds-roller {
-  display: inline-block;
+.atom-spinner,
+.atom-spinner * {
+  box-sizing: border-box;
+}
+
+.atom-spinner {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+}
+
+.atom-spinner .spinner-inner {
   position: relative;
-  width: 64px;
-  height: 64px;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
-.lds-roller div {
-  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  transform-origin: 32px 32px;
-}
-.lds-roller div:after {
-  content: " ";
+
+.atom-spinner .spinner-circle {
   display: block;
   position: absolute;
-  width: 6px;
-  height: 6px;
+  color: $primary;
+  font-size: calc(60px * 0.24);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.atom-spinner .spinner-line {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: $primary;
-  margin: -3px 0 0 -3px;
+  animation-duration: 1s;
+  border-left-width: calc(60px / 25);
+  border-top-width: calc(60px / 25);
+  border-left-color: $color-scheme-violet;
+  border-left-style: solid;
+  border-top-style: solid;
+  border-top-color: transparent;
 }
-.lds-roller div:nth-child(1) {
-  animation-delay: -0.036s;
+
+.atom-spinner .spinner-line:nth-child(1) {
+  animation: atom-spinner-animation-1 1s linear infinite;
+  transform: rotateZ(120deg) rotateX(66deg) rotateZ(0deg);
 }
-.lds-roller div:nth-child(1):after {
-  top: 50px;
-  left: 50px;
+
+.atom-spinner .spinner-line:nth-child(2) {
+  animation: atom-spinner-animation-2 1s linear infinite;
+  transform: rotateZ(240deg) rotateX(66deg) rotateZ(0deg);
 }
-.lds-roller div:nth-child(2) {
-  animation-delay: -0.072s;
+
+.atom-spinner .spinner-line:nth-child(3) {
+  animation: atom-spinner-animation-3 1s linear infinite;
+  transform: rotateZ(360deg) rotateX(66deg) rotateZ(0deg);
 }
-.lds-roller div:nth-child(2):after {
-  top: 54px;
-  left: 45px;
-}
-.lds-roller div:nth-child(3) {
-  animation-delay: -0.108s;
-}
-.lds-roller div:nth-child(3):after {
-  top: 57px;
-  left: 39px;
-}
-.lds-roller div:nth-child(4) {
-  animation-delay: -0.144s;
-}
-.lds-roller div:nth-child(4):after {
-  top: 58px;
-  left: 32px;
-}
-.lds-roller div:nth-child(5) {
-  animation-delay: -0.18s;
-}
-.lds-roller div:nth-child(5):after {
-  top: 57px;
-  left: 25px;
-}
-.lds-roller div:nth-child(6) {
-  animation-delay: -0.216s;
-}
-.lds-roller div:nth-child(6):after {
-  top: 54px;
-  left: 19px;
-}
-.lds-roller div:nth-child(7) {
-  animation-delay: -0.252s;
-}
-.lds-roller div:nth-child(7):after {
-  top: 50px;
-  left: 14px;
-}
-.lds-roller div:nth-child(8) {
-  animation-delay: -0.288s;
-}
-.lds-roller div:nth-child(8):after {
-  top: 45px;
-  left: 10px;
-}
-@keyframes lds-roller {
-  0% {
-    transform: rotate(0deg);
-  }
+
+@keyframes atom-spinner-animation-1 {
   100% {
-    transform: rotate(360deg);
+    transform: rotateZ(120deg) rotateX(66deg) rotateZ(360deg);
+  }
+}
+
+@keyframes atom-spinner-animation-2 {
+  100% {
+    transform: rotateZ(240deg) rotateX(66deg) rotateZ(360deg);
+  }
+}
+
+@keyframes atom-spinner-animation-3 {
+  100% {
+    transform: rotateZ(360deg) rotateX(66deg) rotateZ(360deg);
   }
 }
 </style>
