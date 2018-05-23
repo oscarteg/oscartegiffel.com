@@ -6,9 +6,8 @@
     <transition mode="out-in" 
       class="transition"
       enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut"
-      >
-      <router-view class="section container"  />
+      leave-active-class="animated fadeOut">
+      <router-view class="section container" />
     </transition>
     <Footer />
   </div> 

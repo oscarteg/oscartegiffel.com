@@ -11,7 +11,7 @@
             <communication />
         </div>
       </div>
-      <div class="level">
+      <div class="level has-text-centered">
           <skills />
         </div>
       <div class="level has-text-centered">

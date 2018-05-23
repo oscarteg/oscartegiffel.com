@@ -22,10 +22,10 @@ export default {
       particlesJS("particles", {
         particles: {
           number: {
-            value: 50,
+            value: 38,
             density: {
               enable: true,
-              value_area: 1443
+              value_area: 800
             }
           },
           color: {
@@ -57,12 +57,12 @@ export default {
             }
           },
           size: {
-            value: 10,
+            value: 3,
             random: true,
             anim: {
-              enable: true,
-              speed: 2.4362316369040355,
-              size_min: 5.684540486109416,
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
               sync: false
             }
           },
@@ -75,14 +75,14 @@ export default {
           },
           move: {
             enable: true,
-            speed: 4,
-            direction: "top",
-            random: true,
+            speed: 6,
+            direction: "none",
+            random: false,
             straight: false,
             out_mode: "out",
             bounce: false,
             attract: {
-              enable: true,
+              enable: false,
               rotateX: 600,
               rotateY: 1200
             }
@@ -92,31 +92,31 @@ export default {
           detect_on: "canvas",
           events: {
             onhover: {
-              enable: true,
-              mode: "grab"
+              enable: false,
+              mode: "repulse"
             },
             onclick: {
               enable: false,
-              mode: "repulse"
+              mode: "push"
             },
             resize: true
           },
           modes: {
             grab: {
-              distance: 400,
+              distance: 1390.6093906093906,
               line_linked: {
                 opacity: 1
               }
             },
             bubble: {
-              distance: 400,
-              size: 40,
-              duration: 2,
+              distance: 1066.933066933067,
+              size: 411.5884115884116,
+              duration: 0,
               opacity: 8,
               speed: 3
             },
             repulse: {
-              distance: 203.01930307533627,
+              distance: 200,
               duration: 0.4
             },
             push: {

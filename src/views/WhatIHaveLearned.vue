@@ -38,23 +38,12 @@
         <div class="tile is-parent">
           <article class="tile is-child box is-vertical is-info">
             <p class="title">
-              Hogeschool Leiden</p>
-            <p class="subtitle">Informatica | Software engineering | 2013 - heden</p>
+              Udemy</p>
+            <p class="subtitle">Laravel</p>
             <div class="content">
-              <p>Op deze school heb ik de opleiding Informatica gevolgd met een specialisatie in software engineer. Hier heb ik de beginselen gekregen van software ontwikkeling. Ook heb ik hier veel geleerd over project management in verschillende project methodieken.</p>
-              <p>De vakken die ik heb gekregen zijn onder andere:</p>
-              <ul>
-                <li>Java</li>
-                <li>Software Test methodieken</li>
-                <li>PHP</li>
-                <li>UML</li>
-                <li>HTML(5)/CSS(3)</li>
-                <li>Databases (Postgres, MySQL)</li>
-                <li>Basic design patterns</li>
-                <li>Database modeling</li>
-                <li>Networking and security</li>
-                <li>Project (ontwikkel)methodieken (RUP, SCRUM, Waterfall, PRINCE2)</li>
-              </ul>
+              <figure class="image">
+                <img src="../assets/img/udemy-laravel-certificate.jpg">
+              </figure>
             </div>
           </article>
         </div>
@@ -62,9 +51,12 @@
         <div class="tile is-parent">
           <article class="tile is-child box is-vertical is-info">
             <p class="title">
-              Hogeschool </p>
-            <p class="subtitle">Informatica | Software engineering | 2013 - heden</p>
+              Udemy </p>
+            <p class="subtitle">Vuejs</p>
             <div class="content">
+              <figure class="image">
+                <img src="../assets/img/udemy-vuejs-certificate.jpg">
+              </figure>
             </div>
           </article>
         </div>

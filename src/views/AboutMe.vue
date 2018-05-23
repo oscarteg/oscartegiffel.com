@@ -2,10 +2,10 @@
   <div class="content">
     <h1>over Mij</h1>
     <div class="tile is-ancestor">
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-          <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/640x480.png">
+      <div class="tile is-parent is-4">
+        <article class="tile is-child box ">
+          <figure class="image">
+            <img class="profile-picture" src="../assets/img/profile-image-small.jpg">
           </figure>
         </article>
       </div>
@@ -37,3 +37,10 @@ export default {
   name: "AboutMe"
 };
 </script>
+
+<style lang="scss" scoped>
+.profile-picture {
+  max-width: 50%;
+  max-height: 50%;
+}
+</style>

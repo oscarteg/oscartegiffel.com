@@ -52,10 +52,6 @@ export default {
         {
           name: "Linux",
           rating: 3
-        },
-        {
-          name: "Docker",
-          rating: "3"
         }
       ]
     };

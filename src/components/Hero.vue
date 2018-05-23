@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <Particlejs classes="is-overlay"/>
+    <!-- <Particlejs classes="is-overlay"/> -->
     <!-- <div class="background-image is-overlay"/> -->
     <section class="hero is-fullheight is-bold background-image" >
       <div class="hero-head">
@@ -8,25 +8,11 @@
       </div>
       <div class="hero-body">
         <div class="container has-text-centered">
-          <div class="columns is-vcentered">
-            <div class="column is-5">
-              <div class="box">
-                <figure class="image is-square">
-                  <img src="https://picsum.photos/600/600/?random" alt="Description">
-                </figure>
-              </div>
-            </div>
-            <div class="column is-6 is-offset-1">
-              <TypedJs :strings="['developer', 'homo']" />
-              <h2 class="subtitle is-4">
-                Let this cover page describe a product or service.
-              </h2>
+          <div class="columns is-vcentered is-centered">
+            <div class="column is-half title">
+              <h1 class="name--title">Oscar te Giffel</h1>
+              <!-- <TypedJs :strings="['developer']" /> -->
               <br>
-              <p class="has-text-centered">
-                <button class="button is-medium is-primary is-outlined">
-                  Learn more
-                </button>
-              </p>
             </div>
           </div>
         </div>
@@ -61,8 +47,13 @@ export default {
 
 <style lang="scss">
 .background-image {
-  background: url("../assets/img/hero-background.svg") no-repeat right top;
+  // background: url("../assets/img/hero-background.svg") no-repeat right top;
   // background-size: cover;
   // z-index: 10000;
+}
+
+.name--title {
+  letter-spacing: 1rem;
+  text-transform: uppercase;
 }
 </style>
