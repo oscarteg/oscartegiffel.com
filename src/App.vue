@@ -1,16 +1,18 @@
 <template>
 <div> 
+  
   <PreLoader v-if="loading" />
-  <div v-cloak v-if="!loading">
-    <Hero />
-    <transition mode="out-in" 
-      class="transition"
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut">
-      <router-view class="section container" />
-    </transition>
-    <Footer />
-  </div> 
+  <transition mode="out-in" enter-active-class="animated fadeIn">
+    <div v-cloak v-if="!loading">
+      <Hero />
+      <transition mode="out-in" 
+        enter-active-class="router--transition animated fadeIn"
+        leave-active-class="router--transition animated fadeOut">
+        <router-view class="section container" />
+      </transition>
+      <Footer />
+    </div> 
+  </transition>
 </div>
 </template>
 <script>
@@ -43,9 +45,9 @@ export default {
   display: none;
 }
 
-.animated {
-  -webkit-animation-duration: 200ms;
-  -moz-animation-duration: 200ms;
-  animation-duration: 200ms;
+.router--transition {
+  -webkit-animation-duration: 250ms;
+  -moz-animation-duration: 250ms;
+  animation-duration: 250ms;
 }
 </style>
