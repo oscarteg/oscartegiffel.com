@@ -1,5 +1,5 @@
 <template>
-    <div class="has-text-centered">
+    <div>
         <p><font-awesome-icon class="fa-fw" icon="envelope"/><a href="mailto:oscar@tegiffel.com"> oscar[at]tegiffel[dot]com</a>
         <p><font-awesome-icon class="fa-fw" icon="mobile"/><a href="tel:0031652789990"> +31 6 52789990</a></p>
         <p><font-awesome-icon class="fa-fw" :icon="['fab', 'telegram']"/><a href="https://t.me/oscarteg"> @oscarteg</a></p>

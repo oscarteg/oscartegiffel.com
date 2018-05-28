@@ -1,18 +1,11 @@
 <template>
   <header class="header">
-    <!-- <Particlejs classes="is-overlay"/> -->
-    <!-- <div class="background-image is-overlay"/> -->
     <section class="hero is-fullheight is-bold background-image" >
-      <div class="hero-head">
-        <NavBar />
-      </div>
       <div class="hero-body">
         <div class="container has-text-centered">
           <div class="columns is-vcentered is-centered">
             <div class="column is-half title">
-              <h1 class="name--title">Oscar te Giffel</h1>
-              <!-- <TypedJs :strings="['developer']" /> -->
-              <br>
+              <h1 class="name--title">Oscar te Giffel</h1> <BlinkingCursor/>
             </div>
           </div>
         </div>
@@ -30,17 +23,13 @@
 
 <script>
 import Navigation from "@/components/Navigation";
-import NavBar from "@/components/Navbar";
-import Particlejs from "@/components/Particlejs";
-import TypedJs from "@/components/Typedjs";
+import BlinkingCursor from "@/components/BlinkingCursor";
 
 export default {
   name: "Hero",
   components: {
     Navigation,
-    NavBar,
-    Particlejs,
-    TypedJs
+    BlinkingCursor
   }
 };
 </script>

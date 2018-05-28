@@ -1,5 +1,5 @@
 <template>
-    <button class="button is-primary is-outlined" @click="jobStatus">
+    <button class="button is-medium is-primary is-outlined" @click="jobStatus">
         <font-awesome-icon icon="briefcase" pull="left"/> job status
     </button>    
 </template>

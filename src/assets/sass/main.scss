@@ -4,32 +4,10 @@
 @import "~animate.css/animate.min";
 @import "~bulma-timeline/dist/bulma-timeline.sass";
 @import "./_mixins";
+@import "./_navigation";
+@import "./_font";
 
 // Hovering underline on link
-a {
-  text-decoration: none;
-  display: inline-block;
-  position: relative;
-  color: $primary;
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: $color-scheme-tulip;
-    transform-origin: bottom right;
-    transition: transform 0.5s ease-out;
-  }
-  &:hover {
-    &::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
-    }
-  }
-}
 
 // Button hovering
 button {
@@ -57,13 +35,13 @@ button {
   font-family: "Poppins";
 }
 
-[v-cloak] {
-  display: none;
-}
+.footer {
+  @extend .has-text-grey;
 
-// font
-
-.title {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  & a {
+    @extend .has-text-grey;
+    &:hover {
+      @extend .has-text-primary;
+    }
+  }
 }
