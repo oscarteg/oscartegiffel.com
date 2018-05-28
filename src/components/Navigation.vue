@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="navigation has-text-centered">
     <!-- TODO: Add icons for every route -->
       <router-link :to="{ name: 'AboutMe'}" tag="li">
         <a>over mij</a>

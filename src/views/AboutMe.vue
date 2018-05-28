@@ -13,11 +13,11 @@
         <article class="tile is-child box">
           <div class="content">
             <div class="columns">
-              <div class="column about-profile">
-                <p><span>Geboortedatum -</span> Juli 21, 1992</p>
-                <p><span>Woonplaats -</span> Amersfoort</p>
-                <p><span>Telefoon-</span><a href="tel:0031652789990"> +31 6 52 78 99 90</a></p>
-                <p><span>Email -</span> <a href="mailto:oscar+website@tegiffel.com">oscar[at]tegiffel[dot]com</a></p>
+              <div class="column">
+                <p><span>Geboortedatum - </span> Juli 21, 1992</p>
+                <p><span>Woonplaats - </span> Amersfoort</p>
+                <p><span>Telefoon - </span><a href="tel:0031652789990"> +31 6 52 78 99 90</a></p>
+                <p><span>Email - </span> <a href="mailto:oscar+website@tegiffel.com">oscar[at]tegiffel[dot]com</a></p>
               </div>
               <div class="column">
                 <p>Ik ben Oscar. 25 jaar en student aan de Hogeschool Leiden. Momenteel zit ik in me afstudeerjaar voor de opleiding Informatica en specialisatie in software engineer. De afgelopen 6 jaar ben ik bezig met software ontwikkelen. </p>

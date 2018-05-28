@@ -1,4 +1,28 @@
 @mixin hovering-shadow() {
-  transform: translateY(-1px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  transform: box-shadow 0.25s linear;
+  box-shadow: 0 10px 20px rgba(3, 27, 78, 0.1);
+}
+
+@mixin underlineOnHover($color) {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: $color;
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+  }
+  &:hover {
+    &::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
 }

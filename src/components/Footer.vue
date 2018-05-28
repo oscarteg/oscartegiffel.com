@@ -1,37 +1,27 @@
 <template>
-<footer class="footer">
-  <div class="container">
-    <section class="section">
-      <div class="level">
-        <!-- Left side -->
-          <div class="level-item">
-            <socials />
-          </div>
-          <div class="level-item">
+  <footer class="footer has-text-white">
+    <div class="container">
+      <section class="section">
+        <div class="columns is-centered">
+          <div class="column is-one-quarter">
+            <h2 class="subtitle has-text-white-ter">Socials</h2>
             <communication />
+          </div>
+          <div class="column is-one-quarter">
+            <h2 class="subtitle has-text-white-ter">Skills</h2>
+            <skills />
+          </div>
         </div>
-      </div>
-      <div class="level has-text-centered">
-          <skills />
-        </div>
-      <div class="level has-text-centered">
-        <div class="level-item">
-          <copyright />
-        </div>
-      </div>
-      <div class="level">
-        <div class="level-item">
-          <job-status />
-        </div>
-      </div>
-    </section>
-  </div>
-</footer>
+      </section>
+      <hr>
+      <socials />
+      <copyright />
+    </div>
+  </footer>
 </template>
 
 <script>
 import Skills from "@/components/Skills";
-import JobStatus from "@/components/JobStatus";
 import Copyright from "@/components/Copyright";
 import Communication from "@/components/Communication";
 import Socials from "@/components/Socials";
@@ -41,9 +31,11 @@ export default {
   components: {
     Skills,
     Copyright,
-    JobStatus,
     Communication,
     Socials
   }
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

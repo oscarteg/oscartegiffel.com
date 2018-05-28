@@ -63,6 +63,22 @@
       </div>
     </div>
   </div>
+  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'certificate']"/>Minor</h2>
+  <div class="tile is-ancestor">
+    <div class="tile is-vertical">
+      <div class="tile">
+        <div class="tile is-parent">
+          <article class="tile is-child box is-vertical is-info">
+            <p class="title">
+              Hogeschool Utrecht </p>
+            <p class="subtitle">Filosofie, wereldreligies en spiritualiteit</p>
+            <div class="content">
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 

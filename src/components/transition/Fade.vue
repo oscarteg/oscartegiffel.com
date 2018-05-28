@@ -13,4 +13,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.router--transition {
+  -webkit-animation-duration: 250ms;
+  -moz-animation-duration: 250ms;
+  animation-duration: 250ms;
+}
 </style>

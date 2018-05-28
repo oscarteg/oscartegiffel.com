@@ -1,17 +1,17 @@
 <template>
-  <div class="field is-grouped is-grouped-multiline" >
+  <div class="field is-grouped is-grouped-multiline">
     <div class="control" v-for="skill in skills" :key="skill.name">
       <div class="tags has-addons">
-          <span class="tag is-primary">{{ skill.name }}</span>
-          <span class="tag is-warning" v-if="skill.frameworks">
-            {{ skill.frameworks.join('/')}}
-          </span>
-          <span class="tag">
-              <font-awesome-icon icon="star" v-for="(rating, index) in skill.rating" :key="index"/>
-              <font-awesome-icon :icon="['far', 'star']" v-for="(rating, index) in calculateEmptyStars(skill.rating)" :key="skill + index"/>
-          </span>
+        <span class="tag is-primary">{{ skill.name }}</span>
+        <span class="tag is-warning" v-if="skill.frameworks">
+          {{ skill.frameworks.join('/')}}
+        </span>
+        <span class="tag">
+            <font-awesome-icon icon="star" v-for="(rating, index) in skill.rating" :key="index"/>
+            <font-awesome-icon :icon="['far', 'star']" v-for="(rating, index) in calculateEmptyStars(skill.rating)" :key="skill + index"/>
+        </span>
       </div>
-      </div>
+    </div>
   </div>
 </template>
 
