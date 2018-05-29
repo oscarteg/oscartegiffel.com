@@ -4,11 +4,11 @@
       <section class="section">
         <div class="columns is-centered">
           <div class="column is-one-quarter">
-            <h2 class="subtitle has-text-white-ter">Contact</h2>
+            <h2 class="subtitle has-text-white-ter">Neem anders contact op via</h2>
             <communication />
           </div>
           <div class="column is-one-quarter">
-            <h2 class="subtitle has-text-white-ter">Skills</h2>
+            <h2 class="subtitle has-text-white-ter">Ik heb ervaring met</h2>
             <skills />
           </div>
         </div>

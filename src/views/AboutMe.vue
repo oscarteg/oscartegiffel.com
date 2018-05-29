@@ -20,7 +20,7 @@
                 <p><span>Email - </span> <a href="mailto:oscar+website@tegiffel.com">oscar[at]tegiffel[dot]com</a></p>
               </div>
               <div class="column">
-                <p>Ik ben Oscar. 25 jaar en student aan de Hogeschool Leiden. Momenteel zit ik in me afstudeerjaar voor de opleiding Informatica en specialisatie in software engineer. De afgelopen 6 jaar ben ik bezig met software ontwikkelen. </p>
+                <p>Ik ben Oscar. 25 jaar en student aan de Hogeschool Leiden. Momenteel zit ik in mijn afstudeerjaar voor de opleiding Software Engineer.   
                 <p>Elke dag leer ik wat nieuws en elke dag wil ik wat nieuws leren.</p>
                 <p>Als u meer wilt weten of vragen heeft, stel ze gerust. </p>
               </div>

@@ -5,7 +5,7 @@
         <div class="container has-text-centered">
           <div class="columns is-vcentered is-centered">
             <div class="column is-half title">
-              <h1 class="name--title">Oscar te Giffel</h1>
+              <h1 class="name--title" style="display: inline-block;">Oscar te Giffel</h1>
             </div>
           </div>
         </div>

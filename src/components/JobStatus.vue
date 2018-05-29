@@ -14,7 +14,7 @@ export default {
   methods: {
     jobStatus() {
       this.$snackbar.open({
-        message: "Op dit moment ben ik bezet met werk",
+        message: "Op dit moment heb ik al werk, maar neem gerust contact op",
         type: "is-danger",
         position: "is-top",
         duration: 5000,

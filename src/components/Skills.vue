@@ -2,13 +2,9 @@
   <div class="field is-grouped is-grouped-multiline">
     <div class="control" v-for="skill in skills" :key="skill.name">
       <div class="tags has-addons">
-        <span class="tag is-primary">{{ skill.name }}</span>
+        <span class="tag is-info">{{ skill.name }}</span>
         <span class="tag is-warning" v-if="skill.frameworks">
           {{ skill.frameworks.join('/')}}
-        </span>
-        <span class="tag">
-            <font-awesome-icon icon="star" v-for="(rating, index) in skill.rating" :key="index"/>
-            <font-awesome-icon :icon="['far', 'star']" v-for="(rating, index) in calculateEmptyStars(skill.rating)" :key="skill + index"/>
         </span>
       </div>
     </div>
@@ -28,30 +24,27 @@ export default {
       maxRating: 5,
       skills: [
         {
-          name: "Html",
-          rating: 4
+          name: "Html"
         },
         {
-          name: "Css",
-          rating: 4
+          name: "Css"
         },
         {
           name: "Javascript",
-          frameworks: ["React", "VueJS"],
-          rating: 4
+          frameworks: ["React", "VueJS"]
         },
         {
           name: "Php",
-          frameworks: ["Laravel"],
-          rating: 4
+          frameworks: ["Laravel"]
         },
         {
-          name: "Java",
-          rating: 4
+          name: "Java"
         },
         {
-          name: "Linux",
-          rating: 3
+          name: "Linux"
+        },
+        {
+          name: "Docker"
         }
       ]
     };

@@ -9,7 +9,7 @@ import WhatIHaveDone from "@/views/WhatIHaveDone";
 Vue.use(Router);
 
 export default new Router({
-  // mode: "abstract",
+  mode: "history",
   linkExactActiveClass: "is-active",
   routes: [
     {
