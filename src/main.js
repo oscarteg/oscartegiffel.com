@@ -8,19 +8,8 @@ import _ from "lodash";
 
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
-import "./registerServiceWorker";
 import "./assets/sass/main.scss";
 
-/*
-
-Add styling to Vue
-
-Buefy 
-Fontawesome
-Vue loading
-
-*/
 Vue.use(Buefy, {
   defaultIconPack: "fas"
 });
@@ -30,7 +19,6 @@ fontawesome.library.add(brands, solid, regular);
 
 /*
  Adding utils
-
  Lodash
 */
 
@@ -40,6 +28,5 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
-  store,
   render: h => h(App)
 }).$mount("#app");

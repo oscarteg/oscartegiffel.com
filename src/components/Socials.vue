@@ -1,6 +1,5 @@
 <template>
     <div class="socials">
-        <a href="https://facebook.com/oscarteg"><font-awesome-icon :icon="['fab', 'facebook-square']"/> Facebook</a>
         <a href="https://twitter.com/oscartegiffel"><font-awesome-icon :icon="['fab', 'twitter-square']"/> Twitter</a>
         <a href="https://github.com/oscarteg"><font-awesome-icon :icon="['fab', 'github-square']"/> Github</a>
         <a href="https://gitlab.com/oscarteg">

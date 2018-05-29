@@ -5,7 +5,9 @@
       <div v-cloak v-if="!loading">
         <Hero />
         <Fade>
-          <router-view class="section container" />
+          <div class="background-wavy">
+            <router-view class="section container" />
+          </div>
         </Fade>
         <FooterCta/>
         <Footer />
@@ -46,4 +48,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.background-wavy {
+  background-image: url(./assets/img/wave.svg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 200%;
+}
 </style>
