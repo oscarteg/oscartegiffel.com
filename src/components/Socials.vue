@@ -30,6 +30,6 @@ export default {
 
 <style lang="scss" scoped>
 .socials > a {
-  margin: 0.5em;
+  margin-right: 1em;
 }
 </style>

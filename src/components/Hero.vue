@@ -5,16 +5,14 @@
         <div class="container has-text-centered">
           <div class="columns is-vcentered is-centered">
             <div class="column is-half title">
-              <h1 class="name--title">Oscar te Giffel</h1> <BlinkingCursor/>
+              <h1 class="name--title">Oscar te Giffel</h1>
             </div>
           </div>
         </div>
       </div>    
       <div class="hero-foot">
         <div class="container">
-          <div class="tabs is-centered is-boxed is-fullwidth">
-            <Navigation />
-          </div>
+          <Navigation />
         </div>
       </div>
     </section>
@@ -23,26 +21,18 @@
 
 <script>
 import Navigation from "@/components/Navigation";
-import BlinkingCursor from "@/components/BlinkingCursor";
 
 export default {
   name: "Hero",
   components: {
-    Navigation,
-    BlinkingCursor
+    Navigation
   }
 };
 </script>
 
 <style lang="scss">
-.background-image {
-  // background: url("../assets/img/hero-background.svg") no-repeat right top;
-  // background-size: cover;
-  // z-index: 10000;
-}
-
 .name--title {
-  letter-spacing: 1rem;
+  letter-spacing: 1.5rem;
   text-transform: uppercase;
 }
 </style>

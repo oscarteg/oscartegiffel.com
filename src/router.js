@@ -10,13 +10,11 @@ import Contact from "@/views/Contact";
 Vue.use(Router);
 
 export default new Router({
-  // TODO: Set to history mode https://router.vuejs.org/en/essentials/history-mode.html
-  // Fix 404 issue
-  // mode: "history",
-  linkExactActiveClass: "is-active ",
+  // mode: "abstract",
+  linkExactActiveClass: "is-active",
   routes: [
     {
-      path: "/over-mij",
+      path: "/",
       name: "AboutMe",
       component: AboutMe
     },
@@ -39,12 +37,6 @@ export default new Router({
       path: "/contact",
       name: "Contact",
       component: Contact
-    },
-    {
-      path: "/",
-      redirect: {
-        name: "AboutMe"
-      }
     }
   ]
 });

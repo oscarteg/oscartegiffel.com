@@ -1,10 +1,10 @@
 <template>
-  <footer class="footer has-text-white">
+  <footer class="footer has-text-white-ter">
     <div class="container">
       <section class="section">
         <div class="columns is-centered">
           <div class="column is-one-quarter">
-            <h2 class="subtitle has-text-white-ter">Socials</h2>
+            <h2 class="subtitle has-text-white-ter">Contact</h2>
             <communication />
           </div>
           <div class="column is-one-quarter">
