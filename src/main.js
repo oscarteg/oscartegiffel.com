@@ -19,7 +19,6 @@ fontawesome.library.add(brands, solid, regular);
 
 /*
  Adding utils
-
  Lodash
 */
 
