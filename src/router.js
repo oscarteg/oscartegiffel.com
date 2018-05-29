@@ -5,7 +5,6 @@ import AboutMe from "@/views/AboutMe";
 import WhatICan from "@/views/WhatICan";
 import WhatIHaveLearned from "@/views/WhatIHaveLearned";
 import WhatIHaveDone from "@/views/WhatIHaveDone";
-import Contact from "@/views/Contact";
 
 Vue.use(Router);
 
@@ -32,11 +31,6 @@ export default new Router({
       path: "/wat-ik-heb-gedaan",
       name: "WhatIHaveDone",
       component: WhatIHaveDone
-    },
-    {
-      path: "/contact",
-      name: "Contact",
-      component: Contact
     }
   ]
 });

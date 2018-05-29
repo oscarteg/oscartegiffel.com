@@ -4,7 +4,6 @@
 @import "~animate.css/animate.min";
 @import "~bulma-timeline/dist/bulma-timeline.sass";
 @import "./_mixins";
-@import "./_navigation";
 @import "./_font";
 
 // Button hovering
@@ -30,8 +29,12 @@
   font-family: "Poppins";
 }
 
+a {
+  @include underline-on-hover($info, $color-scheme-turquoise);
+}
+
 .footer {
   a {
-    @include underline-on-hover($info, $color-scheme-turquoise);
+    color: $white-bis !important;
   }
 }
