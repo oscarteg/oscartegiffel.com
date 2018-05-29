@@ -48,7 +48,6 @@ export default {
   display: -ms-flexbox;
   display: flex;
   list-style: none;
-  margin-bottom: 50px;
   padding: 0;
   position: relative;
 }
