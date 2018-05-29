@@ -1,14 +1,13 @@
 <template>
 <div class="content">
   <h1>mijn Educatie</h1>
-  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'graduation-cap']"/>Opleidingen</h2>
+  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'graduation-cap']"/> Opleidingen</h2>
   <div class="tile is-ancestor">
     <div class="tile is-vertical">
       <div class="tile">
         <div class="tile is-parent">
           <article class="tile is-child box is-vertical is-info">
-            <p class="title">
-              Hogeschool Leiden</p>
+            <p class="title"> Hogeschool Leiden</p>
             <p class="subtitle">Informatica | Software engineering | 2013 - heden</p>
             <div class="content">
               <p>Op deze school heb ik de opleiding Informatica gevolgd met een specialisatie in software engineer. Hier heb ik de beginselen gekregen van software ontwikkeling. Ook heb ik hier veel geleerd over project management in verschillende project methodieken.</p>
@@ -31,7 +30,7 @@
       </div>
     </div>
   </div>
-  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'certificate']"/>Cursussen/Certificaten</h2>
+  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'certificate']"/> Cursussen/Certificaten</h2>
   <div class="tile is-ancestor">
     <div class="tile is-vertical">
       <div class="tile">
@@ -63,7 +62,7 @@
       </div>
     </div>
   </div>
-  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'certificate']"/>Minor</h2>
+  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'certificate']"/> Minor</h2>
   <div class="tile is-ancestor">
     <div class="tile is-vertical">
       <div class="tile">

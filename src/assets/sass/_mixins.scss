@@ -1,9 +1,11 @@
-@mixin hovering-shadow() {
-  transform: box-shadow 0.25s linear;
-  box-shadow: 0 10px 20px rgba(3, 27, 78, 0.1);
+@mixin hovering-shadow {
+  transition: box-shadow 0.25s linear;
+  &:hover {
+    box-shadow: 0 10px 20px rgba(3, 27, 78, 0.1);
+  }
 }
 
-@mixin underlineOnHover($color) {
+@mixin underline-on-hover($underlineColor, $hoverColor) {
   text-decoration: none;
   display: inline-block;
   position: relative;
@@ -15,14 +17,13 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: $color;
-    transform-origin: bottom right;
+    background-color: $underlineColor;
     transition: transform 0.5s ease-out;
   }
   &:hover {
+    color: $hoverColor;
     &::after {
       transform: scaleX(1);
-      transform-origin: bottom left;
     }
   }
 }

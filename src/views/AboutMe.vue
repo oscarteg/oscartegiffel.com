@@ -1,11 +1,11 @@
 <template>
   <div class="content">
-    <h1>over Mij</h1>
+    <h1>Over mij</h1>
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-4">
-        <article class="tile is-child box ">
-          <figure class="image">
-            <img class="profile-picture" src="../assets/img/profile-image-small.jpg">
+      <div class="tile is-parent is-3">
+        <article class="tile is-child box">
+          <figure class="profile-picture">
+            <img src="../assets/img/profile-image-small.jpg">
           </figure>
         </article>
       </div>
@@ -39,8 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profile-picture {
-  max-width: 50%;
-  max-height: 50%;
+.profile-picture > img {
+  border-radius: 5px;
 }
 </style>

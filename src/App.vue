@@ -7,7 +7,7 @@
         <Fade>
           <router-view class="section container" />
         </Fade>
-        <!-- <FooterCta/> -->
+        <FooterCta/>
         <Footer />
       </div> 
     </Fade>

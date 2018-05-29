@@ -54,7 +54,7 @@
         </div>
         <div class="timeline-item">
           <div class="timeline-marker is-icon">
-            <font-awesome-icon class="fa-xs" icon='code'/>
+            <font-awesome-icon class="fa-xs" icon='phone'/>
           </div>
           <div class="timeline-content">
             <p class="heading">Oktober </p>

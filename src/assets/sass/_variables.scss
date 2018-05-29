@@ -15,23 +15,11 @@ $color-scheme-tulip: #ff8484;
 $color-scheme-turquoise: #4dccbd;
 $color-scheme-lazuli: #2374ab;
 
-// $primary: $turquoise
-// $link: $blue
-// $info: $cyan
-// $success: $green
-// $warning: $yellow
-// $danger: $red
-// $dark: $grey-darker
-// $text: $grey-dark
-
 $primary: $color-scheme-blue;
 $info: $color-scheme-tulip;
-$link: $color-scheme-lazuli;
-$info: $color-scheme-turquoise;
+$link: hsl(0, 0%, 98%);
 
 $footer-background-color: darken($color-scheme-violet, 12);
-
-$white: #fff;
 
 h1,
 h2,

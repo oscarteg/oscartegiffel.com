@@ -7,28 +7,23 @@
 @import "./_navigation";
 @import "./_font";
 
-// Hovering underline on link
-
 // Button hovering
-button {
-  transition: all 0.5s;
+.button {
   &:hover {
-    @include hovering-shadow();
+    color: $primary;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
   }
 }
 
 .tile .is-child {
-  transition: all 0.5s;
-  &:hover {
-    @include hovering-shadow();
-  }
+  @include hovering-shadow;
 }
 
 .box {
-  transition: all 0.5s;
-  &:hover {
-    @include hovering-shadow();
-  }
+  border: 1px solid #e5e8ed;
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  @include hovering-shadow;
 }
 
 .title {
@@ -36,12 +31,7 @@ button {
 }
 
 .footer {
-  @extend .has-text-grey;
-
-  & a {
-    @extend .has-text-grey;
-    &:hover {
-      @extend .has-text-primary;
-    }
+  a {
+    @include underline-on-hover($info, $color-scheme-turquoise);
   }
 }
