@@ -30,7 +30,9 @@
 }
 
 a {
-  @include underline-on-hover($info, $color-scheme-turquoise);
+  &:not(.button) {
+    @include underline-on-hover($info, $color-scheme-turquoise);
+  }
 }
 
 .footer {

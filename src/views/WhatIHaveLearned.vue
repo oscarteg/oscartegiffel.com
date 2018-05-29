@@ -1,6 +1,6 @@
 <template>
 <div class="content">
-  <h1>mijn Educatie</h1>
+  <h1>Mijn educatie</h1>
   <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'graduation-cap']"/> Opleidingen</h2>
   <div class="tile is-ancestor">
     <div class="tile is-vertical">

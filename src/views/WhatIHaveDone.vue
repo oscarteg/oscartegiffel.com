@@ -1,8 +1,8 @@
 <template>
 <div class="content">
-  <h1>mijn Werkervaring</h1>
+  <h1>Mijn werkervaring</h1>
   <div class="box">
-    <div class="timeline">
+    <div class="timeline is-centered">
         <header class="timeline-header">
           <span class="tag is-primary">Heden</span>
         </header>

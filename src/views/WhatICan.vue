@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h1>mijn Vaardigheden</h1>
+    <h1>Mijn vaardigheden</h1>
     <div class="tile is-ancestor">
       <div class="tile is-vertical">
         <div class="tile">
