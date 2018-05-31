@@ -25,7 +25,7 @@
         <div class="bui-Tabs-bubble-icon">
           <svg version="1.1" viewBox="0 0 48 48" xml:space="preserve" width="48" height="48"><g class="nc-icon-wrapper"><path fill="#444444" d="M43,33H5c-1.10457,0-2,0.89543-2,2v8c0,1.10457,0.89543,2,2,2h38c1.10457,0,2-0.89543,2-2v-8 C45,33.89543,44.10457,33,43,33z"></path> <path fill="#B3B3B3" d="M32,11c-0.55273,0-1-0.44775-1-1V5H17v5c0,0.55225-0.44727,1-1,1s-1-0.44775-1-1V4c0-0.55225,0.44727-1,1-1 h16c0.55273,0,1,0.44775,1,1v6C33,10.55225,32.55273,11,32,11z"></path> <path fill="#636363" d="M45,9H3c-1.10457,0-2,0.89543-2,2v22c0,1.10457,0.89543,2,2,2h42c1.10457,0,2-0.89543,2-2V11 C47,9.89543,46.10457,9,45,9z"></path> <path fill="#EFD358" d="M28,39h-8c-0.55228,0-1-0.44772-1-1v-6c0-0.55228,0.44772-1,1-1h8c0.55228,0,1,0.44772,1,1v6 C29,38.55228,28.55228,39,28,39z"></path></g></svg>
         </div>
-        <h2 class="bui-Tabs-bubble-label">wat ik heb gedaan</h2>
+        <h2 class="bui-Tabs-bubble-label">Wat ik heb gedaan</h2>
       </router-link>
     </ul>
   </div>
@@ -44,6 +44,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/sass/_variables";
+
 .bui-Tabs.bui-Tabs--bubble {
   display: -ms-flexbox;
   display: flex;
@@ -70,7 +72,7 @@ export default {
     .bui-Tabs-bubble-icon {
       -ms-flex-align: center;
       align-items: center;
-      background-color: #f3f5f9;
+      background-color: lighten($primary, 50);
       border: 2px solid rgba(3, 27, 78, 0.1);
       border-radius: 50%;
       box-shadow: 0 2px 4px transparent;
@@ -88,14 +90,14 @@ export default {
 
     &.is-active {
       .bui-Tabs-bubble-icon {
-        background-color: #fff;
+        background-color: lighten($info, 40);
         border-color: transparent;
-        box-shadow: 0 2px 4px rgba(3, 27, 78, 0.2);
+        box-shadow: 0 2px 4px darken($info, 50);
       }
 
       .bui-Tabs-bubble-label {
-        color: #031b4e;
-        font-weight: 200;
+        color: $color-scheme-violet;
+        font-weight: 500;
       }
     }
   }
