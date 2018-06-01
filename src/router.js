@@ -13,11 +13,6 @@ export default new Router({
   linkExactActiveClass: "is-active",
   routes: [
     {
-      path: "/",
-      name: "AboutMe",
-      component: AboutMe
-    },
-    {
       path: "/wat-ik-kan",
       name: "WhatICan",
       component: WhatICan
@@ -31,6 +26,11 @@ export default new Router({
       path: "/wat-ik-heb-gedaan",
       name: "WhatIHaveDone",
       component: WhatIHaveDone
+    },
+    {
+      path: "/",
+      name: "AboutMe",
+      component: AboutMe
     }
   ]
 });

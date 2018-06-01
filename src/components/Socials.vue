@@ -7,7 +7,7 @@
             <font-awesome-layers >
                 <font-awesome-icon icon="square" />
                 <font-awesome-icon :icon="['fab', 'gitlab']" transform="shrink-6" style="color: black;" />
-            </font-awesome-layers>Gitlab</a>
+            </font-awesome-layers> Gitlab</a>
         
     </div>
 </template>
