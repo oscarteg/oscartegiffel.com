@@ -72,7 +72,7 @@ export default {
     .bui-Tabs-bubble-icon {
       -ms-flex-align: center;
       align-items: center;
-      background-color: lighten($primary, 50);
+      background-color: #f3f5f9;
       border: 2px solid rgba(3, 27, 78, 0.1);
       border-radius: 50%;
       box-shadow: 0 2px 4px transparent;
@@ -90,9 +90,9 @@ export default {
 
     &.is-active {
       .bui-Tabs-bubble-icon {
-        background-color: lighten($info, 40);
+        background-color: #fff;
         border-color: transparent;
-        box-shadow: 0 2px 4px darken($info, 50);
+        box-shadow: 0 2px 4px rgba(3, 27, 78, 0.2);
       }
 
       .bui-Tabs-bubble-label {
