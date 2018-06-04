@@ -5,7 +5,7 @@
         <div class="container has-text-centered">
           <div class="columns is-vcentered is-centered">
             <div class="column is-half title">
-              <h1 class="name--title">Oscar te Giffel</h1>
+              <h1 class="name--title title ">Oscar te Giffel</h1>
             </div>
           </div>
         </div>
@@ -31,8 +31,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/sass/_variables";
+
 .name--title {
   letter-spacing: 1.5rem;
   text-transform: uppercase;
+  font-family: $family-monospace;
 }
 </style>
