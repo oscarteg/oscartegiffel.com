@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div class="app"> 
     <Fade>
       <PreLoader v-if="loading"/>
       <div v-cloak v-if="!loading">
@@ -14,9 +14,10 @@
       </div> 
     </Fade>
   </div>
-</template>
 
-<script>
+</template>
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import PreLoader from "@/components/PreLoader";
@@ -24,34 +25,21 @@ import Fade from "@/components/transition/Fade";
 import JobStatus from "@/components/JobStatus";
 import FooterCta from "@/components/FooterCta";
 
-export default {
-  name: "App",
-  data() {
-    return {
-      loading: true
-    };
-  },
-  components: {
-    Hero,
-    Footer,
-    PreLoader,
-    Fade,
-    JobStatus,
-    FooterCta
-  },
+@Component({
+  components: { Hero, Footer, PreLoader, Fade, JobStatus, FooterCta }
+})
+export default class App extends Vue {
+  loading = true;
+
   created() {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
   }
-};
+}
 </script>
 
-<style lang="scss" scoped>
-.background-wavy {
-  background-image: url(./assets/img/wave.svg);
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: 200%;
-}
+
+
+<style lang="scss">
 </style>

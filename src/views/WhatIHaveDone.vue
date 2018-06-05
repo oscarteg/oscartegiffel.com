@@ -83,11 +83,10 @@
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-export default {
-  name: "WhatIHaveDone",
-  components: {
-    FontAwesomeIcon
-  }
-};
+@Component({
+  FontAwesomeIcon
+})
+export default class WhatIHaveDone extends Vue {}
 </script>
