@@ -1,23 +1,24 @@
 <template>
-  <div class="app"> 
-    <Fade>
-      <PreLoader v-if="loading"/>
-      <div v-cloak v-if="!loading">
-        <Hero />
+    <div class="app">
         <Fade>
-          <div class="background-wavy">
-            <router-view class="section container" />
-          </div>
+            <PreLoader v-if="loading"/>
+            <div v-cloak v-if="!loading">
+                <Hero/>
+                <Fade>
+                    <div class="background-wavy">
+                        <router-view class="section container content"/>
+                    </div>
+                </Fade>
+                <FooterCta/>
+                <Footer/>
+            </div>
         </Fade>
-        <FooterCta/>
-        <Footer />
-      </div> 
-    </Fade>
-  </div>
+    </div>
 
 </template>
+
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import PreLoader from "@/components/PreLoader";
@@ -38,7 +39,6 @@ export default class App extends Vue {
   }
 }
 </script>
-
 
 
 <style lang="scss">

@@ -1,29 +1,31 @@
 <template>
     <a class="button is-primary" @click="jobStatus">
-        <font-awesome-icon icon="briefcase" pull="left"/> werk status
-    </a>    
+        <font-awesome-icon class="is-medium" icon="briefcase" pull="left"/>
+        werk status
+    </a>
 </template>
 
-<script>
+<script lang="ts">
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-export default {
-  name: "JobStatus",
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+@Component({
   components: {
     FontAwesomeIcon
-  },
-  methods: {
-    jobStatus() {
-      this.$snackbar.open({
-        message: "Op dit moment heb ik al werk, maar neem gerust contact op",
-        type: "is-danger",
-        position: "is-top",
-        duration: 5000,
-        actionText: "klik hier om te mailen",
-        onAction: () => {
-          window.location.href = "mailto:oscar+werk@tegiffel.com?subject=Werk";
-        }
-      });
-    }
   }
-};
+})
+export default class JobStatus extends Vue {
+  jobStatus() {
+    this.$snackbar.open({
+      message: "Op dit moment heb ik al werk, maar neem gerust contact op",
+      type: "is-danger",
+      position: "is-top",
+      duration: 5000,
+      actionText: "klik hier om te mailen",
+      onAction: () => {
+        window.location.href = "mailto:oscar+werk@tegiffel.com?subject=Werk";
+      }
+    });
+  }
+}
 </script>

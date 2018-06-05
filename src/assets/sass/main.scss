@@ -21,7 +21,9 @@
 
 .box {
   border: 1px solid #e5e8ed;
+  background-color: $background-light;
   box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  color: hsl(0, 0%, 86%);
   @include hovering-shadow;
 }
 
@@ -31,7 +33,7 @@
 
 a {
   &:not(.button) {
-    @include underline-on-hover($info, $color-scheme-turquoise);
+    @include underline-on-hover($info, $sea-serpant);
   }
 }
 

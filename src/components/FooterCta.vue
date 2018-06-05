@@ -1,23 +1,23 @@
 <template>
     <div class="container-fluid footer-cta--container">
         <div class="columns is-centered">
-          <div class="column is-two-thirds box">
-            <div class="columns" style="padding: 50px">
-              <div class="column is-9">
-                <h1 class="title">Neem contact op</h1>
-              </div>
-              <div class="column is-1">
-                <div class="job-status">
-                  <job-status />
-                </div> 
-              </div>
+            <div class="column is-two-thirds box">
+                <div class="columns" style="padding: 50px">
+                    <div class="column is-9">
+                        <h1 class="title has-text-white-bis">Neem contact op</h1>
+                    </div>
+                    <div class="column is-1">
+                        <div class="job-status">
+                            <job-status/>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import JobStatus from "@/components/JobStatus";
 
 export default {
@@ -35,10 +35,10 @@ export default {
   padding: 50px;
   background-image: linear-gradient(
     180deg,
-    #fff,
-    #fff 50%,
-    $footer-background-color 0,
-    $footer-background-color
+    $background,
+    $background 50%,
+    $yankees-blue 0,
+    $yankees-blue
   );
 }
 </style>

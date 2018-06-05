@@ -1,30 +1,36 @@
 <template>
     <div class="socials">
-        <a href="https://www.linkedin.com/in/otegiffel/"><font-awesome-icon :icon="['fab', 'linkedin']"/> Linkedin</a>
-        <a href="https://twitter.com/oscartegiffel"><font-awesome-icon :icon="['fab', 'twitter-square']"/> Twitter</a>
-        <a href="https://github.com/oscarteg"><font-awesome-icon :icon="['fab', 'github-square']"/> Github</a>
+        <a href="https://www.linkedin.com/in/otegiffel/">
+            <font-awesome-icon :icon="['fab', 'linkedin']"/>
+            Linkedin</a>
+        <a href="https://twitter.com/oscartegiffel">
+            <font-awesome-icon :icon="['fab', 'twitter-square']"/>
+            Twitter</a>
+        <a href="https://github.com/oscarteg">
+            <font-awesome-icon :icon="['fab', 'github-square']"/>
+            Github</a>
         <a href="https://gitlab.com/oscarteg">
-            <font-awesome-layers >
-                <font-awesome-icon icon="square" />
-                <font-awesome-icon :icon="['fab', 'gitlab']" transform="shrink-6" style="color: black;" />
-            </font-awesome-layers> Gitlab</a>
-        
+            <font-awesome-layers>
+                <font-awesome-icon icon="square"/>
+                <font-awesome-icon :icon="['fab', 'gitlab']" transform="shrink-6" style="color: black;"/>
+            </font-awesome-layers>
+            Gitlab</a>
+
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import {
   FontAwesomeIcon,
   FontAwesomeLayers
 } from "@fortawesome/vue-fontawesome";
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
-  name: "Socials",
-  components: {
-    FontAwesomeLayers,
-    FontAwesomeIcon
-  }
-};
+@Component({
+  FontAwesomeIcon,
+  FontAwesomeLayers
+})
+export default class Socials extends Vue {}
 </script>
 
 <style lang="scss" scoped>

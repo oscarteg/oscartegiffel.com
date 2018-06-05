@@ -1,93 +1,106 @@
 <template>
-<div class="content">
-  <h1>Mijn educatie</h1>
-  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'graduation-cap']"/> Opleidingen</h2>
-  <div class="tile is-ancestor">
-    <div class="tile is-vertical">
-      <div class="tile">
-        <div class="tile is-parent">
-          <article class="tile is-child box is-vertical is-info">
-            <p class="title"> Hogeschool Leiden</p>
-            <p class="subtitle">Informatica | Software engineering | 2013 - heden</p>
-            <div class="content">
-              <p>Op deze school heb ik de opleiding Informatica gevolgd met een specialisatie in software engineer. Hier heb ik de beginselen gekregen van software ontwikkeling. Ook heb ik hier veel geleerd over project management in verschillende project methodieken.</p>
-              <p>De vakken die ik heb gekregen zijn onder andere:</p>
-              <ul>
-                <li>Java</li>
-                <li>Software Test methodieken</li>
-                <li>PHP</li>
-                <li>UML</li>
-                <li>HTML(5)/CSS(3)</li>
-                <li>Databases (Postgres, MySQL)</li>
-                <li>Basic design patterns</li>
-                <li>Database modeling</li>
-                <li>Networking and security</li>
-                <li>Project (ontwikkel)methodieken (RUP, SCRUM, Waterfall, PRINCE2)</li>
-              </ul>
+    <div class="content">
+        <h1 class="has-text-white-bis">Mijn educatie</h1>
+        <h2 class="subtitle has-text-white-bis">
+            <font-awesome-icon :icon="['fas', 'graduation-cap']"/>
+            Opleidingen
+        </h2>
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical">
+                <div class="tile">
+                    <div class="tile is-parent">
+                        <article class="tile is-child box is-vertical is-info">
+                            <p class="title has-text-white-bis"> Hogeschool Leiden</p>
+                            <p class="subtitle has-text-white-bis">Informatica | Software engineering | 2013 - heden</p>
+                            <div class="content">
+                                <p>Op deze school heb ik de opleiding Informatica gevolgd met een specialisatie in
+                                    software engineer. Hier heb ik de beginselen gekregen van software ontwikkeling. Ook
+                                    heb ik hier veel geleerd over project management in verschillende project
+                                    methodieken.</p>
+                                <p>De vakken die ik heb gekregen zijn onder andere:</p>
+                                <ul>
+                                    <li>Java</li>
+                                    <li>Software Test methodieken</li>
+                                    <li>PHP</li>
+                                    <li>UML</li>
+                                    <li>HTML(5)/CSS(3)</li>
+                                    <li>Databases (Postgres, MySQL)</li>
+                                    <li>Basic design patterns</li>
+                                    <li>Database modeling</li>
+                                    <li>Networking and security</li>
+                                    <li>Project (ontwikkel)methodieken (RUP, SCRUM, Waterfall, PRINCE2)</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </div>
-          </article>
         </div>
-      </div>
-    </div>
-  </div>
-  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'certificate']"/> Cursussen/Certificaten</h2>
-  <div class="tile is-ancestor">
-    <div class="tile is-vertical">
-      <div class="tile">
-        <div class="tile is-parent">
-          <article class="tile is-child box is-vertical is-info">
-            <p class="title">
-              Udemy</p>
-            <p class="subtitle">Laravel</p>
-            <div class="content">
-              <figure class="image">
-                <img src="../assets/img/udemy-laravel-certificate.jpg">
-              </figure>
-            </div>
-          </article>
-        </div>
+        <h2 class="subtitle has-text-white-bis">
+            <font-awesome-icon :icon="['fas', 'certificate']"/>
+            Cursussen/Certificaten
+        </h2>
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical">
+                <div class="tile">
+                    <div class="tile is-parent">
+                        <article class="tile is-child box is-vertical is-info">
+                            <p class="title has-text-white-bis">
+                                Udemy</p>
+                            <p class="subtitle has-text-white-bis">Laravel</p>
+                            <div class="content">
+                                <figure class="image">
+                                    <img src="../assets/img/udemy-laravel-certificate.jpg">
+                                </figure>
+                            </div>
+                        </article>
+                    </div>
 
-        <div class="tile is-parent">
-          <article class="tile is-child box is-vertical is-info">
-            <p class="title">
-              Udemy </p>
-            <p class="subtitle">Vuejs</p>
-            <div class="content">
-              <figure class="image">
-                <img src="../assets/img/udemy-vuejs-certificate.jpg">
-              </figure>
+                    <div class="tile is-parent">
+                        <article class="tile is-child box is-vertical is-info">
+                            <p class="title has-text-white-bis">
+                                Udemy </p>
+                            <p class="subtitle has-text-white-bis">Vuejs</p>
+                            <div class="content">
+                                <figure class="image">
+                                    <img src="../assets/img/udemy-vuejs-certificate.jpg">
+                                </figure>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </div>
-          </article>
         </div>
-      </div>
-    </div>
-  </div>
-  <h2 class="subtitle"><font-awesome-icon :icon="['fas', 'certificate']"/> Minor</h2>
-  <div class="tile is-ancestor">
-    <div class="tile is-vertical">
-      <div class="tile">
-        <div class="tile is-parent">
-          <article class="tile is-child box is-vertical is-info">
-            <p class="title">
-              Hogeschool Utrecht </p>
-            <p class="subtitle">Filosofie, wereldreligies en spiritualiteit</p>
-            <div class="content">
+        <h2 class="subtitle has-text-white-bis">
+            <font-awesome-icon :icon="['fas', 'certificate']"/>
+            Minor
+        </h2>
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical">
+                <div class="tile">
+                    <div class="tile is-parent">
+                        <article class="tile is-child box is-vertical is-info">
+                            <p class="title has-text-white-bis">
+                                Hogeschool Utrecht </p>
+                            <p class="subtitle has-text-white-bis">Filosofie, wereldreligies en spiritualiteit</p>
+                            <div class="content">
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </div>
-          </article>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 </template>
 
-<script>
+<script lang="ts">
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
-  name: "WhereILearned",
+@Component({
   components: {
     FontAwesomeIcon
   }
-};
+})
+export default class WhatIHaveLearned extends Vue {}
 </script>

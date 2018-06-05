@@ -1,25 +1,27 @@
 <template>
-<div class="atom-spinner">
-  <div class="spinner-inner">
-    <div class="spinner-line"></div>
-    <div class="spinner-line"></div>
-    <div class="spinner-line"></div>
-    <!--Chrome renders little circles malformed :(-->
-    <div class="spinner-circle">
-      &#9679;
+    <div class="atom-spinner">
+        <div class="spinner-inner">
+            <div class="spinner-line"></div>
+            <div class="spinner-line"></div>
+            <div class="spinner-line"></div>
+            <!--Chrome renders little circles malformed :(-->
+            <div class="spinner-circle">
+                &#9679;
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 </template>
 
-<script>
-export default {
-  name: "Loading"
-};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+@Component({})
+export default class Loading extends Vue {}
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/sass/_variables";
+
 .atom-spinner,
 .atom-spinner * {
   box-sizing: border-box;
@@ -41,7 +43,7 @@ export default {
 .atom-spinner .spinner-circle {
   display: block;
   position: absolute;
-  color: $primary;
+  color: #fff;
   font-size: calc(60px * 0.24);
   top: 50%;
   left: 50%;
@@ -56,7 +58,7 @@ export default {
   animation-duration: 1s;
   border-left-width: calc(60px / 25);
   border-top-width: calc(60px / 25);
-  border-left-color: $color-scheme-violet;
+  border-left-color: #fff;
   border-left-style: solid;
   border-top-style: solid;
   border-top-color: transparent;

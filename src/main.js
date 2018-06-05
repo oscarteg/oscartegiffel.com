@@ -10,20 +10,16 @@ import solid from "@fortawesome/fontawesome-free-solid";
 import regular from "@fortawesome/fontawesome-free-regular";
 import _ from "lodash";
 import "./assets/sass/main.scss";
-
 Vue.config.productionTip = false;
-
 Vue.use(Buefy, {
-    defaultIconPack: "fas"
+  defaultIconPack: "fas"
 });
-
 // Add libraries to fontawesome
 fontawesome.library.add(brands, solid, regular);
-
 Vue.prototype.$_ = _;
-
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount("#app");
+//# sourceMappingURL=main.js.map
