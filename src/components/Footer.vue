@@ -21,10 +21,10 @@
 </template>
 
 <script lang="ts">
-import Skills from "@/components/Skills";
-import Copyright from "@/components/Copyright";
-import Communication from "@/components/Communication";
-import Socials from "@/components/Socials";
+import Skills from "@/components/Skills.vue";
+import Copyright from "@/components/Copyright.vue";
+import Communication from "@/components/Communication.vue";
+import Socials from "@/components/Socials.vue";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({

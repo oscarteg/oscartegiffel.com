@@ -19,12 +19,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
-import PreLoader from "@/components/PreLoader";
-import Fade from "@/components/transition/Fade";
-import JobStatus from "@/components/JobStatus";
-import FooterCta from "@/components/FooterCta";
+import Hero from "@/components/Hero.vue";
+import Footer from "@/components/Footer.vue";
+import PreLoader from "@/components/PreLoader.vue";
+import Fade from "@/components/transition/Fade.vue";
+import JobStatus from "@/components/JobStatus.vue";
+import FooterCta from "@/components/FooterCta.vue";
 
 @Component({
   components: { Hero, Footer, PreLoader, Fade, JobStatus, FooterCta }

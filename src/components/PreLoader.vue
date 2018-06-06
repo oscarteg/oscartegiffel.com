@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import Loading from "@/components/Loading";
+import Loading from "@/components/Loading.vue";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({

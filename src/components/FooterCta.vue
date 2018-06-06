@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import JobStatus from "@/components/JobStatus";
+import JobStatus from "@/components/JobStatus.vue";
 
 export default {
   name: "FooterCta",
