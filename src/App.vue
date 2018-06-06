@@ -32,7 +32,7 @@ import FooterCta from "@/components/FooterCta";
 export default class App extends Vue {
   loading = true;
 
-  created() {
+  created(): void {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
@@ -42,4 +42,8 @@ export default class App extends Vue {
 
 
 <style lang="scss">
+.background-wavy {
+  background: url(./assets/img/wave.svg) no-repeat top;
+  background-size: 200%;
+}
 </style>

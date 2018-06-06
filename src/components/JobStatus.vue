@@ -6,14 +6,9 @@
 </template>
 
 <script lang="ts">
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  components: {
-    FontAwesomeIcon
-  }
-})
+@Component({})
 export default class JobStatus extends Vue {
   jobStatus() {
     this.$snackbar.open({

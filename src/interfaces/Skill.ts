@@ -1,4 +1,4 @@
 export interface Skill {
-    name: string,
-    frameworks?: Array<string>
+  name: string;
+  frameworks?: Array<string>;
 }

@@ -92,11 +92,8 @@
 </template>
 
 <script lang="ts">
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Component, Vue } from "vue-property-decorator";
 
-@Component({
-  FontAwesomeIcon
-})
+@Component({})
 export default class WhatIHaveDone extends Vue {}
 </script>

@@ -12,19 +12,10 @@
 </template>
 
 <script lang="ts">
-import {
-  FontAwesomeIcon,
-  FontAwesomeLayers
-} from "@fortawesome/vue-fontawesome";
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { Skill } from "@/interfaces/Skill";
 
-@Component({
-  components: {
-    FontAwesomeIcon,
-    FontAwesomeLayers
-  }
-})
+@Component({})
 export default class Skills extends Vue {
   skills = [
     {

@@ -11,11 +11,17 @@ import regular from "@fortawesome/fontawesome-free-regular";
 import _ from "lodash";
 import "./assets/sass/main.scss";
 
+import {FontAwesomeIcon, FontAwesomeLayers} from "@fortawesome/vue-fontawesome";
+
 Vue.config.productionTip = false;
 
 Vue.use(Buefy, {
-    defaultIconPack: "fas"
+  defaultIconPack: "fas"
 });
+
+Vue.component("font-awesome-icon", FontAwesomeIcon,);
+Vue.component("font-awesome-layers", FontAwesomeLayers,);
+
 
 // Add libraries to fontawesome
 fontawesome.library.add(brands, solid, regular);
@@ -23,7 +29,7 @@ fontawesome.library.add(brands, solid, regular);
 Vue.prototype.$_ = _;
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount("#app");

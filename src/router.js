@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import AboutMe from "@/views/AboutMe";
-import WhatICan from "@/views/WhatICan";
-import WhatIHaveLearned from "@/views/WhatIHaveLearned";
-import WhatIHaveDone from "@/views/WhatIHaveDone";
+import AboutMe from "./views/AboutMe";
+import WhatICan from "./views/WhatICan";
+import WhatIHaveLearned from "./views/WhatIHaveLearned";
+import WhatIHaveDone from "./views/WhatIHaveDone";
 Vue.use(Router);
 export default new Router({
   mode: "history",

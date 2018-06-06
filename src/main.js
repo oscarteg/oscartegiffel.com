@@ -10,10 +10,16 @@ import solid from "@fortawesome/fontawesome-free-solid";
 import regular from "@fortawesome/fontawesome-free-regular";
 import _ from "lodash";
 import "./assets/sass/main.scss";
+import {
+  FontAwesomeIcon,
+  FontAwesomeLayers
+} from "@fortawesome/vue-fontawesome";
 Vue.config.productionTip = false;
 Vue.use(Buefy, {
   defaultIconPack: "fas"
 });
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.component("font-awesome-layers", FontAwesomeLayers);
 // Add libraries to fontawesome
 fontawesome.library.add(brands, solid, regular);
 Vue.prototype.$_ = _;

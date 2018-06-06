@@ -1,7 +1,7 @@
 <template>
     <div class="SideScrollArea">
         <div class="SideScrollArea-content--below-medium">
-            <ul class="bui-Tabs bui-Tabs--bubble" data-bui-tabs-droplets-manage="" data-pushstate-ignore="">
+            <ul class="bui-Tabs bui-Tabs--bubble">
                 <router-link :to="{ name: 'AboutMe'}" class="bui-Tabs--bubble-listItem bui-Tabs--bubble-listItemLink"
                              tag="li">
                     <div class="bui-Tabs-bubble-icon">
@@ -37,14 +37,9 @@
 </template>
 
 <script lang="ts">
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Component, Vue } from "vue-property-decorator";
 
-@Component({
-  components: {
-    FontAwesomeIcon
-  }
-})
+@Component({})
 export default class Navigation extends Vue {}
 </script>
 
@@ -79,7 +74,7 @@ export default class Navigation extends Vue {}
   }
 
   .bui-Tabs-bubble-label {
-    color: rgba(3, 27, 78, 0.5);
+    color: $independence;
     display: block;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
@@ -97,7 +92,7 @@ export default class Navigation extends Vue {}
       -ms-flex-align: center;
       align-items: center;
       background-color: $background-light;
-      border: 0.3px solid $aquamarine;
+      border: 0.3px solid;
       border-radius: 50%;
       box-shadow: 0 2px 4px transparent;
       display: -ms-flexbox;
@@ -114,13 +109,12 @@ export default class Navigation extends Vue {}
 
     &.is-active {
       .bui-Tabs-bubble-icon {
-        background-color: white;
-        border-color: transparent;
+        background-color: $independence;
         box-shadow: 0 2px 4px rgba(3, 27, 78, 0.2);
       }
 
       .bui-Tabs-bubble-label {
-        color: #fff;
+        color: $aquamarine;
         font-weight: 500;
       }
     }

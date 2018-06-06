@@ -20,16 +20,9 @@
 </template>
 
 <script lang="ts">
-import {
-  FontAwesomeIcon,
-  FontAwesomeLayers
-} from "@fortawesome/vue-fontawesome";
 import { Component, Vue } from "vue-property-decorator";
 
-@Component({
-  FontAwesomeIcon,
-  FontAwesomeLayers
-})
+@Component({})
 export default class Socials extends Vue {}
 </script>
 
