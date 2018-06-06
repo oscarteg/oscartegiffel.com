@@ -1,57 +1,49 @@
 <template>
-  <div> 
-    <Fade>
-      <PreLoader v-if="loading"/>
-      <div v-cloak v-if="!loading">
-        <Hero />
+    <div class="app">
         <Fade>
-          <div class="background-wavy">
-            <router-view class="section container" />
-          </div>
+            <PreLoader v-if="loading"/>
+            <div v-cloak v-if="!loading">
+                <Hero/>
+                <Fade>
+                    <div class="background-wavy">
+                        <router-view class="section container content"/>
+                    </div>
+                </Fade>
+                <FooterCta/>
+                <Footer/>
+            </div>
         </Fade>
-        <FooterCta/>
-        <Footer />
-      </div> 
-    </Fade>
-  </div>
+    </div>
+
 </template>
 
-<script>
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
-import PreLoader from "@/components/PreLoader";
-import Fade from "@/components/transition/Fade";
-import JobStatus from "@/components/JobStatus";
-import FooterCta from "@/components/FooterCta";
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import Hero from "@/components/Hero.vue";
+import Footer from "@/components/Footer.vue";
+import PreLoader from "@/components/PreLoader.vue";
+import Fade from "@/components/transition/Fade.vue";
+import JobStatus from "@/components/JobStatus.vue";
+import FooterCta from "@/components/FooterCta.vue";
 
-export default {
-  name: "App",
-  data() {
-    return {
-      loading: true
-    };
-  },
-  components: {
-    Hero,
-    Footer,
-    PreLoader,
-    Fade,
-    JobStatus,
-    FooterCta
-  },
-  created() {
+@Component({
+  components: { Hero, Footer, PreLoader, Fade, JobStatus, FooterCta }
+})
+export default class App extends Vue {
+  loading = true;
+
+  created(): void {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
   }
-};
+}
 </script>
 
-<style lang="scss" scoped>
+
+<style lang="scss">
 .background-wavy {
-  background-image: url(./assets/img/wave.svg);
-  background-position: top;
-  background-repeat: no-repeat;
+  background: url(./assets/img/wave.svg) no-repeat top;
   background-size: 200%;
 }
 </style>

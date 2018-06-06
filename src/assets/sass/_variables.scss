@@ -1,29 +1,28 @@
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Poppins|Anonymous+Pro|Fira+Mono|Karla");
+/* HSL */
+$maastricht-blue: hsla(240%, 59%, 11%, 1);
+$yankees-blue: hsla(240%, 40%, 18%, 1);
+$independence: hsla(228%, 34%, 31%, 1);
+$sea-serpant: hsla(194%, 44%, 55%, 1);
+$aquamarine: hsla(186%, 100%, 72%, 1);
 
-// Heading: Poppins
-// Body: Anonymous pro
+/* RGB */
+$maastricht-blue: rgba(11, 11, 43, 1);
+$yankees-blue: rgba(27, 27, 63, 1);
+$independence: rgba(53, 64, 107, 1);
+$sea-serpant: rgba(89, 167, 191, 1);
+$aquamarine: rgba(112, 240, 255, 1);
+
+// Override
+$primary: $maastricht-blue;
+$info: $independence;
+$link: $sea-serpant;
+
+$background: $maastricht-blue;
+$background-light: $yankees-blue;
+
+$footer-background-color: $background-light;
+$body-background-color: $background;
 
 $family-monospace: "Anonymous Pro";
 
 $family-primary: "Karla";
-
-// Color scheme
-$color-scheme-blue: #3423a6;
-$color-scheme-violet: #231651;
-$color-scheme-tulip: #ff8484;
-$color-scheme-turquoise: #4dccbd;
-$color-scheme-lazuli: #2374ab;
-
-$primary: $color-scheme-blue;
-$info: $color-scheme-tulip;
-
-$footer-background-color: darken($color-scheme-violet, 12);
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: "Poppins";
-}

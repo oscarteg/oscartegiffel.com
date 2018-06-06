@@ -1,4 +1,18 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Poppins|Anonymous+Pro|Fira+Mono|Karla");
+
+// Heading: Poppins
+// Body: Anonymous pro
+
 .title {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Poppins";
 }

@@ -2,8 +2,9 @@
     <p>Copyright © 2018 Oscar te Giffel | All Rights Reserved.</p>
 </template>
 
-<script>
-export default {
-  name: "Copyright"
-};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+@Component({})
+export default class Copyright extends Vue {}
 </script>

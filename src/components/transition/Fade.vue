@@ -1,15 +1,16 @@
 <template>
-    <transition mode="out-in" 
-        enter-active-class="router--transition animated fadeIn"
-        leave-active-class="router--transition animated fadeOut">
+    <transition mode="out-in"
+                enter-active-class="router--transition animated fadeIn"
+                leave-active-class="router--transition animated fadeOut">
         <slot></slot>
     </transition>
 </template>
 
-<script>
-export default {
-  name: "Fade"
-};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+@Component({})
+export default class Fade extends Vue {}
 </script>
 
 <style lang="scss" scoped>
