@@ -54,7 +54,7 @@ export default class Navigation extends Vue {}
   position: relative;
 
   &:before {
-    background-color: rgba(3, 27, 78, 0.1);
+    background-color: $independence;
     content: "";
     height: 2px;
     left: 50%;
