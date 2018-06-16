@@ -6,6 +6,20 @@
                 <header class="timeline-header">
                     <span class="tag is-primary">Heden</span>
                 </header>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker is-icon">
+                        <font-awesome-icon class="fa-s" icon='file-code'/>
+                    </div>
+                    <div class="timeline-content">
+                        <p class="heading">MoneyMonk</p>
+                        <p>Fullstack en React native</p>
+                        <p>Na mijn afstudeerstage ben ik in dienst getreden bij MoneyMonk. Hierbij houdt ik mij bezig
+                            met de realisatie van de frontend en backend van de webapplicatie.
+                            Daarnaast heb ik ervaring gedaan met het ontwikkelen van een mobiele app in React
+                            Native.</p>
+                    </div>
+                </div>
                 <div class="timeline-item">
                     <div class="timeline-marker is-icon">
                         <font-awesome-icon class="fa-s" icon='file-code'/>
@@ -17,6 +31,9 @@
                             voor de gebruikers van MoneyMonk.</p>
                     </div>
                 </div>
+                <header class="timeline-header">
+                    <span class="tag is-primary">2018</span>
+                </header>
                 <div class="timeline-item">
                     <div class="timeline-marker is-icon">
                         <font-awesome-icon class="fa-xs" icon='terminal'/>
@@ -67,20 +84,8 @@
                     <div class="timeline-content">
                         <p class="heading"> Teleperformance</p>
                         <p>Technical Support Representative</p>
-                        <ul>
-                            <li>Het afhandelen van telefonische klantcontacten.</li>
-                            <li>Individuele training van collega-medewerkers op vakkennis.</li>
-                            <li>Begeleiden en inwerken van nieuwe collega’s.</li>
-                            <li>Netwerk en data storingen analyseren en oplossen.</li>
-                            <li>TCP/IP-netwerkondersteuning geven aan klanten.</li>
-                            <li>Adviseren, configureren, storingen analyseren en oplossen van router, modem, computer en
-                                iptv.
-                            </li>
-                            <li>Het aansturen van installatie en storingsmonteurs.</li>
-                            <li>Klantcorrespondentie.</li>
-                            <li>Het aannemen van wijzigingsaanvragen en deze verwerken in het klantbestand.</li>
-                            <li>Diverse administratieve werkzaamheden.</li>
-                        </ul>
+                        Bij Teleperformance heb ik technische klant ondersteuning gegeven op het Ziggo project. Hierbij
+                        heb ik mij bezig gehouden met het het afhandelen van telefonische klantcontact en het ondersteunen en aansturen van collega's.
                     </div>
                 </div>
                 <div class="timeline-header">

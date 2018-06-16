@@ -1,5 +1,9 @@
 <template>
-    <ul class="communication">
+<aside class="menu">
+    <p class="menu-label">
+        Neem contact op via
+    </p>
+    <ul class="menu-list">
         <li><a href="mailto:oscar@tegiffel.com" target="_blank">
             <font-awesome-icon class="fa-fw" icon="envelope"/>
             oscar[at]tegiffel[dot]com</a></li>
@@ -13,6 +17,7 @@
             <font-awesome-icon class="fa-fw" :icon="['fab', 'whatsapp']"/>
             +31 6 52789990</a></li>
     </ul>
+</aside>
 </template>
 
 <script lang="ts">
@@ -23,7 +28,4 @@ export default class Communication extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-.communication > a {
-  margin-right: 0.5em;
-}
 </style>
