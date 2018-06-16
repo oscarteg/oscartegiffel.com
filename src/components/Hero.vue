@@ -5,6 +5,7 @@
                 <div class="container has-text-centered">
                     <div class="columns is-vcentered is-centered">
                         <div class="column is-half title">
+                            <!-- <Title class="name--title has-text-white-bis"/> -->
                             <h1 class="name--title title has-text-white-bis">Oscar te Giffel</h1>
                         </div>
                     </div>
@@ -21,11 +22,13 @@
 
 <script lang="ts">
 import Navigation from "@/components/Navigation.vue";
+import Title from "@/components/Title.vue";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
-    Navigation
+    Navigation,
+    Title
   }
 })
 export default class Hero extends Vue {}

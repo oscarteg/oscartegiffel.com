@@ -1,4 +1,8 @@
 <template>
+<aside class="menu">
+  <p class="menu-label">
+    Ik heb ervaring met
+  </p>
     <div class="field is-grouped is-grouped-multiline">
         <div class="control" v-for="skill in skills" :key="skill.name">
             <div class="tags has-addons">
@@ -9,6 +13,7 @@
             </div>
         </div>
     </div>
+    </aside>
 </template>
 
 <script lang="ts">
@@ -17,6 +22,7 @@ import { Skill } from "@/interfaces/Skill";
 
 @Component({})
 export default class Skills extends Vue {
+  // TODO: Type check skill
   skills = [
     {
       name: "Html"
@@ -40,6 +46,12 @@ export default class Skills extends Vue {
     },
     {
       name: "Docker"
+    },
+    {
+      name: "Android"
+    },
+    {
+      name: "React Native"
     }
   ];
 }

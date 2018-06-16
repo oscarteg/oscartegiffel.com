@@ -6,7 +6,7 @@
                 <Hero/>
                 <Fade>
                     <div class="background-wavy">
-                        <router-view class="section container content"/>
+                        <router-view class="section container"/>
                     </div>
                 </Fade>
                 <FooterCta/>

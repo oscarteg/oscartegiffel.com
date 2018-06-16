@@ -92,7 +92,7 @@ export default class Navigation extends Vue {}
       -ms-flex-align: center;
       align-items: center;
       background-color: $background-light;
-      border: 0.3px solid;
+      border: 1px solid;
       border-radius: 50%;
       box-shadow: 0 2px 4px transparent;
       display: -ms-flexbox;
