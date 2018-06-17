@@ -28,6 +28,6 @@ export default class Socials extends Vue {}
 
 <style lang="scss" scoped>
 .socials > a {
-  margin-right: 1em;
+  margin-right: 2rem;
 }
 </style>
