@@ -11,7 +11,7 @@
                     <div class="tile is-parent">
                         <article class="tile is-child box is-vertical is-info">
                             <p class="title has-text-white-bis"> Hogeschool Leiden</p>
-                            <p class="subtitle has-text-white-bis">Informatica | Software engineering | 2013 - heden</p>
+                            <p class="subtitle has-text-white-bis">Informatica | Software engineering | 2013 - 2018</p>
                             <div class="content">
                                 <p>Op deze school heb ik de opleiding Informatica gevolgd met een specialisatie in
                                     software engineer. Hier heb ik de beginselen gekregen van software ontwikkeling. Ook
@@ -25,9 +25,10 @@
                                     <li>UML</li>
                                     <li>HTML(5)/CSS(3)</li>
                                     <li>Databases (Postgres, MySQL)</li>
-                                    <li>Basic design patterns</li>
+                                    <li>Design patterns</li>
                                     <li>Database modeling</li>
                                     <li>Networking and security</li>
+                                    <li>Android</li>
                                     <li>Project (ontwikkel)methodieken (RUP, SCRUM, Waterfall, PRINCE2)</li>
                                 </ul>
                             </div>
@@ -84,7 +85,10 @@
                                 Hogeschool Utrecht </p>
                             <p class="subtitle has-text-white-bis">Filosofie, wereldreligies en spiritualiteit</p>
                             <div class="content">
+                                Tijdens deze minor heb ik ervaring opgedaan met westerse en oosterse filosofische stromingen. Onder andere Plato, Aristoteles en Immanuel Kant. 
+                                Hierin heb ik mij met name verdiept in het existentialisme en de filosoof Jean Paul Sartre. Daarnaast heb ik mij onder andere verdiept in de Islam, Atheïsme, Jodendom, Humanisme, Christendom, Boeddhisme, Sikhisme en Hindoeïsme. 
                             </div>
+
                         </article>
                     </div>
                 </div>

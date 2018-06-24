@@ -5,7 +5,8 @@
                 <div class="container has-text-centered">
                     <div class="columns is-vcentered is-centered">
                         <div class="column is-half title">
-                            <!-- <Title class="name--title has-text-white-bis"/> -->
+                            <!-- TODO: Add an svg text animation -->
+                            <!-- <Title class="name--title title has-text-white-bis"/> -->
                             <h1 class="name--title title has-text-white-bis">Oscar te Giffel</h1>
                         </div>
                     </div>

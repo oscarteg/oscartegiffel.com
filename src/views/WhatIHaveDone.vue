@@ -15,8 +15,8 @@
                         <p class="heading">MoneyMonk</p>
                         <p>Fullstack en React native</p>
                         <p>Na mijn afstudeerstage ben ik in dienst getreden bij MoneyMonk. Hierbij houdt ik mij bezig
-                            met de realisatie van de frontend en backend van de webapplicatie.
-                            Daarnaast heb ik ervaring gedaan met het ontwikkelen van een mobiele app in React
+                            met de realisatie van de frontend in React en de backend in PHP.
+                            Daarnaast heb ik enige ervaring gedaan met het ontwikkelen van een mobiele app in React
                             Native.</p>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                         <p class="heading">MoneyMonk</p>
                         <p>Afstudeerstage</p>
                         <p>Tijdens mijn afstuderen heb ik mij bezig gehouden met het ontwikkelen van een rapportagetool
-                            voor de gebruikers van MoneyMonk.</p>
+                            voor de gebruikers van MoneyMonk.De rapportagetool is een onderdeel van Bussiness Intelligence en verschaft de nodige informatie om het bedrijf van de gebruikers richting te geven. </p>
                     </div>
                 </div>
                 <header class="timeline-header">
@@ -42,7 +42,7 @@
                         <p class="heading">MoneyMonk</p>
                         <p>Fullstack Developer</p>
                         <p>Na afloop van mijn stage ben ik gebleven bij MoneyMonk. Naast de werkzaamheden aan de backend
-                            heb ik mijn kennis verder uitgebreid door frontend development in React te doen.</p>
+                            heb ik mijn kennis verder uitgebreid door frontend development in React te doen. </p>
                     </div>
                 </div>
                 <header class="timeline-header">

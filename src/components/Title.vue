@@ -12,7 +12,7 @@
     </svg>
 
     <filter color-interpolation-filters="sRGB" id="filter" width="100%" heigth="100%" x="0" y="0">
-      <feFlood flood-color="black" result="black" />
+      <feFlood flood-color="rgba(11, 11, 43, 1)" result="black" />
 
       <!-- red text start -->
       <feFlood flood-color="red" result="REDTXT_FLOOD_10" />
