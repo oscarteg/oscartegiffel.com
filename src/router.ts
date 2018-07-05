@@ -4,13 +4,18 @@ import AboutMe from "./views/AboutMe.vue";
 import WhatICan from "./views/WhatICan.vue";
 import WhatIHaveLearned from "./views/WhatIHaveLearned.vue";
 import WhatIHaveDone from "./views/WhatIHaveDone.vue";
-
+import ThingsICreated from "./views/ThingsICreated.vue";
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
   linkExactActiveClass: "is-active",
   routes: [
+    {
+      path: "/things-i-created",
+      name: "ThingsICreated",
+      component: ThingsICreated
+    },
     {
       path: "/wat-ik-kan",
       name: "WhatICan",

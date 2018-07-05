@@ -28,7 +28,8 @@
                         <p class="heading">MoneyMonk</p>
                         <p>Afstudeerstage</p>
                         <p>Tijdens mijn afstuderen heb ik mij bezig gehouden met het ontwikkelen van een rapportagetool
-                            voor de gebruikers van MoneyMonk.De rapportagetool is een onderdeel van Bussiness Intelligence en verschaft de nodige informatie om het bedrijf van de gebruikers richting te geven. </p>
+                            voor de gebruikers van MoneyMonk. De rapportagetool is een onderdeel van Bussiness Intelligence 
+                            en verschaft de nodige informatie om het bedrijf van de gebruikers richting te geven. </p>
                     </div>
                 </div>
                 <header class="timeline-header">
@@ -80,12 +81,12 @@
                 <div class="timeline-item">
                     <div class="timeline-marker is-icon">
                         <font-awesome-icon class="fa-xs" icon='phone'/>
-                    </div>
+                    </div>>
                     <div class="timeline-content">
                         <p class="heading"> Teleperformance</p>
                         <p>Technical Support Representative</p>
-                        Bij Teleperformance heb ik technische klant ondersteuning gegeven op het Ziggo project. Hierbij
-                        heb ik mij bezig gehouden met het het afhandelen van telefonische klantcontact en het ondersteunen en aansturen van collega's.
+                        <p>Bij Teleperformance heb ik technische klant ondersteuning gegeven op het Ziggo project. Hierbij heb ik mij bezig gehouden met het het afhandelen van telefonische klantcontact en het ondersteunen en aansturen van collega's.
+                        </p>
                     </div>
                 </div>
                 <div class="timeline-header">

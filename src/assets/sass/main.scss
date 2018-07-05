@@ -27,10 +27,6 @@
   @include hovering-shadow;
 }
 
-.title {
-  font-family: "Poppins";
-}
-
 a {
   &:not(.button) {
     @include underline-on-hover($info, $sea-serpant);
@@ -41,4 +37,12 @@ a {
   a {
     color: $white-bis !important;
   }
+}
+
+.underline--magical {
+  background-image: linear-gradient(120deg, #ffeb3b 0%, #ffeb3b 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.1em;
+  background-position: 0 80%;
+  transition: background-size 0.25s ease-in;
 }
