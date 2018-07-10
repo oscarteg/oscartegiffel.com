@@ -1,7 +1,7 @@
 <template>
     <a class="button is-primary" @click="jobStatus">
-        <font-awesome-icon class="is-medium" icon="briefcase" pull="left"/>
-        werk status
+        <font-awesome-icon class="is-large" icon="briefcase" pull="left"/>
+          werk status
     </a>
 </template>
 

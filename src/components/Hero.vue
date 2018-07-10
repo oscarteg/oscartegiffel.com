@@ -4,9 +4,10 @@
             <div class="hero-body">
                 <div class="container has-text-centered">
                     <div class="columns is-vcentered is-centered">
-                        <div class="column is-half title">
-                            <!-- <Title class="name--title has-text-white-bis"/> -->
-                            <h1 class="name--title title has-text-white-bis">Oscar te Giffel</h1>
+                        <div class="column is-half title is-centered text-center">
+                            <!-- TODO: Add an svg text animation -->
+                            <!-- <Title class="name--title title has-text-white-bis"/> -->
+                            <h1 class="title name--title has-text-white-bis underline--magical ">Oscar te Giffel</h1>
                         </div>
                     </div>
                 </div>
@@ -40,6 +41,5 @@ export default class Hero extends Vue {}
 .name--title {
   letter-spacing: 1.5rem;
   text-transform: uppercase;
-  font-family: $family-monospace;
 }
 </style>

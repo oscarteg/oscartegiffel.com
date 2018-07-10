@@ -1,8 +1,8 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Poppins|Anonymous+Pro|Fira+Mono|Karla|Rubik");
 
-// Heading: Poppins
-// Body: Anonymous pro
+// Heading & body: Karla
+// Monospace: Anonymous pro
 
 .title {
   -webkit-font-smoothing: antialiased;
@@ -14,5 +14,5 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Poppins";
+  font-family: $family-monospace;
 }
