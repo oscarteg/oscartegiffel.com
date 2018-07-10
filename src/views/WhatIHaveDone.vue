@@ -6,7 +6,6 @@
                 <header class="timeline-header">
                     <span class="tag is-primary">Heden</span>
                 </header>
-
                 <div class="timeline-item">
                     <div class="timeline-marker is-icon">
                         <font-awesome-icon class="fa-s" icon='file-code'/>

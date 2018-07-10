@@ -12,7 +12,7 @@ export default new Router({
   linkExactActiveClass: "is-active",
   routes: [
     {
-      path: "/things-i-created",
+      path: "/wat-ik-heb-gemaakt",
       name: "ThingsICreated",
       component: ThingsICreated
     },
