@@ -1,3 +1,3 @@
-[submodule "resume"]
-	path = resume
-	url = git@github.com:Oscarteg/resume.git
+[submodule "src/assets/static/resume"]
+	path = src/assets/static/resume
+	url = git@github.com:oscarteg/resume.git

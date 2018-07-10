@@ -1,0 +1,100 @@
+\documentclass[a4paper]{limecv}
+  
+  % Defaults used in template design.
+  \usepackage[margin=\cvMargin,noheadfoot]{geometry}
+
+  
+  % For cover letter.
+  \usepackage{lipsum}
+  
+  \begin{document}
+  
+  % Design of side bar.
+  \begin{cvSidebar}
+    \cvID{Oscar}{te Giffel}{picture}{}
+  
+    \begin{cvProfile}
+    
+
+%      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper euismod lorem nec eleifend. Suspendisse ac varius quam. Etiam laoreet nunc orci, vestibulum imperdiet enim elementum at. Duis dictum metus sapien, eu blandit quam malesuada et. Ut viverra maximus eros.
+    \end{cvProfile}
+    
+    \begin{cvContact}
+      \cvContactAddress{Hogeweg 29 J\\3814CC Amersfoort}
+      \cvContactEmail{mailto:oscar@tegiffel.com}{oscar@tegiffel.com}
+      \cvContactPhone{+31 6 52789990}
+      \cvContactWebsite{https://oscartegiffel.com}{oscartegiffel.com}
+      \cvContactLinkedin{https://www.linkedin.com/in/otegiffel/}{oscartegiffel}
+      \cvContactTwitter{https://twitter.com/oscartegiffel}{@oscartegiffel}
+    \end{cvContact}
+    
+    \begin{cvLanguages}
+      \cvLanguage{Nederlands (native)}{5}
+      \cvLanguage{English}{4}
+    \end{cvLanguages}
+    
+    \begin{cvInterests}[short]
+      \cvInterestsPersonal
+      \cvInterest{\faGamepad}{gaming}
+      \cvInterest{\faSuitcase}{reizen}
+      \cvInterestsProfessional
+      \cvInterest{\faDesktop}{programmeren}
+    \end{cvInterests}
+    
+    \begin{cvProjects}
+      \cvProject[link=https://chewyp.com]{\texttt{Chewpy}}{Geeft jou de recepten die bij je past}
+      \cvProject{\texttt{Cryptoportfolio}}{Een web applicatie om je cryptocurrency in bij te houden. Gemaakt in VueJS}
+    \end{cvProjects}
+    
+  \end{cvSidebar}
+
+  \begin{cvMainContent}
+
+    \begin{cvEducation}
+      \cvItem{Bachelor Computer Science and Engineering\\
+      University of Applied Sciences Leiden. September 2013 -- June 2018\\
+      Op deze school heb ik de opleiding Informatica gevolgd met een specialisatie in software engineer. Hier heb ik de beginselen gekregen van software ontwikkeling. Ook heb ik hier veel geleerd over project management in verschillende project methodieken.
+          De vakken die ik heb gekregen zijn onder andere Java, test methodieken, databases, netwerk en beveiliging en project (ontwikkel)methodieken.}
+    \end{cvEducation}
+    
+    \begin{cvExperience}
+      \cvItem{Backend \& Frontend developer (stage) \\
+              \textsc{\selectfont MoneyMonk}, Utrecht. Feb 2017 - Nu \\
+              Na afloop van mijn stage ben ik gebleven bij MoneyMonk. Ik doe dezelfde werkzaamheden die ik tijdens mijn stage ook had uitgevoerd.};
+      \cvItem{(Stage) Backend Developer \\
+              \textsc{\selectfont MoneyMonk}, Utrecht.  Sept 2016 -- Feb 2017\\
+             Tijdens mijn opleiding Software Engineer heb ik een half jaar stage gelopen bij MoneyMonk. MoneyMonk is een oplossing voor ZZP'ers om hun administratie bij te houden waaronder, contacten bijhouden, projecten bijhouden en facturen versturen. Mijn taken waren vooral gericht op de backend. Daarnaast heb ik ook nog mogen proeven om de frontend in React vorm te geven.
+             };
+      \cvItem{Webdeveloper\\
+              \textsc{Freelance}, Jan 2016 -- Feb 2017\\
+              Naast mijn studie ben ik me eigen bedrijf gestart. Ik heb verschillende opdrachten gehad waaronder servers instellen, websites maken in Wordpress, webshops in Shopify aanpassen en API koppeling maken tussen ERP systeem en Shopify.};
+    \end{cvExperience}
+    
+    \begin{cvSkills}
+      \cvSkillTwo{5}{PHP}{4}{Java}
+      \cvSkillTwo{4}{Javascript}{4}{ReactJS}
+      \cvSkillTwo{3}{HTML5/CSS}{3}{VueJS}
+      \cvSkillTwo{3}{Linux}{3}{MySQL}
+      \cvSkillOne{3}{Git}
+    \end{cvSkills}
+  
+    \begin{cvReferences}
+      \cvAddReference{
+        name=Jasper Horstink,
+        company=MoneyMonk,
+        position=CEO,
+        address line 1=Vondellaan 12,
+        address line 2= 3521 GD Utrecht,
+        mobile phone=+3185 303 0800}
+    
+          \cvAddReference{
+        name=Chris de Groot,
+        company=Greymedia,
+        position=CEO,
+        address line 1=Vijver 32 c,
+        address line 2=3811CM Amersfoort}
+    \end{cvReferences}
+  
+  \end{cvMainContent}
+  
+  \end{document}
