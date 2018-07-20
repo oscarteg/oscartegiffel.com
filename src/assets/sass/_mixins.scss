@@ -27,3 +27,8 @@
     }
   }
 }
+
+@mixin underline--magical () {
+  border-bottom: 3px solid $warning;
+  box-shadow: inset 0 -4px 0 $warning; // background-image
+}

@@ -52,6 +52,9 @@ export default class Skills extends Vue {
     },
     {
       name: "React Native"
+    },
+    {
+      name: "Shopify"
     }
   ];
 }

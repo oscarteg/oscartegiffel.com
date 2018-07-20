@@ -121,7 +121,7 @@ export default class Navigation extends Vue {}
       }
 
       .bui-Tabs-bubble-label {
-        color: $aquamarine;
+        color: $sea-serpant;
         font-weight: 500;
       }
     }

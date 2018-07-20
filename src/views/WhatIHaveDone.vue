@@ -80,7 +80,7 @@
                 <div class="timeline-item">
                     <div class="timeline-marker is-icon">
                         <font-awesome-icon class="fa-xs" icon='phone'/>
-                    </div>>
+                    </div>
                     <div class="timeline-content">
                         <p class="heading"> Teleperformance</p>
                         <p>Technical Support Representative</p>
