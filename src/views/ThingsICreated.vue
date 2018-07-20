@@ -12,7 +12,7 @@
                             <div class="content">
                                 <p>Chewpy is een mobile only applicatie die gebruikers antwoord geeft op de vraag; "Wat ga ik of wat gaan we vanavond eten. Het idee is dat de app een weekoverzicht van recepten genereert op basis van de behoeften van de gebruiker. Dit doen we met behulp van ons speciaal ontwikkelde algoritme. Op de website <a href="https://www.chewpy.com">https://www.chewpy.com</a> is de link te vinden naar de verschillend applicaties.
                                 
-                                Ik heb meegewerkt aan de backend REST API. Deze heb ik samen met de oprichter ontworpen en gerealiseerd in het Laravel framwork. Daarnaast heb ik een CMS systeem gemaakt in het framework VueJS.
+                                Ik heb meegewerkt aan de backend REST API. Deze heb ik samen met de oprichter ontworpen en gerealiseerd in het Laravel framework. Daarnaast heb ik een CMS systeem gemaakt in het framework VueJS.
                                 </p>
                             </div>
                         </article>

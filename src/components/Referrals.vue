@@ -27,6 +27,10 @@ export default class Referrals extends Vue {
       name: "DigitalOcean",
       icon: "../assets/img/referral-icons/digitalocean.svg",
       url: "https://m.do.co/c/3263e6f7df8f"
+    },
+    {
+      name: "Coinbase",
+      url: "https://www.coinbase.com/join/52fa09150ba426d205000065"
     }
   ];
 }

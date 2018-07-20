@@ -25,27 +25,24 @@
                                 <font-awesome-icon :icon="['fas', 'code']"/>
                                 Java
                             </p>
-
+                            <p class="subtitle"></p>
                             <div class="content">
-                                Op school heb ik ervaring opgedaan met het programmeren in Java. De object georiënteerd
-                                manier van programmeren is makkelijk over te zetten in andere programmeer talen.
+                                <p>Op school heb ik ervaring opgedaan met het programmeren in Java. De object georiënteerd
+                                manier van programmeren is makkelijk over te zetten in andere programmeer talen.</p>
                             </div>
                         </article>
                     </div>
-                </div>
-                <div class="tile">
                     <div class="tile is-parent">
                         <article class="tile is-child box">
                             <p class="title has-text-white-bis">
                                 <font-awesome-icon :icon="['fas', 'desktop']"/>
                                 Webdevelopment
                             </p>
-                            <p class="subtitle has-text-white-bis">Php, Javascript</p>
+                            <p class="subtitle has-text-white-bis">Php, Javascriptm, NodeJS</p>
                             <div class="content">
-                                Ik heb meerdere webdevelopment projecten gedaan. Backend development in PHP en gebruik
-                                gemaakt van framework Laravel. Frontend development in HTML, CSS en Javascript waarbij
+                                <p> Ik heb meerdere webdevelopment projecten gedaan waaronder backend development in PHP en NodeJS. Hierbij heb ik gebruik gemaakt van de frameworks Laravel en Express. Frontend development in HTML, CSS en Javascript waarbij
                                 ik gebruik heb gemaakt van verschillende Javascript frameworks zoals ReactJs, VueJs en
-                                jQuery.
+                                jQuery.</p>
                             </div>
                         </article>
                     </div>
