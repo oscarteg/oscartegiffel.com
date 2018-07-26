@@ -43,7 +43,7 @@ export default class App extends Vue {
 
 <style lang="scss">
 .background-wavy {
-  background: url(./assets/img/wave.svg) no-repeat top;
+  background: url(./assets/img/wave.svg) no-repeat center fixed;
   background-size: 200%;
 }
 </style>
