@@ -6,7 +6,7 @@ $font_path: '~@/assets/fonts/';
 // Monospace: Inconsolata
 @font-face {
   font-family: "Dank Mono";
-  src: url($font_path + "ttf/DankMono-Regular.ttf") format("ttf");
+  src: url($font_path + "ttf/DankMono-Regular.ttf") format("ttf"), url($font_path + "otf/DankMono-Regular.otf") format("otf");
 }
 
 .title {

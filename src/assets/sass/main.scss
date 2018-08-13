@@ -36,3 +36,18 @@
 .underline--magical {
   @include underline--magical;
 }
+
+.title {
+  font-family: "Dank Mono";
+}
+
+// Selection color
+::selection {
+  background: $warning;
+  /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  background: $warning;
+  /* Gecko Browsers */
+}
