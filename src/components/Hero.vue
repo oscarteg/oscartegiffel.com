@@ -5,7 +5,7 @@
                 <div class="container has-text-centered">
                     <div class="columns is-vcentered is-centered">
                         <div class="column is-half title is-centered text-center">
-                            <h1 class="title name--title has-text-white-bis underline--magical ">Oscar te Giffel</h1>
+                            <h1 class="title name--title has-text-white-bis underline--magical">Oscar te Giffel</h1>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,14 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Poppins|Anonymous+Pro|Fira+Mono|Karla|Rubik|Inconsolata");
+@import url("https://fonts.googleapis.com/css?family=Rubik|Inconsolata");
+$font_path: '~@/assets/fonts/';
 // Body: Rubik
 // Headers: 
 // Monospace: Inconsolata
+@font-face {
+  font-family: "Dank Mono";
+  src: url($font_path + "ttf/DankMono-Regular.ttf") format("ttf"), url($font_path + "otf/DankMono-Regular.otf") format("otf");
+}
+
 .title {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
