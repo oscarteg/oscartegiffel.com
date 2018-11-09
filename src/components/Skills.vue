@@ -28,7 +28,8 @@ export default class Skills extends Vue {
       name: "Html"
     },
     {
-      name: "Css"
+      name: "Css",
+      frameworks: ["Bulma", "Bootstrap", "TailwindCSS"]
     },
     {
       name: "Javascript",

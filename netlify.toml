@@ -3,3 +3,8 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "https://oscartegiffel.netlify.com/*"
+  to = "https://www.oscartegiffel.com/:splat"
+  status = 301
