@@ -1,14 +1,17 @@
 <template>
-  <div class="app">
-    <Fade>
-      <PreLoader v-if="loading" />
-      <div v-cloak v-if="!loading">
-        <Hero /> <Fade> <router-view class="section container" /> </Fade>
-        <FooterCta />
-        <footer />
-      </div>
-    </Fade>
-  </div>
+    <div class="app">
+        <Fade>
+            <PreLoader v-if="loading" />
+            <div v-cloak v-if="!loading">
+                <Hero />
+                <Fade>
+                    <router-view class="section container" />
+                </Fade>
+                <FooterCta />
+                <Footer />
+            </div>
+        </Fade>
+    </div>
 </template>
 
 <script lang="ts">
