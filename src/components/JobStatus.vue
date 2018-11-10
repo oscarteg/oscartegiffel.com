@@ -1,8 +1,8 @@
 <template>
-    <a class="button is-primary" @click="jobStatus">
-        <font-awesome-icon class="is-large" icon="briefcase" pull="left"/>
-          werk status
-    </a>
+  <a class="button is-primary" @click="jobStatus">
+    <font-awesome-icon class="is-large" icon="business-time" pull="left" />
+    werk status
+  </a>
 </template>
 
 <script lang="ts">

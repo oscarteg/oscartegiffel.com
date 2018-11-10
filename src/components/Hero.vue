@@ -1,22 +1,24 @@
 <template>
-    <header class="header">
-        <section class="hero is-fullheight is-bold">
-            <div class="hero-body">
-                <div class="container has-text-centered">
-                    <div class="columns is-vcentered is-centered">
-                        <div class="column is-half title is-centered text-center">
-                            <h1 class="title name--title has-text-white-bis underline--magical ">Oscar te Giffel</h1>
-                        </div>
-                    </div>
-                </div>
+  <header class="header background-wavy">
+    <section class="hero is-fullheight is-bold">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div class="columns is-vcentered is-centered">
+            <div class="column is-half title is-centered text-center">
+              <h1
+                class="title name--title has-text-white-bis underline--magical"
+              >
+                Oscar te Giffel
+              </h1>
             </div>
-            <div class="hero-foot">
-                <div class="container">
-                    <Navigation/>
-                </div>
-            </div>
-        </section>
-    </header>
+          </div>
+        </div>
+      </div>
+      <div class="hero-foot">
+        <div class="container"><Navigation /></div>
+      </div>
+    </section>
+  </header>
 </template>
 
 <script lang="ts">

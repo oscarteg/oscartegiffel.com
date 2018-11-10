@@ -14,6 +14,12 @@ $sea-serpant: rgba(89, 167, 191, 1);
 $aquamarine: rgba(112, 240, 255, 1);
 /* Override */
 
+$maastricht-blue: rgba(11, 11, 43, 1);
+$yankees-blue: rgba(27, 27, 63, 1);
+$independence: rgba(53, 64, 107, 1);
+$sea-serpant: rgba(89, 167, 191, 1);
+$aquamarine: rgba(112, 240, 255, 1);
+
 $primary: $maastricht-blue;
 $info: $independence;
 $link: $sea-serpant;
@@ -21,5 +27,5 @@ $background: $maastricht-blue;
 $background-light: $yankees-blue;
 $footer-background-color: $background-light;
 $body-background-color: $background;
-$family-monospace: "Inconsolata";
+$family-monospace: "Dank Mono";
 $family-primary: "Rubik";
