@@ -1,20 +1,14 @@
 <template>
-    <div class="app">
-        <Fade>
-            <PreLoader v-if="loading"/>
-            <div v-cloak v-if="!loading">
-                <Hero/>
-                <Fade>
-                    <div class="background-wavy">
-                        <router-view class="section container"/>
-                    </div>
-                </Fade>
-                <FooterCta/>
-                <Footer/>
-            </div>
-        </Fade>
-    </div>
-
+  <div class="app">
+    <Fade>
+      <PreLoader v-if="loading" />
+      <div v-cloak v-if="!loading">
+        <Hero /> <Fade> <router-view class="section container" /> </Fade>
+        <FooterCta />
+        <footer />
+      </div>
+    </Fade>
+  </div>
 </template>
 
 <script lang="ts">
@@ -40,10 +34,9 @@ export default class App extends Vue {
 }
 </script>
 
-
 <style lang="scss">
 .background-wavy {
-  background: url(./assets/img/wave.svg) no-repeat center fixed;
+  background: url(./assets/img/wave.svg) no-repeat center;
   background-size: 200%;
 }
 </style>
