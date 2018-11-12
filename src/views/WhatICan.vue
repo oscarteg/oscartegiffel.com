@@ -7,7 +7,7 @@
                     <div class="tile is-parent">
                         <article class="tile is-child box is-vertical is-info">
                             <p class="title has-text-white-bis">
-                                <font-awesome-icon :icon="['fas', 'server']"/>
+                                <font-awesome-icon :icon="['fas', 'server']" />
                                 Devops
                             </p>
                             <p class="subtitle"></p>
@@ -22,27 +22,39 @@
                     <div class="tile is-parent">
                         <article class="tile is-child box">
                             <p class="title has-text-white-bis">
-                                <font-awesome-icon :icon="['fas', 'code']"/>
+                                <font-awesome-icon :icon="['fas', 'code']" />
                                 Java
                             </p>
                             <p class="subtitle"></p>
                             <div class="content">
                                 <p>Op school heb ik ervaring opgedaan met het programmeren in Java. De object georiënteerd
-                                manier van programmeren is makkelijk over te zetten in andere programmeer talen.</p>
+                                    manier van programmeren is makkelijk over te zetten in andere programmeer talen.</p>
                             </div>
                         </article>
                     </div>
                     <div class="tile is-parent">
                         <article class="tile is-child box">
                             <p class="title has-text-white-bis">
-                                <font-awesome-icon :icon="['fas', 'desktop']"/>
+                                <font-awesome-icon :icon="['fas', 'desktop']" />
                                 Webdevelopment
                             </p>
                             <p class="subtitle has-text-white-bis">Html/CSS/PHP/Javascript</p>
                             <div class="content">
-                                <p> Ik heb meerdere webdevelopment projecten gedaan waaronder backend development in PHP en NodeJS. Hierbij heb ik gebruik gemaakt van de frameworks Laravel en Express. Frontend development in HTML, CSS en Javascript waarbij
-                                ik gebruik heb gemaakt van verschillende Javascript frameworks zoals ReactJs, VueJs en
-                                jQuery.</p>
+                                <p> Ik heb webdevelopment projecten gedaan waaronder backend development in PHP en NodeJS. Hierbij heb ik gebruik gemaakt van de frameworks Laravel en Express. Frontend development in HTML, CSS en Javascript waarbij
+                                    ik gebruik heb gemaakt van verschillende Javascript frameworks zoals ReactJs, VueJs en
+                                    jQuery.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="tile is-parent">
+                        <article class="tile is-child box">
+                            <p class="title has-text-white-bis">
+                                <font-awesome-icon :icon="['fas', 'code']" />
+                                Mobile development
+                            </p>
+                            <p class="subtitle"></p>
+                            <div class="content">
+                                <p>Ik heb enige ervaring opgedaan met het ontwikkelen van mobile applicaties in Java voor Android. Daarnaast heb ik een in productie genomen React Native applicatie gemaakt voor de platformen iOS en Android</p>
                             </div>
                         </article>
                     </div>
