@@ -5,7 +5,12 @@
 @tailwind utilities;
 
 html {
-    @apply bg-grey-lightest
+    @apply bg-grey-lightest;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 .content a,.highlight {
