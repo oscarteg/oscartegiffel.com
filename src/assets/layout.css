@@ -1,0 +1,27 @@
+@tailwind preflight;
+
+@tailwind components;
+
+@tailwind utilities;
+
+html {
+    @apply bg-grey-lightest
+}
+
+.content a,.highlight {
+    color: inherit;
+    position: relative;
+    z-index: 1
+}
+
+.content a:before,.highlight:before {
+    background-color: rgba(255,207,3,.55);
+    bottom: 0;
+    content: "";
+    height: 10px;
+    left: 4px;
+    position: absolute;
+    transition: .15s ease-in;
+    width: 100%;
+    z-index: -1;
+}
