@@ -1,23 +1,30 @@
 import React from 'react'
-
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Card from '../components/Card'
 
 const IndexPage = ({ data }) => {
-  const siteTitle = data.site.siteMetadata.title
+  // const siteTitle = data.site.siteMetadata.title
   const projects = data.allMarkdownRemark.edges
 
   return (
     <Layout>
-      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-      {projects.map(project => (
-        <Card
-          key={project.node.fields}
-          title={project.node.frontmatter.title}
-          image={project.node.frontmatter.image.childImageSharp.fixed}
-        />
-      ))}
+      <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
+      <div className="flex flex-wrap -mx-8 lg:mx-auto px-2">
+        {projects.map(project => (
+          <div className="md:w-1/3 p-5 max-w-sm">
+            <Card
+              key={project.node.fields}
+              title={project.node.frontmatter.title}
+              date={project.node.frontmatter.date}
+              image={project.node.frontmatter.image.childImageSharp.fluid}
+              tags={project.node.frontmatter.tags}
+              description={project.node.frontmatter.description}
+            />
+          </div>
+        ))}
+      </div>
     </Layout>
   )
 }
@@ -45,11 +52,11 @@ export const pageQuery = graphql`
             tags
             image {
               childImageSharp {
-                fixed(width: 200) {
-                  width
-                  height
+                fluid {
+                  aspectRatio
                   src
                   srcSet
+                  sizes
                 }
               }
             }

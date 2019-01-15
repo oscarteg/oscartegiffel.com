@@ -1,22 +1,24 @@
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 const Header = ({ siteTitle }) => (
-  <div className="max-w-full px-4">
-    <div className="mx-auto max-w-2xl pt-12 pb-8">
-      <h1 className="my-0 leading-loose text-4xl font-bold">
-        <Link
-          to="/"
-          style={{
-            // color: `white`,
-            // textDecoration: `none`,
-          }}>
-        {siteTitle}
-        </Link>
-      </h1>
+  <div className="max-w-full px-4 container">
+    <div className="mx-auto pt-12 pb-8">
+      <div className="max-w-xl">
+        <h1
+          className="cursor-pointer"
+          onClick={() => navigate('/')}
+        >
+          {siteTitle}
+        </h1>
+      </div>
       <p className="text-2xl my-6 leading-loose">
-        Thoughts &amp; insights on <strong className="highlight">Web Development</strong> with a focus on <strong className="highlight">Craft CMS</strong>, <strong className="highlight">Front-end Tools</strong> and <strong className="highlight">Best-Practices.</strong>
+        Thoughts &amp; insights on
+        <strong className="highlight">Web Development</strong> with a focus on
+        <strong className="highlight">Craft CMS</strong>,
+        <strong className="highlight">Front-end Tools</strong> and
+        <strong className="highlight">Best-Practices.</strong>
       </p>
     </div>
   </div>

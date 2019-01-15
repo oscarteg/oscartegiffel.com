@@ -14,15 +14,6 @@ const Bio = () => (
       <p className="my-4">
         Hallo, Ik ben  <strong>Oscar te Giffel</strong>.<br />
         Webdeveloper die nooit iets afmaakt . 
-        Contact me on{' '}
-        <a
-          href="https://twitter.com/Jan_DHollander"
-          target="_blank"
-          rel="nofollow noopener noreferrer"
-          className="highlight"
-        >
-          Twitter.
-        </a>
       </p>
     </div>
   </div>

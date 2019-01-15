@@ -20,7 +20,7 @@ html {
 }
 
 .content a:before,.highlight:before {
-    background-color: rgba(255,207,3,.55);
+    @apply bg-yellow-dark;
     bottom: 0;
     content: "";
     height: 10px;
@@ -29,4 +29,12 @@ html {
     transition: .15s ease-in;
     width: 100%;
     z-index: -1;
+}
+
+footer li span {
+    @apply ml-1;
+}
+
+footer li span svg {
+    @apply text-yellow-dark;
 }
