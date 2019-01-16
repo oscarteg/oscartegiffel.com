@@ -42,7 +42,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        trackingId: `UA-61119473-6`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -68,5 +68,6 @@ module.exports = {
         pathToConfigModule: `src/assets/typography`,
       },
     },
+    `gatsby-plugin-netlify`,
   ],
 }
