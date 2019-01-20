@@ -38,3 +38,7 @@ footer li span {
 footer li span svg {
     @apply text-yellow-dark;
 }
+
+.social-links li {
+    @apply mr-2;
+}

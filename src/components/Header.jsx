@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const Header = ({ siteTitle }) => (
-  <div className="max-w-full px-4 container">
-    <div className="mx-auto pt-12 pb-8">
-      <div className="max-w-xl">
+  <div className="container px-4 mx-auto">
+    <div className="pt-12 pb-8">
+      <div className="max-w-sm ml-8">
         <h1
           className="cursor-pointer"
           onClick={() => navigate('/')}
@@ -14,11 +14,7 @@ const Header = ({ siteTitle }) => (
         </h1>
       </div>
       <p className="text-2xl my-6 leading-loose">
-        Thoughts &amp; insights on
-        <strong className="highlight">Web Development</strong> with a focus on
-        <strong className="highlight">Craft CMS</strong>,
-        <strong className="highlight">Front-end Tools</strong> and
-        <strong className="highlight">Best-Practices.</strong>
+        Software ontwikkelaar met een focus op <strong className="highlight">webdevelopment</strong> en een passie voor knutselen met <strong className="highlight">software</strong> .
       </p>
     </div>
   </div>

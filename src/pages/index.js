@@ -13,9 +13,11 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
       <div className="flex flex-wrap -mx-8 lg:mx-auto px-2">
         {projects.map(project => (
-          <div className="md:w-1/3 p-5 max-w-sm">
+          <div
+            className="md:w-1/3 p-5 max-w-sm"
+            key={project.node.frontmatter.title}
+          >
             <Card
-              key={project.node.fields}
               title={project.node.frontmatter.title}
               date={project.node.frontmatter.date}
               image={project.node.frontmatter.image.childImageSharp.fluid}

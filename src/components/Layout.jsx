@@ -22,11 +22,28 @@ const Layout = ({ children }) => {
           site {
             siteMetadata {
               title
+              author
+              social {
+                twitter
+                linkedin
+                github
+              }
+            }
+          }
+          file(relativePath: { eq: "images/profile.jpg" }) {
+            childImageSharp {
+              fluid {
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
             }
           }
         }
       `}
       render={data => {
+        console.log(data.file.childImageSharp.fluid)
         return (
           <>
             <Header siteTitle={data.site.siteMetadata.title} />
@@ -34,7 +51,13 @@ const Layout = ({ children }) => {
               {children}
             </div>
             <div className="container mx-auto max-w-lg">
-              <Bio />
+              <Bio
+                author={data.site.siteMetadata.author}
+                profileImage={data.file.childImageSharp.fluid}
+                twitter={data.site.siteMetadata.social.twitter}
+                linkedin={data.site.siteMetadata.social.linkedin}
+                github={data.site.siteMetadata.social.github}
+              />
             </div>
             <Footer />
           </>

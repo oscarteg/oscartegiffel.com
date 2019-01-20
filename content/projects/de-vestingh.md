@@ -1,14 +1,15 @@
 ---
 title: Vestingh
 date: 2019-01-12
-description: Shopify webshop opgezet Lorem ipsum etsdasdasdassdasda dasdas d sdasd  as d as d 
-image: './de-vestingh.png'
+description: Het opzetten van de online webwinkel en beheer processen.
+image: 'de-vestingh.png'
 tags:
   - Shopify
   - Liquid
   - CSS
   - HTML
   - Javascript
+  - jQuery
 ---
 
 This is a MoneyMonk project

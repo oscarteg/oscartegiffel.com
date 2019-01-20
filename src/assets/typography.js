@@ -2,7 +2,10 @@ import Typography from 'typography'
 import doelgerTheme from 'typography-theme-doelger'
 
 doelgerTheme.overrideThemeStyles = () => ({
-
+    a: {
+        textDecoration: 'none',
+        backgroundImage: 'none'
+    }
 })
 
 const typography = new Typography(doelgerTheme)

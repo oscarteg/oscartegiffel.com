@@ -1,8 +1,8 @@
 ---
 title: MoneyMonk
 date: 2019-01-12
-description: Meegewerkt aan backend frontend Lorem ipsuma asdasdsdadas
-image: './moneymonk.jpg'
+description: Freelancers helpen met de administratie van hun bedrijf.
+image: 'moneymonk.jpg'
 tags:
   - React Native
   - PHP
@@ -10,4 +10,3 @@ tags:
   - Custom
 ---
 
-This is a MoneyMonk project
