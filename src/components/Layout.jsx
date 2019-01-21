@@ -33,17 +33,13 @@ const Layout = ({ children }) => {
           file(relativePath: { eq: "images/profile.jpg" }) {
             childImageSharp {
               fluid {
-                aspectRatio
-                src
-                srcSet
-                sizes
+                ...GatsbyImageSharpFluid
               }
             }
           }
         }
       `}
       render={data => {
-        console.log(data.file.childImageSharp.fluid)
         return (
           <>
             <Header siteTitle={data.site.siteMetadata.title} />

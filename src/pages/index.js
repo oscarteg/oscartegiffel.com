@@ -14,7 +14,7 @@ const IndexPage = ({ data }) => {
       <div className="flex flex-wrap -mx-8 lg:mx-auto px-2">
         {projects.map(project => (
           <div
-            className="md:w-1/3 p-5 max-w-sm"
+            className="md:w-1/2 p-5 max-w-sm sm:mx-2 md:mx-0"
             key={project.node.frontmatter.title}
           >
             <Card
@@ -55,10 +55,7 @@ export const pageQuery = graphql`
             image {
               childImageSharp {
                 fluid {
-                  aspectRatio
-                  src
-                  srcSet
-                  sizes
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
