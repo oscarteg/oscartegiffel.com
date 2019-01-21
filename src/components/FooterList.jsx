@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const FooterList = ({title, items}) => (
