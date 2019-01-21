@@ -3,9 +3,9 @@ import Img from 'gatsby-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Bio = ({ author, profileImage, twitter, linkedin, github }) => (
-  <div className="text-center md:text-left w-full mx-auto max-w-full shadow rounded-lg py-8 px-4 md:p-4 mt-8 md:mt-16 mb-4 items-center bg-grey-lighter">
+  <div className="text-center md:text-left w-full mx-auto max-w-full shadow rounded-lg py-8 px-4 p-4 mt-8 md:mt-16 mb-4 items-center bg-grey-lighter">
     <div className="flex-wrap flex">
-      <div className="md:mr-12 flex-no-shrink w-full md:w-auto">
+      <div className="md:mr-12 flex-no-shrink w-full md:w-auto justify-center">
         <Img
           fluid={profileImage}
           className="rounded-full mb-0 bio-pic h-full w-24"

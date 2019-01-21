@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Footer = () => (
   <footer className="bg-white mt-24">
     <div className="max-w-lg mx-auto pt-2">
-      <div className="md:flex mb-4 sm:text-center md:text-left">
+      <div className="md:flex mb-4 text-center md:text-left">
         <div className="md:w-1/3 sm:mx-auto">
           <h4 className="font-mono uppercase tracking-wide text-xs py-3 font-hairline font-bold text-grey-dark">
             Frontend

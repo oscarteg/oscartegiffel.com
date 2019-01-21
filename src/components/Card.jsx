@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 
 const Card = ({ title, image, date, description, tags, slug }) => (
   <div className="card bg-white rounded shadow block flex-1 h-full border-b-2 border-yellow-dark" href={slug}>
-    <div className="thumbnail-container">
+    <div className="thumbnail-container overlay">
       <Img fluid={image} className={'thumbnail'} />
     </div>
     <div className="p-4 mt-4">

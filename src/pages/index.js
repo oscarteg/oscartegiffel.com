@@ -11,7 +11,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
-      <div className="flex flex-wrap -mx-8 lg:mx-auto px-2">
+      <div className="container flex flex-wrap mx-auto justify-center">
         {projects.map(project => (
           <div
             className="md:w-1/2 p-5 max-w-sm sm:mx-2 md:mx-0"
