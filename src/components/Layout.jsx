@@ -43,10 +43,8 @@ const Layout = ({ children }) => {
         return (
           <>
             <Header siteTitle={data.site.siteMetadata.title} />
-            <div className="container flex mx-auto max-w-xl overflow-hidden">
+            <div className="container flex flex-wrap mx-auto justify-center">
               {children}
-            </div>
-            <div className="container mx-auto max-w-lg">
               <Bio
                 author={data.site.siteMetadata.author}
                 profileImage={data.file.childImageSharp.fluid}

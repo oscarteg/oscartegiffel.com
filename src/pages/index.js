@@ -5,28 +5,27 @@ import SEO from '../components/Seo'
 import Card from '../components/Card'
 
 const IndexPage = ({ data }) => {
-  // const siteTitle = data.site.siteMetadata.title
   const projects = data.allMarkdownRemark.edges
 
   return (
-    <Layout>
+    <Layout> 
       <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
-      <div className="container flex flex-wrap mx-auto justify-center">
-        {projects.map(project => (
-          <div
-            className="md:w-1/2 p-5 max-w-sm sm:mx-2 md:mx-0"
-            key={project.node.frontmatter.title}
-          >
-            <Card
-              title={project.node.frontmatter.title}
-              date={project.node.frontmatter.date}
-              image={project.node.frontmatter.image.childImageSharp.fluid}
-              tags={project.node.frontmatter.tags}
-              description={project.node.frontmatter.description}
-            />
-          </div>
-        ))}
-      </div>
+        {projects.map(project => {
+          const { title, image, tags, description } = project.node.frontmatter
+          return (
+            <div
+              className="md:w-1/2 p-5 max-w-sm sm:mx-2 md:mx-0 w-full"
+              key={title}
+            >
+              <Card
+                title={title}
+                image={image.childImageSharp.fluid}
+                tags={tags}
+                description={description}
+              />
+            </div>
+          )
+        })}
     </Layout>
   )
 }
