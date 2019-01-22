@@ -14,7 +14,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 library.add(fas, far, fab)
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children, location, className }) => {
   return (
     <StaticQuery
       query={graphql`
@@ -43,7 +43,7 @@ const Layout = ({ children, location }) => {
         return (
           <>
             <Header siteTitle={data.site.siteMetadata.title} location={location}/>
-            <div className="container flex flex-wrap justify-center">
+            <div className={'container ' + className}>
               {children}
             </div>
             <div className="container max-w-md">

@@ -8,7 +8,10 @@ const IndexPage = ({ data, location }) => {
   const projects = data.allMarkdownRemark.edges
 
   return (
-    <Layout location={location}>
+    <Layout
+      location={location}
+      className={'flex flex-wrap justify-center'}
+    >
       <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
       {projects.map(project => {
         const { title, image, tags, description } = project.node.frontmatter
