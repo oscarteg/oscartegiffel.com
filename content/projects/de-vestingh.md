@@ -12,4 +12,4 @@ tags:
   - jQuery
 ---
 
-This is a MoneyMonk project
+De Vestingh wilde een volledig vernieuwde website. Met het bedrijf is de oplossing voor Shopify gevonden. 

@@ -43,10 +43,10 @@ const Layout = ({ children, location, className }) => {
         return (
           <>
             <Header siteTitle={data.site.siteMetadata.title} location={location}/>
-            <div className={'container ' + className}>
+            <div className={`container ${className}`}>
               {children}
             </div>
-            <div className="container max-w-md">
+            <div className={`container max-w-md`}>
               <Bio
                 author={data.site.siteMetadata.author}
                 profileImage={data.file.childImageSharp.fluid}

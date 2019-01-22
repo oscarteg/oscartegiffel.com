@@ -10,7 +10,7 @@ const Bio = ({ author, profileImage, twitter, linkedin, github }) => (
         className="rounded-full mb-0 bio-pic h-full w-24"
       />
     </div>
-    <div className="content">
+    <div>
       <p className="my-4">
         Hallo, Ik ben <strong>{author}</strong>.<br />
         Webdeveloper die nooit iets afmaakt .

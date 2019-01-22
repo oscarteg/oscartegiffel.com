@@ -9,8 +9,11 @@ const IndexPage = ({ data, location }) => {
   return (
     <Layout location={location}>
       <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
-      <h1 className="title">{title}</h1>
+      <h1 className="title text-center">{title}</h1>
+      <div className="max-w-sm mx-auto">
+      <div className="my-6 border-b border-yellow-dark" />
       <div className={"content"} dangerouslySetInnerHTML={{ __html: post.html }} />
+      </div>
     </Layout>
   )
 }

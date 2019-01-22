@@ -11,30 +11,44 @@ html {
     box-sizing: inherit;
 }
 
-.content a,.highlight {
+a,.highlight {
+    text-decoration: none;
+    background-image: none;
+    text-shadow: none;
     color: inherit;
     position: relative;
-    z-index: 1
+    z-index: 1;
+
+    &:before {
+        @apply bg-yellow-dark;
+        bottom: 0;
+        content: "";
+        height: 10px;
+        left: 4px;
+        position: absolute;
+        transition: .15s ease-in;
+        width: 100%;
+        z-index: -1;
+    }
 }
 
-.content a:before,.highlight:before {
-    @apply bg-yellow-dark;
-    bottom: 0;
-    content: "";
-    height: 10px;
-    left: 4px;
-    position: absolute;
-    transition: .15s ease-in;
-    width: 100%;
-    z-index: -1;
+.content {
+    h1, h2 {
+        @apply my-4;
+    }
+    
 }
 
-footer li span {
-    @apply ml-1;
-}
+footer {
+    li {
+        span {
+            @apply ml-1;
+        }
 
-footer li span svg {
-    @apply text-yellow-dark;
+        svg {
+            @apply text-yellow-dark;
+        }
+    }
 }
 
 .social-links li {
@@ -49,9 +63,11 @@ footer li span svg {
     @apply relative;
 }
 
-.overlay::before {
-    @apply rounded-t w-full h-full block absolute pin-t pin-l z-50 bg-black opacity-20;
-    content: '';
+.overlay {
+    &:before {
+        @apply rounded-t w-full h-full block absolute pin-t pin-l z-50 bg-black opacity-20;
+        content: '';
+    }
 }
 
 @tailwind utilities;

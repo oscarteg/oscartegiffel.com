@@ -36,7 +36,7 @@ const Footer = () => (
         />
       </div>
       <div className="flex justify-center text-grey font-hairline text-sm">
-        <div className="pb-8">© Copyright - {new Date().getFullYear()}</div>
+        <div className="py-8">© Copyright - {new Date().getFullYear()}</div>
       </div>
     </div>
   </footer>
