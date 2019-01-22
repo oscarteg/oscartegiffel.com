@@ -11,9 +11,7 @@ const Card = ({ title, image, description, tags, slug }) => (
       <h3 className="my-1 text-xl inline-block text-black">{title}</h3>
       <p className="text-grey-darker my-4 text-base">{description}</p>
 
-      {tags.map(tag => (
-        <Tag tag={tag} key={tag} />
-      ))}
+      {tags.map(tag => <Tag tag={tag} key={tag} />)}
     </div>
   </div>
 )
