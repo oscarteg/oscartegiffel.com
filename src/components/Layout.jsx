@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from './Header'
 import Footer from './Footer'
 import Bio from './Bio'
-import '../assets/layout.css'
+import '../assets/layout.scss'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +14,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 library.add(fas, far, fab)
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   return (
     <StaticQuery
       query={graphql`
@@ -42,9 +42,11 @@ const Layout = ({ children }) => {
       render={data => {
         return (
           <>
-            <Header siteTitle={data.site.siteMetadata.title} />
-            <div className="container flex flex-wrap mx-auto justify-center">
+            <Header siteTitle={data.site.siteMetadata.title} location={location}/>
+            <div className="container flex flex-wrap justify-center">
               {children}
+            </div>
+            <div className="container max-w-md">
               <Bio
                 author={data.site.siteMetadata.author}
                 profileImage={data.file.childImageSharp.fluid}
