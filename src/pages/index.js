@@ -19,7 +19,7 @@ const IndexPage = ({ data, location }) => {
         return (
           // <Link to={slug}>
           <div
-            className="md:w-1/2 m-5 max-w-sm w-full cursor-pointer"
+            className="m-5 max-w-sm w-full cursor-pointer"
             key={title}
             onClick={() => navigate(slug)}
           >
