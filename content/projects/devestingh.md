@@ -2,7 +2,7 @@
 title: Vestingh
 date: 2019-01-12
 description: Het opzetten van de online webwinkel en beheer processen.
-image: 'de-vestingh.png'
+image: 'devestingh.png'
 tags:
   - Shopify
   - Liquid

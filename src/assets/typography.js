@@ -1,19 +1,14 @@
 import Typography from 'typography'
-import doelgerTheme from 'typography-theme-doelger'
+import grandViewTheme from 'typography-theme-grand-view'
 
-doelgerTheme.overrideThemeStyles = () => ({
-    a: {
-        // textDecoration: 'none',
-        // backgroundImage: 'none',
-        // textShadow: 'none'
-    },
-})
+// grandViewTheme.overrideThemeStyles = () => ({
+// })
 
-const typography = new Typography(doelgerTheme)
+const typography = new Typography(grandViewTheme)
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {
-    typography.injectStyles()
+  typography.injectStyles()
 }
 
 export default typography

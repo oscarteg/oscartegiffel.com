@@ -2871,7 +2871,7 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-compass-vertical-rhythm@^1.4.5:
+compass-vertical-rhythm@^1.2.1, compass-vertical-rhythm@^1.4.5:
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/compass-vertical-rhythm/-/compass-vertical-rhythm-1.4.5.tgz#4baa8d7068fda164d3675d706775d7547e8750f5"
   integrity sha512-bJo3IYX7xmmZCDYjrT2XolaiNjGZ4E2JvUGxpdU0ecbH4ZLK786wvc8aHKVrGrKct9JlkmJbUi8YLrQWvOc+uA==
@@ -11678,6 +11678,15 @@ typography-theme-doelger@^0.16.18:
   resolved "https://registry.yarnpkg.com/typography-theme-doelger/-/typography-theme-doelger-0.16.18.tgz#ff015893c9ca794ba4293117d878b322ced85926"
   integrity sha512-gkI6870/xcJDxJSV7idrHGfxyYilp1Rw5gJEaYgVJBVEceJPPJdHYPYTg8c+sHcU1KzDW1tDB9X3hBZozDRK5A==
   dependencies:
+    gray-percentage "^2.0.0"
+    typography-breakpoint-constants "^0.16.18"
+
+typography-theme-grand-view@^0.16.18:
+  version "0.16.18"
+  resolved "https://registry.yarnpkg.com/typography-theme-grand-view/-/typography-theme-grand-view-0.16.18.tgz#d2cd13e3ebdc8f718f352b2ec07fb6b8093f92a1"
+  integrity sha512-+dAFwaB4JLVjV9QVjkZOj1/MHESUZNAk5J4zUSRnpBo6V80CI7ik3eesdqnrksnN1d7PfeE/XDnNuwqyUfXXLw==
+  dependencies:
+    compass-vertical-rhythm "^1.2.1"
     gray-percentage "^2.0.0"
     typography-breakpoint-constants "^0.16.18"
 

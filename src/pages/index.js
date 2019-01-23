@@ -8,16 +8,12 @@ const IndexPage = ({ data, location }) => {
   const projects = data.allMarkdownRemark.edges
 
   return (
-    <Layout
-      location={location}
-      className={'flex flex-wrap justify-center'}
-    >
+    <Layout location={location} className={'flex flex-wrap justify-center'}>
       <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
       {projects.map(project => {
         const { title, image, tags, description } = project.node.frontmatter
         const { slug } = project.node.fields
         return (
-          // <Link to={slug}>
           <div
             className="m-5 max-w-sm w-full cursor-pointer"
             key={title}
@@ -30,7 +26,6 @@ const IndexPage = ({ data, location }) => {
               description={description}
             />
           </div>
-          // </Link>
         )
       })}
     </Layout>
@@ -61,7 +56,7 @@ export const pageQuery = graphql`
             image {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
             }
