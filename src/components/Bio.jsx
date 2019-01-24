@@ -21,6 +21,7 @@ const Bio = ({ author, profileImage, twitter, linkedin, github }) => (
             href={`https://twitter.com/${twitter}`}
             target="_blank"
             rel="noopener noreferrer"
+            className="highlight"
           >
             <FontAwesomeIcon icon={['fab', 'twitter']} className="fa-xs" />
           </a>
@@ -30,6 +31,7 @@ const Bio = ({ author, profileImage, twitter, linkedin, github }) => (
             href={`https://linkedin.com/in/${linkedin}`}
             target="_blank"
             rel="noopener noreferrer"
+            className="highlight"
           >
             <FontAwesomeIcon icon={['fab', 'linkedin']} className="fa-xs" />
           </a>
@@ -39,6 +41,7 @@ const Bio = ({ author, profileImage, twitter, linkedin, github }) => (
             href={`https://github.com/${github}`}
             target="_blank"
             rel="noopener noreferrer"
+            className="highlight"
           >
             <FontAwesomeIcon icon={['fab', 'github']} className="fa-xs" />
           </a>
