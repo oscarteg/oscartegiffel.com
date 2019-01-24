@@ -33,7 +33,7 @@ const Layout = ({ children, location, className }) => {
           file(relativePath: { eq: "images/profile.jpg" }) {
             childImageSharp {
               fluid {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
             }
           }
@@ -42,10 +42,11 @@ const Layout = ({ children, location, className }) => {
       render={data => {
         return (
           <>
-            <Header siteTitle={data.site.siteMetadata.title} location={location}/>
-            <div className={`container ${className}`}>
-              {children}
-            </div>
+            <Header
+              siteTitle={data.site.siteMetadata.title}
+              location={location}
+            />
+            <div className={`container ${className}`}>{children}</div>
             <div className={`container max-w-md`}>
               <Bio
                 author={data.site.siteMetadata.author}
