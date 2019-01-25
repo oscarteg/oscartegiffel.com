@@ -2,11 +2,12 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/Seo'
+import Img from 'gatsby-image'
 
 const IndexPage = ({ data, location }) => {
   const post = data.markdownRemark
   const { html, frontmatter } = post
-  const { title, url } = frontmatter
+  const { title, url, image } = frontmatter
   return (
     <Layout location={location}>
       <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
@@ -23,6 +24,7 @@ const IndexPage = ({ data, location }) => {
             {url}
           </a>
         </div>
+        <Img fluid={image.childImageSharp.fluid} />
         <div className="my-6 border-b border-yellow-dark" />
         <div className={'content'} dangerouslySetInnerHTML={{ __html: html }} />
       </div>
@@ -40,6 +42,13 @@ export const pageQuery = graphql`
         title
         url
         date(formatString: "MMMM DD, YYYY", locale: "nl")
+        image {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+          }
+        }
       }
     }
   }
