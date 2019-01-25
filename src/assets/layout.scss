@@ -78,5 +78,9 @@ footer {
     transition: all 0.4s;
 }
 
+.title {
+    @apply my-4 text-center;
+}
+
 
 @tailwind utilities;
