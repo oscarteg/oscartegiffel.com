@@ -15,8 +15,6 @@ Voor veel mensen is het lastig om vegetarisch te eten omdat ze niet weten waar z
 
 De backend is gemaakt als REST Api in **Laravel** met daarbij een CMS frontend in **Vue** en **Bootstrap**. De technieken die hierbij zijn gebruikt;
 
-[Google](https://google.com)
-
 - Clean Architecture
 - Clean Code
 - Repository Pattern
