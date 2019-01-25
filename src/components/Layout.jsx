@@ -22,39 +22,22 @@ const Layout = ({ children, location, className }) => {
           site {
             siteMetadata {
               title
-              author
-              social {
-                twitter
-                linkedin
-                github
-              }
-            }
-          }
-          file(relativePath: { eq: "images/profile.jpg" }) {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
             }
           }
         }
       `}
       render={data => {
+        const { title } = data.site.siteMetadata
+
         return (
           <>
             <Header
-              siteTitle={data.site.siteMetadata.title}
+              siteTitle={title}
               location={location}
             />
             <div className={`container ${className}`}>{children}</div>
             <div className={`container max-w-md`}>
-              <Bio
-                author={data.site.siteMetadata.author}
-                profileImage={data.file.childImageSharp.fluid}
-                twitter={data.site.siteMetadata.social.twitter}
-                linkedin={data.site.siteMetadata.social.linkedin}
-                github={data.site.siteMetadata.social.github}
-              />
+              <Bio />
             </div>
             <Footer />
           </>

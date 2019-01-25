@@ -8,6 +8,7 @@ module.exports = {
       twitter: `oscartegiffel`,
       linkedin: `otegiffel`,
       github: `oscarteg`,
+      gitlab: `oscarteg`,
     },
   },
   plugins: [
