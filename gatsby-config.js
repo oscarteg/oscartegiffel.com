@@ -4,6 +4,7 @@ module.exports = {
     description: ``,
     author: `@oscartegiffel`,
     siteUrl: `https://oscartegiffel.com`,
+    github: `https://github.com/oscarteg/homepage`,
     social: {
       twitter: `oscartegiffel`,
       linkedin: `otegiffel`,
