@@ -59,12 +59,14 @@ footer {
     @apply mr-2;
 }
 
-.thumbnail {
-    @apply rounded-t h-96;
-}
+
 
 .thumbnail-container {
     @apply relative;
+
+    .thumbnail {
+        @apply rounded-t h-96;
+    }
 }
 
 .overlay {
