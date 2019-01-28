@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Oscar te Giffel`,
-    description: ``,
+    description: `Portfolio website om mijn projecten te laten zien.`,
     author: `@oscartegiffel`,
     siteUrl: `https://oscartegiffel.com`,
     github: `https://github.com/oscarteg/homepage`,
@@ -61,13 +61,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Oscar te Giffel - portfolio`,
+        short_name: `oscartegiffel`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#f8fafc`,
+        theme_color: `#f2d024`,
         display: `standalone`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `content/assets/images/profile.jpg`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
