@@ -8,5 +8,4 @@ tags:
   - Liquid
   - Javascript
   - HTML/CSS
-  - Python
 ---

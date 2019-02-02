@@ -37,7 +37,9 @@
     "typography-theme-grand-view": "^0.16.18"
   },
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "portfolio",
+    "tailwindcss"
   ],
   "license": "MIT",
   "scripts": {
