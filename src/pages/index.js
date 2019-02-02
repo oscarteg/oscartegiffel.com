@@ -21,7 +21,7 @@ const IndexPage = ({ data, location }) => {
           >
             <Card
               title={title}
-              image={image.childImageSharp.fluid}
+              image={image}
               tags={tags}
               description={description}
             />
@@ -55,7 +55,7 @@ export const pageQuery = graphql`
             tags
             image {
               childImageSharp {
-                fluid {
+                fluid(grayscale: true, cropFocus: ENTROPY) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
