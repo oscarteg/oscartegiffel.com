@@ -55,7 +55,7 @@ export const pageQuery = graphql`
             tags
             image {
               childImageSharp {
-                fluid(grayscale: true, cropFocus: ENTROPY) {
+                fluid(grayscale: true, cropFocus: SOUTH) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
