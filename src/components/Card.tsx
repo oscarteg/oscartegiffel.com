@@ -3,10 +3,9 @@ import Tag from './Tag'
 import Img from 'gatsby-image'
 
 
-const Card = ({ title, image, description, tags, slug }) => (  
+const Card = ({ title, image, description, tags }) => (  
   <div
     className="card bg-white rounded shadow block flex-1 h-full border-b-2 border-yellow-dark"
-    href={slug}
   >
     <div className="thumbnail-container overlay">
       <Img fluid={image.childImageSharp.fluid} className={'thumbnail'} alt={title} />
