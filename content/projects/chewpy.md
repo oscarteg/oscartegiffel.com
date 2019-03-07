@@ -1,7 +1,7 @@
 ---
 title: Chewpy
 date: 2019-01-12
-description: Met machine learning het vegetarisme dichterbij mensen brengen.
+description: Met machine learning het vegetarisme dichter bij mensen brengen.
 image: './chewpy.png'
 url: https://chewpy.com
 tags:
