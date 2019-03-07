@@ -13,4 +13,4 @@ tags:
   - jQuery
 ---
 
-De Vestingh wilde een volledig vernieuwde website. Met het bedrijf is de oplossing voor Shopify gevonden. 
+De Vestingh wilde een volledig vernieuwde website in eerste tele

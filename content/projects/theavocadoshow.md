@@ -11,4 +11,4 @@ tags:
   - Javascript
 ---
 
-The Avocadoshow is een concept dat begon met een passie voor *de avocado*. Hierbij zijn de eigenaren begonnen met een restaurant in Amsterdam waarbij gerechten met Avocado verkocht worden. Na enige tijd beseften ze dat ze zich ook wilden richten op de online markt door een webshop te openen.
+The Avocadoshow is een concept dat begon met een passie voor *de avocado*. Hierbij zijn de eigenaren begonnen met een restaurant in Amsterdam waarbij gerechten met Avocado verkocht worden. Na enige tijd beseften ze dat ze zich ook wilden richten op de online markt door een webshop te openen. Door een ontwerpen was een design gemaakt en 

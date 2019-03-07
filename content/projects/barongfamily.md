@@ -8,4 +8,7 @@ tags:
   - Liquid
   - Javascript
   - HTML/CSS
+  - jQuery
 ---
+
+Voor verschillende artiesten onder het Barong Family Label heb ik kleine aanpassingen gedaan in de website. Het toevoegen van formulieren, modals en aanpassingen in de layout. 

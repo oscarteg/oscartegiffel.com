@@ -48,7 +48,7 @@ const Bio = () => (
           <div>
             <p className="my-4">
               Hallo, Ik ben <strong>{author}</strong>.<br />
-              Webdeveloper die nooit iets afmaakt .
+              Developer die altijd nieuwe dingen wilt leren.
             </p>
             <ul className="social-links list-reset flex">
               <li>

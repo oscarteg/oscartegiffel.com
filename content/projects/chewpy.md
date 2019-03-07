@@ -7,7 +7,7 @@ url: https://chewpy.com
 tags:
   - Laravel
   - PHP
-  - VueJs
+  - Vue
   - Bootstrap
 ---
 
