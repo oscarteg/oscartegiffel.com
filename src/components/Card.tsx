@@ -1,12 +1,23 @@
-import React from 'react'
+import * as React from 'react'
 import Tag from './Tag'
-import Img from 'gatsby-image'
+import Img, { GatsbyImageProps } from 'gatsby-image'
 
 
-const Card = ({ title, image, description, tags, slug }) => (  
+interface CardProps {
+  title: string,
+  image: GatsbyImageProps,
+  description: string,
+  tags: Array<string>
+}
+
+const Card: React.StatelessComponent<CardProps> = ({
+  title,
+  image,
+  description,
+  tags,
+}) => (
   <div
     className="card bg-white rounded shadow block flex-1 h-full border-b-2 border-yellow-dark"
-    href={slug}
   >
     <div className="thumbnail-container overlay">
       <Img fluid={image.childImageSharp.fluid} className={'thumbnail'} alt={title} />

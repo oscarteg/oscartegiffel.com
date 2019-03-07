@@ -20,11 +20,13 @@ const Footer = () => (
           <FooterList
             title={'Frontend'}
             items={[
-              'ES 5/6/7',
-              'React',
-              'Vue 2',
+              'ES 5/6/7 en Typescript',
+              'React (Redux / SPA met React Router)',
+              'Vue (Vuex / SPA met Vue Router)',
               'React Native',
               'CSS (SCSS/SASS)',
+              'Bootstrap/Bulma/Tailwindcss',
+              'Android (beginner)',
             ]}
           />
 
