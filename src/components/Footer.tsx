@@ -1,6 +1,6 @@
-import React from `react`
-import FooterList from `./FooterList`
-import { StaticQuery, graphql } from `gatsby`;
+import React from 'react'
+import FooterList from './FooterList'
+import { StaticQuery, graphql } from 'gatsby';
 
 const Footer = () => (
   <StaticQuery 
