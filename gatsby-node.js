@@ -9,7 +9,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const projectPage = path.resolve(`./src/templates/project.js`)
+  const projectPage = path.resolve(`./src/templates/project.tsx`)
   return graphql(
     `
       {
