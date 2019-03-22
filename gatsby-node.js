@@ -9,13 +9,23 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const projectPage = path.resolve(`./src/templates/project.js`)
   return graphql(
     `
       {
-        allMarkdownRemark(
+        pages: allMarkdownRemark(
+          filter: { fields: { sourceInstanceName: { eq: "pages" } } }
+        ) {
+          edges {
+            node {
+              fields {
+                slug
+              }
+            }
+          }
+        }
+        projects: allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
+          filter: { fields: { sourceInstanceName: { eq: "projects" } } }
         ) {
           edges {
             node {
@@ -36,24 +46,34 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create project pages.
-    const projects = result.data.allMarkdownRemark.edges
+    const projects = result.data.projects.edges
 
     projects.forEach((project, index) => {
       const previous =
         index === projects.length - 1 ? null : projects[index + 1].node
       const next = index === 0 ? null : projects[index - 1].node
 
-      const data = {
+      createPage({
         path: project.node.fields.slug,
-        component: projectPage,
+        component: path.resolve(`./src/templates/project.tsx`),
         context: {
           slug: project.node.fields.slug,
           previous,
           next,
         },
-      }
+      })
+    })
 
-      createPage(data)
+    const pages = result.data.pages.edges
+
+    pages.forEach(page => {
+      createPage({
+        path: page.node.fields.slug,
+        component: path.resolve(`./src/templates/page.tsx`),
+        context: {
+          slug: page.node.fields.slug,
+        },
+      })
     })
   })
 }
@@ -62,11 +82,20 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const slug = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: slug,
+    })
+
+    // Get the parent node
+    const parent = getNode(node.parent)
+
+    createNodeField({
+      name: `sourceInstanceName`,
+      node,
+      value: parent.sourceInstanceName,
     })
   }
 }

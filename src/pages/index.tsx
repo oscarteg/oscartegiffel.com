@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, navigate } from 'gatsby'
-import Layout from '../components/Layout'
+import Layout from '../layouts/Layout'
 import SEO from '../components/Seo'
 import Card from '../components/Card'
 
@@ -27,6 +27,7 @@ const IndexPage: React.StatelessComponent<IndexPageProps> = ({
       {projects.map(project => {
         const { title, image, tags, description } = project.node.frontmatter
         const { slug } = project.node.fields
+        
         return (
           <div
             className="m-5 max-w-sm w-full cursor-pointer"
@@ -56,10 +57,12 @@ export const pageQuery = graphql`
         description
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fields: { sourceInstanceName: { eq: "projects" }}}
+    ) {
       edges {
         node {
-          excerpt
           fields {
             slug
           }

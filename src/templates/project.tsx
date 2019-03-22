@@ -1,10 +1,18 @@
-import React from 'react'
+import * as React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
+import Layout from '../layouts/Layout'
 import SEO from '../components/Seo'
 import Img from 'gatsby-image'
 
-const IndexPage = ({ data, location }) => {
+interface ProjectPageProps {
+  data: any
+  location: any
+}
+
+const ProjectPage: React.FunctionComponent<ProjectPageProps> = ({
+  data,
+  location,
+}) => {
   const post = data.markdownRemark
   const { html, frontmatter } = post
   const { title, url, image } = frontmatter
@@ -32,7 +40,7 @@ const IndexPage = ({ data, location }) => {
   )
 }
 
-export default IndexPage
+export default ProjectPage
 
 export const pageQuery = graphql`
   query ProjectBySlug($slug: String!) {

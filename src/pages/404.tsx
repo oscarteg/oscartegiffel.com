@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-import Layout from '../components/Layout'
+import Layout from '../layouts/Layout'
 import SEO from '../components/Seo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { navigate } from 'gatsby'

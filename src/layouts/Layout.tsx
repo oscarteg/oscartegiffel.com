@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
-import Header from './Header'
-import Footer from './Footer'
-import Bio from './Bio'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Bio from '../components/Bio'
 import '../assets/layout.scss'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -14,7 +14,13 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 library.add(fas, far, fab)
 
-const Layout = ({ children, location, className }) => {
+interface LayoutProps {
+  children?: any,
+  location: any,
+  className?: string,
+}
+
+const Layout: React.FunctionComponent<LayoutProps> = ({ children, location, className }) => {
   return (
     <StaticQuery
       query={graphql`
@@ -45,10 +51,6 @@ const Layout = ({ children, location, className }) => {
       }}
     />
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout
