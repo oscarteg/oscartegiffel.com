@@ -1,6 +1,6 @@
 import React from 'react'
 import FooterList from './FooterList'
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, navigate } from 'gatsby';
 
 const Footer = () => (
   <StaticQuery 
@@ -50,9 +50,20 @@ const Footer = () => (
             ]}
           />
         </div>
-        <div className="flex justify-center text-grey font-hairline text-sm">
+        <div className="flex justify-center  align-center text-grey font-hairline text-sm">
           <div className="py-8">© Copyright - {new Date().getFullYear()} - Source on <a target="_blank"
-            rel="noopener noreferrer" href={data.site.siteMetadata.github}>github</a></div> 
+            rel="noopener noreferrer" href={data.site.siteMetadata.github}>github</a>
+
+
+          <a className={``} onClick={() => navigate('uses')}>
+            Uses
+          </a>
+          
+          <a onClick={() => navigate('about')}>
+            About
+          </a>
+            
+          </div> 
         </div>
       </div>
     </footer>

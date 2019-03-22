@@ -39,8 +39,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/projects`,
         name: `projects`,
+        path: `${__dirname}/content/projects`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/content/pages`,
       },
     },
     {
@@ -91,6 +98,6 @@ module.exports = {
         // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
       },
     },
-    `gatsby-plugin-typescript`
+    `gatsby-plugin-typescript`,
   ],
 }

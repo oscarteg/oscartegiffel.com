@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, navigate } from 'gatsby'
-import Layout from '../components/Layout'
+import Layout from '../layouts/Layout'
 import SEO from '../components/Seo'
 import Card from '../components/Card'
 
@@ -16,6 +16,8 @@ const IndexPage: React.StatelessComponent<IndexPageProps> = ({
   location,
 }) => {
   const projects = data.allMarkdownRemark.edges
+
+  console.log(projects)
 
   return (
     <Layout location={location} className={'flex flex-wrap justify-center'}>
@@ -56,10 +58,12 @@ export const pageQuery = graphql`
         description
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fields: { sourceInstanceName: { eq: "projects" }}}
+    ) {
       edges {
         node {
-          excerpt
           fields {
             slug
           }
