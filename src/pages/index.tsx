@@ -17,8 +17,6 @@ const IndexPage: React.StatelessComponent<IndexPageProps> = ({
 }) => {
   const projects = data.allMarkdownRemark.edges
 
-  console.log(projects)
-
   return (
     <Layout location={location} className={'flex flex-wrap justify-center'}>
       <SEO
@@ -29,6 +27,7 @@ const IndexPage: React.StatelessComponent<IndexPageProps> = ({
       {projects.map(project => {
         const { title, image, tags, description } = project.node.frontmatter
         const { slug } = project.node.fields
+        
         return (
           <div
             className="m-5 max-w-sm w-full cursor-pointer"

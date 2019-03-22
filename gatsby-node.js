@@ -9,11 +9,21 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const projectPage = path.resolve(`./src/templates/project.tsx`)
   return graphql(
     `
       {
-        allMarkdownRemark(
+        pages: allMarkdownRemark(
+          filter: { fields: { sourceInstanceName: { eq: "pages" } } }
+        ) {
+          edges {
+            node {
+              fields {
+                slug
+              }
+            }
+          }
+        }
+        projects: allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: DESC }
           filter: { fields: { sourceInstanceName: { eq: "projects" } } }
         ) {
@@ -36,7 +46,7 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create project pages.
-    const projects = result.data.allMarkdownRemark.edges
+    const projects = result.data.projects.edges
 
     projects.forEach((project, index) => {
       const previous =
@@ -45,7 +55,7 @@ exports.createPages = ({ graphql, actions }) => {
 
       createPage({
         path: project.node.fields.slug,
-        component: projectPage,
+        component: path.resolve(`./src/templates/project.tsx`),
         context: {
           slug: project.node.fields.slug,
           previous,
@@ -53,43 +63,15 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
     })
-  })
-}
 
-exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions
+    const pages = result.data.pages.edges
 
-  const pagesTemplate = path.resolve(`src/templates/page.tsx`)
-
-  return graphql(`
-    {
-      allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
-        filter: { fields: { sourceInstanceName: { eq: "pages" } } }
-      ) {
-        edges {
-          node {
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `).then(result => {
-    if (result.errors) {
-      return Promise.reject(result.errors)
-    }
-
-    // Create pages.
-    const pages = result.data.allMarkdownRemark.edges
-
-    pages.forEach((project, index) => {
+    pages.forEach(page => {
       createPage({
-        path: project.node.fields.slug,
-        component: pagesTemplate,
+        path: page.node.fields.slug,
+        component: path.resolve(`./src/templates/page.tsx`),
         context: {
-          slug: project.node.fields.slug,
+          slug: page.node.fields.slug,
         },
       })
     })

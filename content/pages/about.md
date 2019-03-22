@@ -1,5 +1,3 @@
 ---
-title: About
+title: About me
 ---
-
-Over mij
