@@ -8,7 +8,10 @@ const Footer = () => (
       {
         site {
           siteMetadata {
-            github
+            repoUrl
+            social {
+              blog
+            }
           }
         }
       }
@@ -21,11 +24,11 @@ const Footer = () => (
               title={`Frontend`}
               items={[
                 `ES 5/6/7 en Typescript`,
-                `React (Redux / SPA met React Router)`,
-                `Vue (Vuex / SPA met Vue Router)`,
+                `React (Redux / GatsbyJs / SPA met React Router)`,
+                `Vue (Vuex / Vuepress / SPA met Vue Router)`,
                 `React Native`,
-                `CSS (SCSS/SASS)`,
-                `Bootstrap/Bulma/Tailwindcss`,
+                `CSS (SASS)`,
+                `Bootstrap / Bulma / Tailwindcss`,
                 `REST/Graphql`,
                 `Android (beginner)`,
               ]}
@@ -50,18 +53,30 @@ const Footer = () => (
               ]}
             />
           </div>
-          <div className="flex justify-center  align-center text-grey font-hairline text-sm">
+          <div className="flex justify-center align-center text-grey font-hairline text-sm">
             <div className="py-8">
-              © Copyright - {new Date().getFullYear()} - Source on{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={data.site.siteMetadata.github}
-              >
-                github
-              </a>
-              <Link className={`border-l-2 border-r-2 mx-1 px-1`} to={`/uses`}>Uses</Link>
-              <Link className={`border-l-2 border-r-2 mx-1 px-1`} to={`/about`}>About</Link>
+              <div className="mb-2">
+                  © Copyright - {new Date().getFullYear()} - Source on{' '}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={data.site.siteMetadata.github}
+                    >
+                    github
+                  </a>
+              </div>
+              <div className="flex justify-center"> 
+                <Link className={`border-l-2 border-r-2 mx-1 px-1`} to={`/uses`}>Uses</Link>
+                <Link className={`border-l-2 border-r-2 mx-1 px-1`} to={`/about`}>About</Link>
+                <a
+                  className={`border-l-2 border-r-2 mx-1 px-1`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={data.site.siteMetadata.social.blog}
+                >
+                  Blog
+                  </a>
+              </div>
             </div>
           </div>
         </div>

@@ -4,12 +4,13 @@ module.exports = {
     description: `Portfolio website om mijn projecten te laten zien.`,
     author: `@oscartegiffel`,
     siteUrl: `https://oscartegiffel.com`,
-    github: `https://github.com/oscarteg/homepage`,
+    repoUrl: `https://github.com/oscarteg/homepage`,
     social: {
       twitter: `oscartegiffel`,
       linkedin: `otegiffel`,
       github: `oscarteg`,
       gitlab: `oscarteg`,
+      blog: `https://blog.oscartegiffel.com`
     },
   },
   plugins: [
