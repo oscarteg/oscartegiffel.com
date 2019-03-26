@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
+import PageTransition from 'gatsby-plugin-page-transitions'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -15,12 +16,16 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, far, fab)
 
 interface LayoutProps {
-  children?: any,
-  location: any,
-  className?: string,
+  children?: any
+  location: any
+  className?: string
 }
 
-const Layout: React.FunctionComponent<LayoutProps> = ({ children, location, className }) => {
+const Layout: React.FunctionComponent<LayoutProps> = ({
+  children,
+  location,
+  className,
+}) => {
   return (
     <StaticQuery
       query={graphql`
@@ -36,17 +41,14 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children, location, clas
         const { title } = data.site.siteMetadata
 
         return (
-          <>
-            <Header
-              siteTitle={title}
-              location={location}
-            />
+          <PageTransition>
+            <Header siteTitle={title} location={location} />
             <div className={`container ${className}`}>{children}</div>
             <div className={`container max-w-md`}>
               <Bio />
             </div>
             <Footer />
-          </>
+          </PageTransition>
         )
       }}
     />

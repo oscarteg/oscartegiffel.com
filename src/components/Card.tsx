@@ -17,7 +17,7 @@ const Card: React.StatelessComponent<CardProps> = ({
   tags,
 }) => (
   <div
-    className="card bg-white rounded shadow block flex-1 h-full border-b-2 border-yellow-dark"
+    className="card bg-white rounded shadow block flex-1 h-full border-b-2 border-yellow-light"
   >
     <div className="thumbnail-container overlay">
       <Img fluid={image.childImageSharp.fluid} className={'thumbnail'} alt={title} />

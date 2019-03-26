@@ -23,23 +23,23 @@ const IndexPage: React.StatelessComponent<IndexPageProps> = ({
         title="Home"
         keywords={[`homepage`, `oscar te giffel`, `gatsby`]}
         description={data.site.description}
-      />
+        />
       {projects.map(project => {
         const { title, image, tags, description } = project.node.frontmatter
         const { slug } = project.node.fields
         
         return (
           <div
-            className="m-5 max-w-sm w-full cursor-pointer"
-            key={title}
-            onClick={() => navigate(slug)}
+          className="m-5 max-w-sm w-full cursor-pointer"
+          key={title}
+          onClick={() => navigate(slug)}
           >
             <Card
               title={title}
               image={image}
               tags={tags}
               description={description}
-            />
+              />
           </div>
         )
       })}
@@ -59,7 +59,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fields: { sourceInstanceName: { eq: "projects" }}}
+      filter: { fields: { sourceInstanceName: { eq: "projects" } } }
     ) {
       edges {
         node {

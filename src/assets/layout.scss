@@ -11,7 +11,49 @@ html {
     box-sizing: inherit;
 }
 
+.card {
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    top: 0;
+    position: relative;
+
+    &:hover {
+        @apply shadow-lg;
+        top: -8px;
+    }
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: scale3d(0, 0, 1);
+        transition: transform .3s ease-out 0s;
+        background: rgba(255, 255, 255, .1);
+        content: '';
+        pointer-events: none;
+    }
+
+    &::before {
+        transform-origin: left top;
+    }
+
+    &::after {
+        transform-origin: right bottom;
+    }
+
+    &:hover,
+    &:focus {
+        &::before,
+        &::after {
+            transform: scale3d(1, 1, 1);
+        }
+    }
+}
+
 .content a,.highlight {
+    @apply font-semibold;
     text-decoration: none;
     background-image: none;
     text-shadow: none;
@@ -20,7 +62,7 @@ html {
     z-index: 1;
 
     &:before {
-        @apply bg-yellow-dark;
+        @apply bg-yellow-dark opacity-70;
         bottom: 0;
         content: "";
         height: 10px;
@@ -29,6 +71,11 @@ html {
         transition: .15s ease-in;
         width: 100%;
         z-index: -1;
+    }
+    &:hover {
+        &:before {
+            height: 1rem;
+        }
     }
 }
 
@@ -43,6 +90,10 @@ html {
 
     .table-of-contents {
         @apply list-reset;
+    }
+
+    .content ul {
+        @apply ml-2;
     }
 }
 
@@ -86,7 +137,6 @@ footer {
 .title {
     @apply my-4 text-center;
 }
-
 
 
 @tailwind utilities;
