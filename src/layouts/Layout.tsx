@@ -1,11 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import PageTransition from 'gatsby-plugin-page-transitions'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Bio from '../components/Bio'
+import Transition from '../components/Transition'
 import '../assets/layout.scss'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -41,14 +40,18 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
         const { title } = data.site.siteMetadata
 
         return (
-          <PageTransition>
+          <>
             <Header siteTitle={title} location={location} />
-            <div className={`container ${className}`}>{children}</div>
-            <div className={`container max-w-md`}>
-              <Bio />
-            </div>
-            <Footer />
-          </PageTransition>
+              <Transition location={location}>
+                <div className={`container ${className}`}>
+                  {children}
+                </div>
+              </Transition>
+                <div className={`container max-w-md`}>
+                  <Bio />
+                </div>
+              <Footer />
+          </>
         )
       }}
     />

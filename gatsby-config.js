@@ -14,7 +14,6 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-page-transitions`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
