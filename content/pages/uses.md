@@ -69,7 +69,7 @@ I use [Spectacle](https://www.spectacleapp.com/) with some shortcuts to move the
 I have a couple of apps I use every thing for developing:
 - [Paw](https://paw.cloud)
 - [Tower](https://www.git-tower.com/)
-- [Code kit](https://codekitapp.com/) - *I don't really use this every day. Only when I have a single HTML page I want to serve with hot reload. Not really neccessary though*
+- [Code kit](https://codekitapp.com/) - *I don't really use this every day. Only when I have a single HTML page I want to serve with hot reload. Not really neccessary though.*
 - [Dash](https://kapeli.com/dash) 
 
 ## Writing
@@ -89,7 +89,7 @@ For editing markdown files I use [iA Writer](https://ia.net/writer). It's a simp
 I have been collecting books for a couple of years. I manage all my digital books with [Calibre](https://calibre-ebook.com/). I am, as they say a */r/DataHoarder*. I love collecting data and files and things. I love collecting books even though I don't read all of them. 
 
 
-## Setup
+## Gear
 For my **PC** at home (that I mostly use for gaming) these are the specs:
 - Windows 10
 - Monitors
@@ -112,6 +112,10 @@ For my **Macbook** these are my specs:
 - 2,2 GHZ Intel Core i7
 - 16Gb 1600 MHz DDR3
 - Intel Iris Pro 1536 MB
+
+- Headphones - [Bowers & Wilkins PX](https://www.bowerswilkins.com/headphones/px)
+- iPhone 8
+- iPad Air 2
 
 ## Technologies
 Look at the footer.
