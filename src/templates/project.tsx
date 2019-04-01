@@ -18,7 +18,7 @@ const ProjectPage: React.FunctionComponent<ProjectPageProps> = ({
   const { title, url, image } = frontmatter
   return (
     <Layout location={location}>
-      <SEO title="Home" keywords={[`homepage`, `oscar te giffel`, `gatsby`]} />
+      <SEO title={title} keywords={[title, `oscar te giffel`, `gatsby`]} />
       <h1 className="title text-center">{title}</h1>
 
       <div className="max-w-sm mx-auto">

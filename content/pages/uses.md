@@ -51,7 +51,7 @@ I use the command line every day. With [homebrew](https://brew.sh) (ofcourse) I 
 ## Editor(s)
 **Code editor for small things:** At the moment I use [Visual Studio Code](https://code.visualstudio.com/) for most front end development and small websites or scripts. Here I also use the Night Owl theme but also switch regularly with the [Rainglow](https://rainglow.io/) themes or with [Ayu](https://marketplace.visualstudio.com/items?itemName=teabyii.ayu). Other essential plugins I use are advanced-new-file, Docker, GitLens, Project Manager and some Intellisense plugins. 
 
-**Code editor for big things:** For big projects I use mostly [Intellij](https://www.jetbrains.com/idea/) for all languages. I love that with a couple of plugins the IDE handles everything I need and I don't need to switch every time. Some essential plugins are Material Theme UI with (ofcoure) the Nigh Owl theme. 
+**Code editor for big things:** For big projects I use mostly [Intellij](https://www.jetbrains.com/idea/) for all other languages (PHP, Laravel, HTML/CSS/Javascript etc.). I love that with a couple of plugins the IDE handles everything I need and I don't need to switch every time. Some essential plugins are Material Theme UI with (ofcoure) the Nigh Owl theme. I recently started programming in GoLang and for that I use [GoLang](https://www.jetbrains.com/go/).
 
 ## Design
 I don't design much but I need to look at some design files every once in a while. My preference is [Sketch](https://www.sketch.com/). I tried [Figma](https://www.figma.com) but I couldn't get over that it's a webview. I would happen to much that I would want to scroll to the left and the browser goes back a page. Also I use [Nucleo](https://nucleoapp.com/) for most icons I need. 

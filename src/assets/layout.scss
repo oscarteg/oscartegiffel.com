@@ -13,7 +13,8 @@
 }
 
 html {
-    @apply bg-grey-lightest;
+    // @apply bg-grey-lightest subpixel-antialiased;
+    @apply bg-grey-lightest antialiased;
     box-sizing: border-box;
 }
 
