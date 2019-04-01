@@ -2,6 +2,16 @@
 
 @tailwind components;
 
+@font-face {
+  font-family: "Maison Neue";
+  src: url("./fonts/MaisonNeue/MaisonNeue-Mono.ttf");
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./fonts/ProximaNova/ProximaNova-Regular.ttf");
+}
+
 html {
     @apply bg-grey-lightest;
     box-sizing: border-box;
@@ -15,11 +25,6 @@ html {
     transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
     top: 0;
     position: relative;
-
-    &:hover {
-        @apply shadow-lg;
-        top: -8px;
-    }
 
     &::before,
     &::after {
@@ -45,6 +50,9 @@ html {
 
     &:hover,
     &:focus {
+        @apply shadow-lg;
+        top: -8px;
+
         &::before,
         &::after {
             transform: scale3d(1, 1, 1);
