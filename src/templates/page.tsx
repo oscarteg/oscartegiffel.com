@@ -20,7 +20,7 @@ const Page: React.FunctionComponent<PageProps> = ({ data, location }) => {
         description={description || ''}
       />
       <h1 className="title text-center">{title}</h1>
-      <div className={`text-center text-xs text-grey-light`}>{modifiedTime}</div>
+      {/* <div className={`text-center text-xs text-grey-light`}>{modifiedTime}</div> */}
 
       <div className="max-w-xl mx-auto">
         <div className="my-6 border-b border-yellow-dark" />
