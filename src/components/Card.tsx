@@ -17,12 +17,14 @@ const Card: React.StatelessComponent<CardProps> = ({
   tags,
 }) => (
   <div
-    className="card bg-white rounded shadow block flex-1 h-full border-b-2 border-yellow-light"
+    className="card bg-white rounded shadow block flex-1 border-b-2 border-yellow-light h-full"
   >
     <div className="thumbnail-container overlay">
-      <Img fluid={image.childImageSharp.fluid} className={'thumbnail'} alt={title} />
+        <div className="absolute w-4/5 -mt-10 pin-x mx-auto image-overlay">
+        <Img className="" fluid={image.childImageSharp.fluid} className={'thumbnail'} alt={title} />
+      </div>
     </div>
-    <div className="p-4 mt-4">
+      <div className="p-4 mt-4 pt-32 md:pt-64 ">
       <h3 className="my-1 text-xl inline-block text-black">{title}</h3>
       <p className="text-grey-darker my-4 text-base">{description}</p>
 

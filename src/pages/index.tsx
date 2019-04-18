@@ -30,7 +30,7 @@ const IndexPage: React.StatelessComponent<IndexPageProps> = ({
         
         return (
           <div
-          className="m-5 max-w-sm w-full cursor-pointer"
+          className="m-8 max-w-sm w-full cursor-pointer"
           key={title}
           onClick={() => navigate(slug)}
           >
