@@ -9,7 +9,7 @@ const Header = ({ location, siteTitle }) => (
     <div className="pt-12 pb-8">
       {location.pathname === rootPath ? (
         <div>
-          <div className="max-w-sm ml-8">
+          <div className="max-w-sm md:ml-20">
             <h1 className="cursor-pointer" onClick={() => navigate('/')}>
               {siteTitle}
             </h1>
