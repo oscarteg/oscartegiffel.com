@@ -13,4 +13,6 @@ tags:
   - jQuery
 ---
 
-De Vestingh wilde een volledig vernieuwde website in eerste tele
+De Vestingh is een verf winkel die ook een aantal webwinkels hadden. De verschillende webwinkels hadden ieder hun specifieke product dat ze verkochten. Doordat de producten in verschillende webwinkels waren ondergebracht was er weinig overzicht en er was geen groei in de conversie. Op mijn advies werd er overgestapt op **Shopify**. Hierbij heb ik geholpen de webshop in te richten en over te dragen. Er is gebruik gemaakt van een bestaand thema en deze heeft minimale aanpassingen gekregen. 
+
+Nadat de vernieuwde webshop in productie werd genomen ging mijn rol richting het bedrijf als consultant op oproep basis. Bij kleine aanpassingen en bijvoorbeeld hulp met Analytics en SEO werd mijn hulp vereist.

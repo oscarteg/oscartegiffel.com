@@ -5,6 +5,7 @@ module.exports = {
     author: `@oscartegiffel`,
     siteUrl: `https://oscartegiffel.com`,
     repoUrl: `https://github.com/oscarteg/homepage`,
+    resumeUrl: `https://resume.oscartegiffel.com`,
     social: {
       twitter: `oscartegiffel`,
       linkedin: `otegiffel`,
