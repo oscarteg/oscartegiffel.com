@@ -17,7 +17,7 @@ const Footer = () => (
       }
     `}
     render={data => (
-      <footer className="bg-white mt-24">
+      <footer className="bg-grey-light mt-24">
         <div className="max-w-lg mx-auto pt-2">
           <div className="md:flex mb-4 text-center md:text-left justify-center">
             <FooterList

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const FooterList = ({title, items}) => (
     <div className="px-5 md:w-1/3">
-        <h4 className="font-mono uppercase tracking-wide text-xs py-3 font-hairline font-bold text-grey-dark">
+        <h4 className="font-mono uppercase tracking-wide text-xs py-3 font-hairline font-bold text-grey-darkest">
             {title}
         </h4>
         <ul className="tracking-wide font-hairline list-reset">
