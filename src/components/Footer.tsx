@@ -91,7 +91,7 @@ const Footer = () => (
                   className={`border-l-2 border-r-2 mx-1 px-1`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={data.site.siteMetadata.social.blog}
+                  href={data.site.siteMetadata.social.resume}
                 >
                   Resume
                 </a>
