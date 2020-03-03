@@ -23,7 +23,10 @@ const Header = ({ location, siteTitle }) => (
       ) : (
         <div>
           <div className="ml-8 inline-block">
-            <h3 className="cursor-pointer highlight" onClick={() => navigate('/')}>
+            <h3
+              className="cursor-pointer highlight"
+              onClick={() => navigate('/')}
+            >
               {siteTitle}
             </h3>
           </div>

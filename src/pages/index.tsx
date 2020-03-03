@@ -23,23 +23,23 @@ const IndexPage: React.StatelessComponent<IndexPageProps> = ({
         title="Home"
         keywords={[`homepage`, `oscar te giffel`, `gatsby`]}
         description={data.site.description}
-        />
+      />
       {projects.map(project => {
         const { title, image, tags, description } = project.node.frontmatter
         const { slug } = project.node.fields
-        
+
         return (
           <div
-          className="m-8 max-w-sm w-full cursor-pointer"
-          key={title}
-          onClick={() => navigate(slug)}
+            className="m-8 max-w-lg w-full cursor-pointer"
+            key={title}
+            onClick={() => navigate(slug)}
           >
             <Card
               title={title}
               image={image}
               tags={tags}
               description={description}
-              />
+            />
           </div>
         )
       })}

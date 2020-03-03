@@ -38,7 +38,7 @@ const Bio = () => (
       const { author } = data.site.siteMetadata
 
       return (
-        <div className="flex-wrap flex shadow rounded-lg p-8 my-8 bg-grey-lighter">
+        <div className="flex-wrap flex shadow rounded-lg p-8 my-8 bg-gray-100">
           <div className="md:mr-12 flex-no-shrink w-full md:w-auto justify-center">
             <Img
               fluid={profileImage}

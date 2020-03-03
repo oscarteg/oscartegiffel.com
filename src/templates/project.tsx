@@ -21,7 +21,7 @@ const ProjectPage: React.FunctionComponent<ProjectPageProps> = ({
       <SEO title={title} keywords={[title, `oscar te giffel`, `gatsby`]} />
       <h1 className="title text-center">{title}</h1>
 
-      <div className="max-w-sm mx-auto">
+      <div className="max-w-lg mx-auto">
         <div className="flex justify-center my-3">
           <a
             target="_blank"

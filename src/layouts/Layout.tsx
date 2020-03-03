@@ -23,7 +23,7 @@ interface LayoutProps {
 const Layout: React.FunctionComponent<LayoutProps> = ({
   children,
   location,
-  className,
+  className = '',
 }) => {
   return (
     <StaticQuery
@@ -42,15 +42,13 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
         return (
           <>
             <Header siteTitle={title} location={location} />
-              <Transition location={location}>
-                <div className={`container ${className}`}>
-                  {children}
-                </div>
-              </Transition>
-                <div className={`container max-w-md`}>
-                  <Bio />
-                </div>
-              <Footer />
+            <Transition location={location}>
+              <div className={`container ${className}`}>{children}</div>
+            </Transition>
+            <div className={`container max-w-2xl`}>
+              <Bio />
+            </div>
+            <Footer />
           </>
         )
       }}
