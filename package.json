@@ -50,8 +50,8 @@
     "build": "gatsby build",
     "develop": "gatsby clean && gatsby develop",
     "debug": "gatsby clean && node --inspect node_modules/.bin/gatsby develop",
-    "dev": "npm run develop",
-    "start": "npm run develop",
+    "dev": "yarn develop",
+    "start": "yarn develop",
     "serve": "gatsby serve",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""

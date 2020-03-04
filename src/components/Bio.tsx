@@ -39,10 +39,10 @@ const Bio = () => (
 
       return (
         <div className="flex-wrap flex shadow rounded-lg p-8 my-8 bg-gray-100">
-          <div className="md:mr-12 flex-no-shrink w-full md:w-auto justify-center">
+          <div className="md:mr-12 flex-no-shrink w-full md:w-auto justify-center items-end">
             <Img
               fluid={profileImage}
-              className="rounded-full mb-0 bio-pic h-full w-24"
+              className="rounded-full mb-0 bio-pic w-24"
             />
           </div>
           <div>

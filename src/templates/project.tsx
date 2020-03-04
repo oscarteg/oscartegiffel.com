@@ -33,7 +33,7 @@ const ProjectPage: React.FunctionComponent<ProjectPageProps> = ({
           </a>
         </div>
         <Img fluid={image.childImageSharp.fluid} />
-        <div className="my-6 border-b border-yellow-dark" />
+        <div className="my-6 border-b border-yellow-600" />
         <div className={'content'} dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </Layout>
