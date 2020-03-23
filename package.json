@@ -57,7 +57,7 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "devDependencies": {
-    "prettier": "1.19.1",
+    "prettier": "2.0.2",
     "sass": "1.26.2",
     "tailwindcss": "1.2.0"
   },
