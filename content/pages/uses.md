@@ -113,7 +113,8 @@ For my **Macbook** these are my specs:
 - Radeon Pro 450 2 GB / Intel HD Graphics 530 1536 MB
 
 - Headphones - [Bowers & Wilkins PX](https://www.bowerswilkins.com/headphones/px)
-- iPhone 8
+- iPhone XI
+- Keychron K6 Keyboard
 - PocketBook Touch HD 3
 
 ## Technologies
