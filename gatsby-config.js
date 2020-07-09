@@ -4,6 +4,7 @@ module.exports = {
     description: ``,
     siteUrl: `http://localhost:8000`,
     logo: `logo.png`,
+    repo: `https://github.com/oscarteg/homepage`,
     menuLinks: [
       {
         name: `Home`,
@@ -35,27 +36,27 @@ module.exports = {
       {
         name: `Gitlab`,
         url: `https://gitlab.com/oscarteg`,
-        icon: `fab fa-gitlab`,
+        icon: `gitlab`,
       },
       {
         name: `Instagram`,
         url: `https://instagram.com/oscartegiffel`,
-        icon: `fab fa-instagram`,
+        icon: `instagram`,
       },
       {
         name: `Linkedin`,
         url: `https://www.linkedin.com/in/otegiffel/`,
-        icon: `fab fa-linkedin`,
+        icon: `linkedin`,
       },
       {
         name: `Twitter`,
         url: `https://twitter.com/oscartegiffel`,
-        icon: `fab fa-twitter`,
+        icon: `twitter`,
       },
       {
         name: `Github`,
         url: `https://github.com/oscarteg`,
-        icon: `fab fa-github`,
+        icon: `github`,
       },
     ],
   },
