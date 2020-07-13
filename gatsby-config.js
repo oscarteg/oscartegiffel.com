@@ -3,7 +3,7 @@ module.exports = {
     title: `Oscar te Giffel`,
     description: `This is my homepage for all my projects and blog posts`,
     contactEmail: `oscar@tegiffel.com`,
-    siteUrl: `https//oscartegiffel.com`,
+    siteUrl: `https://oscartegiffel.com`,
     logo: `logo.png`,
     repo: `https://github.com/oscarteg/homepage`,
     menuLinks: [
