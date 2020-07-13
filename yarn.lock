@@ -1534,10 +1534,10 @@
     gatsby-source-filesystem "^2.1.39"
     gatsby-transformer-sharp "^2.3.6"
 
-"@oscarteg/gatsby-theme-deepmind@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.9.tgz#ed1308ad899381c057d6b8f194e39cd17f454989"
-  integrity sha512-dp9NtedjuF0E5+ScwvAki1nrKwlT7zBUa8bBMlAekAMDbolsqb875tPY9HMKGfqrUfQPAN/R/6wLbrITnwyQqQ==
+"@oscarteg/gatsby-theme-deepmind@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.10.tgz#16c474ea95e20ca93435dace42d6221616aeeb54"
+  integrity sha512-Q3SNilsI1jZIuwtrlox9Qdo8L2b+ET7fRADURN3cnsnNoe6J39wudKHQYt3vwTjUkv9S883Rnbz5lp7toB89Ow==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.29"
     "@fortawesome/free-brands-svg-icons" "^5.13.1"
