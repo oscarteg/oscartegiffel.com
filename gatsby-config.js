@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Blog.`,
-    description: ``,
-    siteUrl: `http://localhost:8000`,
+    title: `Oscar te Giffel`,
+    description: `This is my homepage for all my projects and blog posts`,
+    contactEmail: `oscar@tegiffel.com`,
+    siteUrl: `https//oscartegiffel.com`,
     logo: `logo.png`,
     repo: `https://github.com/oscarteg/homepage`,
     menuLinks: [
@@ -62,6 +63,12 @@ module.exports = {
   },
   plugins: [
     `@oscarteg/gatsby-theme-deepmind`,
+    {
+      resolve: `@oscarteg/gatsby-theme-blog-core`,
+      options: {
+        postsPerPage: 10,
+      },
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

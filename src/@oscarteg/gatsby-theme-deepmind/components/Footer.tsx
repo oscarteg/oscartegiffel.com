@@ -22,48 +22,43 @@ export default function Footer(props: FooterProps) {
   return (
     <DeepMindFooter>
       <div className="container border-t border-gray-200 pt-6 mt-6">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="flex flex-col items-center">
-            <FooterList
-              title="Frontend"
-              items={[
-                `ES 5/6/7 en Typescript`,
-                `React (Redux / GatsbyJs / SPA met React Router)`,
-                `Vue (Vuex / Vuepress / SPA met Vue Router)`,
-                `React Native`,
-                `CSS (SASS)`,
-                `Bootstrap / Bulma / Tailwindcss`,
-                `REST/Graphql`,
-                `Android (beginner)`,
-              ]}
-            />
-          </div>
+        <div className="grid grid-cols-4 gap-4">
+          <FooterList
+            title="Software Development"
+            items={[
+              `Cloud computing, microservices, APIs, full stack web apps`,
+            ]}
+          />
 
-          <div className="flex flex-col items-center">
-            <FooterList
-              title="Backend"
-              items={[`PHP (Laravel)`, `Java`, `GoLang (beginner)`]}
-            />
-          </div>
-
-          <div className="flex flex-col items-center">
-            <FooterList
-              title="Database/Devops"
-              items={[
-                `Docker`,
-                `Gitlab CI/CD`,
-                `Linux`,
-                `MySQL`,
-                `Postgresql`,
-                `Nginx/Apache`,
-                `Vagrant`,
-                `Ansible`,
-              ]}
-            />
-          </div>
+          <FooterList
+            title="Technologies"
+            items={[
+              `React/Vue/Svelte`,
+              `PHP (Laravel)`,
+              `Java/Kotlin`,
+              `GoLang`,
+            ]}
+          />
+          <FooterList
+            title={`Future Ventures (Teach myself in ${new Date().getFullYear()})`}
+            items={[
+              `Scalable distributed systems (infrastructure, networks, microservices, kubernetes)`,
+              `Creating mobile applications in Flutter`,
+              `Working more with Graphql`,
+            ]}
+          />
+          <FooterList
+            title={`Projects currently working on`}
+            items={[
+              `Scrum application in React/Go with Graphql`,
+              `Seedbox in Kubernetes`,
+              `MacOS app for simple task list and pomodoro timer`,
+              `Learning to be a better writer`,
+            ]}
+          />
         </div>
       </div>
-      <div className="flex justify-center align-center text-grey font-hairline text-sm text-center">
+      <div className="mt-4 flex justify-center align-center text-grey font-hairline text-sm text-center">
         <div className="mb-2">
           © Copyright - {new Date().getFullYear()} - Source on{" "}
           <a
