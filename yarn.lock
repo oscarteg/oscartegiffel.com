@@ -1503,10 +1503,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@oscarteg/gatsby-theme-blog-core@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-blog-core/-/gatsby-theme-blog-core-0.0.4.tgz#ee63e73deea3889f7553af420a5ef6f3a5596f9d"
-  integrity sha512-mgEulfEnTSmG7qw4fzKLnoOtfmd+AYTwKvgwbjktqDTCl+/8NZN/DrSjUrUN0Ayz7pE9wZ58nEpbgvNU4+lzTQ==
+"@oscarteg/gatsby-theme-blog-core@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-blog-core/-/gatsby-theme-blog-core-0.0.5.tgz#59e29cafb4f2dc6b5a0d0bc8393a082a42730b1c"
+  integrity sha512-C1ezZ9RcqgJX9tIJjzDhfbXZpECUsK0jZ6YbGV3Fmf0fHgO6JrqhWfCfYhwRerPRTPItnBlyVqMZ6kKnKfT7Kg==
   dependencies:
     "@mdx-js/mdx" "^1.5.1"
     "@mdx-js/react" "^1.5.1"
@@ -1534,17 +1534,17 @@
     gatsby-source-filesystem "^2.1.39"
     gatsby-transformer-sharp "^2.3.6"
 
-"@oscarteg/gatsby-theme-deepmind@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.10.tgz#16c474ea95e20ca93435dace42d6221616aeeb54"
-  integrity sha512-Q3SNilsI1jZIuwtrlox9Qdo8L2b+ET7fRADURN3cnsnNoe6J39wudKHQYt3vwTjUkv9S883Rnbz5lp7toB89Ow==
+"@oscarteg/gatsby-theme-deepmind@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.11.tgz#4777c2b9d2cd25ab4f64a1f014dbf0322284ab37"
+  integrity sha512-DGtpnIb7Xqkko/L0+TR0v5wM8pxWPV9KDslVGiAz46CXbKcDQKRzfjIkhUqZVPfYyMEY53v5bQOK+d3tMZU7Mw==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.29"
     "@fortawesome/free-brands-svg-icons" "^5.13.1"
     "@fortawesome/free-regular-svg-icons" "^5.13.1"
     "@fortawesome/free-solid-svg-icons" "^5.13.1"
     "@fortawesome/react-fontawesome" "^0.1.11"
-    "@oscarteg/gatsby-theme-blog-core" "^0.0.4"
+    "@oscarteg/gatsby-theme-blog-core" "^0.0.5"
     "@oscarteg/gatsby-theme-core" "^0.0.4"
     "@oscarteg/gatsby-theme-page-core" "^0.0.5"
     "@oscarteg/gatsby-theme-portfolio-core" "^0.0.4"
