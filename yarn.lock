@@ -1534,10 +1534,10 @@
     gatsby-source-filesystem "^2.1.39"
     gatsby-transformer-sharp "^2.3.6"
 
-"@oscarteg/gatsby-theme-deepmind@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.11.tgz#4777c2b9d2cd25ab4f64a1f014dbf0322284ab37"
-  integrity sha512-DGtpnIb7Xqkko/L0+TR0v5wM8pxWPV9KDslVGiAz46CXbKcDQKRzfjIkhUqZVPfYyMEY53v5bQOK+d3tMZU7Mw==
+"@oscarteg/gatsby-theme-deepmind@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.12.tgz#dec826e3d1fe54dac246308d75441a98b786418e"
+  integrity sha512-7qFlJFvsf2KjbujJhCFKLJ0f2xbMTgjm+Ae8/7HBLOif0NI6muivIvXXuSLczMB2SsBoCkVL9Gm6xAHyqd9Clw==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.29"
     "@fortawesome/free-brands-svg-icons" "^5.13.1"
@@ -1555,6 +1555,7 @@
     gatsby-plugin-offline "^3.2.16"
     gatsby-plugin-postcss "^2.3.6"
     gatsby-plugin-react-helmet "^3.3.6"
+    gatsby-plugin-remove-serviceworker "^1.0.0"
     gatsby-transformer-sharp "^2.5.7"
     prism-react-renderer "^1.1.1"
     prismjs "^1.20.0"
@@ -6519,6 +6520,11 @@ gatsby-plugin-react-helmet@^3.3.6:
   integrity sha512-V/QJUEsiYNaf95bs8ueHDp6Xk3UonPhs9yi+GURGimZomnT/9ST75Tk7pwZwZmRKQNKC8feklUzLNa3pDqHjUw==
   dependencies:
     "@babel/runtime" "^7.10.3"
+
+gatsby-plugin-remove-serviceworker@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-remove-serviceworker/-/gatsby-plugin-remove-serviceworker-1.0.0.tgz#9fb433bc8bd766e14e1d3711c4ac6f051e1dff7c"
+  integrity sha1-n7QzvIvXZuFOHTcRxKxvBR4d/3w=
 
 gatsby-plugin-sharp@^2.2.37, gatsby-plugin-sharp@^2.3.4:
   version "2.6.18"

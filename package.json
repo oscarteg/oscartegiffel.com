@@ -1,6 +1,6 @@
 {
-  "name": "@oscarteg/gatsby-example-deepmind",
-  "description": "Demo for gatsby-theme-deepmind.",
+  "name": "@oscarteg/homepage",
+  "description": "My personal homepage.",
   "private": true,
   "version": "0.0.4",
   "author": "Oscar te Giffel <oscar@tegiffel.com>",
@@ -14,7 +14,7 @@
     "preview": "gatsby build && gatsby serve"
   },
   "dependencies": {
-    "@oscarteg/gatsby-theme-deepmind": "^0.0.11",
+    "@oscarteg/gatsby-theme-deepmind": "^0.0.12",
     "gatsby": "^2.24.2",
     "gatsby-plugin-google-analytics": "^2.3.11",
     "react": "^16.13.1",
