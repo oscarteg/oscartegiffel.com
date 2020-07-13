@@ -16,7 +16,7 @@ I have been developing with Javascript for a couple of years and I still learn t
 
 ```javascript
 async function foo() {
-  const msg = await new Promise(resolve => {
+  const msg = await new Promise((resolve) => {
     setTimeout(() => {
       resolve("Foo");
     }, 2000);
