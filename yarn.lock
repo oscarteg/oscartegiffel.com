@@ -1534,10 +1534,10 @@
     gatsby-source-filesystem "^2.1.39"
     gatsby-transformer-sharp "^2.3.6"
 
-"@oscarteg/gatsby-theme-deepmind@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.12.tgz#dec826e3d1fe54dac246308d75441a98b786418e"
-  integrity sha512-7qFlJFvsf2KjbujJhCFKLJ0f2xbMTgjm+Ae8/7HBLOif0NI6muivIvXXuSLczMB2SsBoCkVL9Gm6xAHyqd9Clw==
+"@oscarteg/gatsby-theme-deepmind@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@oscarteg/gatsby-theme-deepmind/-/gatsby-theme-deepmind-0.0.14.tgz#aa95bc926f6b2b27126c4f832ec6210c27c51938"
+  integrity sha512-mTk1TByNimFvDcicX2skXk1Q4entHSu/Va5CGKA8YaKljRbHiHRkngfpyThovnw8HNBhz9mWJNgfrIuJvYWiEg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.29"
     "@fortawesome/free-brands-svg-icons" "^5.13.1"
@@ -1548,8 +1548,10 @@
     "@oscarteg/gatsby-theme-core" "^0.0.4"
     "@oscarteg/gatsby-theme-page-core" "^0.0.5"
     "@oscarteg/gatsby-theme-portfolio-core" "^0.0.4"
+    "@tailwindcss/typography" "^0.1.2"
     "@tailwindcss/ui" "^0.3.0"
     classnames "^2.2.6"
+    gatsby "^2.21.11"
     gatsby-image "^2.4.12"
     gatsby-plugin-manifest "^2.4.17"
     gatsby-plugin-offline "^3.2.16"
@@ -1559,6 +1561,8 @@
     gatsby-transformer-sharp "^2.5.7"
     prism-react-renderer "^1.1.1"
     prismjs "^1.20.0"
+    react "^16.13.1"
+    react-dom "^16.13.1"
     react-helmet "^6.1.0"
     react-live "^2.2.2"
     react-transition-group "^4.4.1"
@@ -1672,6 +1676,11 @@
     lodash "^4.17.11"
     mini-svg-data-uri "^1.0.3"
     traverse "^0.6.6"
+
+"@tailwindcss/typography@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.1.2.tgz#41fb4f862b7810e6c8eb03ad2de465b53380f0c0"
+  integrity sha512-Qc52tzH2HGWhgn1IWyqzQ5GuuyXnEWCKflAZDiDHSYHq/Rhapsdlqd4ItqDdYjtpl8+6EC8/tV9nGfG3jifdPg==
 
 "@tailwindcss/ui@^0.3.0":
   version "0.3.0"
@@ -6733,7 +6742,7 @@ gatsby-transformer-sharp@^2.3.3, gatsby-transformer-sharp@^2.3.6, gatsby-transfo
     semver "^5.7.1"
     sharp "^0.25.1"
 
-gatsby@^2.24.2:
+gatsby@^2.21.11, gatsby@^2.24.2:
   version "2.24.2"
   resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.24.2.tgz#cadade2e38dd2bfaea36dd69ebcb735049ead08c"
   integrity sha512-2zhCJZBPRJiUGbFRnCogMY3liBoFdb3+cCmIpp5b4BzGUEm+t+QZPSW34xkV5IE1WNywuIMtpZF6G8xTbuepbA==

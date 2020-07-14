@@ -20,8 +20,8 @@ export default function Footer(props: FooterProps) {
   `);
 
   return (
-    <DeepMindFooter>
-      <div className="container border-t border-gray-200 pt-6 mt-6">
+    <DeepMindFooter className="mt-8">
+      <div className="container border-t border-gray-200 py-8 mt-6">
         <div className="grid grid-cols-4 gap-4">
           <FooterList
             title="Software Development"
