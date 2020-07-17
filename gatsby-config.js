@@ -32,6 +32,10 @@ module.exports = {
         name: `Uses`,
         link: `/uses`,
       },
+      {
+        name: `Glossary`,
+        link: `/blog/tags/glossary`,
+      },
     ],
     socialLinks: [
       {

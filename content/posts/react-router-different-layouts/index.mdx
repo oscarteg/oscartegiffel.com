@@ -1,7 +1,7 @@
 ---
 draft: true
 title: How to add different layouts with React Router
-description: Not every layout should be the same
+excerpt: Not every layout should be the same
 date: 2020-03-08
 tags:
   - react
@@ -9,44 +9,3 @@ tags:
 ---
 
 Layouts
-
-```typescript
-<Switch>
-  <Route exact path={["/"]}>
-    <DefaultLayout>
-      <Switch>
-        <Route
-          exact
-          path="/"
-          component={lazy(() => import("../pages/Dashboard"))}
-        />
-      </Switch>
-    </DefaultLayout>
-  </Route>
-  <Route path={["/signin", "/signup", "*"]}>
-    <FullWidthLayout>
-      <Switch>
-        <Route
-          path="/signin"
-          component={lazy(() => import("../pages/User/SignInPage"))}
-        />
-        <Route
-          path="/signup"
-          component={lazy(() => import("../pages/User/SignUpPage"))}
-        />
-        <Route component={NotFound} />
-      </Switch>
-    </FullWidthLayout>
-  </Route>
-  <Route path={["*"]}>
-    <FullWidthLayout>
-      <Switch>
-        <Route component={NotFound} />
-      </Switch>
-    </FullWidthLayout>
-  </Route>
-</Switch>
-```
-
-```typescript
-```
