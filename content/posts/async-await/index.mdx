@@ -29,7 +29,7 @@ msg(); // Message: 'Foo' <-- after 2 seconds
 
 When using _async/await_ instead of Promise you should always use a _try/catch_. Below we don't use _await_ and so the returned promise will always **fulfill with undefined, without waiting.**
 
-```javascript
+```js
 async function printFooAfterTwoSeconds() {
   try {
     foo();
@@ -39,7 +39,7 @@ async function printFooAfterTwoSeconds() {
 }
 ```
 
-```javascript
+```js
 async function printFooAfterTwoSeconds() {
   try {
     await foo();
@@ -49,7 +49,7 @@ async function printFooAfterTwoSeconds() {
 }
 ```
 
-```javascript
+```js
 async function printFooAfterTwoSeconds() {
   try {
     return foo();
