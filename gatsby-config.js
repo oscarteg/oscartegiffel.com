@@ -44,6 +44,11 @@ module.exports = {
         icon: `gitlab`,
       },
       {
+        name: `Resume`,
+        url: `https://resume.oscartegiffel.com`,
+        icon: `file-code`,
+      },
+      {
         name: `Instagram`,
         url: `https://instagram.com/oscartegiffel`,
         icon: `instagram`,
