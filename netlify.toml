@@ -1,3 +1,8 @@
+[build]
+  command = "yarn build"
+  publish = "public"
+  NODE_VERSION = "12"
+
 [[redirects]]
   from = "https://blog.oscartegiffel.com"
   to = "https://oscartegiffel.com/blog"
