@@ -1,5 +1,5 @@
 [[redirects]]
   from = "https://blog.oscartegiffel.com"
   to = "https://oscartegiffel.com/blog"
-  status = 200
+  status = 301
   force = true # COMMENT: ensure that we always redirect

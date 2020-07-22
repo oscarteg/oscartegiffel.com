@@ -79,6 +79,12 @@ module.exports = {
       },
     },
     {
+      resolve: `@oscarteg/gatsby-theme-portfolio-core`,
+      options: {
+        pageExcerpt: `All the work I have done the past couple of years.`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: `UA-61119473-6`,
