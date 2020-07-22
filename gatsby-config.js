@@ -41,32 +41,32 @@ module.exports = {
       {
         name: `Gitlab`,
         url: `https://gitlab.com/oscarteg`,
-        icon: `gitlab`,
+        icon: [`fab`, `gitlab`],
       },
       {
         name: `Resume`,
         url: `https://resume.oscartegiffel.com`,
-        icon: `file-code`,
+        icon: [`far`, `file-code`],
       },
       {
         name: `Instagram`,
         url: `https://instagram.com/oscartegiffel`,
-        icon: `instagram`,
+        icon: [`fab`, `instagram`],
       },
       {
         name: `Linkedin`,
         url: `https://www.linkedin.com/in/otegiffel/`,
-        icon: `linkedin`,
+        icon: [`fab`, `linkedin`],
       },
       {
         name: `Twitter`,
         url: `https://twitter.com/oscartegiffel`,
-        icon: `twitter`,
+        icon: [`fab`, `twitter`],
       },
       {
         name: `Github`,
         url: `https://github.com/oscarteg`,
-        icon: `github`,
+        icon: [`fab`, `github`],
       },
     ],
   },
