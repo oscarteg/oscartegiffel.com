@@ -14,8 +14,8 @@
     "preview": "gatsby build && gatsby serve"
   },
   "devDependencies": {
-    "@oscarteg/gatsby-theme-deepmind": "^0.0.24",
-    "gatsby": "^2.24.8",
+    "@oscarteg/gatsby-theme-deepmind": "^0.0.25",
+    "gatsby": "^2.24.47",
     "gatsby-plugin-google-analytics": "^2.3.13",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

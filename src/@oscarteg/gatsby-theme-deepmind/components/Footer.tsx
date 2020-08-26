@@ -3,9 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 import FooterList from "../../../components/FooterList";
 
-export type FooterProps = {};
-
-export default function Footer(props: FooterProps) {
+export default function Footer() {
   const data = useStaticQuery(graphql`
     {
       currentBuildDate {
@@ -27,13 +25,14 @@ export default function Footer(props: FooterProps) {
             title="Software Development"
             items={[
               `Cloud computing, microservices, APIs, full stack web apps`,
+              `Hybrid mobile apps with Flutter`,
             ]}
           />
 
           <FooterList
             title="Technologies"
             items={[
-              `React/Vue/Svelte`,
+              `JS&TS (React/Vue/Svelte)`,
               `PHP (Laravel)`,
               `Java/Kotlin`,
               `GoLang`,
@@ -45,6 +44,7 @@ export default function Footer(props: FooterProps) {
               `Scalable distributed systems (infrastructure, networks, microservices, kubernetes)`,
               `Creating mobile applications in Flutter`,
               `Working more with Graphql`,
+              `Become better at solving algorithmic problems.`,
             ]}
           />
           <FooterList
@@ -52,7 +52,8 @@ export default function Footer(props: FooterProps) {
             items={[
               `Scrum application in React/Go with Graphql`,
               `Seedbox in Kubernetes`,
-              `MacOS app for simple task list and pomodoro timer`,
+              `A recipe webapp for the secret recipes of my family`,
+              `CRM application with Laravel/TailwindCSS/Livewire/AlpineJS`,
               `Learning to be a better writer`,
             ]}
           />
