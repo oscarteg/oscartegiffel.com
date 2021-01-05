@@ -1,7 +1,5 @@
 import Container from '@/components/Container';
 import { NextSeo } from 'next-seo';
-import Image from 'next/image';
-
 
 export default function SnippetLayout({ children, frontMatter }) {
   const title = `${frontMatter.title} - Code Snippet`;
@@ -28,12 +26,10 @@ export default function SnippetLayout({ children, frontMatter }) {
             </p>
           </div>
           <div className="mt-2 sm:mt-0">
-            <Image
+            <img
               alt={frontMatter.title}
-              height={48}
-              width={48}
               src={`/logos/${frontMatter.logo}`}
-              className="rounded-full"
+              className="rounded-full w-12 h-12"
             />
           </div>
         </div>

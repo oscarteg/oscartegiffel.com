@@ -1,6 +1,5 @@
 import fetcher from '@/lib/fetcher';
 import cn from 'classnames';
-import Image from 'next/image';
 import useSWR from 'swr';
 
 export default function NowPlaying() {
@@ -27,11 +26,11 @@ export default function NowPlaying() {
           )}
         ></span>
       </span>
-      <Image
+      <img
         alt="Spotify"
-        className="rounded-lg w-60 h-60"
-        height={60}
-        width={60}
+        className="rounded-lg w-16 h-16"
+        // height={60}
+        // width={60}
         src={data?.albumImageUrl || '/static/images/placeholder.jpg'}
       />
       <div className="flex flex-col justify-center items-start ml-3">

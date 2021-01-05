@@ -1,6 +1,5 @@
-import Image from 'next/image';
-import { format } from 'date-fns';
 import comma from 'comma-number';
+import { format } from 'date-fns';
 
 /**
  * Supports plain text, images, quote tweets.
@@ -22,6 +21,7 @@ export default function Tweet({
   const replyUrl = `https://twitter.com/intent/tweet?in_reply_to=${id}`;
   const tweetUrl = `https://twitter.com/${author.username}/status/${id}`;
   const createdAt = new Date(created_at);
+  console.log;
 
   const formattedText = text.replace(/https:\/\/[\n\S]+/g, '');
   const quoteTweet =
@@ -36,12 +36,10 @@ export default function Tweet({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
+          <img
             alt={author.username}
-            height={48}
-            width={48}
             src={author.profile_image_url}
-            className="rounded-full"
+            className="rounded-full w-12 h-12"
           />
         </a>
         <a
@@ -97,14 +95,7 @@ export default function Tweet({
       {media && media.length ? (
         <div className="inline-grid grid-cols-2 gap-x-2 gap-y-2 my-2">
           {media.map((m) => (
-            <Image
-              key={m.media_key}
-              alt={text}
-              height={m.height}
-              width={m.width}
-              src={m.url}
-              className="rounded"
-            />
+            <img key={m.media_key} alt={text} src={m.url} className="rounded" />
           ))}
         </div>
       ) : null}

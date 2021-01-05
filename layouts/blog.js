@@ -1,8 +1,6 @@
 import BlogSeo from '@/components/BlogSeo';
 import Container from '@/components/Container';
 import { format, parseISO } from 'date-fns';
-import Image from 'next/image';
-
 
 const editUrl = (slug) =>
   `https://github.com/oscarteg/oscartegiffel.com/edit/master/data/blog/${slug}.mdx`;
@@ -20,12 +18,10 @@ export default function BlogLayout({ children, frontMatter }) {
         </h1>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
           <div className="flex items-center">
-            <Image
+            <img
               alt="Oscar te Giffel"
-              height={24}
-              width={24}
               src="/avatar.jpg"
-              className="rounded-full"
+              className="rounded-full w-6 h-6"
             />
             <p className="text-sm text-gray-700 dark:text-gray-300 ml-2">
               {frontMatter.by}
