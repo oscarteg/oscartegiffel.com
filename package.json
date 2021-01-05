@@ -1,23 +1,69 @@
 {
-  "name": "@oscarteg/homepage",
-  "description": "My personal homepage.",
-  "private": true,
-  "version": "0.0.4",
-  "author": "Oscar te Giffel <oscar@tegiffel.com>",
+  "name": "oscartegiffel.com",
+  "description": "My personal website.",
+  "version": "0.0.0",
+  "author": {
+    "name": "Oscar te Giffel",
+    "email": "oscar@tegiffel.com",
+    "url": "https://oscartegiffel.com"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscarteg/oscartegiffel.com"
+  },
   "scripts": {
-    "build": "gatsby build",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "dev": "gatsby clean && gatsby develop",
-    "preview": "gatsby build && gatsby serve"
+    "build": "next build",
+    "dev": "next",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@mapbox/rehype-prism": "0.5.0",
+    "@mdx-js/loader": "1.6.22",
+    "@mdx-js/react": "1.6.22",
+    "@next/mdx": "10.0.4",
+    "@tailwindcss/typography": "^0.3.1",
+    "autoprefixer": "^10.1.0",
+    "big.js": "6.0.3",
+    "classnames": "^2.2.6",
+    "comma-number": "2.0.1",
+    "date-fns": "2.16.1",
+    "gray-matter": "4.0.2",
+    "mdx-prism": "0.3.1",
+    "next": "10.0.4",
+    "next-mdx-remote": "^2.0.1",
+    "next-seo": "4.17.0",
+    "next-themes": "^0.0.10",
+    "postcss": "^8.2.2",
+    "preact": "^10.5.9",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-tweet-embed": "1.2.2",
+    "reading-time": "1.2.1",
+    "remark-autolink-headings": "6.0.1",
+    "remark-code-titles": "0.1.1",
+    "remark-slug": "6.0.0",
+    "swr": "0.3.11",
+    "tailwindcss": "^2.0.2",
+    "twitter-v2": "^1.0.0",
+    "unsplash-js": "7.0.2"
   },
   "devDependencies": {
-    "@oscarteg/gatsby-theme-deepmind": "^0.0.26",
-    "gatsby": "^2.24.51",
-    "gatsby-plugin-google-analytics": "^2.3.13",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "@netlify/plugin-nextjs": "^1.0.3",
+    "globby": "11.0.1",
+    "image-size": "0.9.3",
+    "prettier": "2.2.1",
+    "rehype": "11.0.0",
+    "remark-frontmatter": "3.0.0",
+    "remark-parse": "9.0.0",
+    "remark-stringify": "9.0.0",
+    "unified": "9.2.0",
+    "unist-util-visit": "2.0.3"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none"
   }
 }

@@ -1,10 +1,5 @@
 [build]
-  command = "yarn build"
-  publish = "public"
-  NODE_VERSION = "12"
+  command   = "npm run build"
 
-[[redirects]]
-  from = "https://blog.oscartegiffel.com"
-  to = "https://oscartegiffel.com/blog"
-  status = 301
-  force = true # COMMENT: ensure that we always redirect
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

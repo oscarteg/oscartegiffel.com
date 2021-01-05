@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://oscartegiffel.com/sitemap.xml
