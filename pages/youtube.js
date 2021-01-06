@@ -29,12 +29,16 @@ export default function Youtube({}) {
           want to focus I really don't like music with lyrics because I tend to
           listen to much to them. So this is my way of keeping my focus.
         </p>
+
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/videoseries?list=PL9WtCaBDfOZt2HMoqNiV13sYSHV27FSJn"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
       </div>
     </Container>
   );
-}
-
-export async function getStaticProps() {
-  //   const tweets = await getLikedTweets(['1344020569151434752']);
-  //   return { props: { tweets } };
 }
