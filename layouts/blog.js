@@ -37,10 +37,6 @@ export default function BlogLayout({ children, frontMatter }) {
         <div className="prose dark:prose-dark max-w-none w-full">
           {children}
         </div>
-        {/* // TODO Disable for now */}
-        {/* <div className="mt-8">
-          <Subscribe />
-        </div> */}
         <div className="text-sm text-gray-700 dark:text-gray-300">
           <a
             href={editUrl(frontMatter.slug)}

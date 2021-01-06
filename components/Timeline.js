@@ -44,16 +44,14 @@ export default function Timeline() {
       </h3>
       <Year>2020</Year>
       <ul>
-        <Step title="Joined MoneyMonk">
-          Came back to the MoneyMonk team.
-        </Step>
-        <Step title="Moves to Indonesia 🇮🇩">
+        <Step title="Joined MoneyMonk">Came back to the MoneyMonk team.</Step>
+        <Step title="Moved to Indonesia 🇮🇩">
           Before COVID-19 I moved to Indonesia. Unfortunatley, I had to move
           back.
         </Step>
-        <Step title="Helping introduce Shape Up 👨🏻‍💻">
-          At the end of the year I got the upportunity to help introducing 
-           Shape Up and shape the process within the company
+        <Step title="Helped introduce Shape Up 👨🏻‍💻">
+          At the end of the year I got the upportunity to help introducing Shape
+          Up and shape the process within the company
         </Step>
       </ul>
       <Divider />

@@ -91,6 +91,9 @@ export default function Footer() {
         <Link href="/uses">
           <a>/uses</a>
         </Link>
+        <Link href="/books">
+          <a>/books</a>
+        </Link>
         <Link href="/snippets">
           <a>/snippets</a>
         </Link>
