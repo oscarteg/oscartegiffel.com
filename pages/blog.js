@@ -79,5 +79,10 @@ export default function Blog({ posts }) {
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog');
 
-  return { props: { posts } };
+  // Removed posts that are in draft.
+  const nonDraftPosts = posts.filter((post) => post.draft !== true);
+
+  return {
+    props: { posts: nonDraftPosts }
+  };
 }

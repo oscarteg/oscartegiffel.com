@@ -87,18 +87,18 @@ export default function Footer() {
           </svg>
         </ExternalLink>
       </div>
-      <div className="space-x-3 text-sm text-gray-500 hover:text-gray-600">
+      <div className="space-x-3 text-sm text-gray-500 font-mono tracking-widest">
         <Link href="/uses">
-          <a>/uses</a>
+          <a className="hover:text-gray-600">/uses</a>
         </Link>
         <Link href="/books">
-          <a>/books</a>
+          <a className="hover:text-gray-600">/books</a>
         </Link>
         <Link href="/snippets">
-          <a>/snippets</a>
+          <a className="hover:text-gray-600">/snippets</a>
         </Link>
         <Link href="/tweets">
-          <a>/tweets</a>
+          <a className="hover:text-gray-600">/tweets</a>
         </Link>
       </div>
     </footer>

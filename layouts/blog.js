@@ -37,7 +37,7 @@ export default function BlogLayout({ children, frontMatter }) {
         <div className="prose dark:prose-dark max-w-none w-full">
           {children}
         </div>
-        <div className="text-sm text-gray-700 dark:text-gray-300">
+        <div className="text-sm text-gray-700 dark:text-gray-300 mt-3">
           <a
             href={editUrl(frontMatter.slug)}
             target="_blank"

@@ -1,6 +1,7 @@
 import MDXComponents from '@/components/MDXComponents';
 import '@/styles/global.css';
 import { MDXProvider } from '@mdx-js/react';
+import 'katex/dist/katex.min.css';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
