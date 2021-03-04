@@ -43,6 +43,7 @@ export default function Blog({ posts }) {
         </p>
         <div className="relative w-full mb-4">
           <input
+            autoFocus
             aria-label="Search articles"
             type="text"
             onChange={(e) => setSearchValue(e.target.value)}

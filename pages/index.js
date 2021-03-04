@@ -6,8 +6,10 @@ export default function Home() {
   return (
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          Hey, I’m Oscar te Giffel
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 dark:text-white">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r  from-blue-600 to-yellow-50 ">
+            Hey, I’m Oscar te Giffel
+          </span>
         </h1>
         <h2 className="text-gray-600 dark:text-gray-400 mb-16">
           I’m a developer, aspired writer, and creator. I work at MoneyMonk as a
