@@ -2,9 +2,9 @@ import Container from '@/components/Container';
 import { NextSeo } from 'next-seo';
 
 const url = 'https://oscartegiffel.com/youtube';
-const title = 'Tweets – Oscar te Giffel';
+const title = 'Youtube – Oscar te Giffel';
 const description =
-  'A collection of tweets that inspire me, make me laugh, and make me think.';
+  'A collection of youtube music that makes me get into the flow state.';
 
 export default function Youtube({}) {
   return (
