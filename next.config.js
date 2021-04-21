@@ -3,12 +3,12 @@ module.exports = {
   images: {
     domains: [
       'i.scdn.co', // Spotify Album Art
-      'pbs.twimg.com' // Twitter Profile Picture
-    ]
+      'pbs.twimg.com', // Twitter Profile Picture
+    ],
   },
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, {dev, isServer}) => {
     if (isServer) {
-      require('./scripts/generate-sitemap');
+      require('./scripts/generate-sitemap.ts');
     }
 
     // Replace React with Preact only in client production build
@@ -16,10 +16,10 @@ module.exports = {
       Object.assign(config.resolve.alias, {
         react: 'preact/compat',
         'react-dom/test-utils': 'preact/test-utils',
-        'react-dom': 'preact/compat'
+        'react-dom': 'preact/compat',
       });
     }
 
     return config;
-  }
+  },
 };
