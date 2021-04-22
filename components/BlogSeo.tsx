@@ -29,7 +29,7 @@ const BlogSeo = ({title, summary, publishedAt, url, image}) => {
         dateModified={date}
         datePublished={date}
         description={summary}
-        images={[featuredImage]}
+        images={[featuredImage.url]}
         publisherLogo="/static/favicons/android-chrome-192x192.png"
         publisherName="Oscar te Giffel"
         title={title}

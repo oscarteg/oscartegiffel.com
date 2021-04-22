@@ -1,7 +1,7 @@
 const visit = require('unist-util-visit');
 const sizeOf = require('image-size');
 
-module.exports = options => tree => {
+module.exports = () => tree => {
   visit(
     tree,
     // only visit p tags that contain an img element

@@ -6,7 +6,7 @@ const title = 'Youtube – Oscar te Giffel';
 const description =
   'A collection of youtube music that makes me get into the flow state.';
 
-export default function Youtube({}) {
+export default function Youtube() {
   return (
     <Container>
       <NextSeo
@@ -34,9 +34,9 @@ export default function Youtube({}) {
           width="560"
           height="315"
           src="https://www.youtube.com/embed/videoseries?list=PL9WtCaBDfOZt2HMoqNiV13sYSHV27FSJn"
-          frameborder="0"
+          frameBorder="0"
           allow="autoplay; encrypted-media"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </div>
     </Container>
