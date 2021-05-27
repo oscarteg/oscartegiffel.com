@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-export default function BlogPost({title, summary, slug}) {
+export default function BlogPost({title, summary, id}) {
   return (
-    <Link href={`/blog/${slug}`}>
+    <Link href={`/blog/${id}`}>
       <a className="w-full">
         <div className="mb-8 w-full">
           <div className="flex flex-col md:flex-row justify-between">
@@ -10,7 +10,9 @@ export default function BlogPost({title, summary, slug}) {
               {title}
             </h4>
           </div>
-          <p className="text-gray-600 dark:text-gray-400">{summary}</p>
+          <p className="text-gray-600 dark:text-gray-400 line-clamp-3">
+            {summary}
+          </p>
         </div>
       </a>
     </Link>

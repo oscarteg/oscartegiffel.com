@@ -4,6 +4,8 @@ import {getAllFilesFrontMatter} from '@/lib/mdx';
 import {NextSeo} from 'next-seo';
 import {useState} from 'react';
 
+import {Client} from '@notionhq/client';
+
 const url = 'https://oscartegiffel.com/blog';
 const title = 'Blog – Oscar te Giffel';
 const description =
@@ -11,14 +13,9 @@ const description =
 
 export default function Blog({posts}) {
   const [searchValue, setSearchValue] = useState('');
-  const filteredBlogPosts = posts
-    .sort(
-      (a, b) =>
-        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
-    )
-    .filter(frontMatter =>
-      frontMatter.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
+  const filteredBlogPosts = posts.filter(post =>
+    post.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <Container>
@@ -69,21 +66,69 @@ export default function Blog({posts}) {
           All Posts
         </h3>
         {!filteredBlogPosts.length && 'No posts found.'}
-        {filteredBlogPosts.map(frontMatter => (
-          <BlogPost key={frontMatter.title} {...frontMatter} />
+        {filteredBlogPosts.map(post => (
+          <BlogPost key={post.title} {...post} />
         ))}
       </div>
     </Container>
   );
 }
 
-export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog');
+// export async function getStaticProps() {
+//   const posts = await getAllFilesFrontMatter('blog');
+//
+//   // Removed posts that are in draft.
+//   const nonDraftPosts = posts.filter(post => post.draft !== true);
+//
+//   return {
+//     // props: {posts: nonDraftPosts},
+//   };
+// }
+//
+// ---
+// title: Tailwind best practices
+// publishedAt: '2020-07-20'
+// summary: ''
+// image: '/static/images/zero-programming-experience-to-three-internships/banner.png'
+// tags:
+// - tailwind
+// - best practices
+// ---
 
-  // Removed posts that are in draft.
-  const nonDraftPosts = posts.filter(post => post.draft !== true);
+export async function getServerSideProps() {
+  const client = new Client({auth: process.env.NOTION_ACCESS_TOKEN});
+
+  const pages = await client.databases.query({
+    database_id: process.env.NOTION_DATABASE_BLOG_ID,
+    filter: {
+      property: 'Stage',
+      select: {
+        equals: 'Stage 5: Epilogue',
+      },
+    },
+    sorts: [
+      {
+        property: 'Published at',
+        direction: 'descending',
+      },
+    ],
+  });
+
+  const posts = pages.results.map(({id, properties}) => ({
+    id,
+    title: properties.Name.title[0].plain_text,
+    summary: properties.Summary.rich_text[0].plain_text,
+    tags: properties.Tags.multi_select.map(select => ({
+      name: select.name,
+      color: select.color,
+    })),
+  }));
+
+  console.log({posts});
 
   return {
-    props: {posts: nonDraftPosts},
+    props: {
+      posts,
+    },
   };
 }

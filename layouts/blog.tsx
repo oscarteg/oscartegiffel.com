@@ -29,23 +29,12 @@ export default function BlogLayout({children, frontMatter}) {
               {format(parseISO(frontMatter.publishedAt), 'MMMM dd, yyyy')}
             </p>
           </div>
-          <p className="text-sm text-gray-500 min-w-32 mt-2 md:mt-0">
-            {frontMatter.readingTime.text}
-            {' • '}
-          </p>
+          <p className="text-sm text-gray-500 min-w-32 mt-2 md:mt-0">{' • '}</p>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">
           {children}
         </div>
-        <div className="text-sm text-gray-700 dark:text-gray-300 mt-3">
-          <a
-            href={editUrl(frontMatter.slug)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {'Edit on GitHub'}
-          </a>
-        </div>
+        <div className="text-sm text-gray-700 dark:text-gray-300 mt-3"></div>
       </article>
     </Container>
   );
