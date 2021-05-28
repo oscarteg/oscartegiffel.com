@@ -1,17 +1,21 @@
 import BlogSeo from '@/components/BlogSeo';
 import Container from '@/components/Container';
 import {format, parseISO} from 'date-fns';
+import {ReactNode} from 'react';
 
-const editUrl = slug =>
-  `https://github.com/oscarteg/oscartegiffel.com/edit/master/data/blog/${slug}.mdx`;
+type Props = {
+  id: string;
+  frontMatter: {
+    title: string;
+    publishedAt: string;
+  };
+  children: ReactNode;
+};
 
-export default function BlogLayout({children, frontMatter}) {
+export default function BlogLayout({id, children, frontMatter}: Props) {
   return (
     <Container>
-      <BlogSeo
-        url={`https://oscartegiffel.com/blog/${frontMatter.slug}`}
-        {...frontMatter}
-      />
+      <BlogSeo url={`https://oscartegiffel.com/blog/${id}`} {...frontMatter} />
       <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           {frontMatter.title}
@@ -24,7 +28,6 @@ export default function BlogLayout({children, frontMatter}) {
               className="rounded-full w-6 h-6"
             />
             <p className="text-sm text-gray-700 dark:text-gray-300 ml-2">
-              {frontMatter.by}
               {'Oscar te Giffel / '}
               {format(parseISO(frontMatter.publishedAt), 'MMMM dd, yyyy')}
             </p>

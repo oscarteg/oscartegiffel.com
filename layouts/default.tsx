@@ -1,8 +1,24 @@
 import Container from '@/components/Container';
 import {NextSeo} from 'next-seo';
 import {useRouter} from 'next/router';
+import {ReactNode} from 'react';
 
-export default function DefaultLayout({title, excerpt, frontMatter, children}) {
+type Props = {
+  title?: string;
+  excerpt?: string;
+  frontMatter: {
+    title: string;
+    excerpt: string;
+  };
+  children: ReactNode;
+};
+
+export default function DefaultLayout({
+  title,
+  excerpt,
+  frontMatter,
+  children,
+}: Props) {
   const {pathname} = useRouter();
   return (
     <Container>

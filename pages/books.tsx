@@ -1,18 +1,24 @@
-import MDXComponents from '@/components/MDXComponents';
-import DefaultLayout from '@/layouts/default';
-import {getFileBySlug} from '@/lib/mdx';
-import hydrate from 'next-mdx-remote/hydrate';
+import {GetStaticProps} from 'next';
+import {MDXRemote, MDXRemoteSerializeResult} from 'next-mdx-remote';
+import DefaultLayout from '../layouts/default';
+import {getFileBySlug} from '../lib/mdx';
 
 export default function Books({mdxSource, frontMatter}) {
-  const content = hydrate(mdxSource, {
-    components: MDXComponents,
-  });
-
-  return <DefaultLayout frontMatter={frontMatter}>{content}</DefaultLayout>;
+  return (
+    <DefaultLayout frontMatter={frontMatter}>
+      <MDXRemote {...mdxSource} />
+    </DefaultLayout>
+  );
 }
 
-export async function getStaticProps() {
-  const books = await getFileBySlug('books');
+export const getStaticProps: GetStaticProps<MDXRemoteSerializeResult> =
+  async () => {
+    const {mdxSource, frontMatter} = await getFileBySlug('books');
 
-  return {props: books};
-}
+    return {
+      props: {
+        mdxSource,
+        frontMatter,
+      },
+    };
+  };

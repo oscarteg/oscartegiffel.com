@@ -44,10 +44,9 @@ export default function Tweet({
         </a>
         <a
           href={authorUrl}
-          className="author"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col ml-4"
+          className="author flex flex-col ml-4"
         >
           <span
             className="flex items-center font-bold text-gray-900 dark:text-gray-100 leading-5"

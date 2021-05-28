@@ -1,7 +1,7 @@
-import MDXComponents from '@/components/MDXComponents';
 import fs from 'fs';
 import matter from 'gray-matter';
-import renderToString from 'next-mdx-remote/render-to-string';
+import {MDXRemoteSerializeResult} from 'next-mdx-remote';
+import {serialize} from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
 
@@ -11,14 +11,27 @@ export async function getFiles(type) {
   return fs.readdirSync(path.join(root, 'data', type));
 }
 
-export async function getFileBySlug(type, slug) {
+type IReadTimeResults = {
+  text: string;
+  time: number;
+  words: number;
+  minutes: number;
+};
+
+type GetFileByPropsReturn<
+  T extends {wordCount: number; readingTime: IReadTimeResults; slug: string}
+> = Promise<{
+  mdxSource: MDXRemoteSerializeResult<Record<string, unknown>>;
+  frontMatter: T;
+}>;
+
+export async function getFileBySlug(type: string, slug?: string) {
   const source = slug
     ? fs.readFileSync(path.join(root, 'data', type, `${slug}.mdx`), 'utf8')
     : fs.readFileSync(path.join(root, 'data', `${type}.mdx`), 'utf8');
 
   const {data, content} = matter(source);
-  const mdxSource = await renderToString(content, {
-    components: MDXComponents,
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
         require('remark-autolink-headings'),
@@ -41,7 +54,7 @@ export async function getFileBySlug(type, slug) {
   };
 }
 
-export async function getAllFilesFrontMatter(type) {
+export async function getAllFilesFrontMatter(type: string) {
   const files = fs.readdirSync(path.join(root, 'data', type));
 
   return files.reduce((allPosts, postSlug) => {

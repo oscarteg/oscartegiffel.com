@@ -1,12 +1,23 @@
-import Container from '@/components/Container';
-import FunctionCard from '@/components/FunctionCard';
-import {getAllFilesFrontMatter} from '@/lib/mdx';
 import {NextSeo} from 'next-seo';
+import Container from '../../components/Container';
+import FunctionCard from '../../components/FunctionCard';
+import {getAllFilesFrontMatter} from '../../lib/mdx';
 
 const url = 'https://oscartegiffel.com/snippets';
 const title = 'Code Snippets – Oscar te Giffel';
 
-export default function Snippets({snippets}) {
+type Props = {
+  snippets: Array<Snippet>;
+};
+
+type Snippet = {
+  slug: string;
+  title: string;
+  logo: string;
+  description: string;
+};
+
+export default function Snippets({snippets}: Props) {
   return (
     <Container>
       <NextSeo
