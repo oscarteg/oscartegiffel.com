@@ -13,15 +13,12 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-    "@/components/*": ["components/*"],
-      "@/data/*": ["data/*"],
-      "@/layouts/*": ["layouts/*"],
-      "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"] 
+      "../components/*": ["components/*"],
+      "../data/*": ["data/*"],
+      "../layouts/*": ["layouts/*"],
+      "../lib/*": ["lib/*"],
+      "../styles/*": ["styles/*"]
     }
   },
-  "include": [
-    "src/**/*.tsx",
-    "test/**/*.tsx"
-  ]
+  "include": ["src/**/*.tsx", "test/**/*.tsx"]
 }

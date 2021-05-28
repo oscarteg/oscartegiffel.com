@@ -1,10 +1,8 @@
-import BlogPost from '@/components/BlogPost';
-import Container from '@/components/Container';
-import {getAllFilesFrontMatter} from '@/lib/mdx';
+import {Client} from '@notionhq/client';
 import {NextSeo} from 'next-seo';
 import {useState} from 'react';
-
-import {Client} from '@notionhq/client';
+import BlogPost from '../../components/BlogPost';
+import Container from '../../components/Container';
 
 const url = 'https://oscartegiffel.com/blog';
 const title = 'Blog – Oscar te Giffel';

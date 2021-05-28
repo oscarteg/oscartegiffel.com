@@ -1,7 +1,7 @@
-import Container from '@/components/Container';
 import {NextSeo} from 'next-seo';
 import {useRouter} from 'next/router';
 import {ReactNode} from 'react';
+import Container from '../components/Container';
 
 type Props = {
   title?: string;

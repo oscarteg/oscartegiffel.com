@@ -1,5 +1,5 @@
-import DefaultLayout from '@/layouts/default';
-import {getWidgets} from '@/lib/widgets';
+import DefaultLayout from '../../layouts/default';
+import {getWidgets} from '../../lib/widgets';
 
 export default function Widgets({widgets}) {
   return (

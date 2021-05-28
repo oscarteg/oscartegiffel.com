@@ -1,5 +1,5 @@
-import Footer from '@/components/Footer';
 import NextLink from 'next/link';
+import Footer from '../components/Footer';
 
 export default function Container({children}) {
   return (

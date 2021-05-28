@@ -1,7 +1,7 @@
-import BlogSeo from '@/components/BlogSeo';
-import Container from '@/components/Container';
 import {format, parseISO} from 'date-fns';
 import {ReactNode} from 'react';
+import BlogSeo from '../components/BlogSeo';
+import Container from '../components/Container';
 
 type Props = {
   id: string;

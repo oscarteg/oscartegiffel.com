@@ -1,7 +1,7 @@
-import Container from '@/components/Container';
-import Tweet from '@/components/Tweet';
-import {getLikedTweets} from '@/lib/twitter';
 import {NextSeo} from 'next-seo';
+import Container from '../components/Container';
+import Tweet from '../components/Tweet';
+import {getLikedTweets} from '../lib/twitter';
 
 const url = 'https://oscartegiffel.com/tweets';
 const title = 'Tweets – Oscar te Giffel';

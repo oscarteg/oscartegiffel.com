@@ -2,10 +2,11 @@ import {Client} from '@notionhq/client';
 import BlogLayout from '../../layouts/blog';
 import notionToHtml from '../../lib/notion';
 
-export default function Blog({html, post, blocks}) {
+export default function Blog({html, post}) {
   console.log(post);
   return (
     <BlogLayout
+      id={post.id}
       frontMatter={{
         title: post.properties.Name.title[0].text.content,
         publishedAt: post.properties['Published at'].date.start,

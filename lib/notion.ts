@@ -1,5 +1,6 @@
 import {BlocksChildrenListResponse} from '@notionhq/client/build/src/api-endpoints';
 import {
+  BulletedListItemBlock,
   HeadingOneBlock,
   HeadingThreeBlock,
   HeadingTwoBlock,
@@ -30,6 +31,11 @@ export default function notionToHtml(
         return `<li>${(
           child as NumberedListItemBlock
         ).numbered_list_item.text.map(text => renderParagraph(text))}</li>`;
+
+      case 'bulleted_list_item':
+        return `<li>${(
+          child as BulletedListItemBlock
+        ).bulleted_list_item.text.map(text => renderParagraph(text))}</li>`;
 
       case 'paragraph':
         return `<p>${(child as ParagraphBlock).paragraph.text.map(text =>

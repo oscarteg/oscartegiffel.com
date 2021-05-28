@@ -1,5 +1,5 @@
-import NowPlaying from '@/components/NowPlaying';
 import Link from 'next/link';
+import NowPlaying from '../components/NowPlaying';
 
 const ExternalLink = ({href, children}) => (
   <a

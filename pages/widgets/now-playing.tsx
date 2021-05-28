@@ -1,4 +1,4 @@
-const {default: NowPlaying} = require('@/components/NowPlaying');
+const {default: NowPlaying} = require('../../components/NowPlaying');
 
 export default function NowPlayingWidget() {
   return <NowPlaying />;

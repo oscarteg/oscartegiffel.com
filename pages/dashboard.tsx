@@ -1,6 +1,6 @@
-import Container from '@/components/Container';
-import TopTracks from '@/components/TopTracks';
 import {NextSeo} from 'next-seo';
+import Container from '../components/Container';
+import TopTracks from '../components/TopTracks';
 
 const url = 'https://oscartegiffel.com/dashboard';
 const title = 'Dashboard – Oscar te Giffel';

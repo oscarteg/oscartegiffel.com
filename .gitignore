@@ -5,3 +5,6 @@ node_modules
 .env.local
 public/sitemap.xml
 .vercel
+
+# Local Netlify folder
+.netlify

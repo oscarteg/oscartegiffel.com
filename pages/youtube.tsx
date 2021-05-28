@@ -1,5 +1,5 @@
-import Container from '@/components/Container';
 import {NextSeo} from 'next-seo';
+import Container from '../components/Container';
 
 const url = 'https://oscartegiffel.com/youtube';
 const title = 'Youtube – Oscar te Giffel';

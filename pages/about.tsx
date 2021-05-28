@@ -1,5 +1,5 @@
-import Container from '@/components/Container';
 import {NextSeo} from 'next-seo';
+import Container from '../components/Container';
 
 export default function About() {
   return (
