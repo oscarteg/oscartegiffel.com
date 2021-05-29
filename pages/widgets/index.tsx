@@ -20,7 +20,6 @@ export default function Widgets({widgets}) {
 
 export async function getStaticProps() {
   const widgets = await getWidgets();
-  console.log(widgets);
 
   return {props: {widgets}};
 }

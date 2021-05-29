@@ -3,7 +3,6 @@ import BlogLayout from '../../layouts/blog';
 import notionToHtml from '../../lib/notion';
 
 export default function Blog({html, post}) {
-  console.log(post);
   return (
     <BlogLayout
       id={post.id}
@@ -24,7 +23,7 @@ export async function getServerSideProps({params}) {
   const blocksPromise = client.blocks.children.list({block_id: params.id});
   const [page, blocks] = await Promise.all([pagePromise, blocksPromise]);
 
-  const html = notionToHtml(blocks);
+  const html = notionToHtml(blocks).join('');
 
   return {
     props: {

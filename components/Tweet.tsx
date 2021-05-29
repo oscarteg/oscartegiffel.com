@@ -21,7 +21,6 @@ export default function Tweet({
   const replyUrl = `https://twitter.com/intent/tweet?in_reply_to=${id}`;
   const tweetUrl = `https://twitter.com/${author.username}/status/${id}`;
   const createdAt = new Date(created_at);
-  console.log;
 
   const formattedText = text.replace(/https:\/\/[\n\S]+/g, '');
   const quoteTweet =

@@ -72,27 +72,6 @@ export default function Blog({posts}) {
   );
 }
 
-// export async function getStaticProps() {
-//   const posts = await getAllFilesFrontMatter('blog');
-//
-//   // Removed posts that are in draft.
-//   const nonDraftPosts = posts.filter(post => post.draft !== true);
-//
-//   return {
-//     // props: {posts: nonDraftPosts},
-//   };
-// }
-//
-// ---
-// title: Tailwind best practices
-// publishedAt: '2020-07-20'
-// summary: ''
-// image: '/static/images/zero-programming-experience-to-three-internships/banner.png'
-// tags:
-// - tailwind
-// - best practices
-// ---
-
 export async function getServerSideProps() {
   const client = new Client({auth: process.env.NOTION_ACCESS_TOKEN});
 
@@ -121,8 +100,6 @@ export async function getServerSideProps() {
       color: select.color,
     })),
   }));
-
-  console.log({posts});
 
   return {
     props: {
