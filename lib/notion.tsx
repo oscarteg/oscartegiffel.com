@@ -70,7 +70,7 @@ export default function notionToHtml(
                     <span class="ml-2">${child.to_do.text[0].plain_text}</span>
                   </label></div>`;
       default:
-        return child.type;
+        console.error(`Type ${child.type} not implemented!`);
     }
   });
 }
