@@ -17,7 +17,6 @@ export default function notionToHtml(
     const previousElement = children.results[currentIndex - 1];
     const nextElement = children.results[currentIndex + 1];
 
-    console.log(previousElement === undefined, {previousElement, nextElement});
     switch (child.type) {
       case 'heading_1':
         return `<h1>${
@@ -63,6 +62,13 @@ export default function notionToHtml(
         return `<p>${(child as ParagraphBlock).paragraph.text.map(text =>
           renderParagraph(text)
         )}</p>`;
+      case 'to_do':
+        return `<div><label class="inline-flex items-center">
+                    <input readonly disabled type="checkbox" class="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500" ${
+                      child.to_do.checked ? 'checked' : ''
+                    }>
+                    <span class="ml-2">${child.to_do.text[0].plain_text}</span>
+                  </label></div>`;
       default:
         return child.type;
     }

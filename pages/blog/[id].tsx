@@ -23,6 +23,8 @@ export async function getServerSideProps({params}) {
   const blocksPromise = client.blocks.children.list({block_id: params.id});
   const [page, blocks] = await Promise.all([pagePromise, blocksPromise]);
 
+  console.log(JSON.stringify(blocks, null, 4));
+
   const html = notionToHtml(blocks).join('');
 
   return {

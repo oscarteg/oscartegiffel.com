@@ -2,7 +2,12 @@ const {spacing, fontFamily} = require('tailwindcss/defaultTheme');
 
 module.exports = {
   mode: 'jit',
-  purge: ['./pages/**/*.tsx', './components/**/*.tsx', './layouts/**/*.tsx'],
+  purge: [
+    './pages/**/*.tsx',
+    './components/**/*.tsx',
+    './layouts/**/*.tsx',
+    './lib/**/*.tsx',
+  ],
   darkMode: 'media',
   theme: {
     extend: {
@@ -77,6 +82,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
   ],
 };
