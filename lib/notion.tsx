@@ -36,9 +36,9 @@ export default function notionToHtml(
           previousElement.type !== 'numbered_list_item'
             ? '<ol>'
             : ''
-        }<li>${(child as NumberedListItemBlock).numbered_list_item.text.map(
-          text => renderParagraph(text)
-        )}</li>${
+        }<li>${(child as NumberedListItemBlock).numbered_list_item.text
+          .map(text => richtText(text))
+          .join('')}</li>${
           nextElement === undefined || nextElement.type !== 'numbered_list_item'
             ? '</ol>'
             : ''
@@ -50,9 +50,9 @@ export default function notionToHtml(
           previousElement.type !== 'bulleted_list_item'
             ? '<ul>'
             : ''
-        }<li>${(child as BulletedListItemBlock).bulleted_list_item.text.map(
-          text => renderParagraph(text)
-        )}</li>${
+        }<li>${(child as BulletedListItemBlock).bulleted_list_item.text
+          .map(text => richtText(text))
+          .join('')}</li>${
           nextElement === undefined || nextElement.type !== 'bulleted_list_item'
             ? '</ul>'
             : ''
@@ -60,7 +60,7 @@ export default function notionToHtml(
 
       case 'paragraph':
         return `<p>${(child as ParagraphBlock).paragraph.text.map(text =>
-          renderParagraph(text)
+          richtText(text)
         )}</p>`;
       case 'to_do':
         return `<div><label class="inline-flex items-center">
@@ -75,10 +75,26 @@ export default function notionToHtml(
   });
 }
 
-export function renderParagraph(text: RichText) {
-  if (text.annotations.code) {
-    return `<code>${text.plain_text}</code>`;
-  } else {
-    return `${text.plain_text}`;
+export function richtText(text: RichText) {
+  let formattedText = text.plain_text;
+
+  if (text.annotations.bold) {
+    formattedText = `<strong>${formattedText}</strong>`;
   }
+  if (text.annotations.italic) {
+    formattedText = `<em>${formattedText}</em>`;
+  }
+  if (text.annotations.strikethrough) {
+    formattedText = `<strike>${formattedText}</strike>`;
+  }
+  if (text.annotations.underline) {
+    formattedText = `<u>${formattedText}</u>`;
+  }
+  if (text.annotations.code) {
+    formattedText = `<code>${formattedText}</code>`;
+  }
+
+  // TODO: Implement color
+
+  return formattedText;
 }

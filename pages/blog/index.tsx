@@ -91,10 +91,13 @@ export async function getServerSideProps() {
     ],
   });
 
+  console.log(JSON.stringify(pages, null, 4));
   const posts = pages.results.map(({id, properties}) => ({
     id,
     title: properties.Name.title[0].plain_text,
-    summary: properties.Summary.rich_text[0].plain_text,
+    summary: properties.Summary.rich_text
+      .map(richText => richText.plain_text)
+      .join(''),
     tags: properties.Tags.multi_select.map(select => ({
       name: select.name,
       color: select.color,
