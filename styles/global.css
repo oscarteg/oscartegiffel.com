@@ -65,75 +65,6 @@ html {
   @apply m-0;
 }
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  @apply text-gray-700 dark:text-gray-300;
-}
-
-.token.punctuation {
-  @apply text-gray-700 dark:text-gray-300;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  @apply text-green-500;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  @apply text-purple-500;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  @apply text-yellow-500;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  @apply text-blue-500;
-}
-
-.token.function,
-.token.class-name {
-  @apply text-pink-500;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  @apply text-yellow-500;
-}
-
-code[class*='language-'],
-pre[class*='language-'] {
-  @apply text-gray-800 dark:text-gray-50;
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 .remark-code-title {
   @apply text-gray-800 dark:text-gray-200 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-700 rounded-t bg-gray-200 dark:bg-gray-800 text-sm font-mono font-bold;
 }
@@ -154,14 +85,16 @@ input[type='email'] {
   appearance: none;
 }
 
-.metric-card > a {
-  @apply no-underline;
+/* nprogress styling */
+#nprogress .peg {
+  box-shadow: 0 0 10px theme('colors.black'), 0 0 5px theme('colors.black');
 }
 
-.metric-card > p {
-  @apply my-2;
+#nprogress .bar {
+  @apply bg-black;
 }
 
-.step > h3 {
-  @apply my-0;
+#nprogress .spinner-icon {
+  border-top-color: theme('colors.black');
+  border-left-color: theme('colors.black');
 }
