@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {memo} from 'react';
 import NowPlaying from '../components/NowPlaying';
 
 const ExternalLink = ({href, children}) => (
@@ -12,7 +13,7 @@ const ExternalLink = ({href, children}) => (
   </a>
 );
 
-export default function Footer() {
+const Footer = memo(() => {
   return (
     <footer className="flex flex-col items-center mb-8">
       <NowPlaying />
@@ -103,4 +104,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;

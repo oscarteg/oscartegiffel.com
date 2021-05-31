@@ -5,6 +5,7 @@ import {ThemeProvider} from 'next-themes';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import 'nprogress/nprogress.css';
+import Footer from '../components/Footer';
 import MDXComponents from '../components/MDXComponents';
 import SEO from '../next-seo.config';
 import '../styles/global.css';
@@ -26,6 +27,7 @@ export default function App({Component, pageProps}) {
         <DefaultSeo {...SEO} />
         <ProgressBar />
         <Component {...pageProps} />
+        <Footer />
       </MDXProvider>
     </ThemeProvider>
   );

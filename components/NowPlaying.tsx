@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import fetcher from '../lib/fetcher';
 
 export default function NowPlaying() {
-  const {data} = useSWR('/api/now-playing', fetcher);
+  const {data} = useSWR('/api/now-playing', fetcher, {refreshInterval: 5000});
 
   return (
     <a

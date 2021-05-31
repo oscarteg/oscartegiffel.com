@@ -22,10 +22,7 @@ export default function Container({children}) {
           </NextLink>
         </div>
       </nav>
-      <main className="flex flex-col justify-center px-8">
-        {children}
-        <Footer />
-      </main>
+      <main className="flex flex-col justify-center px-8">{children}</main>
     </div>
   );
 }
