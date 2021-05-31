@@ -47,7 +47,7 @@ const securityHeaders = [
     value: 'camera=(), microphone=(), geolocation=()',
   },
 ];
-s;
+
 module.exports = {
   target: 'serverless',
   images: {
