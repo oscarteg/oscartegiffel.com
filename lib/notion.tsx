@@ -1,3 +1,4 @@
+import {encode} from 'html-entities';
 import {BlocksChildrenListResponse} from '@notionhq/client/build/src/api-endpoints';
 import {
   BulletedListItemBlock,
@@ -75,8 +76,8 @@ export default function notionToHtml(
   });
 }
 
-export function renderRichText(text: RichText) {
-  let formattedText = text.plain_text;
+export function renderRichText(text: RichText): string {
+  let formattedText = encode(text.plain_text);
 
   if (text.annotations.bold) {
     formattedText = `<strong>${formattedText}</strong>`;
@@ -95,6 +96,7 @@ export function renderRichText(text: RichText) {
   }
 
   if (text.annotations.code) {
+    console.log({formattedText});
     formattedText = `<code>${formattedText}</code>`;
   }
 

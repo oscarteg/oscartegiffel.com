@@ -91,7 +91,6 @@ export async function getServerSideProps() {
     ],
   });
 
-  console.log(JSON.stringify(pages, null, 4));
   const posts = pages.results.map(({id, properties}) => ({
     id,
     title: properties.Name.title[0].plain_text,

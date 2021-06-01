@@ -8,7 +8,8 @@ export default function Blog({html, post}) {
       id={post.id}
       frontMatter={{
         title: post.properties.Name.title[0].text.content,
-        publishedAt: post.properties['Published at'].date.start,
+        publishedAt: new Date(post.properties['Published at'].date.start),
+        updatedAt: new Date(post.properties['Updated at'].last_edited_time),
       }}
     >
       <div dangerouslySetInnerHTML={{__html: html}} />
@@ -22,6 +23,8 @@ export async function getServerSideProps({params}) {
   const pagePromise = client.pages.retrieve({page_id: params.id});
   const blocksPromise = client.blocks.children.list({block_id: params.id});
   const [page, blocks] = await Promise.all([pagePromise, blocksPromise]);
+
+  console.log(JSON.stringify(blocks, null, 4));
 
   const html = notionToHtml(blocks).join('');
 

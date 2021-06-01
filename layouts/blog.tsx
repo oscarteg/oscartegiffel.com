@@ -1,4 +1,4 @@
-import {format, parseISO} from 'date-fns';
+import {format, formatRelative, parseISO} from 'date-fns';
 import {ReactNode} from 'react';
 import BlogSeo from '../components/BlogSeo';
 import Container from '../components/Container';
@@ -7,12 +7,14 @@ type Props = {
   id: string;
   frontMatter: {
     title: string;
-    publishedAt: string;
+    publishedAt: Date;
+    updatedAt: Date;
   };
   children: ReactNode;
 };
 
 export default function BlogLayout({id, children, frontMatter}: Props) {
+  console.log(frontMatter);
   return (
     <Container>
       <BlogSeo url={`https://oscartegiffel.com/blog/${id}`} {...frontMatter} />
@@ -29,10 +31,13 @@ export default function BlogLayout({id, children, frontMatter}: Props) {
             />
             <p className="text-sm text-gray-700 dark:text-gray-300 ml-2">
               {'Oscar te Giffel / '}
-              {format(parseISO(frontMatter.publishedAt), 'MMMM dd, yyyy')}
+              {format(frontMatter.publishedAt, 'MMMM dd, yyyy')}
             </p>
           </div>
-          <p className="text-sm text-gray-500 min-w-32 mt-2 md:mt-0">{' • '}</p>
+          <p className="text-sm text-gray-500 min-w-32 mt-2 md:mt-0">
+            {' • '}
+            Last update: {formatRelative(frontMatter.updatedAt, new Date())}
+          </p>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">
           {children}
