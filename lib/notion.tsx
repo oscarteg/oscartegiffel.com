@@ -19,17 +19,17 @@ export default function notionToHtml(
 
     switch (child.type) {
       case 'heading_1':
-        return `<h1>${
-          (child as HeadingOneBlock).heading_1.text[0].plain_text
-        }</h1>`;
+        return `<h1>${(child as HeadingOneBlock).heading_1.text
+          .map(text => renderRichText(text))
+          .join('')}</h1>`;
       case 'heading_2':
-        return `<h2>${
-          (child as HeadingTwoBlock).heading_2.text[0].plain_text
-        }</h2>`;
+        return `<h2>${(child as HeadingTwoBlock).heading_2.text
+          .map(text => renderRichText(text))
+          .join('')}</h2>`;
       case 'heading_3':
-        return `<h3>${
-          (child as HeadingThreeBlock).heading_3.text[0].plain_text
-        }</h3>`;
+        return `<h3>${(child as HeadingThreeBlock).heading_3.text
+          .map(text => renderRichText(text))
+          .join('')}</h3>`;
       case 'numbered_list_item':
         return `${
           previousElement === undefined ||
@@ -37,7 +37,7 @@ export default function notionToHtml(
             ? '<ol>'
             : ''
         }<li>${(child as NumberedListItemBlock).numbered_list_item.text
-          .map(text => richtText(text))
+          .map(text => renderRichText(text))
           .join('')}</li>${
           nextElement === undefined || nextElement.type !== 'numbered_list_item'
             ? '</ol>'
@@ -51,7 +51,7 @@ export default function notionToHtml(
             ? '<ul>'
             : ''
         }<li>${(child as BulletedListItemBlock).bulleted_list_item.text
-          .map(text => richtText(text))
+          .map(text => renderRichText(text))
           .join('')}</li>${
           nextElement === undefined || nextElement.type !== 'bulleted_list_item'
             ? '</ul>'
@@ -60,7 +60,7 @@ export default function notionToHtml(
 
       case 'paragraph':
         return `<p>${(child as ParagraphBlock).paragraph.text.map(text =>
-          richtText(text)
+          renderRichText(text)
         )}</p>`;
       case 'to_do':
         return `<div><label class="inline-flex items-center">
@@ -75,23 +75,31 @@ export default function notionToHtml(
   });
 }
 
-export function richtText(text: RichText) {
+export function renderRichText(text: RichText) {
   let formattedText = text.plain_text;
 
   if (text.annotations.bold) {
     formattedText = `<strong>${formattedText}</strong>`;
   }
+
   if (text.annotations.italic) {
     formattedText = `<em>${formattedText}</em>`;
   }
+
   if (text.annotations.strikethrough) {
     formattedText = `<strike>${formattedText}</strike>`;
   }
+
   if (text.annotations.underline) {
     formattedText = `<u>${formattedText}</u>`;
   }
+
   if (text.annotations.code) {
     formattedText = `<code>${formattedText}</code>`;
+  }
+
+  if (text.href !== null) {
+    formattedText = `<a href="${text.href}" target="_blank" rel="noreferrer noopener" >${formattedText}</a>`;
   }
 
   // TODO: Implement color
