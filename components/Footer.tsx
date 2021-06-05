@@ -98,9 +98,6 @@ const Footer = memo(() => {
         <Link href="/snippets">
           <a className="hover:text-gray-600">/snippets</a>
         </Link>
-        <Link href="/tweets">
-          <a className="hover:text-gray-600">/tweets</a>
-        </Link>
         <Link href="/workflow">
           <a className="hover:text-gray-600">/workflow</a>
         </Link>
