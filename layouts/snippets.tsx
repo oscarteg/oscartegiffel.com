@@ -26,11 +26,13 @@ export default function SnippetLayout({children, frontMatter}) {
             </p>
           </div>
           <div className="mt-2 sm:mt-0">
-            <img
-              alt={frontMatter.title}
-              src={`/logos/${frontMatter.logo}`}
-              className="rounded-full w-12 h-12"
-            />
+            {frontMatter.logo && (
+              <img
+                alt={frontMatter.title}
+                src={`/logos/${frontMatter.logo}`}
+                className="rounded-full w-12 h-12"
+              />
+            )}
           </div>
         </div>
         <div className="prose dark:prose-dark w-full">{children}</div>

@@ -7,14 +7,15 @@ type Props = {
   id: string;
   frontMatter: {
     title: string;
+    summary: string;
     publishedAt: Date;
     updatedAt: Date;
+    image: string;
   };
   children: ReactNode;
 };
 
 export default function BlogLayout({id, children, frontMatter}: Props) {
-  console.log(frontMatter);
   return (
     <Container>
       <BlogSeo url={`https://oscartegiffel.com/blog/${id}`} {...frontMatter} />

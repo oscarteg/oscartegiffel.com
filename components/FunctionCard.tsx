@@ -13,11 +13,13 @@ export default function FunctionCard({
         className="border border-grey-200 dark:border-gray-900 rounded p-4 w-full"
         {...rest}
       >
-        <img
-          alt={title}
-          src={`/logos/${logo}`}
-          className="rounded-full w-8 h-8"
-        />
+        {logo && (
+          <img
+            alt={title}
+            src={`/logos/${logo}`}
+            className="rounded-full w-8 h-8"
+          />
+        )}
         <h3 className="text-lg font-bold text-left mt-2 text-gray-900 dark:text-gray-100">
           {title}
         </h3>

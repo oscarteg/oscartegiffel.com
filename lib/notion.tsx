@@ -10,6 +10,35 @@ import {
   RichText,
 } from '@notionhq/client/build/src/api-types';
 import {ReactNode} from 'react';
+import {Client} from '@notionhq/client';
+
+const client = new Client({auth: process.env.NOTION_ACCESS_TOKEN});
+
+export async function fetchBlocks(id: string) {
+  return client.blocks.children.list({block_id: id});
+}
+
+export async function fetchPages() {
+  return client.databases.query({
+    database_id: process.env.NOTION_DATABASE_BLOG_ID,
+    filter: {
+      property: 'Stage',
+      select: {
+        equals: 'Stage 5: Epilogue',
+      },
+    },
+    sorts: [
+      {
+        property: 'Published at',
+        direction: 'descending',
+      },
+    ],
+  });
+}
+
+export async function fetchPage(id: string) {
+  return client.pages.retrieve({page_id: id});
+}
 
 export default function notionToHtml(
   children: BlocksChildrenListResponse
@@ -96,7 +125,6 @@ export function renderRichText(text: RichText): string {
   }
 
   if (text.annotations.code) {
-    console.log({formattedText});
     formattedText = `<code>${formattedText}</code>`;
   }
 

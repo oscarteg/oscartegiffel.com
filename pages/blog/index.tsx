@@ -3,17 +3,27 @@ import {NextSeo} from 'next-seo';
 import {useState} from 'react';
 import BlogPost from '../../components/BlogPost';
 import Container from '../../components/Container';
+import {fetchPages} from '../../lib/notion';
+import Error from 'next/error';
+import {
+  MultiSelectProperty,
+  MultiSelectPropertyValue,
+  RichTextPropertyValue,
+  TitlePropertyValue,
+} from '@notionhq/client/build/src/api-types';
 
 const url = 'https://oscartegiffel.com/blog';
 const title = 'Blog – Oscar te Giffel';
 const description =
-  'Thoughts on the software industry, programming, tech, videography, music, and my personal life.';
+  'Thoughts on the software industry, programming, tech, music, and my personal life.';
 
-export default function Blog({posts}) {
+export default function Blog({error, posts}) {
   const [searchValue, setSearchValue] = useState('');
   const filteredBlogPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  if (error) return <Error statusCode={error.status} title={error.message} />;
 
   return (
     <Container>
@@ -72,40 +82,42 @@ export default function Blog({posts}) {
   );
 }
 
-export async function getServerSideProps() {
-  const client = new Client({auth: process.env.NOTION_ACCESS_TOKEN});
+export async function getServerSideProps({res}) {
+  try {
+    const pages = await fetchPages();
+    const posts = pages.results.map(({id, properties}) => {
+      const name = properties.Name as TitlePropertyValue;
+      const summary = properties.Summary as RichTextPropertyValue;
+      const tags = properties.Tags as MultiSelectPropertyValue;
+      return {
+        id,
+        title: name.title[0].plain_text,
+        summary: summary.rich_text
+          .map(richText => richText.plain_text)
+          .join(''),
+        tags: tags.multi_select.map(select => ({
+          name: select.name,
+          color: select.color,
+        })),
+      };
+    });
 
-  const pages = await client.databases.query({
-    database_id: process.env.NOTION_DATABASE_BLOG_ID,
-    filter: {
-      property: 'Stage',
-      select: {
-        equals: 'Stage 5: Epilogue',
+    return {
+      props: {
+        posts,
       },
-    },
-    sorts: [
-      {
-        property: 'Published at',
-        direction: 'descending',
+    };
+  } catch (error) {
+    res.statusCode = error.status;
+
+    console.error(error);
+    return {
+      props: {
+        error: {
+          status: error.status,
+          message: error.message,
+        },
       },
-    ],
-  });
-
-  const posts = pages.results.map(({id, properties}) => ({
-    id,
-    title: properties.Name.title[0].plain_text,
-    summary: properties.Summary.rich_text
-      .map(richText => richText.plain_text)
-      .join(''),
-    tags: properties.Tags.multi_select.map(select => ({
-      name: select.name,
-      color: select.color,
-    })),
-  }));
-
-  return {
-    props: {
-      posts,
-    },
-  };
+    };
+  }
 }

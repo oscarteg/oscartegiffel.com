@@ -1,8 +1,10 @@
-import {Client} from '@notionhq/client';
 import BlogLayout from '../../layouts/blog';
-import notionToHtml from '../../lib/notion';
+import notionToHtml, {fetchBlocks, fetchPage} from '../../lib/notion';
+import Error from 'next/error';
 
-export default function Blog({html, post}) {
+export default function Blog({error, html, post}) {
+  if (error) return <Error statusCode={error.status} title={error.message} />;
+
   return (
     <BlogLayout
       id={post.id}
@@ -17,22 +19,30 @@ export default function Blog({html, post}) {
   );
 }
 
-export async function getServerSideProps({params}) {
-  const client = new Client({auth: process.env.NOTION_ACCESS_TOKEN});
+export async function getServerSideProps({res, params}) {
+  try {
+    const [page, blocks] = await Promise.all([
+      fetchPage(params.id),
+      fetchBlocks(params.id),
+    ]);
+    const html = notionToHtml(blocks).join('');
 
-  const pagePromise = client.pages.retrieve({page_id: params.id});
-  const blocksPromise = client.blocks.children.list({block_id: params.id});
-  const [page, blocks] = await Promise.all([pagePromise, blocksPromise]);
-
-  console.log(JSON.stringify(blocks, null, 4));
-
-  const html = notionToHtml(blocks).join('');
-
-  return {
-    props: {
-      post: page,
-      blocks: blocks,
-      html,
-    },
-  };
+    return {
+      props: {
+        post: page,
+        blocks: blocks,
+        html,
+      },
+    };
+  } catch (error) {
+    res.statusCode = error.status;
+    return {
+      props: {
+        error: {
+          status: error.status,
+          message: error.message,
+        },
+      },
+    };
+  }
 }
