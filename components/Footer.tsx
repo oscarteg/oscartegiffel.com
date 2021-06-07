@@ -4,7 +4,7 @@ import NowPlaying from '../components/NowPlaying';
 
 const ExternalLink = ({href, children}) => (
   <a
-    className="text-sm text-gray-500 hover:text-gray-600 transition"
+    className="text-sm text-gray-500 hover:text-gray-400 dark:text-gray-200 transition"
     target="_blank"
     rel="noopener noreferrer"
     href={href}
@@ -88,18 +88,18 @@ const Footer = memo(() => {
           </svg>
         </ExternalLink>
       </div>
-      <div className="space-x-3 text-sm text-gray-500 font-mono tracking-widest">
+      <div className="space-x-3 text-sm text-gray-500 dark:text-gray-200 font-mono tracking-widest">
         <Link href="/uses">
-          <a className="hover:text-gray-600">/uses</a>
+          <a className="hover:text-gray-400 transition">/uses</a>
         </Link>
         <Link href="/books">
-          <a className="hover:text-gray-600">/books</a>
+          <a className="hover:text-gray-400 transition">/books</a>
         </Link>
         <Link href="/snippets">
-          <a className="hover:text-gray-600">/snippets</a>
+          <a className="hover:text-gray-400 transition">/snippets</a>
         </Link>
         <Link href="/workflow">
-          <a className="hover:text-gray-600">/workflow</a>
+          <a className="hover:text-gray-400 transition">/workflow</a>
         </Link>
       </div>
     </footer>

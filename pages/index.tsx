@@ -7,7 +7,7 @@ export default function Home() {
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 dark:text-white">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-700 via-gray-900 to-black dark:bg-gray-700 ">
+          <span className="bg-clip-text text-transparent bg-gradient-conic-l from-yellow-500 via-purple-500 to-blue-500">
             Hey, I’m Oscar te Giffel
           </span>
         </h1>
