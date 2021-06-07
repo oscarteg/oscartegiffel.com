@@ -23,7 +23,7 @@ export default function Youtube() {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           Music
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="text-gray-600 dark:text-gray-100 mb-4">
           This is the playlist I use for when I want to focus. It consist of
           some chillstep | classical | lofi beats for concentration. Whenever I
           want to focus I really don't like music with lyrics because I tend to

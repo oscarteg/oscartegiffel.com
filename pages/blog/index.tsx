@@ -1,15 +1,15 @@
-import {NextSeo} from 'next-seo';
-import {useState} from 'react';
-import BlogPost from '../../components/BlogPost';
-import Container from '../../components/Container';
-import {fetchPages} from '../../lib/notion';
-import Error from 'next/error';
 import {
   MultiSelectPropertyValue,
   RichTextPropertyValue,
   TitlePropertyValue,
 } from '@notionhq/client/build/src/api-types';
+import {NextSeo} from 'next-seo';
+import Error from 'next/error';
+import {useState} from 'react';
+import BlogPost from '../../components/BlogPost';
+import Container from '../../components/Container';
 import {Post} from '../../interfaces/post';
+import {fetchPages} from '../../lib/notion';
 
 const url = 'https://oscartegiffel.com/blog';
 const title = 'Blog – Oscar te Giffel';
@@ -40,7 +40,7 @@ export default function Blog({error, posts}) {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           Blog
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="text-gray-600 dark:text-gray-100 mb-4">
           {`I've started writing since the start of 2021, mostly about web development and tech careers.
             In total, I've written ${posts.length} articles on this site.
             Use the search below to filter by title.`}

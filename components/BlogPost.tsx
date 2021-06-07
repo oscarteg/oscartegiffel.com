@@ -10,7 +10,7 @@ export default function BlogPost({title, summary, id}) {
               {title}
             </h4>
           </div>
-          <p className="text-gray-600 dark:text-gray-400 line-clamp-3">
+          <p className="text-gray-600 dark:text-gray-100 line-clamp-3">
             {summary}
           </p>
         </div>

@@ -11,7 +11,7 @@ export default function Home() {
             Hey, I’m Oscar te Giffel
           </span>
         </h1>
-        <h2 className="text-gray-600 dark:text-gray-400 mb-16">
+        <h2 className="text-gray-600 dark:text-gray-100 mb-16">
           I’m a developer, aspired writer, and creator. I work at HeadFWD as a
           Fullstack Software Consultant. You have found my website where I
           aspire to start writing and sharing things I have learned.

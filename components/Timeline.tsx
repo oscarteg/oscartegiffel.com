@@ -31,7 +31,7 @@ const Step = ({title, children}) => {
         </svg>
         <p className="font-medium text-gray-900 dark:text-gray-100">{title}</p>
       </div>
-      <p className="text-gray-700 dark:text-gray-400 ml-6">{children}</p>
+      <p className="text-gray-700 dark:text-gray-100 ml-6">{children}</p>
     </li>
   );
 };
