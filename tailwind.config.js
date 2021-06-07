@@ -15,17 +15,30 @@ module.exports = {
         sans: ['IBM Plex Sans', ...fontFamily.sans],
         mono: ['IBM Plex Mono', ...fontFamily.mono],
       },
+      animation: {
+        blob: 'blob 7s infinite',
+      },
+      keyframes: {
+        blob: {
+          '0%': {
+            transform: 'translate(0px, 0px) scale(1)',
+          },
+          '33%': {
+            transform: 'translate(30px, -50px) scale(1.1)',
+          },
+
+          '66%': {
+            transform: 'translate(-20px, 20px) scale(0.9)',
+          },
+          '100%': {
+            transform: 'translate(0px, 0px) scale(1)',
+          },
+        },
+      },
       typography: theme => ({
         DEFAULT: {
           css: {
             color: theme('colors.gray.700'),
-            a: {
-              color: theme('colors.blue.500'),
-              '&:hover': {
-                color: theme('colors.blue.700'),
-              },
-              code: {color: theme('colors.blue.400')},
-            },
             'h2,h3,h4': {
               'scroll-margin-top': spacing[32],
             },
@@ -37,13 +50,6 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.gray.300'),
-            a: {
-              color: theme('colors.blue.400'),
-              '&:hover': {
-                color: theme('colors.blue.600'),
-              },
-              code: {color: theme('colors.blue.400')},
-            },
             blockquote: {
               borderLeftColor: theme('colors.gray.700'),
               color: theme('colors.gray.300'),

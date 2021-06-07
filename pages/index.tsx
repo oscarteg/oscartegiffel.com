@@ -12,9 +12,9 @@ export default function Home() {
           </span>
         </h1>
         <h2 className="text-gray-600 dark:text-gray-400 mb-16">
-          I’m a developer, aspired writer, and creator. I work at MoneyMonk as a
-          Software Engineer. You have found my website where I aspire to start
-          writing and sharing things I have learned.
+          I’m a developer, aspired writer, and creator. I work at HeadFWD as a
+          Fullstack Software Consultant. You have found my website where I
+          aspire to start writing and sharing things I have learned.
         </h2>
         <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
           Projects

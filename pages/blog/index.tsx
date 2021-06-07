@@ -1,4 +1,3 @@
-import {Client} from '@notionhq/client';
 import {NextSeo} from 'next-seo';
 import {useState} from 'react';
 import BlogPost from '../../components/BlogPost';
@@ -6,11 +5,11 @@ import Container from '../../components/Container';
 import {fetchPages} from '../../lib/notion';
 import Error from 'next/error';
 import {
-  MultiSelectProperty,
   MultiSelectPropertyValue,
   RichTextPropertyValue,
   TitlePropertyValue,
 } from '@notionhq/client/build/src/api-types';
+import {Post} from '../../interfaces/post';
 
 const url = 'https://oscartegiffel.com/blog';
 const title = 'Blog – Oscar te Giffel';
@@ -19,7 +18,7 @@ const description =
 
 export default function Blog({error, posts}) {
   const [searchValue, setSearchValue] = useState('');
-  const filteredBlogPosts = posts.filter(post =>
+  const filteredBlogPosts = posts.filter((post: Post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 

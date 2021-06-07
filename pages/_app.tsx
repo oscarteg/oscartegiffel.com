@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import MDXComponents from '../components/MDXComponents';
 import SEO from '../next-seo.config';
 import '../styles/global.css';
+import AnimatedBackgroundShapes from '../components/animated-background-shapes';
 
 const ProgressBar = dynamic(
   () => {
@@ -26,6 +27,7 @@ export default function App({Component, pageProps}) {
         </Head>
         <DefaultSeo {...SEO} />
         <ProgressBar />
+        <AnimatedBackgroundShapes />
         <Component {...pageProps} />
         <Footer />
       </MDXProvider>

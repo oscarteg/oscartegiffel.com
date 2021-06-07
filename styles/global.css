@@ -3,6 +3,16 @@
 @tailwind utilities;
 @import './prism-night-owl.css';
 
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -98,4 +108,19 @@ input[type='email'] {
 #nprogress .spinner-icon {
   border-top-color: theme('colors.black');
   border-left-color: theme('colors.black');
+}
+
+@media (prefers-color-scheme: dark) {
+  #nprogress .peg {
+    box-shadow: 0 0 10px theme('colors.white'), 0 0 5px theme('colors.white');
+  }
+
+  #nprogress .bar {
+    @apply bg-white;
+  }
+
+  #nprogress .spinner-icon {
+    border-top-color: theme('colors.white');
+    border-left-color: theme('colors.white');
+  }
 }

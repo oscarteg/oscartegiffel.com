@@ -1,29 +1,14 @@
 import fs from 'fs';
 import matter from 'gray-matter';
-import {MDXRemoteSerializeResult} from 'next-mdx-remote';
 import {serialize} from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
 
 const root = process.cwd();
 
-export async function getFiles(type) {
+export async function getFiles(type: string) {
   return fs.readdirSync(path.join(root, 'data', type));
 }
-
-type IReadTimeResults = {
-  text: string;
-  time: number;
-  words: number;
-  minutes: number;
-};
-
-type GetFileByPropsReturn<
-  T extends {wordCount: number; readingTime: IReadTimeResults; slug: string}
-> = Promise<{
-  mdxSource: MDXRemoteSerializeResult<Record<string, unknown>>;
-  frontMatter: T;
-}>;
 
 export async function getFileBySlug(type: string, slug?: string) {
   const source = slug

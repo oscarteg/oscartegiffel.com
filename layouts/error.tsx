@@ -1,10 +1,8 @@
-import {format, formatRelative, parseISO} from 'date-fns';
 import {ReactNode} from 'react';
-import BlogSeo from '../components/BlogSeo';
 import Container from '../components/Container';
 
 type Props = {
-  error: string;
+  error: ReactNode;
 };
 
 export default function ErrorLayout({error}: Props) {

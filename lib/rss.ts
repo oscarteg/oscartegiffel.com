@@ -1,7 +1,7 @@
-require("dotenv").config({ path: ".env.local" });
-const fs = require("fs");
-const path = require("path");
-const axios = require("axios");
+require('dotenv').config({path: '.env.local'});
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios');
 
 const getAllPostsXmlData = async () => {
   const query = `
@@ -20,21 +20,21 @@ const getAllPostsXmlData = async () => {
           }
         }
         `;
-  const headers = { "Content-Type": "application/json" };
+  const headers = {'Content-Type': 'application/json'};
   const allPosts = await axios({
-    method: "post",
+    method: 'post',
     url: process.env.WP_API_URL,
     headers,
-    data: JSON.stringify({ query }),
+    data: JSON.stringify({query}),
   });
 
   return allPosts.data.data.posts.edges;
 };
 
-const blogPostsRssXml = (blogPosts) => {
-  let latestPostDate = "";
-  let rssItemsXml = "";
-  blogPosts.forEach(({ node }) => {
+const blogPostsRssXml = blogPosts => {
+  let latestPostDate = '';
+  let rssItemsXml = '';
+  blogPosts.forEach(({node}) => {
     const post = node;
     const postDate = Date.parse(post.date);
 
@@ -65,8 +65,8 @@ const blogPostsRssXml = (blogPosts) => {
   };
 };
 
-const getRssXml = (blogPosts) => {
-  const { rssItemsXml, latestPostDate } = blogPostsRssXml(blogPosts);
+const getRssXml = blogPosts => {
+  const {rssItemsXml, latestPostDate} = blogPostsRssXml(blogPosts);
 
   // Edit the '<link>' and '<description>' data here to reflect your own website details!
   return `<?xml version="1.0" ?>
@@ -93,13 +93,13 @@ async function generateRSS() {
   const allBlogPostData = await getAllPostsXmlData();
   const processedXml = getRssXml(allBlogPostData);
 
-  const staticOutputPath = path.join(process.cwd(), "out");
+  const staticOutputPath = path.join(process.cwd(), 'out');
 
-  fs.writeFile(`${staticOutputPath}/rss.xml`, processedXml, (err) => {
+  fs.writeFile(`${staticOutputPath}/rss.xml`, processedXml, err => {
     if (err) {
       console.log(err);
     } else {
-      console.log("File written successfully");
+      console.log('File written successfully');
     }
   });
 }

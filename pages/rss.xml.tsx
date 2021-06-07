@@ -1,4 +1,4 @@
-import {fetchPages} from "../lib/notion";
+import {fetchPages} from '../lib/notion';
 
 export default function Rss() {
   return null;
