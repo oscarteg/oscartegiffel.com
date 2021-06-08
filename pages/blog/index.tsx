@@ -3,6 +3,7 @@ import {
   RichTextPropertyValue,
   TitlePropertyValue,
 } from '@notionhq/client/build/src/api-types';
+import {GetServerSideProps, GetStaticProps} from 'next';
 import {NextSeo} from 'next-seo';
 import Error from 'next/error';
 import {useState} from 'react';
@@ -81,42 +82,31 @@ export default function Blog({error, posts}) {
   );
 }
 
-export async function getServerSideProps({res}) {
-  try {
-    const pages = await fetchPages();
-    const posts = pages.results.map(({id, properties}) => {
-      const name = properties.Name as TitlePropertyValue;
-      const summary = properties.Summary as RichTextPropertyValue;
-      const tags = properties.Tags as MultiSelectPropertyValue;
-      return {
-        id,
-        title: name.title[0].plain_text,
-        summary: summary.rich_text
-          .map(richText => richText.plain_text)
-          .join(''),
-        tags: tags.multi_select.map(select => ({
-          name: select.name,
-          color: select.color,
-        })),
-      };
-    });
-
+export const getStaticProps: GetStaticProps = async () => {
+  const pages = await fetchPages();
+  const posts = pages.results.map(({id, properties}) => {
+    const name = properties.Name as TitlePropertyValue;
+    const summary = properties.Summary as RichTextPropertyValue;
+    const tags = properties.Tags as MultiSelectPropertyValue;
     return {
-      props: {
-        posts,
-      },
+      id,
+      title: name.title[0].plain_text,
+      summary: summary.rich_text.map(richText => richText.plain_text).join(''),
+      tags: tags.multi_select.map(select => ({
+        name: select.name,
+        color: select.color,
+      })),
     };
-  } catch (error) {
-    res.statusCode = error.status;
+  });
 
-    console.error(error);
-    return {
-      props: {
-        error: {
-          status: error.status,
-          message: error.message,
-        },
-      },
-    };
-  }
-}
+  return {
+    props: {
+      posts,
+
+      // Next.js will attempt to re-generate the page:
+      // - When a request comes in
+      // - At most once every 10 seconds
+      revalidate: 3600, // In seconds
+    },
+  };
+};

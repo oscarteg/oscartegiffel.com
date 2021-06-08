@@ -1,6 +1,11 @@
 import BlogLayout from '../../layouts/blog';
-import notionToHtml, {fetchBlocks, fetchPage} from '../../lib/notion';
+import notionToHtml, {
+  fetchBlocks,
+  fetchPage,
+  fetchPages,
+} from '../../lib/notion';
 import Error from 'next/error';
+import {GetStaticProps, GetStaticPaths} from 'next';
 
 export default function Blog({error, html, post}) {
   if (error) return <Error statusCode={error.status} title={error.message} />;
@@ -19,7 +24,7 @@ export default function Blog({error, html, post}) {
   );
 }
 
-export async function getServerSideProps({res, params}) {
+export const getStaticProps: GetStaticProps = async ({params}) => {
   try {
     const [page, blocks] = await Promise.all([
       fetchPage(params.id),
@@ -35,14 +40,25 @@ export async function getServerSideProps({res, params}) {
       },
     };
   } catch (error) {
-    res.statusCode = error.status;
+    console.error(error);
     return {
-      props: {
-        error: {
-          status: error.status,
-          message: error.message,
-        },
-      },
+      notFound: true,
     };
   }
-}
+};
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pages = await fetchPages();
+  // Get the paths we want to pre-render based on posts
+  const paths = pages.results.map(({id}) => ({
+    params: {id},
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: blocking } will server-render pages
+  // on-demand if the path doesn't exist.
+  return {paths, fallback: 'blocking'};
+};
