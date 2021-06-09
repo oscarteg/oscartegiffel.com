@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         post: page,
         blocks: blocks,
         html,
+        revalidate: 1,
       },
     };
   } catch (error) {
