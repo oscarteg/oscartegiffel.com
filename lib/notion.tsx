@@ -89,9 +89,9 @@ export default function notionToHtml(
         }`;
 
       case 'paragraph':
-        return `<p>${(child as ParagraphBlock).paragraph.text.map(text =>
-          renderRichText(text)
-        )}</p>`;
+        return `<p>${(child as ParagraphBlock).paragraph.text
+          .map(text => renderRichText(text))
+          .join('')}</p>`;
       case 'to_do':
         return `<div><label class="inline-flex items-center">
                     <input readonly disabled type="checkbox" class="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500" ${
