@@ -39,8 +39,12 @@ const Step = ({title, children}) => {
 export default function Timeline() {
   return (
     <>
+      <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
+        Timeline
+      </h3>
       <Year>2021</Year>
       <ul>
+        <Step title="Senior frontend developer at KVK"></Step>
         <Step title="Back at HeadFWD">
           Became a fullstack developer at a medium consultant agency.
         </Step>
@@ -50,9 +54,6 @@ export default function Timeline() {
         </Step>
       </ul>
       <Divider />
-      <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
-        Timeline
-      </h3>
       <Year>2020</Year>
       <ul>
         <Step title="Joined MoneyMonk">Came back to the MoneyMonk team.</Step>

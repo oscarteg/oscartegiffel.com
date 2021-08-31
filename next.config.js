@@ -58,7 +58,7 @@ module.exports = {
   },
   webpack: (config, {dev, isServer}) => {
     if (isServer) {
-      require('./scripts/generate-sitemap.ts');
+      // import('./scripts/generate-sitemap.js');
     }
 
     // Replace React with Preact only in client production build

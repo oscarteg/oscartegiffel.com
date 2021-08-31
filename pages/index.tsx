@@ -5,27 +5,27 @@ import Timeline from '../components/Timeline';
 export default function Home() {
   return (
     <Container>
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 dark:text-white">
-          <span className="bg-clip-text text-transparent bg-gradient-conic-l from-yellow-500 via-purple-500 to-blue-500">
+      <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl dark:text-white">
+          <span className="text-transparent bg-clip-text bg-gradient-conic-l from-yellow-500 via-purple-500 to-blue-500">
             Hey, I’m Oscar te Giffel
           </span>
         </h1>
-        <h2 className="text-gray-600 dark:text-gray-100 mb-16">
+        <h2 className="mb-16 text-gray-600 dark:text-gray-100">
           I’m a developer, aspired writer, and creator. I work at HeadFWD as a
           Fullstack Software Consultant. You have found my website where I
           aspire to start writing and sharing things I have learned.
         </h2>
-        <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
+        <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
           Projects
         </h3>
         <ProjectCard
           title="Advent of code"
           description="Use Go and Rust to solve challenges."
-          href="https://github.com/oscarteg/advent-of-code"
+          href="https://github.com/oscarteg/advent-of-codejjj"
           icon={
             <svg
-              className="h-8 w-8 min-w-sm text-gray-900 dark:text-gray-100"
+              className="w-8 h-8 text-gray-900 min-w-sm dark:text-gray-100"
               viewBox="0 0 496 512"
             >
               <path
@@ -42,7 +42,7 @@ export default function Home() {
           href="https://github.com/oscarteg/simple-note"
           icon={
             <svg
-              className="h-8 w-8 min-w-sm text-gray-900 dark:text-gray-100"
+              className="w-8 h-8 text-gray-900 min-w-sm dark:text-gray-100"
               viewBox="0 0 496 512"
             >
               <path
