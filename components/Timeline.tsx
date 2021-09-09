@@ -1,12 +1,12 @@
 const Divider = () => {
   return (
-    <div className="border border-gray-200 dark:border-gray-600 w-full my-8" />
+    <div className="w-full my-8 border border-gray-200 dark:border-gray-600" />
   );
 };
 
 const Year = ({children}) => {
   return (
-    <h3 className="text-lg md:text-xl font-bold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
+    <h3 className="mb-4 text-lg font-bold tracking-tight text-gray-900 md:text-xl dark:text-gray-100">
       {children}
     </h3>
   );
@@ -17,7 +17,7 @@ const Step = ({title, children}) => {
     <li className="mb-4 ml-2">
       <div className="flex items-center mb-2 text-green-700 dark:text-green-300">
         <span className="sr-only">Check</span>
-        <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
           <g
             fill="none"
             stroke="currentColor"
@@ -31,7 +31,7 @@ const Step = ({title, children}) => {
         </svg>
         <p className="font-medium text-gray-900 dark:text-gray-100">{title}</p>
       </div>
-      <p className="text-gray-700 dark:text-gray-100 ml-6">{children}</p>
+      <p className="ml-6 text-gray-700 dark:text-gray-100">{children}</p>
     </li>
   );
 };
@@ -39,12 +39,14 @@ const Step = ({title, children}) => {
 export default function Timeline() {
   return (
     <>
-      <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
+      <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
         Timeline
       </h3>
       <Year>2021</Year>
       <ul>
-        <Step title="Senior frontend developer at KVK"></Step>
+        <Step title="Senior frontend developer at KVK">
+          Worked on the online platform for the Dutch Chamber Of Commerce.
+        </Step>
         <Step title="Back at HeadFWD">
           Became a fullstack developer at a medium consultant agency.
         </Step>
