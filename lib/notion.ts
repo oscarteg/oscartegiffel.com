@@ -1,17 +1,24 @@
 import {Client} from '@notionhq/client';
 import Header from '../components/notion/header';
-import BulletedListItem from '../components/notion/bulleted_list_item';
+import BulletedListItem from '../components/notion/bulleted-list-item';
 import Paragraph from '../components/notion/paragraph';
 import Code from '../components/notion/code';
-import {QueryDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
+import {
+  GetBlockResponse,
+  ListBlockChildrenResponse,
+  QueryDatabaseResponse,
+} from '@notionhq/client/build/src/api-endpoints';
+import {ReactElement} from 'react';
 
 const client = new Client({auth: process.env.NOTION_ACCESS_TOKEN});
 
-export async function fetchBlocks(id: string): GetBlockResponse {
+export async function fetchBlocks(
+  id: string
+): Promise<ListBlockChildrenResponse> {
   return client.blocks.children.list({block_id: id});
 }
 
-export async function fetchPages(): QueryDatabaseResponse {
+export async function fetchPages(): Promise<QueryDatabaseResponse> {
   return client.databases.query({
     database_id: process.env.NOTION_DATABASE_BLOG_ID!,
     filter: {
@@ -33,13 +40,17 @@ export async function fetchPage(id: string) {
   return client.pages.retrieve({page_id: id});
 }
 
-// This is temp code to refactore after the notion API is out of beta
-export default function notionToHtml(child) {
+// type MapType = Pick<GetBlockResponse, 'type'>;
+
+export default function notionToHtml(child: GetBlockResponse): JSX.Element {
   // return children.results.map((child, currentIndex) => {
   // const previousElement = children.results[currentIndex - 1];
   // const nextElement = children.results[currentIndex + 1];
+  //
+  // console.
+  console.log({child});
 
-  const map = {
+  const map: {[key: string]: unknown} = {
     heading_1: Header,
     heading_2: Header,
     heading_3: Header,
@@ -48,8 +59,5 @@ export default function notionToHtml(child) {
     code: Code,
   };
 
-  console.log(child.type);
-  console.log(map[child.type]);
-
-  return map[child.type] ?? null;
+  return (map[child.type] as JSX.Element) ?? null;
 }

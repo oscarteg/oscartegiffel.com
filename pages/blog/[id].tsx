@@ -16,8 +16,6 @@ type Props = {
 };
 
 export default function Blog({blocks, post}: Props) {
-  // if (error) return <Error statusCode={error.status} title={error.message} />;
-
   const html = blocks.results.reduce((acc, result) => {
     const Component = notionToHtml(result);
 
@@ -49,8 +47,8 @@ export default function Blog({blocks, post}: Props) {
 export const getStaticProps: GetStaticProps = async ({params}) => {
   try {
     const [page, blocks] = await Promise.all([
-      fetchPage(params.id),
-      fetchBlocks(params.id),
+      fetchPage(params?.id as string),
+      fetchBlocks(params?.id as string),
     ]);
 
     return {

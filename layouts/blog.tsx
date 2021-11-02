@@ -1,7 +1,7 @@
 import {format, formatRelative} from 'date-fns';
 import {ReactNode} from 'react';
-import BlogSeo from '../components/BlogSeo';
-import Container from '../components/Container';
+import BlogSeo from '../components/blog-seo';
+import Container from '../components/container';
 
 type Props = {
   id: string;

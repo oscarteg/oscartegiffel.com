@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import Container from '../components/Container';
+import Container from '../components/container';
 
 type Props = {
   error: ReactNode;
@@ -8,8 +8,8 @@ type Props = {
 export default function ErrorLayout({error}: Props) {
   return (
     <Container>
-      <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+      <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           {error}
         </h1>
       </article>

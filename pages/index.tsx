@@ -22,7 +22,7 @@ export default function Home() {
         <ProjectCard
           title="Advent of code"
           description="Use Go and Rust to solve challenges."
-          href="https://github.com/oscarteg/advent-of-codejjj"
+          href="https://github.com/oscarteg/advent-of-code"
           icon={
             <svg
               className="w-8 h-8 text-gray-900 min-w-sm dark:text-gray-100"

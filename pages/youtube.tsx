@@ -1,5 +1,5 @@
 import {NextSeo} from 'next-seo';
-import Container from '../components/Container';
+import Container from '../components/container';
 
 const url = 'https://oscartegiffel.com/youtube';
 const title = 'Youtube – Oscar te Giffel';
@@ -19,11 +19,11 @@ export default function Youtube() {
           description,
         }}
       />
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+      <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           Music
         </h1>
-        <p className="text-gray-600 dark:text-gray-100 mb-4">
+        <p className="mb-4 text-gray-600 dark:text-gray-100">
           This is the playlist I use for when I want to focus. It consist of
           some chillstep | classical | lofi beats for concentration. Whenever I
           want to focus I really don't like music with lyrics because I tend to

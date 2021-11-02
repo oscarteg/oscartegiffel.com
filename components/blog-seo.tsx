@@ -3,9 +3,10 @@ import {ArticleJsonLd, NextSeo} from 'next-seo';
 type Props = {
   title: string;
   summary: string;
-  publishedAt: string;
-  url: string;
+  publishedAt: Date;
+  updatedAt: Date;
   image: string;
+  url: string;
 };
 
 const BlogSeo = ({title, summary, publishedAt, url, image}: Props) => {
