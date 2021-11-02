@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import {HTMLProps} from 'react';
 import Tweet from 'react-tweet-embed';
-import ConsCard from '../components/ConsCard';
-import ProsCard from '../components/ProsCard';
 import Step from '../components/Step';
 
-const CustomLink = props => {
+type Props = HTMLProps<HTMLAnchorElement>;
+
+const CustomLink = (props: Props) => {
   const href = props.href;
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
 
@@ -23,8 +24,6 @@ const CustomLink = props => {
 const MDXComponents = {
   Image,
   a: CustomLink,
-  ConsCard,
-  ProsCard,
   Step,
   Tweet,
 };

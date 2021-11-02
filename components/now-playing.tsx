@@ -2,8 +2,17 @@ import cn from 'classnames';
 import useSWR from 'swr';
 import fetcher from '../lib/fetcher';
 
+type CurrentSong = {
+  songUrl: string;
+  title: string;
+  artist: string;
+  albumImageUrl: string;
+};
+
 export default function NowPlaying() {
-  const {data} = useSWR('/api/now-playing', fetcher, {refreshInterval: 5000});
+  const {data} = useSWR<CurrentSong>('/api/now-playing', fetcher, {
+    refreshInterval: 5000,
+  });
 
   return (
     <a

@@ -66,7 +66,7 @@ module.exports = {
         },
         dark: {
           css: {
-            color: theme('colors.gray.300'),
+            color: theme('colors.gray.200'),
             blockquote: {
               borderLeftColor: theme('colors.gray.700'),
               color: theme('colors.gray.300'),
@@ -89,6 +89,12 @@ module.exports = {
             strong: {color: theme('colors.gray.300')},
             thead: {
               color: theme('colors.gray.100'),
+            },
+            a: {
+              color: theme('colors.blue.100'),
+              '&:hover': {
+                color: theme('colors.blue.100'),
+              },
             },
             tbody: {
               tr: {

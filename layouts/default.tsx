@@ -6,7 +6,7 @@ import Container from '../components/Container';
 type Props = {
   title?: string;
   excerpt?: string;
-  frontMatter?: {
+  frontMatter: {
     title: string;
     excerpt: string;
   };

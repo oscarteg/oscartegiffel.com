@@ -49,7 +49,6 @@ const securityHeaders = [
 ];
 
 module.exports = {
-  target: 'serverless',
   images: {
     domains: [
       'i.scdn.co', // Spotify Album Art

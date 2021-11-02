@@ -1,25 +1,47 @@
+import {
+  GetPageResponse,
+  ListBlockChildrenResponse,
+} from '@notionhq/client/build/src/api-endpoints';
+import {GetStaticPaths, GetStaticProps} from 'next';
 import BlogLayout from '../../layouts/blog';
 import notionToHtml, {
   fetchBlocks,
   fetchPage,
   fetchPages,
 } from '../../lib/notion';
-import Error from 'next/error';
-import {GetStaticProps, GetStaticPaths} from 'next';
 
-export default function Blog({error, html, post}) {
-  if (error) return <Error statusCode={error.status} title={error.message} />;
+type Props = {
+  blocks: ListBlockChildrenResponse;
+  post: GetPageResponse;
+};
+
+export default function Blog({blocks, post}: Props) {
+  // if (error) return <Error statusCode={error.status} title={error.message} />;
+
+  const html = blocks.results.reduce((acc, result) => {
+    const Component = notionToHtml(result);
+
+    // console.log(Component);
+    console.log(acc);
+
+    if (Component) {
+      // acc.push(<Component {...result} />);
+    }
+  }, []);
+  console.log({html, post});
 
   return (
     <BlogLayout
       id={post.id}
       frontMatter={{
-        title: post.properties.Name.title[0].text.content,
+        title: post.properties.name,
+        // image:
+        summary: post.properties.Summary.text,
         publishedAt: new Date(post.properties['Published at'].date.start),
-        updatedAt: new Date(post.properties['Updated at'].last_edited_time),
+        updatedAt: new Date(post.last_edited_time),
       }}
     >
-      <div dangerouslySetInnerHTML={{__html: html}} />
+      {html}
     </BlogLayout>
   );
 }
@@ -30,13 +52,11 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       fetchPage(params.id),
       fetchBlocks(params.id),
     ]);
-    const html = notionToHtml(blocks).join('');
 
     return {
       props: {
         post: page,
         blocks: blocks,
-        html,
         revalidate: 1,
       },
     };

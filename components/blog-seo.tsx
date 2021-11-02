@@ -1,6 +1,14 @@
 import {ArticleJsonLd, NextSeo} from 'next-seo';
 
-const BlogSeo = ({title, summary, publishedAt, url, image}) => {
+type Props = {
+  title: string;
+  summary: string;
+  publishedAt: string;
+  url: string;
+  image: string;
+};
+
+const BlogSeo = ({title, summary, publishedAt, url, image}: Props) => {
   const date = new Date(publishedAt).toISOString();
   const featuredImage = {
     url: `https://oscartegiffel.com${image}`,

@@ -1,5 +1,3 @@
-import {fetchPages} from '../lib/notion';
-
 export default function Rss() {
   return null;
 }
@@ -10,8 +8,8 @@ export async function getServerSideProps(context) {
     return;
   }
   // fetch your RSS data from somewhere here
-  const blogPosts = getRssXml(await fetchPages()());
+  // const blogPosts = getRssXml(await fetchPages()());
   res.setHeader('Content-Type', 'text/xml');
-  res.write(blogPosts);
+  // res.write(blogPosts);
   res.end();
 }

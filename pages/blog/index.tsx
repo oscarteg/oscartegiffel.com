@@ -1,8 +1,3 @@
-import {
-  MultiSelectPropertyValue,
-  RichTextPropertyValue,
-  TitlePropertyValue,
-} from '@notionhq/client/build/src/api-types';
 import {GetStaticProps} from 'next';
 import {NextSeo} from 'next-seo';
 import Error from 'next/error';

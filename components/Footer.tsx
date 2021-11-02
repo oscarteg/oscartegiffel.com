@@ -1,8 +1,14 @@
 import Link from 'next/link';
+import {ReactNode} from 'react';
 import {memo} from 'react';
 import NowPlaying from '../components/NowPlaying';
 
-const ExternalLink = ({href, children}) => (
+type Props = {
+  href: string;
+  children: ReactNode;
+};
+
+const ExternalLink = ({href, children}: Props) => (
   <a
     className="text-sm text-gray-500 hover:text-gray-400 dark:text-gray-200 transition"
     target="_blank"
@@ -17,10 +23,10 @@ const Footer = memo(() => {
   return (
     <footer className="flex flex-col items-center mb-8">
       <NowPlaying />
-      <div className="flex space-x-4 mb-4">
+      <div className="flex mb-4 space-x-4">
         <ExternalLink href="https://twitter.com/oscartegiffel">
           <span className="sr-only">Twitter</span>
-          <svg className="h-5 w-5" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" viewBox="0 0 24 24">
             <g
               fill="none"
               stroke="currentColor"
@@ -34,7 +40,7 @@ const Footer = memo(() => {
         </ExternalLink>
         <ExternalLink href="https://github.com/oscarteg">
           <span className="sr-only">Github</span>
-          <svg className="h-5 w-5" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" viewBox="0 0 24 24">
             <g
               fill="none"
               stroke="currentColor"
@@ -48,7 +54,7 @@ const Footer = memo(() => {
         </ExternalLink>
         <ExternalLink href="https://gitlab.com/oscarteg">
           <span className="sr-only">Gitlab</span>
-          <svg className="h-5 w-5" viewBox="0 0 496 512">
+          <svg className="w-5 h-5" viewBox="0 0 496 512">
             <path
               fill="currentColor"
               d="M105.2 24.9c-3.1-8.9-15.7-8.9-18.9 0L29.8 199.7h132c-.1 0-56.6-174.8-56.6-174.8zM.9 287.7c-2.6 8 .3 16.9 7.1 22l247.9 184-226.2-294zm160.8-88l94.3 294 94.3-294zm349.4 88l-28.8-88-226.3 294 247.9-184c6.9-5.1 9.7-14 7.2-22zM425.7 24.9c-3.1-8.9-15.7-8.9-18.9 0l-56.6 174.8h132z"
@@ -57,7 +63,7 @@ const Footer = memo(() => {
         </ExternalLink>
         <ExternalLink href="https://www.linkedin.com/in/otegiffel">
           <span className="sr-only">LinkedIn</span>
-          <svg className="h-5 w-5" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" viewBox="0 0 24 24">
             <g
               fill="none"
               stroke="currentColor"
@@ -74,7 +80,7 @@ const Footer = memo(() => {
 
         <ExternalLink href="mailto:oscar@tegiffel.com">
           <span className="sr-only">Email</span>
-          <svg className="h-5 w-5" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" viewBox="0 0 24 24">
             <g
               fill="none"
               stroke="currentColor"
@@ -88,7 +94,7 @@ const Footer = memo(() => {
           </svg>
         </ExternalLink>
       </div>
-      <div className="space-x-3 text-sm text-gray-500 dark:text-gray-200 font-mono tracking-widest">
+      <div className="font-mono text-sm tracking-widest text-gray-500 space-x-3 dark:text-gray-200">
         <Link href="/uses">
           <a className="hover:text-gray-400 transition">/uses</a>
         </Link>

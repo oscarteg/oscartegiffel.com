@@ -1,8 +1,8 @@
 import Router from 'next/router';
 import NProgress from 'nprogress';
 
-let timer;
-let state;
+let timer: NodeJS.Timeout;
+let state: 'loading' | 'stop';
 let activeRequests = 0;
 const delay = 250;
 

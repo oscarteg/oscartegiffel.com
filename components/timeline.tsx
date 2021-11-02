@@ -1,10 +1,11 @@
+import {ReactNode} from 'react';
 const Divider = () => {
   return (
     <div className="w-full my-8 border border-gray-200 dark:border-gray-600" />
   );
 };
 
-const Year = ({children}) => {
+const Year = ({children}: {children: ReactNode}) => {
   return (
     <h3 className="mb-4 text-lg font-bold tracking-tight text-gray-900 md:text-xl dark:text-gray-100">
       {children}
@@ -12,7 +13,7 @@ const Year = ({children}) => {
   );
 };
 
-const Step = ({title, children}) => {
+const Step = ({title, children}: {title: string; children: ReactNode}) => {
   return (
     <li className="mb-4 ml-2">
       <div className="flex items-center mb-2 text-green-700 dark:text-green-300">

@@ -3,6 +3,12 @@ import matter from 'gray-matter';
 import {serialize} from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
+import remarkAutoLinkHeadings from 'remark-autolink-headings';
+import remarkSlug from 'remark-slug';
+import remarkCodeTitles from 'remark-code-titles';
+import remarkMath from 'remark-math';
+import mdxPrism from 'mdx-prism';
+import rehypeKatex from 'rehype-katex';
 
 const root = process.cwd();
 
@@ -19,12 +25,12 @@ export async function getFileBySlug(type: string, slug?: string) {
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
-        require('remark-autolink-headings'),
-        require('remark-slug'),
-        require('remark-code-titles'),
-        require('remark-math'),
+        remarkAutoLinkHeadings,
+        remarkSlug,
+        remarkCodeTitles,
+        remarkMath,
       ],
-      rehypePlugins: [require('mdx-prism'), require('rehype-katex')],
+      rehypePlugins: [mdxPrism, rehypeKatex],
     },
   });
 
