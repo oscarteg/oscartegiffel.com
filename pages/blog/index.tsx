@@ -2,8 +2,8 @@ import {GetStaticProps} from 'next';
 import {NextSeo} from 'next-seo';
 import Error from 'next/error';
 import {useState} from 'react';
-import BlogPost from '../../components/BlogPost';
-import Container from '../../components/Container';
+import BlogPost from '../../components/blog-post';
+import Container from '../../components/container';
 import {Post} from '../../interfaces/post';
 import {fetchPages} from '../../lib/notion';
 
@@ -80,9 +80,9 @@ export default function Blog({error, posts}) {
 export const getStaticProps: GetStaticProps = async () => {
   const pages = await fetchPages();
   const posts = pages.results.map(({id, properties}) => {
-    const name = properties.Name as TitlePropertyValue;
-    const summary = properties.Summary as RichTextPropertyValue;
-    const tags = properties.Tags as MultiSelectPropertyValue;
+    const name = properties.Name;
+    const summary = properties.Summary;
+    const tags = properties.Tags;
     return {
       id,
       title: name.title[0].plain_text,

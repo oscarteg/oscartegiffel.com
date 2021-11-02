@@ -1,6 +1,6 @@
-import Container from '../components/Container';
-import ProjectCard from '../components/ProjectCard';
-import Timeline from '../components/Timeline';
+import Container from '../components/container';
+import ProjectCard from '../components/project-card';
+import Timeline from '../components/timeline';
 
 export default function Home() {
   return (

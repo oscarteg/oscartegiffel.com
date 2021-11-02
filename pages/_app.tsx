@@ -5,11 +5,12 @@ import {ThemeProvider} from 'next-themes';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import 'nprogress/nprogress.css';
-import Footer from '../components/Footer';
-import MDXComponents from '../components/MDXComponents';
+import Footer from '../components/footer';
+import MDXComponents from '../components/mdx-components';
 import SEO from '../next-seo.config';
 import '../styles/global.css';
 import AnimatedBackgroundShapes from '../components/animated-background-shapes';
+import type {AppProps} from 'next/app';
 
 const ProgressBar = dynamic(
   () => {
@@ -18,7 +19,7 @@ const ProgressBar = dynamic(
   {ssr: false}
 );
 
-export default function App({Component, pageProps}) {
+export default function App({Component, pageProps}: AppProps) {
   return (
     <ThemeProvider attribute="class" enableSystem>
       <MDXProvider components={MDXComponents}>

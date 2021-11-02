@@ -1,8 +1,9 @@
+import {ReactNode} from 'react';
 type Props = {
   title: string;
   description: string;
   href: string;
-  icon: string;
+  icon: ReactNode;
 };
 
 export default function ProjectCard({title, description, href, icon}: Props) {

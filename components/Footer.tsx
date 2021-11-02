@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import {ReactNode} from 'react';
-import {memo} from 'react';
-import NowPlaying from '../components/NowPlaying';
+import {ReactNode, memo} from 'react';
+import NowPlaying from '../components/now-playing';
 
 type Props = {
   href: string;
@@ -100,9 +99,6 @@ const Footer = memo(() => {
         </Link>
         <Link href="/books">
           <a className="hover:text-gray-400 transition">/books</a>
-        </Link>
-        <Link href="/snippets">
-          <a className="hover:text-gray-400 transition">/snippets</a>
         </Link>
         <Link href="/workflow">
           <a className="hover:text-gray-400 transition">/workflow</a>

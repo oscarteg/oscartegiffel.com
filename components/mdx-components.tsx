@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {HTMLProps} from 'react';
-import Tweet from 'react-tweet-embed';
-import Step from '../components/Step';
+import Step from '../components/step';
 
 type Props = HTMLProps<HTMLAnchorElement>;
 
@@ -25,7 +24,6 @@ const MDXComponents = {
   Image,
   a: CustomLink,
   Step,
-  Tweet,
 };
 
 export default MDXComponents;

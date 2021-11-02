@@ -1,5 +1,5 @@
 import {NextSeo} from 'next-seo';
-import Container from '../components/Container';
+import Container from '../components/container';
 
 export default function About() {
   return (
@@ -12,11 +12,11 @@ export default function About() {
           title: 'About Me – Oscar te Giffel',
         }}
       />
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+      <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           About Me
         </h1>
-        <div className="mb-8 prose leading-6 text-gray-600 dark:text-gray-100">
+        <div className="mb-8 text-gray-600 prose leading-6 dark:text-gray-100">
           <p>
             Hey, I’m Oscar. I'm a developer, aspired writer, and user of many
             technologies.

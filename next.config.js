@@ -1,3 +1,13 @@
+// @ts-check
+
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx$/,
+  // options: {
+  // remarkPlugins: [require('remark-math')],
+  // rehypePlugins: [require('rehype-katex')],
+  // },
+});
+
 // https://securityheaders.com
 const ContentSecurityPolicy = `
   default-src 'self';
@@ -48,7 +58,11 @@ const securityHeaders = [
   },
 ];
 
-module.exports = {
+/**
+ * @type {import('next').NextConfig}
+ **/
+const nextConfig = withMDX({
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   images: {
     domains: [
       'i.scdn.co', // Spotify Album Art
@@ -79,4 +93,6 @@ module.exports = {
       },
     ];
   },
-};
+});
+
+module.exports = nextConfig;
