@@ -1,5 +1,9 @@
 export type Post = {
-  name: string;
+  id: string;
+  title: string;
   summary: string;
-  tags: Array<string>;
+  tags: {
+    name: string;
+    color: string;
+  };
 };

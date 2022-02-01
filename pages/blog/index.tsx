@@ -4,7 +4,7 @@ import Error from 'next/error';
 import {useState} from 'react';
 import BlogPost from '../../components/blog-post';
 import Container from '../../components/container';
-import {Post} from '../../interfaces/post';
+import type {Post} from '../../interfaces/post';
 import {fetchPages} from '../../lib/notion';
 
 const url = 'https://oscartegiffel.com/blog';
@@ -12,13 +12,17 @@ const title = 'Blog – Oscar te Giffel';
 const description =
   'Thoughts on the software industry, programming, tech, music, and my personal life.';
 
-export default function Blog({error, posts}) {
-  const [searchValue, setSearchValue] = useState('');
-  const filteredBlogPosts = posts.filter((post: Post) =>
-    post.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
+type Props = {
+  posts: Array<Post>;
+};
 
-  if (error) return <Error statusCode={error.status} title={error.message} />;
+export default function Blog({posts}: Props) {
+  const [searchValue, setSearchValue] = useState('');
+  // const filteredBlogPosts = posts.filter((post: Post) =>
+  // post.title.toLowerCase().includes(searchValue.toLowerCase())
+  // );
+
+  // if (error) return <Error statusCode={error.status} title={error.message} />;
 
   return (
     <Container>
@@ -38,8 +42,7 @@ export default function Blog({error, posts}) {
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-100">
           {`I've started writing since the start of 2021, mostly about web development and tech careers.
-            In total, I've written ${posts.length} articles on this site.
-            Use the search below to filter by title.`}
+            In total, I've written ${posts.length} articles on this site.`}
         </p>
         <div className="relative w-full mb-4">
           <input
@@ -68,8 +71,7 @@ export default function Blog({error, posts}) {
         <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
           All Posts
         </h3>
-        {!filteredBlogPosts.length && 'No posts found.'}
-        {filteredBlogPosts.map(post => (
+        {posts.map(post => (
           <BlogPost key={post.title} {...post} />
         ))}
       </div>
@@ -79,20 +81,24 @@ export default function Blog({error, posts}) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const pages = await fetchPages();
-  const posts = pages.results.map(({id, properties}) => {
-    const name = properties.Name;
-    const summary = properties.Summary;
-    const tags = properties.Tags;
-    return {
-      id,
-      title: name.title[0].plain_text,
-      summary: summary.rich_text.map(richText => richText.plain_text).join(''),
-      tags: tags.multi_select.map(select => ({
-        name: select.name,
-        color: select.color,
-      })),
-    };
-  });
+  const posts = pages.results.map(
+    ({id, properties}: {id: string; properties?: Record<string, any>}) => {
+      const name = properties?.Name;
+      const summary = properties?.Summary;
+      const tags = properties?.Tags;
+      return {
+        id,
+        title: name.title[0].plain_text,
+        summary: summary.rich_text
+          .map((richText: any) => richText.plain_text)
+          .join(''),
+        tags: tags.multi_select.map((select: any) => ({
+          name: select.name,
+          color: select.color,
+        })),
+      };
+    }
+  );
 
   return {
     props: {

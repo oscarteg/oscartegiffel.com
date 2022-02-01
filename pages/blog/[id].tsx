@@ -1,3 +1,4 @@
+import {NotionBlocksHtmlParser} from '@notion-stuff/blocks-html-parser';
 import {
   GetPageResponse,
   ListBlockChildrenResponse,
@@ -11,35 +12,42 @@ import notionToHtml, {
 } from '../../lib/notion';
 
 type Props = {
+  html: string;
   blocks: ListBlockChildrenResponse;
-  post: GetPageResponse;
+  post: GetPageResponse & {
+    properties: Record<string, any>;
+    last_edited_time: string;
+  };
 };
 
-export default function Blog({blocks, post}: Props) {
-  const html = blocks.results.reduce((acc, result) => {
-    const Component = notionToHtml(result);
+export default function Blog({html, post}: Props) {
+  // const html = blocks.results.reduce((acc, result) => {
+  //   const Component = notionToHtml(result):;
+  //
+  //   // console.log(Component);
+  //   console.log(acc);
+  //
+  //   if (Component) {
+  //     // acc.push(<Component {...result} />);
+  //   }
+  // }, []);
+  // console.log({html, post});
+  //
+  //
 
-    // console.log(Component);
-    console.log(acc);
-
-    if (Component) {
-      // acc.push(<Component {...result} />);
-    }
-  }, []);
-  console.log({html, post});
+  console.log(JSON.stringify(post, null, ' '));
 
   return (
     <BlogLayout
       id={post.id}
       frontMatter={{
-        title: post.properties.name,
-        // image:
-        summary: post.properties.Summary.text,
+        title: post.properties.Name.title[0].text.content,
+        summary: post.properties.Summary.rich_text[0].text.content,
         publishedAt: new Date(post.properties['Published at'].date.start),
         updatedAt: new Date(post.last_edited_time),
       }}
     >
-      {html}
+      <div dangerouslySetInnerHTML={{__html: html}} />
     </BlogLayout>
   );
 }
@@ -51,10 +59,16 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       fetchBlocks(params?.id as string),
     ]);
 
+    const instance = NotionBlocksHtmlParser.getInstance();
+    /* eslint-disable */
+    // @ts-ignore
+    const html = instance.parse(blocks.results);
+
     return {
       props: {
         post: page,
         blocks: blocks,
+        html,
         revalidate: 1,
       },
     };

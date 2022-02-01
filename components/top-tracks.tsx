@@ -11,5 +11,11 @@ export default function TopTracks() {
     return <Loading loading={!data} />;
   }
 
-  return data.tracks.map(track => <Track key={track.songUrl} {...track} />);
+  return (
+    <div>
+      {data.tracks.map(track => (
+        <Track key={track.songUrl} {...track} />
+      ))}
+    </div>
+  );
 }

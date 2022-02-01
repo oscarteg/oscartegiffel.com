@@ -11,15 +11,17 @@ type Props = {
     excerpt: string;
   };
   children: ReactNode;
+  meta: any;
 };
 
 export default function DefaultLayout({
   title,
   excerpt,
-  frontMatter,
+  meta: frontMatter,
   children,
 }: Props) {
   const {pathname} = useRouter();
+
   return (
     <Container>
       <NextSeo

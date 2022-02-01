@@ -1,14 +1,15 @@
 import {Client} from '@notionhq/client';
-import Header from '../components/notion/header';
-import BulletedListItem from '../components/notion/bulleted-list-item';
-import Paragraph from '../components/notion/paragraph';
-import Code from '../components/notion/code';
 import {
   GetBlockResponse,
   ListBlockChildrenResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import {ReactElement} from 'react';
+import BulletedListItem from '../components/notion/bulleted-list-item';
+import Code from '../components/notion/code';
+import Header from '../components/notion/header';
+import Paragraph from '../components/notion/paragraph';
+
+import {NotionBlocksHtmlParser} from '@notion-stuff/blocks-html-parser';
 
 const client = new Client({auth: process.env.NOTION_ACCESS_TOKEN});
 
@@ -42,14 +43,7 @@ export async function fetchPage(id: string) {
 
 // type MapType = Pick<GetBlockResponse, 'type'>;
 
-export default function notionToHtml(child: GetBlockResponse): JSX.Element {
-  // return children.results.map((child, currentIndex) => {
-  // const previousElement = children.results[currentIndex - 1];
-  // const nextElement = children.results[currentIndex + 1];
-  //
-  // console.
-  console.log({child});
-
+export default function notionToHtml(child: GetBlockResponse): void {
   const map: {[key: string]: unknown} = {
     heading_1: Header,
     heading_2: Header,
@@ -59,5 +53,9 @@ export default function notionToHtml(child: GetBlockResponse): JSX.Element {
     code: Code,
   };
 
-  return (map[child.type] as JSX.Element) ?? null;
+  const instance = NotionBlocksHtmlParser.getInstance();
+
+  // return (map[child.type] as JSX.Element) ?? null;
+  //
+  //
 }

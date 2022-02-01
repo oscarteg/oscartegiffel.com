@@ -1,11 +1,22 @@
 // @ts-check
+// import remarkMath from 'remark-math';
+// const remarkMath = require('remark-math');
+// import frontMatter from './lib/frontmatter';
+// const frontMatter = require('./lib/frontmatter');
+// import rehypeKatex from 'rehype-katex';
+// const rehypeKatex = require('rehype-katex');
 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx$/,
-  // options: {
-  // remarkPlugins: [require('remark-math')],
-  // rehypePlugins: [require('rehype-katex')],
-  // },
+  options: {
+    remarkPlugins: [
+      // remarkMath,
+      // frontMatter
+    ],
+    rehypePlugins: [
+      // rehypeKatex
+    ],
+  },
 });
 
 // https://securityheaders.com
