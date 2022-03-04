@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import useSWR from 'swr';
+import Image from 'next/image';
 import fetcher from '../lib/fetcher';
 
 type CurrentSong = {
@@ -19,9 +20,9 @@ export default function NowPlaying() {
       href={data?.songUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-start border border-gray-300 dark:border-gray-800 rounded-lg w-72 p-2 mb-8 relative"
+      className="relative flex items-start p-2 mb-8 border border-gray-300 rounded-lg dark:border-gray-800 w-72"
     >
-      <span className="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+      <span className="absolute top-0 right-0 flex w-3 h-3 -mt-1 -mr-1">
         <span
           className={cn(
             'animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75',
@@ -35,16 +36,16 @@ export default function NowPlaying() {
           )}
         ></span>
       </span>
-      <img
+      <Image
         alt="Spotify"
-        className="rounded-lg w-16 h-16"
+        className="w-16 h-16 rounded-lg"
         src={data?.albumImageUrl || '/static/images/placeholder.jpg'}
       />
-      <div className="flex flex-col justify-center items-start ml-3">
-        <span className="text-gray-800 dark:text-gray-200 font-medium max-w-48 truncate w-48">
+      <div className="flex flex-col items-start justify-center ml-3">
+        <span className="w-48 font-medium text-gray-800 truncate dark:text-gray-200 max-w-48">
           {data?.title ?? 'Not Playing'}
         </span>
-        <p className="text-gray-500 dark:text-gray-300 max-w-48 truncate w-48">
+        <p className="w-48 text-gray-500 truncate dark:text-gray-300 max-w-48">
           {data?.artist ?? 'Spotify'}
         </p>
       </div>

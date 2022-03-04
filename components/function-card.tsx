@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import cn from 'classnames';
 import {HTMLProps} from 'react';
+import Image from 'next/image';
 
 type Props = HTMLProps<HTMLAnchorElement> & {
   title: string;
@@ -27,7 +28,7 @@ export default function FunctionCard({
         {...rest}
       >
         {logo && (
-          <img
+          <Image
             alt={title}
             src={`/logos/${logo}`}
             className="w-8 h-8 rounded-full"
