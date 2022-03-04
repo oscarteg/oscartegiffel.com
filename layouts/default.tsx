@@ -11,7 +11,10 @@ type Props = {
     excerpt: string;
   };
   children: ReactNode;
-  meta: any;
+  meta: {
+    title: string;
+    excerpt: string;
+  };
 };
 
 export default function DefaultLayout({

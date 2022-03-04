@@ -8,6 +8,7 @@ type Props = HTMLProps<HTMLAnchorElement> & {
   slug: string;
   logo: string;
 };
+
 export default function FunctionCard({
   title,
   description,

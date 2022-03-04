@@ -14,8 +14,9 @@ type Artist = {
 };
 
 export default async (_: NextApiRequest, res: NextApiResponse) => {
-  const response = await getTopTracks();
-  const {items} = await response.json();
+  // const response = await getTopTracks();
+  // const {items} = await response.json();
+  const items: Array<Track> = [];
 
   const tracks = items.slice(0, 10).map((track: Track) => ({
     artist: track.artists.map((artist: Artist) => artist.name).join(', '),
