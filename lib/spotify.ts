@@ -13,46 +13,41 @@ const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks';
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 
 export async function getAccessToken() {
-  try {
-    const response = await fetch(TOKEN_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${basic}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: querystring.stringify({
-        grant_type: 'client_credentials',
-        json: true,
-      }),
-    });
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: querystring.stringify({
+      grant_type: 'refresh_token',
+      refresh_token,
+    }),
+  });
 
-    return response.json();
-  } catch (e) {
-    console.error(e);
-  }
+  return response.json();
 }
 
 export async function getNowPlaying() {
   const {access_token} = await getAccessToken();
-  console.log(access_token);
 
   return fetch(NOW_PLAYING_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
   });
 }
 
 export async function getTopTracks() {
-  try {
-    const {access_token} = await getAccessToken();
+  const {access_token} = await getAccessToken();
 
-    return fetch(TOP_TRACKS_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
-  } catch (e) {
-    console.error(e);
-  }
+  return fetch(TOP_TRACKS_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  });
 }
