@@ -34,9 +34,6 @@ export default function Blog({html, post}: Props) {
   // console.log({html, post});
   //
   //
-
-  console.log(JSON.stringify(post, null, ' '));
-
   return (
     <BlogLayout
       id={post.id}

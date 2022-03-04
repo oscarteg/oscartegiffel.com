@@ -16,6 +16,7 @@ const withMDX = require('@next/mdx')({
     rehypePlugins: [
       // rehypeKatex
     ],
+    providerImportSource: '@mdx-js/react',
   },
 });
 

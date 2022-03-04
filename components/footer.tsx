@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {ReactNode, memo} from 'react';
+import {memo, ReactNode} from 'react';
 import NowPlaying from '../components/now-playing';
 
 type Props = {
@@ -8,14 +8,15 @@ type Props = {
 };
 
 const ExternalLink = ({href, children}: Props) => (
-  <a
-    className="text-sm text-gray-500 hover:text-gray-400 dark:text-gray-200 transition"
-    target="_blank"
-    rel="noopener noreferrer"
-    href={href}
-  >
-    {children}
-  </a>
+  <Link href={href}>
+    <a
+      className="text-sm text-gray-500 hover:text-gray-400 dark:text-gray-200 transition"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  </Link>
 );
 
 const Footer = memo(() => {

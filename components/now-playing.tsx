@@ -39,6 +39,8 @@ export default function NowPlaying() {
       <Image
         alt="Spotify"
         className="w-16 h-16 rounded-lg"
+        width={64}
+        height={64}
         src={data?.albumImageUrl || '/static/images/placeholder.jpg'}
       />
       <div className="flex flex-col items-start justify-center ml-3">
