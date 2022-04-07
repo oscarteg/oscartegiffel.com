@@ -75,9 +75,12 @@ const securityHeaders = [
  **/
 const nextConfig = withMDX({
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  // experimental: {
+  // runtime: 'nodejs',
+  // },
   images: {
     domains: [
-      'i.scdn.co', // Spotify Album Art
+      'i.scdn.co', // Spotify Album Are
       'pbs.twimg.com', // Twitter Profile Picture
     ],
   },

@@ -41,8 +41,6 @@ export async function fetchPage(id: string) {
   return client.pages.retrieve({page_id: id});
 }
 
-// type MapType = Pick<GetBlockResponse, 'type'>;
-
 export default function notionToHtml(child: GetBlockResponse): void {
   const map: {[key: string]: unknown} = {
     heading_1: Header,
@@ -54,8 +52,4 @@ export default function notionToHtml(child: GetBlockResponse): void {
   };
 
   const instance = NotionBlocksHtmlParser.getInstance();
-
-  // return (map[child.type] as JSX.Element) ?? null;
-  //
-  //
 }
