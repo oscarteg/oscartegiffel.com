@@ -74,7 +74,13 @@ const securityHeaders = [
  * @type {import('next').NextConfig}
  **/
 const nextConfig = withMDX({
+  swcMinify: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  compiler: {
+    removeConsole: {
+      exclude: ['error'],
+    },
+  },
   // experimental: {
   // runtime: 'nodejs',
   // },

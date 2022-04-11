@@ -1,15 +1,14 @@
 import {render, screen} from '@testing-library/react';
 import React from 'react';
-import Home from '../index';
+import Home from '../pages/index';
 
 describe('Home', () => {
   it('renders a heading', () => {
     render(<Home />);
 
-    const heading = screen.getByRole('heading', {
-      name: /Hey, I’m Oscar te Giffel\.js!/i,
-    });
+    screen.debug(undefined, Infinity);
+    const heading = screen.getByTestId('title');
 
-    expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent(/Oscar te Giffel/);
   });
 });
