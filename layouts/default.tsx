@@ -20,6 +20,7 @@ type Props = {
 export default function DefaultLayout(props: Props) {
   const {pathname} = useRouter();
 
+  console.log({props});
   const {title, excerpt, meta: frontMatter, children} = props;
 
   return (
@@ -41,7 +42,7 @@ export default function DefaultLayout(props: Props) {
         <p className="mt-2 mb-8 text-gray-700 dark:text-gray-300">
           {excerpt || frontMatter?.excerpt}
         </p>
-        <div className="w-full prose dark:prose-dark">{children}</div>
+        <div className="w-full prose dark:prose-invert">{children}</div>
       </article>
     </Container>
   );

@@ -13,7 +13,7 @@ const Year = ({children}: {children: ReactNode}) => {
   );
 };
 
-const Step = ({title, children}: {title: string; children: ReactNode}) => {
+const Step = ({title, children}: {title: string; children?: ReactNode}) => {
   return (
     <li className="mb-4 ml-2">
       <div className="flex items-center mb-2 text-green-700 dark:text-green-300">
