@@ -1,15 +1,15 @@
-import {NotionBlocksHtmlParser} from '@notion-stuff/blocks-html-parser';
+import { NotionBlocksHtmlParser } from "@notion-stuff/blocks-html-parser";
 import {
   GetPageResponse,
   ListBlockChildrenResponse,
-} from '@notionhq/client/build/src/api-endpoints';
-import {GetStaticPaths, GetStaticProps} from 'next';
-import BlogLayout from '../../layouts/blog';
+} from "@notionhq/client/build/src/api-endpoints";
+import { GetStaticPaths, GetStaticProps } from "next";
+import BlogLayout from "../../layouts/blog";
 import notionToHtml, {
   fetchBlocks,
   fetchPage,
   fetchPages,
-} from '../../lib/notion';
+} from "../../lib/notion";
 
 type Props = {
   html: string;
@@ -20,7 +20,7 @@ type Props = {
   };
 };
 
-export default function Blog({html, post}: Props) {
+export default function Blog({ html, post }: Props) {
   // const html = blocks.results.reduce((acc, result) => {
   //   const Component = notionToHtml(result):;
   //
@@ -34,22 +34,24 @@ export default function Blog({html, post}: Props) {
   // console.log({html, post});
   //
   //
+
+  console.log({ html, post });
   return (
     <BlogLayout
       id={post.id}
       frontMatter={{
         title: post.properties.Name.title[0].text.content,
         summary: post.properties.Summary.rich_text[0].text.content,
-        publishedAt: new Date(post.properties['Published at'].date.start),
+        publishedAt: new Date(post.properties["Published at"].date.start),
         updatedAt: new Date(post.last_edited_time),
       }}
     >
-      <div dangerouslySetInnerHTML={{__html: html}} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </BlogLayout>
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const [page, blocks] = await Promise.all([
       fetchPage(params?.id as string),
@@ -83,12 +85,12 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const pages = await fetchPages();
   // Get the paths we want to pre-render based on posts
-  const paths = pages.results.map(({id}) => ({
-    params: {id},
+  const paths = pages.results.map(({ id }) => ({
+    params: { id },
   }));
 
   // We'll pre-render only these paths at build time.
   // { fallback: blocking } will server-render pages
   // on-demand if the path doesn't exist.
-  return {paths, fallback: 'blocking'};
+  return { paths, fallback: "blocking" };
 };

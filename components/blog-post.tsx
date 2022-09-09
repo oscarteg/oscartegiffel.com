@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 type Props = {
   title: string;
@@ -6,7 +6,7 @@ type Props = {
   id: string;
 };
 
-export default function BlogPost({title, summary, id}: Props) {
+export default function BlogPost({ title, summary, id }: Props) {
   return (
     <Link href={`/blog/${id}`}>
       <a className="w-full">
