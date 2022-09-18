@@ -1,0 +1,39 @@
+---
+import type { GetPageResponse, ListBlockChildrenResponse } from "@notionhq/client/build/src/api-endpoints";
+import BlogLayout from "../../layouts/blog.astro";
+import { blocksToHtml, fetchBlocks, fetchPage, fetchPages } from "../../lib/notion";
+import Content from "../../components/Content";
+
+type Props = {
+  html: string;
+  blocks: ListBlockChildrenResponse;
+  post: GetPageResponse & {
+    properties: Record<string, any>;
+    last_edited_time: string;
+  };
+};
+
+const { id } = Astro.params;
+
+const [post, blocks] = await Promise.all([fetchPage(id as string), fetchBlocks(id as string)]);
+
+export async function getStaticPaths() {
+  const pages = await fetchPages();
+  // Get the paths we want to pre-render based on posts
+  return pages.results.map(({ id }) => ({
+    params: { id },
+  }));
+}
+---
+
+<BlogLayout
+  id={post.id}
+  frontMatter={{
+    title: post.properties.Name.title[0].text.content,
+    summary: post.properties.Summary.rich_text[0].text.content,
+    publishedAt: new Date(post.properties["Published at"].date.start),
+    updatedAt: new Date(post.last_edited_time),
+  }}
+>
+  <Content client:visible blocks={blocks} />
+</BlogLayout>

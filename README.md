@@ -1,29 +1,64 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8d9e8857-241b-4014-a933-d0bc5f5b0a39/deploy-status)](https://app.netlify.com/sites/oscartegiffel/deploys)
+# Astro Starter Kit: Blog
 
-# oscartegiffel.com
-
-My portfolio has transformed over the years - from a static HTML site, to Jekyll, to Hugo, and finally to Next.js/React/MDX with use of the Notion API for the blog. My personal slice of the internet provides a platform for my writing and to showcase my latest work.
-
-## Overview
-
-- `pages/api/*` - [API routes](https://nextjs.org/docs/api-routes/introduction) powering [`/dashboard`](https://oscartegiffel.com/dashboard), newsletter subscription, and post views.
-- `pages/blog/*` - Static pre-rendered blog pages using [MDX](https://github.com/mdx-js/mdx).
-- `pages/dashboard` - [Personal dashboard](https://oscartegiffel.com/dashboard) containing metrics like sales, views, and subscribers.
-- `pages/*` - All other static pages.
-
-## Running Locally
-
-```bash
-$ git clone https://github.com/oscarteg/oscartegiffel.com
-$ cd oscartegiffel.com
-$ yarn
-$ yarn dev
+```
+npm init astro -- --template blog
 ```
 
-Create a `.env.local` file similar to [`.env.example`](https://github.com/oscarteg/oscartegiffel.com/blob/master/.env.example).
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
 
-## Built Using
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-- [Next.js](https://nextjs.org/)
-- [MDX](https://github.com/mdx-js/mdx)
-- [Tailwind CSS](https://tailwindcss.com/)
+
+![blog](https://user-images.githubusercontent.com/4677417/186189140-4ef17aac-c3c9-4918-a8c2-ce86ba1bb394.png)
+
+Features:
+
+- ✅ Minimal styling (make it your own!)
+- ✅ 100/100 Lighthouse performance
+- ✅ SEO-friendly with canonical URLs and OpenGraph data
+- ✅ Sitemap support
+- ✅ RSS Feed support
+- ✅ Markdown & MDX support
+
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```
+├── public/
+├── src/
+│   ├── components/
+│   ├── layouts/
+│   └── pages/
+├── astro.config.mjs
+├── README.md
+├── package.json
+└── tsconfig.json
+```
+
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `npm install`          | Installs dependencies                            |
+| `npm run dev`          | Starts local dev server at `localhost:3000`      |
+| `npm run build`        | Build your production site to `./dist/`          |
+| `npm run preview`      | Preview your build locally, before deploying     |
+| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Credit
+
+This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).

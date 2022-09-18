@@ -1,7 +1,0 @@
-{
-  "extends": ["./node_modules/gts/", "plugin:@next/next/recommended"],
-  "rules": {
-    "node/no-unpublished-require": "off",
-    "node/no-unpublished-import": "off"
-  }
-}

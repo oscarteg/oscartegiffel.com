@@ -1,0 +1,11 @@
+---
+import Track from "../components/Track.astro";
+import type { TrackType } from "../components/track";
+import { fetchTopTracks } from "../lib/spotify";
+
+const tracks = await fetchTopTracks();
+---
+
+<div>
+  {tracks.map((track: TrackType) => <Track key={track.songUrl} {...track} />)}
+</div>
