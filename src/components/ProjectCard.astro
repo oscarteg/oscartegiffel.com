@@ -8,27 +8,17 @@ type Props = {
 const { title, description, href } = Astro.props;
 ---
 
-<a
-  className="w-full mb-4 hover:shadow"
-  href={href}
-  aria-label={title}
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <div
-    className="flex items-center p-4 border border-gray-200 rounded dark:border-gray-800"
-  >
-    <div className="w-8 h-8 ml-2 mr-4">
-      <span className="sr-only">{title}</span>
+<a class="w-full mb-4 hover:shadow" href={href} aria-label={title} target="_blank" rel="noopener noreferrer">
+  <div class="flex items-center p-4 border border-gray-200 rounded dark:border-gray-800">
+    <div class="w-8 h-8 ml-2 mr-4">
+      <span class="sr-only">{title}</span>
       <slot name="icon" />
     </div>
     <div>
-      <h4
-        className="text-lg font-bold tracking-tight text-gray-900 dark:text-gray-100"
-      >
+      <h4 class="text-lg font-bold tracking-tight text-gray-900 dark:text-gray-100">
         {title}
       </h4>
-      <p className="text-gray-700 leading-5 dark:text-gray-300">
+      <p class="text-gray-700 leading-5 dark:text-gray-300">
         {description}
       </p>
     </div>

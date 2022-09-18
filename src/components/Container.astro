@@ -1,21 +1,15 @@
 <div>
-  <nav className="flex flex-row-reverse items-center w-full max-w-4xl p-8 mx-auto my-0 sticky-nav md:my-8">
+  <nav class="flex flex-row-reverse items-center w-full max-w-4xl p-8 mx-auto my-0 sticky-nav md:my-8">
     <div>
-      <a href="/dashboard" className="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition">
+      <a href="/dashboard" class="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition">
         Dashboard
       </a>
-      <a href="/blog" className="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition">
-        Blog
-      </a>
-      <a href="/about" className="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition">
-        About
-      </a>
-      <a href="/" className="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition">
-        Home
-      </a>
+      <a href="/blog" class="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition"> Blog</a>
+      <a href="/about" class="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition"> About</a>
+      <a href="/" class="p-1 text-gray-900 sm:p-4 dark:text-gray-100 hover:text-gray-400 transition"> Home</a>
     </div>
   </nav>
-  <main className="flex flex-col justify-center px-8">
+  <main class="flex flex-col justify-center px-8">
     <slot />
   </main>
 </div>;
