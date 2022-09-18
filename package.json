@@ -65,8 +65,8 @@
     "vitest": "^0.23.4"
   },
   "lint-staged": {
-    "*.{js,css,md,tsx,ts,astro}": "prettier --write",
-    "*.{tsx,ts,astro}": "eslint --fix",
+    "src/**/*.{js,css,md,tsx,ts,astro}": "prettier --write",
+    "src/**/*.{tsx,ts,astro}": "eslint --fix",
     "**/*.ts": "tsc --noEmit"
   }
 }

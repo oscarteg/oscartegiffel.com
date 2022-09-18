@@ -1,9 +1,5 @@
 module.exports = {
-  extends: [
-    "plugin:react/recommended",
-    "plugin:astro/recommended",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["plugin:react/recommended", "plugin:astro/recommended", "plugin:prettier/recommended"],
   env: {
     browser: true,
     es2021: true,
@@ -16,7 +12,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "react-hooks"],
   overrides: [
     {
       files: ["*.astro"],

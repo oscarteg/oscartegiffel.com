@@ -27,15 +27,15 @@ const posts = pages.results.map(({ id, properties }: { id: string; properties?: 
 ---
 
 <DefaultLayout>
-  <div class="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
-    <h1 class="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">Blog</h1>
-    <p class="mb-4 text-gray-600 dark:text-gray-100">
+  <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
+    <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">Blog</h1>
+    <p className="mb-4 text-gray-600 dark:text-gray-100">
       {
         `I've started writing since the start of 2021, mostly about web development and tech careers.
             In total, I've written ${posts.length} articles on this site.`
       }
     </p>
-    <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
+    <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
     {posts.map((post) => <BlogPost {...post} />)}
   </div>
 </DefaultLayout>

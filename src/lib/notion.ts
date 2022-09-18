@@ -1,8 +1,5 @@
 import { Client } from "@notionhq/client";
-import type {
-  GetBlockResponse,
-  QueryDatabaseResponse,
-} from "@notionhq/client/build/src/api-endpoints";
+import type { GetBlockResponse, QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { blocksToReactComponents } from "notion-blocks-react-renderer";
 
 const client = new Client({ auth: import.meta.env.NOTION_ACCESS_TOKEN! });
