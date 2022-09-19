@@ -1,15 +1,10 @@
 ---
 import BlogPost from "../../components/BlogPost.astro";
-import Container from "../../components/Container.astro";
 import { fetchPages } from "../../lib/notion";
-import DefaultLayout from "../../layouts/Default.astro";
-
-/* TODO: fix seo */
-/* const url = "https://oscartegiffel.com/blog"; */
-/* const title = "Blog – Oscar te Giffel"; */
-/* const description = "Thoughts on the software industry, programming, tech, music, and my personal life."; */
+import DefaultLayout from "../../layouts/default.astro";
 
 const pages = await fetchPages();
+
 const posts = pages.results.map(({ id, properties }: { id: string; properties?: Record<string, any> }) => {
   const name = properties?.Name;
   const summary = properties?.Summary;
@@ -26,16 +21,10 @@ const posts = pages.results.map(({ id, properties }: { id: string; properties?: 
 });
 ---
 
-<DefaultLayout>
-  <div class="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
-    <h1 class="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">Blog</h1>
-    <p class="mb-4 text-gray-600 dark:text-gray-100">
-      {
-        `I've started writing since the start of 2021, mostly about web development and tech careers.
-            In total, I've written ${posts.length} articles on this site.`
-      }
-    </p>
-    <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
-    {posts.map((post) => <BlogPost {...post} />)}
-  </div>
+<DefaultLayout
+  title={"Blog"}
+  description={`I've started writing since the start of 2021, mostly about web development and tech careers. In total, I've written ${posts.length} articles on this site.`}
+>
+  <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
+  {posts.map((post) => <BlogPost {...post} />)}
 </DefaultLayout>

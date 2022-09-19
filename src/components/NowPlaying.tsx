@@ -15,6 +15,8 @@ export default function NowPlaying() {
   useEffect(() => {
     (async () => {
       const response = await getNowPlaying();
+
+      console.log({ response });
       setData(response);
     })();
   }, []);

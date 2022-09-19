@@ -1,12 +1,7 @@
 import fetcher from "./fetcher";
 
-const {
-  SPOTIFY_CLIENT_ID: client_id,
-  SPOTIFY_CLIENT_SECRET: client_secret,
-  SPOTIFY_REFRESH_TOKEN: refresh_token,
-} = import.meta.env;
+const { SPOTIFY_BASIC: basic, SPOTIFY_REFRESH_TOKEN: refresh_token } = import.meta.env;
 
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
 const TOP_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks";
 const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
@@ -58,7 +53,7 @@ export async function fetchTopTracks() {
   const { items } = await getTopTracks();
 
   return items.map((track: Record<string, any>) => ({
-    artist: track.artists.map((artist) => artist.name).join(", "),
+    artist: track.artists.map((artist: any) => artist.name).join(", "),
     songUrl: track.external_urls.spotify,
     title: track.name,
   }));

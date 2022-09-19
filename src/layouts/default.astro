@@ -3,41 +3,44 @@ import Container from "../components/Container.astro";
 import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 import AnimatedBackgroundShapes from "../components/AnimatedBackgroundShapes.astro";
+import classnames from "classnames";
 
-type Props = {
+export type Props = {
   title?: string;
   description?: string;
-  excerpt?: string;
-  frontMatter: {
-    title: string;
-    excerpt: string;
-  };
-  meta: {
-    title: string;
-    excerpt: string;
+  prose?: boolean;
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    prose?: boolean;
   };
 };
 
-const { title, description, excerpt } = Astro.props;
+const { title, description, prose = false, frontmatter } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
   </head>
-
   <body class="text-white bg-white dark:bg-black dark:text-black transition duration-500 ease-in-out">
     <AnimatedBackgroundShapes />
     <Container>
-      <div class="text-white bg-white dark:bg-black dark:text-black transition duration-500 ease-in-out">
+      <div class="text-white bg-white dark:bg-black dark:text-white transition duration-500 ease-in-out">
         <article class="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
-          <h1 class="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-            {title}
-          </h1>
-          <p class="mt-2 mb-8 text-gray-700 dark:text-gray-300">
-            {excerpt}
-          </p>
-          <div class="w-full prose dark:prose-invert">
+          {
+            (title || frontmatter?.title) && (
+              <h1 class="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
+                {title || frontmatter?.title}
+              </h1>
+            )
+          }
+          {
+            (description || frontmatter?.description) && (
+              <p class="mt-2 mb-8 text-gray-700 dark:text-gray-300">{description || frontmatter?.description}</p>
+            )
+          }
+          <div class={classnames("w-full", { "prose dark:prose-invert": prose || frontmatter?.prose })}>
             <slot />
           </div>
         </article>

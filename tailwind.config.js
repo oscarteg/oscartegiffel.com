@@ -52,14 +52,9 @@ module.exports = {
         },
         dark: {
           css: {
-            blockquote: {
-              borderLeftColor: theme("colors.gray.700"),
-              color: theme("colors.gray.300"),
-            },
             "h2,h3,h4": {
               "scroll-margin-top": spacing[32],
             },
-            hr: { borderColor: theme("colors.gray.700") },
             ol: {
               li: {
                 "&:before": { color: theme("colors.gray.500") },

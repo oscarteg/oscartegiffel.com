@@ -1,10 +1,7 @@
 ---
-export type Props = {
-  ranking: string;
-  songUrl: string;
-  title: string;
-  artist: string;
-};
+import type { Track as TrackType } from "../models/track";
+
+export type Props = TrackType;
 
 const { ranking, songUrl, title, artist } = Astro.props;
 ---
