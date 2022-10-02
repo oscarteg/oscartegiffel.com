@@ -1,6 +1,7 @@
+import type { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 import React from "react";
 
-export default function TextRenderer(text: React.ReactNode[]): JSX.Element {
+export default function TextRenderer(text: Array<RichTextItemResponse>): JSX.Element {
   return (
     <>
       {text.map((textItem: any) => {

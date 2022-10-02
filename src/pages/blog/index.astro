@@ -1,6 +1,6 @@
 ---
 import BlogPost from "../../components/BlogPost.astro";
-import { fetchPages } from "../../lib/notion";
+import { fetchPages } from "../../services/notion";
 import DefaultLayout from "../../layouts/default.astro";
 
 const pages = await fetchPages();

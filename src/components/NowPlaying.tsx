@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import cn from "classnames";
-import { getNowPlaying } from "../lib/spotify";
+import { getNowPlaying } from "../services/spotify";
 
 export type CurrentSong = {
   songUrl: string;

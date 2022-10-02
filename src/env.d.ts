@@ -19,5 +19,3 @@ declare namespace NodeJS {
     NOTION_DATABASE_BLOG_ID: string;
   }
 }
-
-declare module "notion-blocks-react-renderer";

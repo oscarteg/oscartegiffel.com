@@ -1,7 +1,7 @@
 ---
 import Track from "../components/Track.astro";
 import type { Track as TrackType } from "../models/track";
-import { fetchTopTracks } from "../lib/spotify";
+import { fetchTopTracks } from "../services/spotify";
 
 const tracks = await fetchTopTracks();
 ---

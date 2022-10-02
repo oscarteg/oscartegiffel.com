@@ -1,6 +1,6 @@
 ---
 import BlogLayout from "../../layouts/blog.astro";
-import { fetchBlocks, fetchPage, fetchPages } from "../../lib/notion";
+import { fetchBlocks, fetchPage, fetchPages } from "../../services/notion";
 import Content from "../../components/Content";
 
 const { id } = Astro.params;
@@ -10,7 +10,7 @@ const [post, blocks] = await Promise.all([fetchPage(id as string), fetchBlocks(i
 export async function getStaticPaths() {
   const pages = await fetchPages();
   // Get the paths we want to pre-render based on posts
-  return pages.results.map(({ id }) => ({
+  return pages.results.map(({ id }: { id: string }) => ({
     params: { id },
   }));
 }
@@ -25,5 +25,5 @@ export async function getStaticPaths() {
     updatedAt: new Date(post.last_edited_time),
   }}
 >
-  <Content client:visible blocks={blocks} />
+  <Content client:visible blocks={blocks.results} />
 </BlogLayout>
