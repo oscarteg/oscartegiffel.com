@@ -16,7 +16,6 @@ export default function NowPlaying() {
     (async () => {
       const response = await getNowPlaying();
 
-      console.log({ response });
       setData(response);
     })();
   }, []);

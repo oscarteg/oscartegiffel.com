@@ -47,8 +47,6 @@ type Props = {
 export default function Content({ blocks }: Props) {
   const remappedContent = remapContent(blocks as Array<BlockObjectResponse>);
 
-  console.log({ remappedContent });
-
   return React.Children.toArray(
     remappedContent.map((block: CustomBlockObjectResponse) => {
       return blockRenderer(block, renderers);
