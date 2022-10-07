@@ -1,6 +1,8 @@
+/** @type {import("@types/eslint").Linter.Config} */
 module.exports = {
   extends: ["plugin:react/recommended", "plugin:astro/recommended", "plugin:prettier/recommended"],
   env: {
+    node: true,
     browser: true,
     es2021: true,
   },

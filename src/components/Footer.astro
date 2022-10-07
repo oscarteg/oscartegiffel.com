@@ -1,10 +1,8 @@
 ---
 import ExternalLink from "./ExternalLink.astro";
-import NowPlaying from "./NowPlaying";
 ---
 
 <footer class="flex flex-col items-center mb-8">
-  <NowPlaying client:load />
   <div class="flex mb-4 space-x-4">
     <ExternalLink href="https://twitter.com/oscartegiffel">
       <span class="sr-only">Twitter</span>
@@ -51,5 +49,6 @@ import NowPlaying from "./NowPlaying";
     <a href="/books" class="hover:text-gray-400 transition">/books</a>
     <a href="/workflow" class="hover:text-gray-400 transition">/workflow</a>
     <a href="/youtube" class="hover:text-gray-400 transition">/youtube</a>
+    <a href="/resources" class="hover:text-gray-400 transition">/resources</a>
   </div>
 </footer>
