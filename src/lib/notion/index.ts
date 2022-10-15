@@ -19,7 +19,9 @@ export type CustomBlockObjectResponse =
       list: Array<BulletedListItemBlockObjectResponse>;
     };
 
-export function blockToText(block: BlockObjectResponse): Result<JSX.Element, string> {
+export type BlockType = CustomBlockObjectResponse["type"];
+
+export function blockToText(block: CustomBlockObjectResponse): Result<JSX.Element, string> {
   switch (block.type) {
     case "paragraph":
       return ok(TextRenderer(block.paragraph.rich_text));
@@ -64,8 +66,6 @@ function createNumberedList(
 
   return numbered;
 }
-
-export type BlockType = CustomBlockObjectResponse["type"];
 
 function createBulletedList(
   blocks: Array<BlockObjectResponse>,
@@ -123,7 +123,6 @@ export function remapContent(blocks: Array<BlockObjectResponse>) {
 }
 
 export type RenderNode = {
-  // TODO: Fix typing for block
   [key in BlockType]: (block: any) => JSX.Element;
 };
 

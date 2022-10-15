@@ -1,9 +1,7 @@
 ---
-export type Props = {
-  title: string;
-  summary: string;
-  id: string;
-};
+import type { Post } from '../models/post';
+
+export type Props = Post
 
 const { title, summary, id } = Astro.props;
 ---
