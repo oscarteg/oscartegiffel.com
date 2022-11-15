@@ -15,6 +15,9 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint", "react-hooks"],
+  rules: {
+    "react/react-in-jsx-scope": "off",
+  },
   overrides: [
     {
       files: ["*.astro"],
@@ -23,7 +26,9 @@ module.exports = {
         parser: "@typescript-eslint/parser",
         extraFileExtensions: [".astro"],
       },
-      rules: {},
+      rules: {
+        "react/react-in-jsx-scope": "off",
+      },
     },
   ],
 };

@@ -5,7 +5,8 @@ import Content from "../../components/Content";
 
 const { id } = Astro.params;
 
-const [post, blocks] = await Promise.all([fetchPage(id as string), fetchBlocks(id as string)]);
+const post = await fetchPage(id as string);
+const blocks = await fetchBlocks(id as string);
 
 export async function getStaticPaths() {
   const pages = await fetchPages();
