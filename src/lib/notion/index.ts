@@ -3,7 +3,6 @@ import type {
   BulletedListItemBlockObjectResponse,
   NumberedListItemBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { err, ok, Result } from "neverthrow";
 import TextRenderer from "../../components/TextRenderer";
 
 export type CustomBlockObjectResponse =
@@ -21,26 +20,26 @@ export type CustomBlockObjectResponse =
 
 export type BlockType = CustomBlockObjectResponse["type"];
 
-export function blockToText(block: CustomBlockObjectResponse): Result<JSX.Element, string> {
+export function blockToText(block: CustomBlockObjectResponse): JSX.Element {
   switch (block.type) {
     case "paragraph":
-      return ok(TextRenderer(block.paragraph.rich_text));
+      return TextRenderer(block.paragraph.rich_text);
     case "heading_1":
-      return ok(TextRenderer(block.heading_1.rich_text));
+      return TextRenderer(block.heading_1.rich_text);
     case "heading_2":
-      return ok(TextRenderer(block.heading_2.rich_text));
+      return TextRenderer(block.heading_2.rich_text);
     case "heading_3":
-      return ok(TextRenderer(block.heading_3.rich_text));
+      return TextRenderer(block.heading_3.rich_text);
     case "bulleted_list_item":
-      return ok(TextRenderer(block.bulleted_list_item.rich_text));
+      return TextRenderer(block.bulleted_list_item.rich_text);
     case "numbered_list_item":
-      return ok(TextRenderer(block.numbered_list_item.rich_text));
+      return TextRenderer(block.numbered_list_item.rich_text);
     case "quote":
-      return ok(TextRenderer(block.quote.rich_text));
+      return TextRenderer(block.quote.rich_text);
     case "code":
-      return ok(TextRenderer(block.code.rich_text));
+      return TextRenderer(block.code.rich_text);
     default:
-      return err("Block object type not implemented");
+      return "Block object type not implemented";
   }
 }
 
