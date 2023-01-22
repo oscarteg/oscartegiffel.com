@@ -8,15 +8,15 @@ import TextRenderer from "../../components/TextRenderer";
 export type CustomBlockObjectResponse =
   | BlockObjectResponse
   | {
-      type: "numbered_list";
-      has_children: boolean;
-      list: Array<NumberedListItemBlockObjectResponse>;
-    }
+    type: "numbered_list";
+    has_children: boolean;
+    list: Array<NumberedListItemBlockObjectResponse>;
+  }
   | {
-      type: "bulleted_list";
-      has_children: boolean;
-      list: Array<BulletedListItemBlockObjectResponse>;
-    };
+    type: "bulleted_list";
+    has_children: boolean;
+    list: Array<BulletedListItemBlockObjectResponse>;
+  };
 
 export type BlockType = CustomBlockObjectResponse["type"];
 
@@ -39,7 +39,7 @@ export function blockToText(block: CustomBlockObjectResponse): JSX.Element {
     case "code":
       return TextRenderer(block.code.rich_text);
     default:
-      return "Block object type not implemented";
+      throw new Error(`Unknown block type: ${block.type}`);
   }
 }
 

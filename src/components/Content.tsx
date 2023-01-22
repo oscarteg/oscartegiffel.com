@@ -3,16 +3,16 @@ import { blockRenderer, blockToText, CustomBlockObjectResponse, remapContent, Re
 import React from "react";
 
 const renderers: RenderNode = {
-  paragraph: (block) => <p>{blockToText(block).unwrapOr(<>testing</>)}</p>,
-  heading_1: (block) => <h1>{blockToText(block).unwrapOr(<></>)}</h1>,
+  paragraph: (block) => <p>{blockToText(block)}</p>,
+  heading_1: (block) => <h1>{blockToText(block)}</h1>,
   heading_2: (block) => <h2>{block.heading_2.rich_text[0].text.content}</h2>,
-  heading_3: (block) => <h3>{blockToText(block).unwrapOr(<></>)}</h3>,
-  bulleted_list_item: (block) => <li>{blockToText(block).unwrapOr(<></>)}</li>,
+  heading_3: (block) => <h3>{blockToText(block)}</h3>,
+  bulleted_list_item: (block) => <li>{blockToText(block)}</li>,
   bulleted_list: (block) => <ul>{block.list.map((listItem: any) => blockRenderer(listItem, renderers))}</ul>,
-  numbered_list_item: (block) => <li>{blockToText(block).unwrapOr(<></>)}</li>,
+  numbered_list_item: (block) => <li>{blockToText(block)}</li>,
   numbered_list: (block) => <ol>{block.list.map((listItem: any) => blockRenderer(listItem, renderers))}</ol>,
-  quote: (block) => <blockquote>{blockToText(block).unwrapOr(<></>)}</blockquote>,
-  code: (block) => <pre>{blockToText(block).unwrapOr(<></>)}</pre>,
+  quote: (block) => <blockquote>{blockToText(block)}</blockquote>,
+  code: (block) => <pre>{blockToText(block)}</pre>,
   image: (block) => <img src={block.image.file.url} />,
   audio: (block) => <audio controls preload="none" src={block.audio.file.url} />,
   divider: () => <div className="w-full my-8 border border-gray-200 dark:border-gray-600" />,

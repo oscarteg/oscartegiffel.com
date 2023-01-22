@@ -10,10 +10,11 @@ const posts = pages.results.map(({ id, properties }: { id: string; properties?: 
   const name = properties?.Name;
   const summary = properties?.Summary;
   const tags = properties?.Tags;
+
   return {
     id,
-    title: name.title[0].plain_text,
-    summary: summary.rich_text.map((richText: any) => richText.plain_text).join(""),
+    title: name?.title[0].plain_text,
+    summary: summary?.rich_text?.map((richText: any) => richText.plain_text).join(""),
     tags: tags.multi_select.map((select: any) => ({
       name: select.name,
       color: select.color,
@@ -24,7 +25,7 @@ const posts = pages.results.map(({ id, properties }: { id: string; properties?: 
 
 <DefaultLayout
   title={"Blog"}
-  description={`I've started writing since the start of 2021, mostly about web development and tech careers. In total, I've written ${posts.length} articles on this site.`}
+  description={`I've started writing since the start of 2023, mostly about web development the advancement of my tech careers. In total, I've written ${posts.length} articles on this site.`}
 >
   <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
   {posts.map((post: Post) => <BlogPost {...post} />)}

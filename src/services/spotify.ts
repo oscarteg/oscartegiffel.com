@@ -21,7 +21,7 @@ export async function getAccessToken() {
 }
 
 export async function getNowPlaying() {
-  const { access_token } = (await getAccessToken()).unwrapOr("");
+  const { access_token } = await getAccessToken();
 
   return fetcher(NOW_PLAYING_ENDPOINT, {
     headers: {
@@ -33,7 +33,7 @@ export async function getNowPlaying() {
 }
 
 export async function getTopTracks() {
-  const { access_token } = (await getAccessToken()).unwrapOr("");
+  const { access_token } = (await getAccessToken())
 
   const params = new URLSearchParams({
     time_range: "medium_term",
@@ -50,7 +50,7 @@ export async function getTopTracks() {
 }
 
 export async function fetchTopTracks() {
-  const { items } = (await getTopTracks()).unwrapOr([]);
+  const { items } = (await getTopTracks())
 
   return items.map((track: Record<string, any>) => ({
     artist: track.artists.map((artist: any) => artist.name).join(", "),
