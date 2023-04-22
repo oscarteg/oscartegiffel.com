@@ -1,26 +1,13 @@
 ---
 import BlogPost from "../../components/BlogPost.astro";
-import { fetchPages } from "../../services/notion";
 import DefaultLayout from "../../layouts/default.astro";
-import type { Post } from "../../models/post";
+import { getCollection } from "astro:content";
+import type { Post } from "../../models";
 
-const pages = await fetchPages();
-
-const posts = pages.results.map(({ id, properties }: { id: string; properties?: Record<string, any> }) => {
-  const name = properties?.Name;
-  const summary = properties?.Summary;
-  const tags = properties?.Tags;
-
-  return {
-    id,
-    title: name?.title[0].plain_text,
-    summary: summary?.rich_text?.map((richText: any) => richText.plain_text).join(""),
-    tags: tags.multi_select.map((select: any) => ({
-      name: select.name,
-      color: select.color,
-    })),
-  };
-});
+const posts = await getCollection(
+  "blog",
+  ({ data }) => data.publishDate.valueOf() > new Date().valueOf() || data.isDraft !== true
+);
 ---
 
 <DefaultLayout
@@ -28,5 +15,5 @@ const posts = pages.results.map(({ id, properties }: { id: string; properties?: 
   description={`I've started writing since the start of 2023, mostly about web development the advancement of my tech careers. In total, I've written ${posts.length} articles on this site.`}
 >
   <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
-  {posts.map((post: Post) => <BlogPost {...post} />)}
+  {posts.map((post: Post) => <BlogPost post={post} />)}
 </DefaultLayout>

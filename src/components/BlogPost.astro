@@ -1,12 +1,20 @@
 ---
-import type { Post } from '../models/post';
+import type { Post } from "../models";
 
-export type Props = Post
+export type Props = {
+  post: Post;
+};
 
-const { title, summary, id } = Astro.props;
+const {
+  post: {
+    id,
+    slug,
+    data: { title, summary },
+  },
+} = Astro.props;
 ---
 
-<a class="w-full" href={`/blog/${id}`}>
+<a class="w-full" href={`/blog/${slug}`} id={id}>
   <div class="w-full mb-8">
     <div class="flex flex-col justify-between md:flex-row">
       <h4 class="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">

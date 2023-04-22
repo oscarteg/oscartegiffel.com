@@ -3,7 +3,7 @@ import Container from "../components/Container.astro";
 import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 import AnimatedBackgroundShapes from "../components/AnimatedBackgroundShapes.astro";
-import classnames from "classnames";
+import clsx from "clsx";
 
 export type Props = {
   title?: string;
@@ -40,7 +40,7 @@ const { title, description, prose = false, frontmatter } = Astro.props;
               <p class="mt-2 mb-8 text-gray-700 dark:text-gray-300">{description || frontmatter?.description}</p>
             )
           }
-          <div class={classnames("w-full", { "prose dark:prose-invert": prose || frontmatter?.prose })}>
+          <div class={clsx("w-full", { "prose dark:prose-invert": prose || frontmatter?.prose })}>
             <slot />
           </div>
         </article>

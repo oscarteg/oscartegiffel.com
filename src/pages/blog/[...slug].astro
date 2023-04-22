@@ -1,0 +1,40 @@
+---
+import BlogLayout from "../../layouts/blog.astro";
+
+import { getCollection, getEntryBySlug } from "astro:content";
+// 1. Get the slug from the incoming server request
+const { slug } = Astro.params;
+
+if (slug === undefined) {
+  throw new Error("Slug is required");
+}
+
+// 2. Query for the entry directly using the request slug
+const entry = await getEntryBySlug("blog", slug);
+
+console.log({ slug });
+// 3. Redirect if the entry does not exist
+if (entry === undefined) {
+  return Astro.redirect("/404");
+}
+// 4. (Optional) Render the entry to HTML in the template
+const { Content } = await entry.render();
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+---
+
+<BlogLayout
+  id={entry.id}
+  frontmatter={{
+    title: entry.data.title,
+    summary: entry.data.summary,
+  }}
+>
+  <Content />
+</BlogLayout>

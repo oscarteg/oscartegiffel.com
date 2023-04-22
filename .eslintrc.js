@@ -1,6 +1,13 @@
 /** @type {import("@types/eslint").Linter.Config} */
 module.exports = {
-  extends: ["plugin:react/recommended", "plugin:astro/recommended", "plugin:prettier/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:lit/recommended",
+    "plugin:astro/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+  ],
   env: {
     node: true,
     browser: true,
@@ -14,10 +21,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint", "react-hooks"],
-  rules: {
-    "react/react-in-jsx-scope": "off",
-  },
+  plugins: ["@typescript-eslint"],
   overrides: [
     {
       files: ["*.astro"],

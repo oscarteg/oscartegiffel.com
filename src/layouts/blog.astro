@@ -1,17 +1,10 @@
 ---
-import { default as dayjs } from "dayjs";
 import BaseHead from "../components/BaseHead.astro";
 import Container from "../components/Container.astro";
-import AdvancedFormat from "dayjs/plugin/advancedFormat";
-
-import localizedFormat from "dayjs/plugin/localizedFormat";
-dayjs.extend(localizedFormat);
-dayjs.extend(AdvancedFormat);
 
 type Frontmatter = {
   title: string;
-  summary: string;
-  updatedAt: Date;
+  summary: string | undefined;
   image?: string;
 };
 
@@ -21,7 +14,6 @@ export type Props = {
 };
 
 const { frontmatter } = Astro.props;
-console.log(dayjs(frontmatter.updatedAt).format("L"));
 ---
 
 <html lang="en">
@@ -40,7 +32,6 @@ console.log(dayjs(frontmatter.updatedAt).format("L"));
             <img alt="Oscar te Giffel" src="/avatar.jpg" class="w-6 h-6 rounded-full" />
             <p class="ml-2 text-sm text-gray-700 dark:text-gray-300">
               {"Oscar te Giffel / "}
-              {dayjs(frontmatter.updatedAt).format("L")}
             </p>
           </div>
           <p class="mt-2 text-sm text-gray-500 min-w-32 md:mt-0">
