@@ -1,4 +1,4 @@
-/// <reference types="@astrojs/image/client" />
+import "@astrojs/image/client";
 import "../.astro/types.d.ts";
 
 interface InterfaceMetaEnv {

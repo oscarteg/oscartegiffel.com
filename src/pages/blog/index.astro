@@ -4,10 +4,7 @@ import DefaultLayout from "../../layouts/default.astro";
 import { getCollection } from "astro:content";
 import type { Post } from "../../models";
 
-const posts = await getCollection(
-  "blog",
-  ({ data }) => data.publishDate.valueOf() > new Date().valueOf() || data.isDraft !== true
-);
+const posts = await getCollection("blog", ({ data }) => data.publishDate.valueOf() <= new Date().valueOf());
 ---
 
 <DefaultLayout
@@ -15,5 +12,5 @@ const posts = await getCollection(
   description={`I've started writing since the start of 2023, mostly about web development the advancement of my tech careers. In total, I've written ${posts.length} articles on this site.`}
 >
   <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
-  {posts.map((post: Post) => <BlogPost post={post} />)}
+  {posts.filter(({ data }: Post) => !data.draft).map((post: Post) => <BlogPost post={post} />)}
 </DefaultLayout>

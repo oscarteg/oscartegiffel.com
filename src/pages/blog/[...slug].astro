@@ -12,7 +12,6 @@ if (slug === undefined) {
 // 2. Query for the entry directly using the request slug
 const entry = await getEntryBySlug("blog", slug);
 
-console.log({ slug });
 // 3. Redirect if the entry does not exist
 if (entry === undefined) {
   return Astro.redirect("/404");
