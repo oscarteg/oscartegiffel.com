@@ -1,4 +1,5 @@
 ---
+import Analytics from "../components/Analytics.astro";
 import BaseHead from "../components/BaseHead.astro";
 import Container from "../components/Container.astro";
 
@@ -19,6 +20,7 @@ const { frontmatter } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={frontmatter.title} description={frontmatter.summary} />
+    <Analytics />
   </head>
 
   <body class="text-white bg-white dark:bg-black dark:text-black transition duration-500 ease-in-out">

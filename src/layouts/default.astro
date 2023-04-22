@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 import AnimatedBackgroundShapes from "../components/AnimatedBackgroundShapes.astro";
 import clsx from "clsx";
+import Analytics from "../components/Analytics.astro";
 
 export type Props = {
   title?: string;
@@ -22,7 +23,9 @@ const { title, description, prose = false, frontmatter } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
+    <Analytics />
   </head>
+
   <body class="text-white bg-white dark:bg-black dark:text-black transition duration-500 ease-in-out">
     <AnimatedBackgroundShapes />
     <Container>
