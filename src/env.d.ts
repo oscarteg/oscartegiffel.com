@@ -1,4 +1,5 @@
 /// <reference types="@astrojs/image/client" />
+import "../.astro/types.d.ts";
 
 interface InterfaceMetaEnv {
   SPOTIFY_CLIENT_ID: string;
