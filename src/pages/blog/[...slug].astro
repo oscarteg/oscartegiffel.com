@@ -1,5 +1,5 @@
 ---
-import BlogLayout from "../../layouts/blog.astro";
+import Default from "../../layouts/default.astro";
 
 import { getCollection, getEntryBySlug } from "astro:content";
 // 1. Get the slug from the incoming server request
@@ -28,12 +28,11 @@ export async function getStaticPaths() {
 }
 ---
 
-<BlogLayout
-  id={entry.id}
+<Default
   frontmatter={{
     title: entry.data.title,
-    summary: entry.data.summary,
+    description: entry.data.summary,
   }}
 >
   <Content />
-</BlogLayout>
+</Default>

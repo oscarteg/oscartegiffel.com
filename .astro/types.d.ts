@@ -112,12 +112,63 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"blog": {
+"record-or-object.mdx": {
+  id: "record-or-object.mdx",
+  slug: "record-or-object",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
 "state-libraries.mdx": {
   id: "state-libraries.mdx",
   slug: "state-libraries",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
+},
+"pages": {
+"about.mdx": {
+  id: "about.mdx",
+  slug: "about",
+  body: string,
+  collection: "pages",
+  data: InferEntrySchema<"pages">
+} & { render(): Render[".mdx"] },
+"books.mdx": {
+  id: "books.mdx",
+  slug: "books",
+  body: string,
+  collection: "pages",
+  data: InferEntrySchema<"pages">
+} & { render(): Render[".mdx"] },
+"resources.mdx": {
+  id: "resources.mdx",
+  slug: "resources",
+  body: string,
+  collection: "pages",
+  data: InferEntrySchema<"pages">
+} & { render(): Render[".mdx"] },
+"uses.mdx": {
+  id: "uses.mdx",
+  slug: "uses",
+  body: string,
+  collection: "pages",
+  data: InferEntrySchema<"pages">
+} & { render(): Render[".mdx"] },
+"workflow.mdx": {
+  id: "workflow.mdx",
+  slug: "workflow",
+  body: string,
+  collection: "pages",
+  data: InferEntrySchema<"pages">
+} & { render(): Render[".mdx"] },
+"youtube.mdx": {
+  id: "youtube.mdx",
+  slug: "youtube",
+  body: string,
+  collection: "pages",
+  data: InferEntrySchema<"pages">
 } & { render(): Render[".mdx"] },
 },
 

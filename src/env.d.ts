@@ -1,4 +1,5 @@
-import "@astrojs/image/client";
+/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="../.astro/types.d.ts" />
 import "../.astro/types.d.ts";
 
 interface InterfaceMetaEnv {

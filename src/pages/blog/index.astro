@@ -3,14 +3,19 @@ import BlogPost from "../../components/BlogPost.astro";
 import DefaultLayout from "../../layouts/default.astro";
 import { getCollection } from "astro:content";
 import type { Post } from "../../models";
+const isProd = import.meta.env.PROD;
 
-const posts = await getCollection("blog", ({ data }) => data.publishDate.valueOf() <= new Date().valueOf());
+const posts = await getCollection("blog");
+const filteredPosts = posts
+  .filter(({ data }: Post) => (isProd ? !data.draft : true))
+  .filter(({ data }) => (isProd ? data.publishDate.valueOf() <= new Date().valueOf() : true))
+  .sort((a: Post, b: Post) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 <DefaultLayout
   title={"Blog"}
-  description={`I've started writing since the start of 2023, mostly about web development the advancement of my tech careers. In total, I've written ${posts.length} articles on this site.`}
+  description={`I've started writing since the start of 2023, mostly about web development the advancement of my tech careers. In total, I've written ${filteredPosts.length} articles on this site.`}
 >
   <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
-  {posts.filter(({ data }: Post) => !data.draft).map((post: Post) => <BlogPost post={post} />)}
+  {filteredPosts.map((post: Post) => <BlogPost post={post} />)}
 </DefaultLayout>

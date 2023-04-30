@@ -13,6 +13,15 @@ const blog = defineCollection({
     draft: z.boolean().optional().default(false),
   }),
 });
+
+const pages = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    desciption: z.string().optional(),
+  }),
+});
+
 export const collections = {
   blog,
+  pages,
 };

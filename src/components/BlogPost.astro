@@ -9,20 +9,15 @@ const {
   post: {
     id,
     slug,
-    data: { title, summary },
+    data: { title },
   },
 } = Astro.props;
 ---
 
 <a class="w-full" href={`/blog/${slug}`} id={id}>
-  <div class="w-full mb-8">
-    <div class="flex flex-col justify-between md:flex-row">
-      <h4 class="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
-        {title}
-      </h4>
-    </div>
-    <p class="text-gray-600 dark:text-gray-100 line-clamp-3">
-      {summary}
+  <div class="flex flex-col justify-between md:flex-row">
+    <p class="w-full mb-2 text-lg font-medium">
+      {title}
     </p>
   </div>
 </a>

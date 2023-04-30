@@ -1,52 +1,44 @@
 ---
-import Container from "../components/Container.astro";
+import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
-import AnimatedBackgroundShapes from "../components/AnimatedBackgroundShapes.astro";
-import clsx from "clsx";
 
 export type Props = {
   title?: string;
-  description?: string;
-  prose?: boolean;
+  description?: string | undefined;
   frontmatter?: {
     title?: string;
-    description?: string;
-    prose?: boolean;
+    description?: string | undefined;
   };
 };
 
-const { title, description, prose = false, frontmatter } = Astro.props;
+const { title, description, frontmatter } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="text-white bg-zinc-900">
   <head>
     <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
   </head>
 
-  <body class="text-white bg-white dark:bg-black dark:text-black transition duration-500 ease-in-out">
-    <AnimatedBackgroundShapes />
-    <Container>
-      <div class="text-white bg-white dark:bg-black dark:text-white transition duration-500 ease-in-out">
-        <article class="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
-          {
-            (title || frontmatter?.title) && (
-              <h1 class="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-                {title || frontmatter?.title}
-              </h1>
-            )
-          }
-          {
-            (description || frontmatter?.description) && (
-              <p class="mt-2 mb-8 text-gray-700 dark:text-gray-300">{description || frontmatter?.description}</p>
-            )
-          }
-          <div class={clsx("w-full", { "prose dark:prose-invert": prose || frontmatter?.prose })}>
-            <slot />
-          </div>
-        </article>
-      </div>
-    </Container>
-    <Footer />
+  <body class="antialiased container px-12 py-24 grid grid-cols-[200px_auto] gap-8">
+    <aside class="font-serif max-w-xs">
+      <Sidebar className="lg:sticky lg:top-20" />
+    </aside>
+    <main class="px-16 md:px-0 prose prose-invert">
+      <article class="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
+        {(title || frontmatter?.title) && <h1>{title || frontmatter?.title}</h1>}
+        {
+          (description || frontmatter?.description) && (
+            <p class="mt-2 mb-8">{description || frontmatter?.description}</p>
+          )
+        }
+        <div class:list={["w-full"]}>
+          <slot />
+        </div>
+      </article>
+    </main>
+    <div class="col-span-2">
+      <Footer />
+    </div>
   </body>
 </html>

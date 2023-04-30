@@ -1,0 +1,24 @@
+---
+const { className } = Astro.props;
+
+const isCurrentUrl = (url: string) => {
+  return Astro.url.pathname === url;
+};
+---
+
+<style>
+  a {
+    @apply rounded p-2 hover:text-gray-400 transition font-bold;
+  }
+  a.current {
+    @apply bg-zinc-700;
+  }
+</style>
+
+<div class={className}>
+  <nav class="font-serif flex flex-col">
+    <a href="/blog" class:list={[{ current: isCurrentUrl("/blog") }]}>Blog</a>
+    <a href="/pages/about" class:list={[{ current: isCurrentUrl("/pages/about") }]}> About</a>
+    <a href="/" class:list={[{ current: isCurrentUrl("/") }]}> Home</a>
+  </nav>
+</div>
