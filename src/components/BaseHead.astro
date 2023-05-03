@@ -1,16 +1,17 @@
 ---
 import "../styles/global.css";
-import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE, SITE_LOGO, SITE_URL } from "../config";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_LOGO } from "../config";
 
 export type Props = {
   title?: string | undefined;
   description?: string | undefined;
   image?: string;
+  logo?: string;
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, image = SITE_IMAGE } = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, logo = SITE_LOGO } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -32,14 +33,14 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, image = SITE_IMAGE }
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={new URL(logo, Astro.url)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={new URL(logo, Astro.url)} />
 
 <meta content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw" name="google-site-verification" />
 
