@@ -1,8 +1,13 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{astro,ts,tsx}"],
   theme: {
+    colors: {
+      primary: "#FFD900",
+      ...colors,
+    },
     extend: {
       fontFamily: {
         sans: ["IBM Plex Sans", ...fontFamily.sans],

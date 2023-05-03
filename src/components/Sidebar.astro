@@ -1,24 +1,28 @@
 ---
 const { className } = Astro.props;
 
-const isCurrentUrl = (url: string) => {
+function isCurrentUrl(url: string) {
   return Astro.url.pathname === url;
-};
+}
 ---
 
 <style>
   a {
-    @apply rounded p-2 hover:text-gray-400 transition font-bold;
+    @apply rounded p-2 hover:text-primary transition font-semibold flex;
   }
+
   a.current {
-    @apply bg-zinc-700;
+    @apply bg-neutral-700 text-white;
   }
 </style>
 
-<div class={className}>
-  <nav class="font-serif flex flex-col">
-    <a href="/blog" class:list={[{ current: isCurrentUrl("/blog") }]}>Blog</a>
-    <a href="/pages/about" class:list={[{ current: isCurrentUrl("/pages/about") }]}> About</a>
-    <a href="/" class:list={[{ current: isCurrentUrl("/") }]}> Home</a>
+<aside class={className}>
+  <nav class="flex flex-row md:flex-col space-x-0 pr-10 mb-2 mt-2 md:mt-0">
+    <a href="/" class:list={["text-neutral-500", { current: isCurrentUrl("/") }]}>home</a>
+    <a href="/blog" class:list={["text-neutral-500", { current: isCurrentUrl("/blog") }]}>blog</a>
+    <a href="/pages/uses" class:list={["text-neutral-500", { current: isCurrentUrl("/pages/uses") }]}>uses</a>
+    <a href="/pages/workflow" class:list={["text-neutral-500", { current: isCurrentUrl("/pages/workflow") }]}
+      >workflow</a
+    >
   </nav>
-</div>
+</aside>

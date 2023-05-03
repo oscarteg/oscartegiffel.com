@@ -12,10 +12,7 @@ const filteredPosts = posts
   .sort((a: Post, b: Post) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
-<DefaultLayout
-  title={"Blog"}
-  description={`I've started writing since the start of 2023, mostly about web development the advancement of my tech careers. In total, I've written ${filteredPosts.length} articles on this site.`}
->
+<DefaultLayout title={"Blog"}>
   <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
   {filteredPosts.map((post: Post) => <BlogPost post={post} />)}
 </DefaultLayout>

@@ -20,11 +20,9 @@ const { title, description, frontmatter } = Astro.props;
     <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
   </head>
 
-  <body class="antialiased container px-12 py-24 grid grid-cols-[200px_auto] gap-8">
-    <aside class="font-serif max-w-xs">
-      <Sidebar className="lg:sticky lg:top-20" />
-    </aside>
-    <main class="px-16 md:px-0 prose prose-invert">
+  <body class="antialiased container px-12 py-24 grid grid-cols-[200px_auto] gap-8 mx-auto">
+    <Sidebar className="lg:sticky lg:top-20" />
+    <main class="px-16 md:px-0 prose prose-invert prose-h1:font-serif hover:prose-a:text-primary prose-a:transition">
       <article class="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
         {(title || frontmatter?.title) && <h1>{title || frontmatter?.title}</h1>}
         {
@@ -37,7 +35,7 @@ const { title, description, frontmatter } = Astro.props;
         </div>
       </article>
     </main>
-    <div class="col-span-2">
+    <div class="col-start-2">
       <Footer />
     </div>
   </body>
