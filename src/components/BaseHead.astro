@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE, SITE_LOGO, SITE_URL } from "../config";
 
 export type Props = {
   title?: string | undefined;
@@ -10,14 +10,14 @@ export type Props = {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, image = "/placeholder-social.jpg" } = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, image = SITE_IMAGE } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="canonical" href={canonicalURL} />
 <meta name="generator" content={Astro.generator} />
 
@@ -25,6 +25,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, image = "/placeholde
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta property="description" content={description} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
@@ -40,22 +41,8 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, image = "/placeholde
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<link rel="preload" href="/fonts/IBMPlexSans-Regular.ttf" as="font" type="font/ttf" cross-origin="anonymous" />
-<link rel="preload" href="/fonts/IBMPlexMono-Regular.ttf" as="font" type="font/ttf" cross-origin="anonymous" />
-<link href="/static/favicons/favicon.ico" rel="shortcut icon" />
-<link href="/static/favicons/site.webmanifest" rel="manifest" />
-<link href="/static/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
-<link href="/static/favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
-<link href="/static/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
-<link color="#4a9885" href="/static/favicons/safari-pinned-tab.svg" rel="mask-icon" />
-<meta content="#ffffff" name="theme-color" />
-<meta content="#ffffff" name="msapplication-TileColor" />
-<meta content="/static/favicons/browserconfig.xml" name="msapplication-config" />
-<meta content="14d2e73487fa6c71" name="yandex-verification" />
 <meta content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw" name="google-site-verification" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
   rel="stylesheet"

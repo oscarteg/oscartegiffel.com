@@ -135,13 +135,6 @@ declare module 'astro:content' {
 } & { render(): Render[".mdx"] },
 },
 "pages": {
-"about.mdx": {
-  id: "about.mdx",
-  slug: "about",
-  body: string,
-  collection: "pages",
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] },
 "books.mdx": {
   id: "books.mdx",
   slug: "books",

@@ -21,7 +21,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "@vercel/analytics": "^1.0.0",
     "@webcomponents/template-shadowroot": "^0.2.1",
-    "astro": "^2.3.0",
+    "astro": "^2.3.4",
     "autoprefixer": "^10.4.14",
     "clsx": "^1.2.1",
     "lit": "^2.7.0",
