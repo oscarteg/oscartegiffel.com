@@ -112,6 +112,13 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"blog": {
+"better-react-props.mdx": {
+  id: "better-react-props.mdx",
+  slug: "better-react-props",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
 "dotfiles.mdx": {
   id: "dotfiles.mdx",
   slug: "dotfiles",
@@ -135,13 +142,6 @@ declare module 'astro:content' {
 } & { render(): Render[".mdx"] },
 },
 "pages": {
-"books.mdx": {
-  id: "books.mdx",
-  slug: "books",
-  body: string,
-  collection: "pages",
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] },
 "resources.mdx": {
   id: "resources.mdx",
   slug: "resources",
@@ -159,13 +159,6 @@ declare module 'astro:content' {
 "workflow.mdx": {
   id: "workflow.mdx",
   slug: "workflow",
-  body: string,
-  collection: "pages",
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] },
-"youtube.mdx": {
-  id: "youtube.mdx",
-  slug: "youtube",
   body: string,
   collection: "pages",
   data: InferEntrySchema<"pages">
