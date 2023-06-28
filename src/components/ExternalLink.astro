@@ -2,11 +2,6 @@
 const { href } = Astro.props;
 ---
 
-<a
-  href={href}
-  class="text-sm text-gray-500 dark:text-gray-200 transition hover:text-primary"
-  target="_blank"
-  rel="noopener noreferrer"
->
+<a href={href} class="text-sm text-gray-200 transition hover:text-primary" target="_blank" rel="noopener noreferrer">
   <slot />
 </a>

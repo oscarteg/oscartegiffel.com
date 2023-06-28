@@ -13,6 +13,6 @@ const filteredPosts = posts
 ---
 
 <DefaultLayout title={"Blog"}>
-  <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">All Posts</h3>
+  <h3 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl text-white">All Posts</h3>
   {filteredPosts.map((post: Post) => <BlogPost post={post} />)}
 </DefaultLayout>
