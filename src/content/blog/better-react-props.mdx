@@ -5,4 +5,15 @@ publishDate: 2023-05-30
 draft: true
 ---
 
-Discriminated Union
+A simple pattern to have better React props is to use discriminated unions. This is a powerfull pattern that can be used in many different ways. I don't see it utilized as much as I would like. In this post I will show you how to use it to have better React props.
+
+Let's say we have the following component:
+
+```tsx
+type Props = {
+  onClick: () => void;
+};
+
+// The implementation is not important
+declare function Button(props: Props): JSX.Element;
+```

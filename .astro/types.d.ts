@@ -126,6 +126,13 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
+"pattern-matching.mdx": {
+  id: "pattern-matching.mdx",
+  slug: "pattern-matching",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
 "record-or-object.mdx": {
   id: "record-or-object.mdx",
   slug: "record-or-object",
