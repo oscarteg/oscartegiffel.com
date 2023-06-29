@@ -119,13 +119,6 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
-"dotfiles.mdx": {
-  id: "dotfiles.mdx",
-  slug: "dotfiles",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] },
 "pattern-matching.mdx": {
   id: "pattern-matching.mdx",
   slug: "pattern-matching",
@@ -140,9 +133,23 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
+"ssr-vs-react-server-components.mdx": {
+  id: "ssr-vs-react-server-components.mdx",
+  slug: "ssr-vs-react-server-components",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
 "state-libraries.mdx": {
   id: "state-libraries.mdx",
   slug: "state-libraries",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
+"tech-stack-2023.mdx": {
+  id: "tech-stack-2023.mdx",
+  slug: "tech-stack-2023",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
