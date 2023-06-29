@@ -126,13 +126,6 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
-"record-or-object.mdx": {
-  id: "record-or-object.mdx",
-  slug: "record-or-object",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] },
 "ssr-vs-react-server-components.mdx": {
   id: "ssr-vs-react-server-components.mdx",
   slug: "ssr-vs-react-server-components",
