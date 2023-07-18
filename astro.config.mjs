@@ -11,5 +11,12 @@ export default defineConfig({
   output: "server",
   adapter: serverless(),
   site: SITE_URL,
-  integrations: [mdx(), tailwind(), lit(), image()],
+  integrations: [
+    mdx(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    lit(),
+    image(),
+  ],
 });

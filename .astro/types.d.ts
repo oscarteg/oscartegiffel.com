@@ -119,6 +119,20 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
+"chess-engine-part-1.mdx": {
+  id: "chess-engine-part-1.mdx",
+  slug: "chess-engine-part-1",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
+"maturity.mdx": {
+  id: "maturity.mdx",
+  slug: "maturity",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
 "pattern-matching.mdx": {
   id: "pattern-matching.mdx",
   slug: "pattern-matching",

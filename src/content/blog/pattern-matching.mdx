@@ -1,13 +1,47 @@
 ---
-title: The missing feature in Typescript
+title: Pattern matching in Typescript
 tags: [react, typescript]
-publishDate: 2023-07-01
+publishDate: 2023-07-24
 draft: true
 ---
 
-Pattern matching is a powerful technique in programming that allows developers to match the structure of data against a set of predefined patterns. It enables the extraction and manipulation of data based on its shape, leading to more expressive and readable code. While pattern matching is commonly associated with functional programming languages, it is also supported in TypeScript and Rust, two popular statically-typed languages. In this blog post, we will explore pattern matching in both TypeScript and Rust, highlighting their similarities and differences.
+Pattern matching is a powerful technique in programming that allows developers to match the structure of data against a set of predefined patterns. It allows you to extract and manipulate data based on its shape, leading to more expressive and readable code. While pattern matching is mostly known in functional programming languages, I first got introduced to it in Rust. In this blog post, we will explore what pattern matching is and how we can introduce it in Tyescript. 
 
-Pattern matching is a powerful technique in programming that allows developers to match the structure of data against predefined patterns. Both TypeScript and Rust, popular statically-typed languages, support pattern matching, although with some differences. Let's explore pattern matching in both languages through examples.
+
+First we look at how pattern matching is done in Rust. Rust enables you to use pattern matching by the `match` keyword. Here we see that the syntax consist of keyword  
+
+```rust
+match VALUE {
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+}
+```
+
+pattern matching is more extensive and flexible, with constructs like `match` expressions. Here's an example:
+
+```rust
+enum LogLevel {
+    Info,
+    Warning,
+    Error,
+}
+
+fn log_level_to_string(level: LogLevel) -> String {
+    match level {
+        LogLevel::Info => String::from("Information"),
+        LogLevel::Warning => String::from("Warning"),
+        LogLevel::Error => String::from("Error"),
+    }
+}
+```
+
+In Rust, pattern matching also supports exhaustive checking, ensuring all cases are handled explicitly.
+
+In summary, while TypeScript's pattern matching relies on discriminated unions and the `switch` statement, Rust provides a more comprehensive and expressive pattern matching experience. Understanding the pattern matching capabilities of each language empowers developers to choose the right approach based on their project's requirements.
+
+Pattern matching is a powerful tool for handling complex data structures and improving code readability. Whether you're working with TypeScript or Rust, embracing pattern matching unlocks new possibilities and helps write elegant and robust software.
+
 
 In TypeScript, pattern matching is achieved using discriminated unions and the `switch` statement. Here's an example:
 
@@ -31,29 +65,6 @@ function calculateArea(shape: Shape): number {
 }
 ```
 
-In Rust, pattern matching is more extensive and flexible, with constructs like `match` expressions. Here's an example:
-
-```rust
-enum LogLevel {
-    Info,
-    Warning,
-    Error,
-}
-
-fn log_level_to_string(level: LogLevel) -> String {
-    match level {
-        LogLevel::Info => String::from("Information"),
-        LogLevel::Warning => String::from("Warning"),
-        LogLevel::Error => String::from("Error"),
-    }
-}
-```
-
-In Rust, pattern matching also supports exhaustive checking, ensuring all cases are handled explicitly.
-
-In summary, while TypeScript's pattern matching relies on discriminated unions and the `switch` statement, Rust provides a more comprehensive and expressive pattern matching experience. Understanding the pattern matching capabilities of each language empowers developers to choose the right approach based on their project's requirements.
-
-Pattern matching is a powerful tool for handling complex data structures and improving code readability. Whether you're working with TypeScript or Rust, embracing pattern matching unlocks new possibilities and helps write elegant and robust software.
 
 Remember to explore the respective documentation and examples for TypeScript and Rust to dive deeper into their pattern matching capabilities.
 

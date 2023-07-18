@@ -3,16 +3,20 @@ import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 
-export type Props = {
+type FrontMatter = {
   title?: string;
   description?: string | undefined;
-  frontmatter?: {
-    title?: string;
-    description?: string | undefined;
-  };
+  prose?: boolean;
+};
+
+export type Props = FrontMatter & {
+  title?: string;
+  description?: string | undefined;
+  frontmatter?: FrontMatter;
 };
 
 const { title, description, frontmatter } = Astro.props;
+const { prose = true } = Astro.props;
 ---
 
 <html lang="en" class="text-white bg-zinc-900">
@@ -24,9 +28,20 @@ const { title, description, frontmatter } = Astro.props;
     class="antialiased container md:px-12 py-24 grid grid-cols-1 auto-rows-max sm:grid-cols-[200px_auto] gap-8 mx-auto justify-center md:justify-start"
   >
     <Sidebar className="md:sticky md:top-20 justify-self-center" />
-    <main class="px-16 md:px-0 prose prose-invert prose-h1:font-serif hover:prose-a:text-primary prose-a:transition">
+    <main
+      class:list={[
+        { ["prose prose-invert"]: prose },
+        "px-16 md:px-0 prose-h1:font-serif hover:prose-a:text-primary prose-a:transition",
+      ]}
+    >
       <article class="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
-        {(title || frontmatter?.title) && <h1>{title || frontmatter?.title}</h1>}
+        {
+          (title || frontmatter?.title) && (
+            <h1 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl text-white">
+              {title || frontmatter?.title}
+            </h1>
+          )
+        }
         {
           (description || frontmatter?.description) && (
             <p class="mt-2 mb-8">{description || frontmatter?.description}</p>

@@ -47,6 +47,9 @@ dependencies:
   lit:
     specifier: ^2.7.0
     version: 2.7.2
+  lucide:
+    specifier: ^0.261.0
+    version: 0.261.0
   postcss:
     specifier: ^8.4.23
     version: 8.4.23
@@ -3891,6 +3894,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+
+  /lucide@0.261.0:
+    resolution: {integrity: sha512-aAE1H3D5HipJkKfOHVKwnZcYbLSgiG9wghF1ks95NPRLgDKcdjxig3JQHannqOCd+jlfmUQRZx7t/woegW5b5Q==}
+    dev: false
 
   /magic-string@0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
