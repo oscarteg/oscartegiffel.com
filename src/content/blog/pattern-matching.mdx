@@ -1,12 +1,11 @@
 ---
 title: Pattern matching in Typescript
-tags: [react, typescript]
+tags: [react, typescript, rust ]
 publishDate: 2023-07-24
 draft: true
 ---
 
 Pattern matching is a powerful technique in programming that allows developers to match the structure of data against a set of predefined patterns. It allows you to extract and manipulate data based on its shape, leading to more expressive and readable code. While pattern matching is mostly known in functional programming languages, I first got introduced to it in Rust. In this blog post, we will explore what pattern matching is and how we can introduce it in Tyescript. 
-
 
 First we look at how pattern matching is done in Rust. Rust enables you to use pattern matching by the `match` keyword. Here we see that the syntax consist of keyword  
 
@@ -65,6 +64,19 @@ function calculateArea(shape: Shape): number {
 }
 ```
 
+Remember to explore the respective documentation and examples for TypeScript and Rust to dive deeper into their pattern matching capabilities. 
 
-Remember to explore the respective documentation and examples for TypeScript and Rust to dive deeper into their pattern matching capabilities.
+## Exhaustive checking
+
+One additional feature that ensures type safe branching is `exhaustive deps`. This ensures that all the possible branches are being handled in your code. This may sound like a small thing, but it can be a huge help in preventing bugs. 
+
+
+```typescript
+type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'square'; sideLength: number }
+  | { kind: 'rectangle'; width: number; height: number };
+```
+
+
 

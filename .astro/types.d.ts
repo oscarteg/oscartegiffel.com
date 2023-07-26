@@ -213,6 +213,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"exhaustive-deps.mdx": {
+	id: "exhaustive-deps.mdx";
+  slug: "exhaustive-deps";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "maturity.mdx": {
 	id: "maturity.mdx";
   slug: "maturity";
@@ -244,6 +251,13 @@ declare module 'astro:content' {
 "tech-stack-2023.mdx": {
 	id: "tech-stack-2023.mdx";
   slug: "tech-stack-2023";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"typesafety.mdx": {
+	id: "typesafety.mdx";
+  slug: "typesafety";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
