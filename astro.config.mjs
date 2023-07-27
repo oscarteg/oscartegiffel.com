@@ -13,7 +13,9 @@ export default defineConfig({
   site: SITE_URL,
 
   integrations: [
-    mdx(),
+    mdx({
+      drafts: true,
+    }),
     tailwind({
       applyBaseStyles: false,
     }),
