@@ -57,16 +57,16 @@ type Props = {
 ```
 This approach provides several benefits:
 
-It ensures that only valid combinations of props are used. You can't pass both onClick and href props simultaneously.
-It provides clear guidance to the user of the component on which props are allowed.
-It improves type safety, as TypeScript will catch any incorrect usages at compile-time.
+1. It ensures that only valid combinations of props are used. You can't pass both onClick and href props simultaneously.
+2. It provides clear guidance to the user of the component on which props are allowed.
+3. It improves type safety, as TypeScript will catch any incorrect usages at compile-time.
 
 
 ## Using Discriminated Unions on React Reducers
 
 Discriminated unions can also be useful when working with reducers in React. They provide a way to handle different actions and their associated payloads in a type-safe manner. Here's an example:
 
-```tsx
+```ts
 type State =
   | { status: 'pending' }
   | { status: 'loading' }
@@ -111,8 +111,6 @@ The Action type defines various actions that can be dispatched to the reducer, r
 By using a switch statement, the reducer function handles each action type individually and updates the state accordingly based on the current state and the action received.
 
 Using discriminated unions in this way improves type safety and makes managing state in React applications more straightforward for developers.
-
-In summary, discriminated unions are a handy pattern for enhancing React props and reducers. They provide clearer guidelines, prevent common errors, and help developers build more robust and maintainable React components and reducers.
 
 ---
 The importance of this is garanty of type safety. By utilizing discriminated unions in React props and reducers, we enhance type safety, ensuring that only valid combinations of props are used and that actions and state transitions are handled correctly. TypeScript, with its static type checking, becomes a valuable tool in catching potential errors and providing early feedback during development. With type safety, we can confidently refactor, collaborate, and build robust React applications that are less prone to runtime errors, improving overall development productivity and code quality.

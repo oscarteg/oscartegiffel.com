@@ -199,65 +199,58 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
-"better-react-props.mdx": {
-	id: "better-react-props.mdx";
-  slug: "better-react-props";
+"01_better-react-props.mdx": {
+	id: "01_better-react-props.mdx";
+  slug: "01_better-react-props";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"chess-engine-part-1.mdx": {
-	id: "chess-engine-part-1.mdx";
-  slug: "chess-engine-part-1";
+"03_tech-stack-2023.mdx": {
+	id: "03_tech-stack-2023.mdx";
+  slug: "03_tech-stack-2023";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"exhaustive-deps.mdx": {
-	id: "exhaustive-deps.mdx";
-  slug: "exhaustive-deps";
+"04_maturity.mdx": {
+	id: "04_maturity.mdx";
+  slug: "04_maturity";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"maturity.mdx": {
-	id: "maturity.mdx";
-  slug: "maturity";
+"05_ssr-vs-react-server-components.mdx": {
+	id: "05_ssr-vs-react-server-components.mdx";
+  slug: "05_ssr-vs-react-server-components";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"pattern-matching.mdx": {
-	id: "pattern-matching.mdx";
-  slug: "pattern-matching";
+"06_pattern-matching.mdx": {
+	id: "06_pattern-matching.mdx";
+  slug: "06_pattern-matching";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"ssr-vs-react-server-components.mdx": {
-	id: "ssr-vs-react-server-components.mdx";
-  slug: "ssr-vs-react-server-components";
+"07_exhaustive-deps.mdx": {
+	id: "07_exhaustive-deps.mdx";
+  slug: "07_exhaustive-deps";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"state-libraries.mdx": {
-	id: "state-libraries.mdx";
-  slug: "state-libraries";
+"08_typesafety.mdx": {
+	id: "08_typesafety.mdx";
+  slug: "08_typesafety";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"tech-stack-2023.mdx": {
-	id: "tech-stack-2023.mdx";
-  slug: "tech-stack-2023";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"typesafety.mdx": {
-	id: "typesafety.mdx";
-  slug: "typesafety";
+"09_chess-engine-part-1.mdx": {
+	id: "09_chess-engine-part-1.mdx";
+  slug: "09_chess-engine-part-1";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

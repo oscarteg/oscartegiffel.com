@@ -11,6 +11,7 @@ export default defineConfig({
   output: "server",
   adapter: serverless(),
   site: SITE_URL,
+
   integrations: [
     mdx(),
     tailwind({
@@ -19,4 +20,10 @@ export default defineConfig({
     lit(),
     image(),
   ],
+  markdown: {
+    shikiConfig: {
+      theme: "poimandres",
+      wrap: true,
+    },
+  },
 });
