@@ -11,9 +11,6 @@ export default defineConfig({
   adapter: vercel({
     analytics: true,
   }),
-  build: {
-    split: true,
-  },
   site: SITE_URL,
   integrations: [
     mdx({
