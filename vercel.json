@@ -1,3 +1,9 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "crons": [
+    {
+      "path": "/api/build-and-deploy",
+      "schedule": "0 0 * * 5"
+    }
+  ]
 }

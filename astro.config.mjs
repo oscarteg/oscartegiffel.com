@@ -1,17 +1,17 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
-import serverless from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel/edge";
 import lit from "@astrojs/lit";
-import image from "@astrojs/image";
 import { SITE_URL } from "./src/config";
 
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  adapter: serverless(),
+  adapter: vercel({
+    analytics: true,
+  }),
   site: SITE_URL,
-
   integrations: [
     mdx({
       drafts: true,
@@ -20,7 +20,6 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     lit(),
-    image(),
   ],
   markdown: {
     shikiConfig: {
