@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/edge";
 import lit from "@astrojs/lit";
 import { SITE_URL } from "./src/config";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +21,11 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     lit(),
+    sitemap({
+      filter: (page) => !page.includes("/api/"),
+    }),
   ],
+
   markdown: {
     shikiConfig: {
       theme: "poimandres",
