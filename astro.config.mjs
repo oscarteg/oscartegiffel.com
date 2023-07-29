@@ -1,8 +1,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/edge";
-import lit from "@astrojs/lit";
+import vercel from "@astrojs/vercel/serverless";
 import { SITE_URL } from "./src/config";
 import sitemap from "@astrojs/sitemap";
 
@@ -12,6 +11,9 @@ export default defineConfig({
   adapter: vercel({
     analytics: true,
   }),
+  build: {
+    split: true,
+  },
   site: SITE_URL,
   integrations: [
     mdx({
@@ -20,7 +22,6 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    lit(),
     sitemap({
       filter: (page) => !page.includes("/api/"),
     }),
