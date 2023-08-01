@@ -78,5 +78,45 @@ type Shape =
   | { kind: 'rectangle'; width: number; height: number };
 ```
 
+Recently, I had a need to create a useful object to store the paths of my application. Initially, I started with a basic version using TypeScript:
 
+```typescript
+const paths = {
+  home: '/',
+  user: '/users',
+} as const;
 
+type Path = keyof typeof paths;
+```
+
+This allowed me to define the paths and use them as type-safe keys. However, I realized that it would be even better if we could achieve type safety for dynamic paths, such as paths that include an ID. For instance, something like this:
+
+```typescript
+const paths = {
+  home: '/',
+  user: '/users',
+  users(id: string): `/users/${id}`,
+} as const;
+```
+
+Imagine if the TypeScript compiler could help us by ensuring that all the required data is provided. Unfortunately, we currently have to manually handle such cases, like this:
+
+```typescript
+const paths = {
+  home: '/',
+  user: '/users',
+  usersId: (id: string) => `/users/${id}`,
+} as const;
+```
+
+With this approach, we ensure that the paths are correctly constructed and that the compiler enforces type safety. By using a function, we can achieve a pattern-matching-like behavior in TypeScript. For instance, we can retrieve the dynamic path by calling the function with the appropriate argument:
+
+```typescript
+const userId = 'user123';
+const usersPath = paths.usersId(userId); // Result: "/users/user123"
+const usersPath = paths.usersId; // Valid syntax instead of enforcing an argument 
+```
+
+This allows us to construct the path dynamically and guarantees that we provide the required data (in this case, the user ID). As a result, we achieve a more robust and type-safe way of handling paths in our application.
+
+By utilizing this pattern, we can ensure that our paths are always accurate and that we catch any errors early in the development process, thanks to TypeScript's type-checking capabilities. This not only leads to more reliable code but also improves the overall readability and maintainability of our application.

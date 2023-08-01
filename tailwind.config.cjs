@@ -10,9 +10,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["IBM Plex Sans", ...fontFamily.sans],
-        mono: ["IBM Plex Mono", ...fontFamily.mono],
-        serif: ["IBM Plex Serif", ...fontFamily.serif],
+        sans: ["Apercu", ...fontFamily.sans],
+        mono: ["Dank Mono", ...fontFamily.mono],
+        serif: ["Ogg", ...fontFamily.serif],
       },
     },
   },

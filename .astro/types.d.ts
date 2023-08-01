@@ -255,6 +255,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"10_drizzle.mdx": {
+	id: "10_drizzle.mdx";
+  slug: "10_drizzle";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 };
 "pages": {
 "resources.mdx": {
