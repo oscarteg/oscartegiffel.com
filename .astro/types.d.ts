@@ -262,6 +262,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"11_journey_away_from_commercialization.mdx": {
+	id: "11_journey_away_from_commercialization.mdx";
+  slug: "11_journey_away_from_commercialization";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 };
 "pages": {
 "resources.mdx": {

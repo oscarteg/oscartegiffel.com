@@ -30,11 +30,13 @@ const { prose = true } = Astro.props;
     <Sidebar className="md:sticky md:top-20 justify-self-center" />
     <main
       class:list={[
-        { ["prose prose-invert"]: prose },
-        "px-16 md:px-0 prose-h1:font-serif hover:prose-a:text-primary prose-a:transition prose-headings:tracking-wide",
+        {
+          ["prose prose-invert prose-headings:font-serif hover:prose-a:text-primary prose-a:transition prose-headings:tracking-wide"]:
+            prose,
+        },
       ]}
     >
-      <article class="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
+      <article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
         {
           (title || frontmatter?.title) && (
             <h1 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl text-white">
