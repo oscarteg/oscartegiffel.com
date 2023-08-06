@@ -1,7 +1,6 @@
 ---
+import { getCollection, getEntry } from "astro:content";
 import DefaultLayout from "../../layouts/default.astro";
-
-import { getCollection, getEntryBySlug } from "astro:content";
 // 1. Get the slug from the incoming server request
 const { slug } = Astro.params;
 
@@ -10,7 +9,7 @@ if (slug === undefined) {
 }
 
 // 2. Query for the entry directly using the request slug
-const entry = await getEntryBySlug("blog", slug);
+const entry = await getEntry("blog", slug);
 
 // 3. Redirect if the entry does not exist
 if (entry === undefined) {

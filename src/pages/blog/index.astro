@@ -1,13 +1,14 @@
 ---
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
 import BlogPost from "../../components/BlogPost.astro";
 import DefaultLayout from "../../layouts/default.astro";
-import { getCollection } from "astro:content";
 import type { Post } from "../../models";
-import dayjs from "dayjs";
 
 const isProd = import.meta.env.PROD;
 const posts = await getCollection("blog");
 const filteredPosts = posts
+  .filter(({ data }: Post) => (isProd ? !data.draft : true))
   .filter(({ data }) => (isProd ? dayjs(data.publishDate).isBefore(dayjs()) : true))
   .sort((a: Post, b: Post) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
