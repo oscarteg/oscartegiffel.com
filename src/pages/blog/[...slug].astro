@@ -25,6 +25,8 @@ export async function getStaticPaths() {
     props: { entry },
   }));
 }
+
+export const prerender = true;
 ---
 
 <DefaultLayout

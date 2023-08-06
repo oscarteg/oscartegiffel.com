@@ -12,19 +12,19 @@ function isCurrentUrl(url: string) {
   }
 
   a.current {
-    @apply bg-neutral-700 text-white;
+    @apply bg-neutral-700 text-primary;
   }
 </style>
 
 <aside class={className}>
   <nav class="flex flex-row sm:flex-col space-x-1 sm:space-x-0 sm:pr-10 my-2 sm:mt-0 space-y-0 sm:space-y-1">
-    <a href="/" class:list={["text-neutral-500", { current: isCurrentUrl("/") }]}>home</a>
-    <a href="/blog" class:list={["text-neutral-500", { current: isCurrentUrl("/blog") }]}>blog</a>
-    <a href="/pages/uses" class:list={["text-neutral-500", { current: isCurrentUrl("/pages/uses") }]}>uses</a>
-    <a href="/pages/workflow" class:list={["text-neutral-500", { current: isCurrentUrl("/pages/workflow") }]}
+    <a href="/" class:list={["text-neutral-300", { current: isCurrentUrl("/") }]}>home</a>
+    <a href="/blog" class:list={["text-neutral-300", { current: isCurrentUrl("/blog") }]}>blog</a>
+    <a href="/pages/uses" class:list={["text-neutral-300", { current: isCurrentUrl("/pages/uses") }]}>uses</a>
+    <a href="/pages/workflow" class:list={["text-neutral-300", { current: isCurrentUrl("/pages/workflow") }]}
       >workflow</a
     >
-    <a href="/pages/resources" class:list={["text-neutral-500", { current: isCurrentUrl("/pages/resources") }]}
+    <a href="/pages/resources" class:list={["text-neutral-300", { current: isCurrentUrl("/pages/resources") }]}
       >resources</a
     >
   </nav>

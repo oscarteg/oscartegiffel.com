@@ -14,7 +14,7 @@ const filteredPosts = posts
 ---
 
 <DefaultLayout prose={false} title={"All Posts"}>
-  <ul role="list" class="divide-y divide-gray-800">
+  <ul role="list" class="divide-y divide-zinc-700 flex flex-col">
     {filteredPosts.map((post: Post) => <BlogPost post={post} />)}
   </ul>
 </DefaultLayout>
