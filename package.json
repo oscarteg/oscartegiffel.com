@@ -9,7 +9,9 @@
     "build": "astro check && tsc --noEmit && astro build",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
-    "format:write": "prettier -w --plugin-search-dir=. src/"
+    "format:write": "prettier -w --plugin-search-dir=. src/",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
@@ -36,6 +38,7 @@
     "@types/node": "^20.4.8",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
+    "cypress": "^12.17.3",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-astro": "^0.28.0",
