@@ -3,7 +3,7 @@
 import "../.astro/types.d.ts";
 
 interface InterfaceMetaEnv {
-  readonly DEPOY_HOOK: string;
+  readonly PUBLIC_DEPOY_HOOK: string;
 }
 
 interface ImportMeta {
