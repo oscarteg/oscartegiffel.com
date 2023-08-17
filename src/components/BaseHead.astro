@@ -1,6 +1,7 @@
 ---
 import { SITE_DESCRIPTION, SITE_LOGO, SITE_TITLE } from "../config";
 import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
 
 export type Props = {
   title?: string | undefined;
@@ -46,3 +47,5 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, logo = SITE_LOGO } =
 
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+<ViewTransitions fallback="swap" />

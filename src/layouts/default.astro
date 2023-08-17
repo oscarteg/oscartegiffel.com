@@ -29,6 +29,7 @@ const { prose = true } = Astro.props;
   >
     <Sidebar className="md:sticky md:top-20 justify-self-center" />
     <main
+      transition:animate="fade"
       class:list={[
         {
           ["prose prose-invert prose-headings:font-serif hover:prose-a:text-primary prose-a:transition prose-headings:tracking-wide"]:
