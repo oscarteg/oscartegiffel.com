@@ -16,7 +16,7 @@ function isCurrentUrl(url: string) {
   }
 </style>
 
-<aside class={className} transition:animate="fade">
+<aside class={className}>
   <nav class="flex flex-row sm:flex-col space-x-1 sm:space-x-0 sm:pr-10 my-2 sm:mt-0 space-y-0 sm:space-y-1">
     <a href="/" class:list={["text-neutral-300", { current: isCurrentUrl("/") }]}>home</a>
     <a href="/blog" class:list={["text-neutral-300", { current: isCurrentUrl("/blog") }]}>blog</a>

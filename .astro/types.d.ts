@@ -206,100 +206,114 @@ declare module 'astro:content' {
   slug: "01_better-react-props";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "03_tech-stack-2023.mdx": {
 	id: "03_tech-stack-2023.mdx";
   slug: "03_tech-stack-2023";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "04_maturity.mdx": {
 	id: "04_maturity.mdx";
   slug: "04_maturity";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "05_ssr-vs-react-server-components.mdx": {
 	id: "05_ssr-vs-react-server-components.mdx";
   slug: "05_ssr-vs-react-server-components";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "06_pattern-matching.mdx": {
 	id: "06_pattern-matching.mdx";
   slug: "06_pattern-matching";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "07_exhaustive-deps.mdx": {
 	id: "07_exhaustive-deps.mdx";
   slug: "07_exhaustive-deps";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "08_typesafety.mdx": {
 	id: "08_typesafety.mdx";
   slug: "08_typesafety";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "09_chess-engine-part-1.mdx": {
 	id: "09_chess-engine-part-1.mdx";
   slug: "09_chess-engine-part-1";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "10_drizzle.mdx": {
 	id: "10_drizzle.mdx";
   slug: "10_drizzle";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "11_journey_away_from_commercialization.mdx": {
 	id: "11_journey_away_from_commercialization.mdx";
   slug: "11_journey_away_from_commercialization";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "12_dont_use_fc.mdx": {
 	id: "12_dont_use_fc.mdx";
   slug: "12_dont_use_fc";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"13_server_actions.mdx": {
+	id: "13_server_actions.mdx";
+  slug: "13_server_actions";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 };
 "pages": {
+"blogs.mdx": {
+	id: "blogs.mdx";
+  slug: "blogs";
+  body: string;
+  collection: "pages";
+  data: InferEntrySchema<"pages">
+} & { render(): Render[".mdx"] };
 "resources.mdx": {
 	id: "resources.mdx";
   slug: "resources";
   body: string;
   collection: "pages";
-  data: any
+  data: InferEntrySchema<"pages">
 } & { render(): Render[".mdx"] };
 "uses.mdx": {
 	id: "uses.mdx";
   slug: "uses";
   body: string;
   collection: "pages";
-  data: any
+  data: InferEntrySchema<"pages">
 } & { render(): Render[".mdx"] };
 "workflow.mdx": {
 	id: "workflow.mdx";
   slug: "workflow";
   body: string;
   collection: "pages";
-  data: any
+  data: InferEntrySchema<"pages">
 } & { render(): Render[".mdx"] };
 };
 
@@ -311,5 +325,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	type ContentConfig = never;
+	type ContentConfig = typeof import("../src/content/config");
 }
