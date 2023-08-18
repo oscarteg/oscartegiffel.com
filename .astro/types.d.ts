@@ -208,23 +208,23 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"02_error_handling_in_typescript.mdx": {
-	id: "02_error_handling_in_typescript.mdx";
-  slug: "02_error_handling_in_typescript";
+"02_tech-stack-2023.mdx": {
+	id: "02_tech-stack-2023.mdx";
+  slug: "02_tech-stack-2023";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"03_tech-stack-2023.mdx": {
-	id: "03_tech-stack-2023.mdx";
-  slug: "03_tech-stack-2023";
+"03_maturity.mdx": {
+	id: "03_maturity.mdx";
+  slug: "03_maturity";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"04_maturity.mdx": {
-	id: "04_maturity.mdx";
-  slug: "04_maturity";
+"04_error_handling_in_typescript.mdx": {
+	id: "04_error_handling_in_typescript.mdx";
+  slug: "04_error_handling_in_typescript";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

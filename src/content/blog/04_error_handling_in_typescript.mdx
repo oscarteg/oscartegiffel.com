@@ -1,0 +1,110 @@
+---
+title: Effortless Error Handling with Result Monads in TypeScript"
+tags: [typescript]
+publishDate: 2023-08-11
+---
+
+In the world of TypeScript, one of the functionalities that often feels missing is a straightforward error type. While TypeScript provides the built-in `Error` type, it lacks a simple construct specifically designed to represent errors within functions. Many programming languages have embraced the concept of a `Result` type, so when will TypeScript catch up? Let's explore how to implement a minimalistic `Result` type in TypeScript and understand its usefulness.
+
+## The Result Type
+
+The `Result` type is a versatile construct that elegantly encapsulates the outcome of a function that may succeed or fail. In TypeScript, we can define our own `Result` type, enhancing the clarity of our code and minimizing the need for cumbersome try-catch blocks.
+
+```typescript
+// Normally I don't like to use enums in Typescript
+// but here it feels like the right thing to do
+enum ResultKind {
+  OK = "Ok",
+  ERR = "Err",
+}
+
+export type Result<T, E> = Ok<T> | Err<E>;
+
+interface ResultBase<A, E> {
+  kind: ResultKind;
+  map<B>(fn: (_: A) => B): Result<B, E>;
+  bind<B>(fn: (_: A) => Result<B, E>): Result<B, E>;
+  match<B>(obj: { ok: (_: A) => B; err: (_: E) => B }): B;
+}
+
+export type Ok<A> = Readonly<ResultBase<A, never> & { kind: ResultKind.OK; value: A }>;
+
+export function ok<A>(a: A): Ok<A> {
+  return {
+    kind: ResultKind.OK,
+    value: a,
+    map(fn) {
+      return ok(fn(this.value));
+    },
+    bind(fn) {
+      return fn(this.value);
+    },
+    match({ ok }) {
+      return ok(this.value);
+    },
+  };
+}
+
+export type Err<E> = Readonly<ResultBase<never, E> & { kind: ResultKind.ERR; error: E }>;
+
+export function err<E>(e: E): Err<E> {
+  return {
+    kind: ResultKind.ERR,
+    error: e,
+    map() {
+      return this;
+    },
+    bind() {
+      return this;
+    },
+    match({ err }) {
+      return err(this.error);
+    },
+  };
+}
+```
+
+## Using the Result Type
+
+Defining a function that returns a `Result` type is remarkably straightforward:
+
+```typescript
+// A function that performs division and returns a Result
+function divide(a: number, b: number): Result<number, string> {
+  if (b === 0) {
+    return err("Division by zero");
+  } else {
+    return ok(a / b);
+  }
+}
+
+// Example usage
+const result1: Result<number, string> = divide(10, 2); // Ok
+const result2: Result<number, string> = divide(8, 0); // Err
+
+// Pattern matching
+result1.match({
+  ok: (value) => console.log(`Result: ${value}`),
+  err: (error) => console.error(`Error: ${error}`),
+});
+
+result2.match({
+  ok: (value) => console.log(`Result: ${value}`),
+  err: (error) => console.error(`Error: ${error}`),
+});
+```
+
+## Benefits of the Result Monad
+
+Is this construct called a monad? Yes, indeed! A monad is a design pattern that simplifies handling various computations, including error handling. While our `Result` type exhibits monadic properties, the monad concept involves more complex ideas such as chaining operations and managing side effects.
+
+The `Result` type is immensely useful for:
+
+1. **Cleaner Error Handling:** By explicitly representing both success and error outcomes, the code becomes more readable and self-explanatory. The `match` method conveniently enables pattern matching for better control flow.
+
+2. **Reducing Boilerplate:** Try-catch blocks can introduce unnecessary noise. The `Result` type streamlines error handling, making the codebase cleaner and more focused.
+
+3. **Expressing Intent:** The use of a `Result` type clarifies the intent of a function. It signals that the function can yield either a successful result or an error, promoting better API design.
+
+In conclusion, our `Result` type implementation in TypeScript exemplifies the concept of a monad by providing a straightforward and clean way to manage function outcomes. While it simplifies error handling, it is just one facet of the broader monad design pattern, which encompasses various functional programming principles. Embracing monadic patterns like the `Result` type contributes to writing more robust and maintainable TypeScript code.
+
