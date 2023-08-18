@@ -208,6 +208,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"02_error_handling_in_typescript.mdx": {
+	id: "02_error_handling_in_typescript.mdx";
+  slug: "02_error_handling_in_typescript";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "03_tech-stack-2023.mdx": {
 	id: "03_tech-stack-2023.mdx";
   slug: "03_tech-stack-2023";

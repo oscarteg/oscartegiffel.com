@@ -2,26 +2,21 @@
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
+import type { Post } from "../models";
+import dayjs from "dayjs";
 
-type FrontMatter = {
-  title?: string;
-  description?: string | undefined;
+export type Props = Partial<Post["data"]> & {
   prose?: boolean;
 };
 
-export type Props = FrontMatter & {
-  title?: string;
-  description?: string | undefined;
-  frontmatter?: FrontMatter;
-};
+const { title, summary, publishDate } = Astro.props;
 
-const { title, description, frontmatter } = Astro.props;
 const { prose = true } = Astro.props;
 ---
 
 <html lang="en" class="text-white bg-zinc-900">
   <head>
-    <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
+    <BaseHead title={title} description={summary} />
   </head>
 
   <body
@@ -39,17 +34,18 @@ const { prose = true } = Astro.props;
     >
       <article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
         {
-          (title || frontmatter?.title) && (
-            <h1 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl text-white font-serif">
-              {title || frontmatter?.title}
+          title && (
+            <h1 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl text-white font-serif capitalize">
+              {title}
             </h1>
           )
         }
         {
-          (description || frontmatter?.description) && (
-            <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{description || frontmatter?.description}</p>
+          publishDate && (
+            <p class="mt-1 text-sm text-gray-500">Published at: {dayjs(publishDate).format("MMMM D, YYYY")}</p>
           )
         }
+        {summary && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{summary}</p>}
         <div class:list={["w-full"]}>
           <slot />
         </div>

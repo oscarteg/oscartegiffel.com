@@ -34,9 +34,11 @@ const {
           <p class="text-sm leading-6 text-gray-900">
             {
               tags.map((tag) => (
-                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-[#FFD900] ring-1 ring-inset ring-[#FFD900]/10">
-                  {tag}
-                </span>
+                <a href={`/tags/${tag}`}>
+                  <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-[#FFD900] ring-1 ring-inset ring-[#FFD900]/10">
+                    {tag}
+                  </span>
+                </a>
               ))
             }
           </p>

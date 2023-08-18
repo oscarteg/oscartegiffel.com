@@ -29,12 +29,6 @@ export async function getStaticPaths() {
 export const prerender = true;
 ---
 
-<DefaultLayout
-  prose
-  frontmatter={{
-    title: entry.data.title,
-    description: entry.data.summary,
-  }}
->
+<DefaultLayout prose {...entry.data}>
   <Content />
 </DefaultLayout>
