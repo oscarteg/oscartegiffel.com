@@ -1,5 +1,7 @@
 import type { File, Gist } from "./models";
 import { Octokit } from "octokit";
+import clsx, { type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 const octokit = new Octokit();
 
@@ -30,4 +32,8 @@ export async function fetchSnippets() {
       })),
     ),
   );
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
