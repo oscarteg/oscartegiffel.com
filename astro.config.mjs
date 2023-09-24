@@ -23,9 +23,6 @@ export default defineConfig({
       filter: (page) => !page.includes("/api/"),
     }),
   ],
-  experimental: {
-    viewTransitions: true,
-  },
 
   markdown: {
     shikiConfig: {

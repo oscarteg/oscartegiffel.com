@@ -6,52 +6,21 @@ tags: [typescript, react]
 draft: true
 ---
 
+## Prerequisites
+- [React Server Components](https://reactjs.org/blog/2020/12/21/data-fetching-with-react-server-components.html)
+- Basic knowledge of [Server Side Rendering](https://reactjs.org/docs/react-dom-server.html#rendertopipeablestream)
+
+Embarking on a journey through the history of web development, we transition from the basic Multi-Page Apps (MPAs) to the more intricate Single Page Apps (SPAs), and now, an exciting fusion called Progressively Enhanced Single Page Apps (PESPAs). This evolution sets the stage for exploring Server-Side Rendering (SSR) and the game-changing Server Components, promising a fresh approach to creating dynamic and interactive web experiences.
+
+## SSR
+- We use renderToPipeableStream. Other methods are renderToString to fetch only the HTML a single time.
+
 Notes: 
 - React Server Components does not hydrate
 - SSR sends a React readable string and not real HTML
 - NextJS no server components in a client component   
 
-
-I'm not going into deep detail about React  jj
-
-
-## Introduction
-- Briefly explain the significance of server-side rendering (SSR) and its benefits for web applications.
-- Introduce React Server Components as a new paradigm in web development.
-- Set the context for the blog post by highlighting the need for a more efficient approach to rendering in modern web applications.
-
-## Client-Side Rendering (CSR) vs. Server-Side Rendering (SSR)
-- Define and explain client-side rendering (CSR) and server-side rendering (SSR).
-- Highlight the key differences between the two approaches in terms of initial load time, SEO, and user experience.
-- Discuss the limitations of CSR and how it can lead to performance issues, especially in large-scale applications.
-
-## Introducing React Server Components
-- Provide an overview of React Server Components and their purpose in the React ecosystem.
-- Explain how React Server Components combine the benefits of SSR and client-side interactivity.
-- Discuss the motivation behind the development of React Server Components and how they address the limitations of traditional SSR and CSR.
-
-## How React Server Components Work
-- Dive into the technical aspects of React Server Components.
-- Explain the process of rendering server components on the server-side and sending the pre-rendered content to the client.
-- Illustrate the concept of granular server-side rendering and its impact on performance and scalability.
-
-## Benefits of React Server Components
-- Discuss the advantages of React Server Components over traditional SSR and CSR.
-- Explore the improved performance, reduced time-to-interactive, and enhanced SEO achieved through granular server-side rendering.
-- Highlight how React Server Components promote code splitting, leading to smaller JavaScript bundles and faster initial load times.
-
-## Reusability and Composition
-- Emphasize the reusability and composability of React Server Components, similar to client-side components.
-- Explain how React Server Components can be nested and composed, making the codebase cleaner and more maintainable.
-- Discuss the potential for code-sharing between client-side and server components.
-
-## The Future of React Server Components
-- Address the experimental nature of React Server Components and its current status in the React ecosystem.
-- Speculate on the potential impact of React Server Components on the future of web development.
-- Highlight the community's response and involvement in shaping the future of this new feature.
-
-## Conclusion
-- Recap the key points discussed in the blog post, summarizing the differences between SSR and React Server Components.
-- Emphasize the advantages of React Server Components in terms of performance, scalability, and user experience.
-- Encourage readers to explore and experiment with React Server Components as a promising solution for building modern web applications.
-
+## Sources
+- [The Web's Next Transition - Kent C Dodds](https://www.epicweb.dev/the-webs-next-transition)
+- [React SSR](https://react.dev/reference/react-dom/server/renderToPipeableStream#rendering-a-react-tree-as-html-to-a-nodejs-stream)
+- https://www.mux.com/blog/what-are-react-server-components
