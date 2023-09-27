@@ -1,5 +1,6 @@
 ---
 import Sidebar from "../components/Sidebar.astro";
+import Background from "../components/background-raster.astro";
 import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 import type { Post } from "../models";
@@ -22,6 +23,7 @@ const { prose = true } = Astro.props;
   <body
     class="antialiased container md:px-12 py-24 grid grid-cols-1 auto-rows-max sm:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
   >
+    <Background />
     <Sidebar className="md:sticky md:top-20 justify-self-center" />
     <main
       class:list={[
