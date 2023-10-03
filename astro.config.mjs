@@ -5,10 +5,18 @@ import vercel from "@astrojs/vercel/serverless";
 import { SITE_URL } from "./src/config";
 import sitemap from "@astrojs/sitemap";
 
+const shikiResourcePaths = Object.keys(
+  import.meta.glob([
+    "./node_modules/.pnpm/shiki@*/node_modules/shiki/languages/*.tmLanguage.json",
+    "./node_modules/.pnpm/shiki@*/node_modules/shiki/themes/*.json",
+  ]),
+);
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: vercel({
+    includeFiles: shikiResourcePaths,
     analytics: true,
   }),
   site: SITE_URL,

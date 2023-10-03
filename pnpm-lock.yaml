@@ -59,6 +59,9 @@ dependencies:
   postcss:
     specifier: ^8.4.29
     version: 8.4.30
+  shiki:
+    specifier: ^0.14.4
+    version: 0.14.4
   tailwind-merge:
     specifier: ^1.14.0
     version: 1.14.0
@@ -225,7 +228,7 @@ packages:
       remark-parse: 10.0.2
       remark-rehype: 10.1.0
       remark-smartypants: 2.0.0
-      shiki: 0.14.3
+      shiki: 0.14.4
       unified: 10.1.2
       unist-util-visit: 4.1.2
       vfile: 5.3.7
@@ -2353,7 +2356,7 @@ packages:
       resolve: 1.22.4
       semver: 7.5.4
       server-destroy: 1.0.1
-      shiki: 0.14.3
+      shiki: 0.14.4
       string-width: 6.1.0
       strip-ansi: 7.1.0
       tsconfig-resolver: 3.0.1
@@ -6687,8 +6690,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  /shiki@0.14.3:
-    resolution: {integrity: sha512-U3S/a+b0KS+UkTyMjoNojvTgrBHjgp7L6ovhFVZsXmBGnVdQ4K4U9oK0z63w538S91ATngv1vXigHCSWOwnr+g==}
+  /shiki@0.14.4:
+    resolution: {integrity: sha512-IXCRip2IQzKwxArNNq1S+On4KPML3Yyn8Zzs/xRgcgOWIr8ntIK3IKzjFPfjy/7kt9ZMjc+FItfqHRBg8b6tNQ==}
     dependencies:
       ansi-sequence-parser: 1.1.0
       jsonc-parser: 3.2.0
