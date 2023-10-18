@@ -1,5 +1,5 @@
 ---
-import { Code } from "astro/components";
+import { Prism } from "@astrojs/prism";
 import DefaultLayout from "../../layouts/default.astro";
 import { fetchSnippets } from "../../utils";
 
@@ -14,7 +14,7 @@ export const snippets = await fetchSnippets();
           <li class="py-4 prose">
             <h2 class="text-lg font-semibold text-zinc-100 hover:text-zinc-200">{snippet.description}</h2>
             {snippet.files.map((file: string) => (
-              <Code code={file} lang={"tsx"} theme={"poimandres"} wrap />
+              <Prism code={file} lang={"tsx"} />
             ))}
           </li>
         );

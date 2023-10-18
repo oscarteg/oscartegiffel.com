@@ -59,9 +59,6 @@ dependencies:
   postcss:
     specifier: ^8.4.31
     version: 8.4.31
-  shiki:
-    specifier: ^0.14.4
-    version: 0.14.4
   tailwind-merge:
     specifier: ^1.14.0
     version: 1.14.0

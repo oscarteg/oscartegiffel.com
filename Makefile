@@ -1,4 +1,2 @@
 run: 
-	pnpm build
-	
-	
+		pnpm build
