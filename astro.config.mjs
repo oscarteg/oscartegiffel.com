@@ -8,7 +8,8 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   output: "server",
   adapter: vercel({
-    analytics: true,
+    webAnalytics: true,
+    speedInsights: true,
   }),
   site: SITE_URL,
   integrations: [
@@ -22,7 +23,6 @@ export default defineConfig({
       filter: (page) => !page.includes("/api/"),
     }),
   ],
-
   markdown: {
     syntaxHighlight: "prism",
   },

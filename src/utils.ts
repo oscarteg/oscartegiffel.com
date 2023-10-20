@@ -8,15 +8,20 @@ const octokit = new Octokit();
 /**
  * Fetch contents of a file of a gist
  */
-async function fetchFile(file?: File): Promise<string> {
-  if (!file?.raw_url) return "";
-  return fetch(file.raw_url).then((res) => res.text());
+async function fetchFile(file?: File): Promise<File & { contents: string }> {
+  if (!file?.raw_url) {
+    return { ...file, contents: "" };
+  }
+
+  const contents = await fetch(file.raw_url).then((res) => res.text());
+
+  return {
+    ...file,
+    contents,
+  };
 }
 
-/**
- * Fetch all gists of a specific user
- */
-function fetchGists() {
+async function fetchGists() {
   return octokit.request("GET /users/{username}/gists", {
     username: "oscarteg",
   });
@@ -24,6 +29,7 @@ function fetchGists() {
 
 export async function fetchSnippets() {
   const gists = await fetchGists();
+
   return Promise.all(
     gists.data.map((gist: Gist) =>
       Promise.all(Object.values(gist.files).map(fetchFile)).then((files) => ({
