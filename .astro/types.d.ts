@@ -213,16 +213,16 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"05_ssr-vs-react-server-components.mdx": {
-	id: "05_ssr-vs-react-server-components.mdx";
-  slug: "05_ssr-vs-react-server-components";
+"05_pattern-matching.mdx": {
+	id: "05_pattern-matching.mdx";
+  slug: "05_pattern-matching";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"06_pattern-matching.mdx": {
-	id: "06_pattern-matching.mdx";
-  slug: "06_pattern-matching";
+"06_ssr-vs-react-server-components.mdx": {
+	id: "06_ssr-vs-react-server-components.mdx";
+  slug: "06_ssr-vs-react-server-components";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
