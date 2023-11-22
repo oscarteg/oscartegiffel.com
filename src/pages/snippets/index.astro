@@ -8,7 +8,7 @@ export const snippets = await fetchSnippets();
 ---
 
 <DefaultLayout prose={false} title={"Snippets"}>
-  <ul role="list" class="divide-y divide-zinc-700 flex flex-col">
+  <ul role="list" class="divide-y divide-zinc-700 flex flex-col mt-12">
     {
       snippets.map((snippet) => {
         return (
