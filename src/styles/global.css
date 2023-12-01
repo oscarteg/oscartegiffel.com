@@ -16,6 +16,10 @@ pre[class*="language-"] {
   a:hover {
     @apply transition;
   }
+
+  ::selection {
+    @apply bg-primary text-black;
+  }
 }
 
 /* Apercu Font Family */

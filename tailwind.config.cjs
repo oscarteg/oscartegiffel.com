@@ -5,7 +5,7 @@ module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{astro,ts,mdx,tsx}"],
   theme: {
     colors: {
-      primary: "#FFD900",
+      primary: "#fbdc4e",
       ...colors,
     },
     extend: {
