@@ -283,6 +283,20 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"15_advent_of_code.mdx": {
+	id: "15_advent_of_code.mdx";
+  slug: "15_advent_of_code";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"debugging.mdx": {
+	id: "debugging.mdx";
+  slug: "debugging";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 };
 "pages": {
 "blogs.mdx": {
