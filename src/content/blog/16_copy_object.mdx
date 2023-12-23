@@ -1,0 +1,86 @@
+---
+title: How to Copy an Object in Javascript
+publishDate: 2023-12-23
+tags: [typescript, javascript]
+---
+
+A common task in JavaScript, a language that is easy to learn but full of nuances, is copying objects. Let's explore how to do this effectively.
+
+### ES5 Clone Function
+
+In ES5, we often used a custom clone function:
+
+```javascript
+// ES5 clone function
+function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+var obj = { a: 1, b: 2, c: [1, 2, 3]};
+var copy = clone(obj);
+```
+
+### ES6 Spread Operator
+
+With ES6, we shifted to using the spread operator:
+
+```javascript
+// ES6 spread operator
+const obj = { a: 1, b: 2, c: [1, 2, 3]};
+const copy = { ...obj };
+```
+
+These were the primary solutions available at the time. However, both create a shallow copy, which can lead to unexpected behaviors.
+
+### Shallow Copy Issue
+
+A shallow copy only duplicates the first level of the object:
+
+```javascript
+const obj = { a: 1, b: 2, c: [1, 2, 3]};
+const copy = { ...obj };
+copy.c.push(4);
+console.log(obj.c); // Output: [1, 2, 3, 4]
+console.log(copy.c); // Output: [1, 2, 3, 4]
+```
+
+The modification of `copy.c` also affects `obj.c` because they reference the same array. This illustrates the limitations of shallow copying.
+
+### Deep Copy with JSON Methods
+
+To create a deep copy, one common method is using JSON:
+
+```javascript 
+const obj = { a: 1, b: 2, c: [1, 2, 3]};
+const copy = JSON.parse(JSON.stringify(obj));
+copy.a = 3;
+console.log(obj.a); // Output: 1
+console.log(copy.a); // Output: 3
+```
+
+This method is straightforward but has limitations, including poor performance and inability to handle certain data types and circular references.
+
+### Deep Copy with `structuredClone`
+
+The most recent and optimal solution is `structuredClone`:
+
+```javascript
+const obj = { a: 1, b: 2, c: [1, 2, 3]};
+const copy = structuredClone(obj);
+copy.a = 3;
+console.log(obj.a); // Output: 1
+console.log(copy.a); // Output: 3
+```
+
+`structuredClone` is fast, supports all data types, and handles circular references. It's supported by all major browsers.
+
+> **Note:** `structuredClone` does not clone functions, DOM nodes, property descriptors, setters, or getters. Also, the prototype chain is not duplicated, so the clone is no longer an instance of the original class.
+
+### Conclusion
+
+Understanding the nuances of copying objects in JavaScript is crucial for ensuring data integrity and avoiding unexpected behaviors in your applications. Depending on your needs, you can choose between shallow and deep copying methods, each with its own use cases and limitations.

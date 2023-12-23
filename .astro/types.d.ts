@@ -290,6 +290,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"16_copy_object.mdx": {
+	id: "16_copy_object.mdx";
+  slug: "16_copy_object";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "debugging.mdx": {
 	id: "debugging.mdx";
   slug: "debugging";
@@ -309,6 +316,13 @@ declare module 'astro:content' {
 "resources.mdx": {
 	id: "resources.mdx";
   slug: "resources";
+  body: string;
+  collection: "pages";
+  data: InferEntrySchema<"pages">
+} & { render(): Render[".mdx"] };
+"system.mdx": {
+	id: "system.mdx";
+  slug: "system";
   body: string;
   collection: "pages";
   data: InferEntrySchema<"pages">
