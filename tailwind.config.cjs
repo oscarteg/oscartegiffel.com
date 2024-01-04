@@ -10,7 +10,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["Apercu", ...fontFamily.sans],
+        sans: ["Config Rounded", ...fontFamily.sans],
         mono: ["Dank Mono", ...fontFamily.mono],
         serif: ["Ogg", ...fontFamily.serif],
       },

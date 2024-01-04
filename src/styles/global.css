@@ -95,9 +95,30 @@ pre[class*="language-"] {
 }
 
 /* Ogg Font Family */
+
 @font-face {
   font-family: "Ogg";
   src: url("/fonts/ogg.ttf") format("opentype");
   font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Config Rounded";
+  src: url("/fonts/Config-Rounded-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Config Rounded";
+  src: url("/fonts/Config-Rounded-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Config Rounded";
+  src: url("/fonts/Config-Rounded-Bold.otf") format("opentype");
+  font-weight: 700;
   font-style: normal;
 }
