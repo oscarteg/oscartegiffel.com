@@ -1,0 +1,18 @@
+---
+const { href } = Astro.props;
+const path = Astro.url.pathname;
+
+const isActive = href === "/" ? path === href : path.startsWith(href);
+---
+
+<style>
+  a {
+    @apply rounded p-2 hover:text-primary transition font-semibold flex;
+  }
+
+  a.current {
+    @apply bg-neutral-700 text-primary;
+  }
+</style>
+
+<a href={href} class:list={["text-neutral-300", { current: isActive }]}><slot /></a>

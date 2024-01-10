@@ -6,7 +6,7 @@ import { SITE_URL } from "./src/config";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  output: "server",
+  output: "hybrid",
   adapter: vercel({
     webAnalytics: true,
     speedInsights: true,
@@ -26,4 +26,5 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "prism",
   },
+  prefetch: true,
 });

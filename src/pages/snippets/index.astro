@@ -3,7 +3,7 @@ import { Prism } from "@astrojs/prism";
 import DefaultLayout from "../../layouts/default.astro";
 import { fetchSnippets } from "../../utils";
 
-export const prerender = false;
+export const prerender = true;
 export const snippets = await fetchSnippets();
 ---
 

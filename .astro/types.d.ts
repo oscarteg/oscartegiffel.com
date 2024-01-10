@@ -165,11 +165,11 @@ declare module 'astro:content' {
 			? {
 					collection: C;
 					slug: ValidContentEntrySlug<C>;
-			  }
+				}
 			: {
 					collection: C;
 					id: keyof DataEntryMap[C];
-			  }
+				}
 	>;
 	// Allow generic `string` to avoid excessive type errors in the config
 	// if `dev` is not running to update as you edit.
@@ -306,41 +306,6 @@ declare module 'astro:content' {
 } & { render(): Render[".mdx"] };
 };
 "pages": {
-"blogs.mdx": {
-	id: "blogs.mdx";
-  slug: "blogs";
-  body: string;
-  collection: "pages";
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] };
-"resources.mdx": {
-	id: "resources.mdx";
-  slug: "resources";
-  body: string;
-  collection: "pages";
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] };
-"system.mdx": {
-	id: "system.mdx";
-  slug: "system";
-  body: string;
-  collection: "pages";
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] };
-"uses.mdx": {
-	id: "uses.mdx";
-  slug: "uses";
-  body: string;
-  collection: "pages";
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] };
-"workflow.mdx": {
-	id: "workflow.mdx";
-  slug: "workflow";
-  body: string;
-  collection: "pages";
-  data: InferEntrySchema<"pages">
-} & { render(): Render[".mdx"] };
 };
 
 	};

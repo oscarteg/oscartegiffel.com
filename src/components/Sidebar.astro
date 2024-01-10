@@ -1,33 +1,15 @@
 ---
+import Link from "./Link.astro";
 const { className } = Astro.props;
-
-function isCurrentUrl(url: string) {
-  return Astro.url.pathname === url;
-}
 ---
-
-<style>
-  a {
-    @apply rounded p-2 hover:text-primary transition font-semibold flex;
-  }
-
-  a.current {
-    @apply bg-neutral-700 text-primary;
-  }
-</style>
 
 <aside class={className}>
   <nav class="sm:flex flex-row sm:flex-col space-x-1 sm:space-x-0 sm:pr-10 my-2 sm:mt-0 space-y-0 sm:space-y-1">
-    <a href="/" class:list={["text-neutral-300", { current: isCurrentUrl("/") }]}>home</a>
-    <a href="/blog" class:list={["text-neutral-300", { current: isCurrentUrl("/blog") }]}>blog</a>
-    <a href="/pages/uses" class:list={["text-neutral-300", { current: isCurrentUrl("/pages/uses") }]}>uses</a>
-    <a href="/pages/workflow" class:list={["text-neutral-300", { current: isCurrentUrl("/pages/workflow") }]}
-      >workflow</a
-    >
-    <a href="/pages/resources" class:list={["text-neutral-300", { current: isCurrentUrl("/pages/resources") }]}
-      >resources</a
-    >
-
-    <a href="/snippets" class:list={["text-neutral-300", { current: isCurrentUrl("/snippets") }]}>snippets</a>
+    <Link href="/">home</Link>
+    <Link href="/blog">blog</Link>
+    <Link href="/uses">uses</Link>
+    <Link href="/workflow">workflow</Link>
+    <Link href="/resources">resources</Link>
+    <Link href="/snippets">snippets</Link>
   </nav>
 </aside>

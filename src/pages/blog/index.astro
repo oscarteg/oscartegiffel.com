@@ -1,20 +1,16 @@
 ---
 import { getCollection } from "astro:content";
-import dayjs from "dayjs";
 import BlogPost from "../../components/BlogPost.astro";
 import DefaultLayout from "../../layouts/default.astro";
 import type { Post } from "../../models";
+import { isPublished, sortAsc } from "../../utils";
 
-const isProd = import.meta.env.PROD;
-const posts = await getCollection("blog");
-const filteredPosts = posts
-  .filter(({ data }: Post) => (isProd ? !data.draft : true))
-  .filter(({ data }: Post) => (isProd ? dayjs(data.publishDate).isBefore(dayjs()) : true))
-  .sort((a: Post, b: Post) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const posts = await getCollection("blog", isPublished);
+const sortedPosts = posts.sort(sortAsc);
 ---
 
 <DefaultLayout prose={false} title={"All Posts"}>
   <ul role="list" class={"divide-y divide-zinc-700 flex flex-col mt-12"}>
-    {filteredPosts.map((post: Post) => <BlogPost post={post} />)}
+    {sortedPosts.map((post: Post) => <BlogPost post={post} />)}
   </ul>
 </DefaultLayout>

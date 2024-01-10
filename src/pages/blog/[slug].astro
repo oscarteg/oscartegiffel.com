@@ -1,6 +1,15 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import DefaultLayout from "../../layouts/default.astro";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
 // 1. Get the slug from the incoming server request
 const { slug } = Astro.params;
 
@@ -17,16 +26,6 @@ if (entry === undefined) {
 }
 // 4. (Optional) Render the entry to HTML in the template
 const { Content } = await entry.render();
-
-export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
-}
-
-export const prerender = true;
 ---
 
 <DefaultLayout prose {...entry.data}>
