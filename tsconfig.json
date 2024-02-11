@@ -6,8 +6,6 @@
         "name": "@astrojs/ts-plugin"
       }
     ],
-    "types": ["vite/client"],
-    "typeRoots": ["./node_modules/@types/", "./types", "./node_modules"],
     "strictNullChecks": true,
     "paths": {
       "@components/*": ["./src/components/*"],
