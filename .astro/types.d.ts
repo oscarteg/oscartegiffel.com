@@ -185,30 +185,37 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
-"011_my-system.mdx": {
-	id: "011_my-system.mdx";
-  slug: "011_my-system";
+"011_tech-stack-2023.mdx": {
+	id: "011_tech-stack-2023.mdx";
+  slug: "011_tech-stack-2023";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"01_better-react-props.mdx": {
-	id: "01_better-react-props.mdx";
-  slug: "01_better-react-props";
+"012_maturity.mdx": {
+	id: "012_maturity.mdx";
+  slug: "012_maturity";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"02_tech-stack-2023.mdx": {
-	id: "02_tech-stack-2023.mdx";
-  slug: "02_tech-stack-2023";
+"013_my-system.mdx": {
+	id: "013_my-system.mdx";
+  slug: "013_my-system";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"03_maturity.mdx": {
-	id: "03_maturity.mdx";
-  slug: "03_maturity";
+"02_better-react-props.mdx": {
+	id: "02_better-react-props.mdx";
+  slug: "02_better-react-props";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"03_drizzle.mdx": {
+	id: "03_drizzle.mdx";
+  slug: "03_drizzle";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
@@ -234,23 +241,16 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"07_colocation.mdx": {
+	id: "07_colocation.mdx";
+  slug: "07_colocation";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "08_typesafety.mdx": {
 	id: "08_typesafety.mdx";
   slug: "08_typesafety";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"10_drizzle.mdx": {
-	id: "10_drizzle.mdx";
-  slug: "10_drizzle";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"11_journey_away_from_commercialization.mdx": {
-	id: "11_journey_away_from_commercialization.mdx";
-  slug: "11_journey_away_from_commercialization";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

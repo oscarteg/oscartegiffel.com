@@ -1,87 +1,40 @@
 ---
-title: Pattern matching in Typescript
+title: "Pattern Matching: From Rust to TypeScript"
 tags: [typescript, rust, functional programming]
-publishDate: 2023-10-20
-draft: true
+publishDate: 2024-09-01
 ---
 
-I love learning new programming languages and discovering improvements i can make in my skills. One thing I discovered a while ago was _pattern matching_ in Rust and was wondering if we could have the same in Typescript.
+As a developer constantly seeking to refine my skills, I've found pattern matching to be a powerful technique, particularly prevalent in functional programming and languages like Rust. This post explores how we can bring similar functionality to TypeScript.
 
-Welcome to this exploration of pattern matching, a powerful technique used in functional programming. However, it’s not limited to that paradigm alone; for example, Rust makes extensive use of it. If you’re a TypeScript developer interested in bringing the elegance and utility of pattern matching into your projects, you’re in the right place. In this post, we’ll examine how pattern matching is implemented in Rust and how you can use similar constructs in TypeScript.
+## The Power of Pattern Matching
 
-## Problem Statement
+Pattern matching is a feature that allows you to match complex data structures against predefined patterns. It's particularly useful when dealing with diverse data formats or complex conditional logic.
 
-Imagine you are building a weather forecasting application. You receive data in various formats—XML, JSON, plain text, etc.—and from multiple providers. You must filter this data to extract essential information like temperature, wind speed, and humidity. This is a typical scenario where pattern matching shines. In a language that supports pattern matching out-of-the-box, this could be a breeze. However, if the language lacks native support, like JavaScript, you’ll find yourself bogged down with complex if-else conditional logic, making your code less readable and harder to maintain.
+Consider a weather forecasting application that receives data in various formats (XML, JSON, plain text) from multiple providers. Pattern matching can simplify the extraction of essential information like temperature, wind speed, and humidity, making your code more readable and maintainable.
 
-Great, let’s move on to the next sections where we’ll dive deeper into the technical details. Following your outline, these sections will focus on the solutions offered by Rust and TypeScript for pattern matching.
+## Rust's Native Pattern Matching
 
-## Rust’s Approach to Pattern Matching
-
-Rust provides a native solution for pattern matching using the `match` keyword. This feature is incredibly versatile, allowing you to match against literals, variables, and even destructured types. Here’s how it works:
-
-```rust
-match VALUE {
-    PATTERN => EXPRESSION,
-    PATTERN => EXPRESSION,
-    PATTERN => EXPRESSION,
-}
-```
-
-For example, if you’re dealing with an enum like `Weather`, Rust makes it straightforward to match each condition.
+Rust provides built-in pattern matching using the `match` keyword:
 
 ```rust
 enum Weather {
-	Sunny,
-	Cloudy,
-	Rainy
+    Sunny,
+    Cloudy,
+    Rainy
 }
 
 fn print_weather(weather: Weather) {
-	match weather {
-		Weather::Sunny => println!(“It’s a sunny day!”),
-		Weather::Cloudy => println!(“It’s a cloudy day.”),
-		Weather::Rainy => println!(“It’s raining outside.”),
-	}
-}
-
-```
-
-### Rust: Exhaustive Checking Ensures All Cases Are Handled
-
-For example, if you later added a `BadRequest` variant to the `HttpResponse` enum in Rust:
-
-```rust
-enum HttpResponse {
-    Ok(String),
-    NotFound,
-    Unauthorized,
-    BadRequest,
-    ServerError(u16),
-    Unknown,
-}
-
-```
-
-If you don’t update your `match` expression to handle this new variant, the Rust compiler will throw an error, forcing you to handle the new case:
-
-```rust
-fn handle_response(response: HttpResponse) {
-    match response {
-        HttpResponse::Ok(data) => {
-            // ...
-        },
-        // Compiler will error here, telling you that you missed the `BadRequest` variant
-        // ...
+    match weather {
+        Weather::Sunny => println!("It's a sunny day!"),
+        Weather::Cloudy => println!("It's a cloudy day."),
+        Weather::Rainy => println!("It's raining outside."),
     }
 }
-
 ```
-
-By enforcing exhaustive checking, Rust ensures that you haven’t missed any cases, effectively preventing potential bugs.
 
 ### Exhaustive Checking in Rust
 
-One of the key strengths of Rust’s pattern matching is exhaustive checking, which forces you to handle all potential cases, thereby reducing bugs.
+One of Rust's key strengths is exhaustive checking, which ensures all potential cases are handled:
 
 ```rust
 enum TrafficLight {
@@ -97,211 +50,124 @@ fn action_based_on_light(light: TrafficLight) {
         TrafficLight::Green => go(),
     }
 }
-
 ```
 
-In this example, omitting any of the `TrafficLight` variants would result in a compilation error, ensuring that all scenarios are handled.
+Omitting any `TrafficLight` variant would result in a compilation error, preventing potential bugs where a case is not handled. This is a fairly trivial example, but let's look at a more complex use case:
 
-## TypeScript’s Take on Pattern Matching
+```rust
+enum Message {
+    Quit,
+    Move(i32, i32),
+    Write(String),
+    ChangeColor(i32, i32, i32),
+    Login(String, Option<String>),
+}
 
-While TypeScript doesn’t offer built-in pattern matching, it has discriminated unions and the `switch` statement, which together can mimic some of the functionality.
+struct User { id: u32, name: String, active: bool }
+
+fn process_message(msg: Message, user: Option<User>) {
+    match msg {
+        Message::Quit => println!("Quitting"),
+        Message::Move(x, y) => println!("Moving to ({}, {})", x, y),
+        Message::Write(text) if text.len() < 10 => println!("Short: {}", text),
+        Message::Write(text) => println!("Long: {:.10}...", text),
+        Message::ChangeColor(r, g, b) => println!("Color: RGB({},{},{})", r, g, b),
+        Message::Login(name, Some(pass)) if pass.len() >= 8 => println!("{} logged in", name),
+        Message::Login(name, _) => println!("Login failed for {}", name),
+    }
+
+    match user {
+        Some(User { id, name, active: true }) => println!("Active: {} (ID: {})", name, id),
+        Some(User { name, .. }) => println!("Inactive: {}", name),
+        None => println!("No user logged in"),
+    }
+}
+```
+
+This complex example demonstrates several advanced features of Rust's pattern matching:
+
+1. Enum matching with different variants
+2. Tuple destructuring (e.g., `Message::Move(x, y)`)
+3. Guards with `if` conditions (e.g., `if text.len() < 10`)
+4. Matching on `Option` types
+5. Struct destructuring (e.g., `User { id, name, active: true }`)
+6. Using the `..` wildcard to ignore remaining fields
+
+These features allow for concise and expressive handling of complex data structures and conditions.
+
+## TypeScript's Approach
+
+While TypeScript lacks native pattern matching, it offers alternatives:
 
 ```typescript
 type Shape =
-  | { kind: ‘circle’; radius: number }
-  | { kind: ‘square’; sideLength: number }
-  | { kind: ‘rectangle’; width: number; height: number };
+  | { kind: "circle"; radius: number }
+  | { kind: "square"; sideLength: number }
+  | { kind: "rectangle"; width: number; height: number };
 
 function calculateArea(shape: Shape): number {
   switch (shape.kind) {
-    case ‘circle’:
+    case "circle":
       return Math.PI * shape.radius ** 2;
-    case ‘square’:
+    case "square":
       return shape.sideLength ** 2;
-    case ‘rectangle’:
+    case "rectangle":
       return shape.width * shape.height;
     default:
-      throw new Error(‘Invalid shape’);
+      throw new Error("Invalid shape");
   }
 }
-
 ```
 
-### Libraries for Enhanced Pattern Matching in TypeScript
-
-To bridge the gap, TypeScript developers can also utilize libraries like `ts-pattern` for more robust pattern matching, similar to Rust’s capabilities.
+Libraries like `ts-pattern` can enhance TypeScript's pattern matching capabilities. Here's a more complex example similar to the Rust one:
 
 ```typescript
-import { match, P } from ‘ts-pattern’;
+import { match, P } from "ts-pattern";
 
-type Data =
-  | { type: ‘text’; content: string }
-  | { type: ‘img’; src: string };
+type Message =
+  | { type: "Quit" }
+  | { type: "Move"; x: number; y: number }
+  | { type: "Write"; text: string }
+  | { type: "ChangeColor"; r: number; g: number; b: number }
+  | { type: "Login"; name: string; password?: string };
 
-const result = match(data)
-  .with({ type: ‘text’ }, (data) => /* handle text data */)
-  .with({ type: ‘img’, src: P.select() }, (src) => /* handle image data */)
-  .exhaustive();
-```
+type User = { id: number; name: string; active: boolean };
 
-## Comparing Rust and TypeScript
-
-Both Rust and TypeScript offer compelling, albeit different, approaches to pattern matching. Rust provides native support with exhaustive checking, making it a powerful feature for robust and type-safe code. TypeScript, on the other hand, offers flexibility through discriminated unions and libraries, albeit without the strictness of exhaustive checking at the compiler level.
-
-### Pros and Cons
-
-#### Rust
-
-**Pros:**
-
-1. **Type Safety**: Exhaustive checking ensures you handle all cases, enhancing type safety.
-2. **Expressiveness**: It allows for deep matching, nested destructuring, and more.
-3. **Readability**: Clearer and more concise code that is easier to maintain.
-
-**Cons:**
-
-1. **Learning Curve**: The exhaustive nature may be challenging for beginners.
-2. **Verbosity**: Complex nested patterns can sometimes lead to verbose code.
-
-#### TypeScript
-
-**Pros:**
-
-1. **Flexibility**: The `switch` statement and discriminated unions offer a good degree of flexibility.
-2. **Extensibility**: Libraries like `ts-pattern` provide even more robust options.
-3. **Ease of Adoption**: Easier to integrate into existing JavaScript projects.
-
-**Cons:**
-
-1. **Limited by JavaScript**: As a superset of JavaScript, TypeScript inherits some of its limitations.
-2. **No Exhaustive Checking**: The lack of exhaustive checking may result in runtime errors.
-
-## Practical Use-Cases
-
-### Rust
-
-- **Compilers and Interpreters**: Pattern matching aids in parsing and tokenization, simplifying the code logic.
-- **Data Transformation Pipelines**: Extracting, transforming, and loading (ETL) data becomes more straightforward.
-
-### TypeScript
-
-- **Redux Reducers**: Enhances code readability and maintainability.
-- **API Responses**: Allows for more robust handling of different API response shapes.
-
-### Additional Rust Examples
-
-#### Using Guards in Rust
-
-You can use guards in Rust’s pattern matching to add conditions:
-
-```rust
-fn describe_number(x: i32) {
-    match x {
-        n if n > 0 => println!(“Positive”),
-        0 => println!(“Zero”),
-        _ => println!(“Negative”),
-    }
-}
-```
-
-#### Matching with Ranges
-
-Rust allows you to match numeric ranges, which can be handy:
-
-```rust
-fn grade(score: u8) {
-    match score {
-        90..=100 => println!(“A”),
-        80..=89 => println!(“B”),
-        70..=79 => println!(“C”),
-        _ => println!(“F”),
-    }
-}
-
-```
-
-### Additional TypeScript Examples
-
-#### Using `if` with Discriminated Unions
-
-In TypeScript, you can use `if` statements for a more nuanced handling:
-
-```typescript
-interface Circle { type: ‘circle’; radius: number; }
-
-interface Square { type: ‘square’; side: number; }
-
-type Shape = Circle | Square;
-
-const printArea = (shape: Shape) => {
-  if (shape.type === ‘circle’) {
-    console.log(`Area of circle: ${Math.PI * shape.radius ** 2}`);
-  } else {
-    console.log(`Area of square: ${shape.side ** 2}`);
-  }
-};
-```
-
-### TypeScript: Simulating Exhaustive Checking
-
-In TypeScript, you could achieve a similar effect using a helper function that ensures exhaustiveness. While TypeScript doesn’t enforce this out of the box, you can manually introduce this feature. Here’s how:
-
-First, define a helper function:
-
-```typescript
-function assertNever(x: never): never {
-    throw new Error(“Unexpected object: “ + x);
-}
-```
-
-Then, use it in the `default` case of your `switch` statement:
-
-```typescript
-type HttpResponse =
-  | { type: ‘ok’; data: string }
-  // ... (other types)
-
-function handleResponse(response: HttpResponse) {
-  switch (response.type) {
-    // ... (other cases)
-    default:
-      assertNever(response);
-  }
-}
-
-```
-
-With this, if you add a new variant to `HttpResponse` and forget to handle it in `handleResponse`, TypeScript will produce a compile-time error on the `assertNever(response);` line.
-
-#### Nested Pattern Matching with ts-pattern
-
-You can achieve nested pattern matching using libraries like `ts-pattern`:
-
-```typescript
-import { match, __ } from ‘ts-pattern’;
-
-type NestedShape =
-  | { type: ‘nested’; shape: Shape }
-  | Shape;
-
-const handleNestedShape = (shape: NestedShape) =>
-  match(shape)
-    .with({ type: ‘nested’, shape: { type: ‘circle’, radius: __ } }, ({ radius }) => `Nested circle with radius ${radius}`)
-    .with({ type: ‘circle’, radius: __ }, radius => `Simple circle with radius ${radius}`)
-    .with({ type: ‘square’, side: __ }, side => `Square with side ${side}`)
+function processMessage(msg: Message, user: User | null) {
+  match(msg)
+    .with({ type: "Quit" }, () => console.log("Quitting"))
+    .with({ type: "Move", x: P.number, y: P.number }, ({ x, y }) => console.log(`Moving to (${x}, ${y})`))
+    .with({ type: "Write", text: P.when((t) => t.length < 10) }, ({ text }) => console.log(`Short: ${text}`))
+    .with({ type: "Write" }, ({ text }) => console.log(`Long: ${text.slice(0, 10)}...`))
+    .with({ type: "ChangeColor", r: P.number, g: P.number, b: P.number }, ({ r, g, b }) =>
+      console.log(`Color: RGB(${r},${g},${b})`),
+    )
+    .with({ type: "Login", name: P.string, password: P.when((p) => p && p.length >= 8) }, ({ name }) =>
+      console.log(`${name} logged in`),
+    )
+    .with({ type: "Login" }, ({ name }) => console.log(`Login failed for ${name}`))
     .exhaustive();
+
+  match(user)
+    .with({ active: true }, ({ id, name }) => console.log(`Active: ${name} (ID: ${id})`))
+    .with({ active: false }, ({ name }) => console.log(`Inactive: ${name}`))
+    .with(null, () => console.log("No user logged in"))
+    .exhaustive();
+}
 ```
 
-Exhaustive checking ensures that all possible cases are handled in a `match` expression in Rust or a `switch` statement in TypeScript. This is particularly useful when the codebase evolves and new variants or types are added, helping prevent bugs that could be introduced by unhandled cases.
+This TypeScript example using `ts-pattern` demonstrates similar capabilities to the Rust version, including pattern matching on complex structures, guard conditions, and exhaustiveness checking.
 
-### Summary
+## Practical Use Cases
 
-Exhaustive checking helps to make your code safer and more maintainable by ensuring that all cases are explicitly handled. This is crucial in complex systems where overlooking a single case can lead to subtle, hard-to-detect bugs.
+Pattern matching shines in several real-world scenarios:
 
-Incorporating this discussion on exhaustive checking into your blog post will offer a more rounded view, emphasizing not just the what and how but also the why of pattern matching. Would you like to proceed with adding this section?
+1. **State Machines**: Managing complex application states and transitions.
+2. **Data Parsing**: Handling various data formats in ETL (Extract, Transform, Load) processes.
+3. **Error Handling**: Providing detailed and context-specific error messages.
+4. **Game Development**: Managing different game states, events, or character behaviors.
+5. **Compiler Design**: Parsing and processing abstract syntax trees.
 
-## Summary and Conclusion
+## Conclusion
 
-In the ever-evolving landscape of programming, pattern matching stands as a testament to how older, proven concepts can find new life in modern languages. Rust and TypeScript each offer their unique flavor, optimized for their ecosystems and target audiences. If you’re a developer working with either (or both) of these languages, understanding and leveraging pattern matching can lead to cleaner, more efficient, and robust code.
-
-Whether you aim for the type safety and expressiveness in Rust or the flexibility and ease of adoption in TypeScript, pattern matching has a place in your coding toolbox.
+Pattern matching, whether native in Rust or simulated in TypeScript, offers powerful tools for creating cleaner, more efficient, and robust code. As you explore these techniques, consider how they can enhance your projects and coding style.

@@ -13,7 +13,7 @@ const {
   post: {
     id,
     slug,
-    data: { title, summary, tags, publishDate },
+    data: { title, summary, tags },
   },
 } = Astro.props;
 ---
@@ -41,9 +41,6 @@ const {
                 </a>
               ))
             }
-          </p>
-          <p class="mt-1 text-xs leading-5 text-gray-500 whitespace-nowrap">
-            Published <time datetime={publishDate.toString()}>{dayjs(publishDate).fromNow()}</time>
           </p>
         </div>
 
