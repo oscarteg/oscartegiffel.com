@@ -2,10 +2,9 @@
 title: Moving to Drizzle and back to Prisma
 tags: [typescript, orm]
 publishDate: 2023-09-15
-draft: true
 ---
 
-I always encourage to try new things and to be an advocate of my own advice, I wanted to try a diffent ORM. I wanted to try Drizzle. 
+I always encourage to try new things and to be an advocate of my own advice, I wanted to try a diffent ORM. I wanted to try Drizzle.
 
 At first I want my ORM to provide a good DX. A simple clean API that let's me create queries and mutations in a simple way. I also want it to be type safe. I want to be able to use Typescript and have the ORM provide me with type safety.
 
@@ -23,47 +22,52 @@ export const groups = mysqlTable("groups", {
   id: varchar("id", { length: 256 }).primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
 });
-
 ```
 
-> Note: I use varchar as my id because I create my ids in the application and not in the database. I use uuids for that. MySQL does not have `returning` so you can only fetch the last inserted id with `LAST_INSERT_ID()`. Because this function works on a per connection basis and we are creating this application serverless I want to prevent the possiblity of assigning a resource to the wrong id. 
+> Note: I use varchar as my id because I create my ids in the application and not in the database. I use uuids for that. MySQL does not have `returning` so you can only fetch the last inserted id with `LAST_INSERT_ID()`. Because this function works on a per connection basis and we are creating this application serverless I want to prevent the possiblity of assigning a resource to the wrong id.
 
-I want to create a many-to-many relationship between these tables. At first you have to create the junction table yourself. Now that is not a big issue but still a little obstacel. Let's do that.
-
+I want to create a many-to-many relationship between these tables. At first you have to create the junction table yourself. Now that is not a big issue but still a little obstacle. Let's do that.
 
 ```ts
 export const usersRelations = relations(users, ({ many }) => ({
-	usersToGroups: many(usersToGroups),
+  usersToGroups: many(usersToGroups),
 }));
- 
+
 export const groupsRelations = relations(groups, ({ many }) => ({
-	usersToGroups: many(usersToGroups),
+  usersToGroups: many(usersToGroups),
 }));
- 
-export const usersToGroups = mysqlTable('users_to_groups', {
-		userId: varchar('user_id').notNull().references(() => users.id),
-		groupId: varchar('group_id').notNull().references(() => groups.id),
-	}, (t) => ({
-		pk: primaryKey(t.userId, t.groupId),
-	}),
+
+export const usersToGroups = mysqlTable(
+  "users_to_groups",
+  {
+    userId: varchar("user_id")
+      .notNull()
+      .references(() => users.id),
+    groupId: varchar("group_id")
+      .notNull()
+      .references(() => groups.id),
+  },
+  (t) => ({
+    pk: primaryKey(t.userId, t.groupId),
+  }),
 );
- 
+
 export const usersToGroupsRelations = relations(usersToGroups, ({ one }) => ({
-	group: one(groups, {
-		fields: [usersToGroups.groupId],
-		references: [groups.id],
-	}),
-	user: one(users, {
-		fields: [usersToGroups.userId],
-		references: [users.id],
-	}),
+  group: one(groups, {
+    fields: [usersToGroups.groupId],
+    references: [groups.id],
+  }),
+  user: one(users, {
+    fields: [usersToGroups.userId],
+    references: [users.id],
+  }),
 }));
 ```
 
 This seems alright. Let's look at the api it provides and what it returns.
 
-
 Fetching a single user with a group:
+
 ```ts
 await db.query.users.findFirst({
   with: {
@@ -85,22 +89,17 @@ The with field can be passed to include the object
   "id": "XRdUD20AfH422nXKI72HW",
   "name": "test",
   "groups": [
-      {
-          "userId": "XRdUD20AfH422nXKI72HW",
-          "groupId": "_VQnVW4cZj4HvnCC1W9Lr",
-          "group": {
-              "id": "_VQnVW4cZj4HvnCC1W9Lr",
-              "name": "sdf",
-              "description": "sdf",
-              "quantity": 0,
-              "unit": "kg"
-        }
+    {
+      "userId": "XRdUD20AfH422nXKI72HW",
+      "groupId": "_VQnVW4cZj4HvnCC1W9Lr",
+      "group": {
+        "id": "_VQnVW4cZj4HvnCC1W9Lr",
+        "name": "sdf",
+        "description": "sdf",
+        "quantity": 0,
+        "unit": "kg"
+      }
     }
-  ],
+  ]
 }
 ```
-
-
-
-
-

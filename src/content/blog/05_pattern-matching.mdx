@@ -30,18 +30,18 @@ match VALUE {
 For example, if you’re dealing with an enum like `Weather`, Rust makes it straightforward to match each condition.
 
 ```rust
-enum Weather { 
-	Sunny, 
-	Cloudy, 
+enum Weather {
+	Sunny,
+	Cloudy,
 	Rainy
-} 
+}
 
-fn print_weather(weather: Weather) { 
-	match weather { 
+fn print_weather(weather: Weather) {
+	match weather {
 		Weather::Sunny => println!(“It’s a sunny day!”),
 		Weather::Cloudy => println!(“It’s a cloudy day.”),
-		Weather::Rainy => println!(“It’s raining outside.”), 
-	} 
+		Weather::Rainy => println!(“It’s raining outside.”),
+	}
 }
 
 ```
@@ -81,7 +81,6 @@ By enforcing exhaustive checking, Rust ensures that you haven’t missed any cas
 
 ### Exhaustive Checking in Rust
 
-
 One of the key strengths of Rust’s pattern matching is exhaustive checking, which forces you to handle all potential cases, thereby reducing bugs.
 
 ```rust
@@ -102,7 +101,6 @@ fn action_based_on_light(light: TrafficLight) {
 ```
 
 In this example, omitting any of the `TrafficLight` variants would result in a compilation error, ensuring that all scenarios are handled.
-
 
 ## TypeScript’s Take on Pattern Matching
 
@@ -136,7 +134,7 @@ To bridge the gap, TypeScript developers can also utilize libraries like `ts-pat
 ```typescript
 import { match, P } from ‘ts-pattern’;
 
-type Data = 
+type Data =
   | { type: ‘text’; content: string }
   | { type: ‘img’; src: string };
 
@@ -296,8 +294,6 @@ const handleNestedShape = (shape: NestedShape) =>
 
 Exhaustive checking ensures that all possible cases are handled in a `match` expression in Rust or a `switch` statement in TypeScript. This is particularly useful when the codebase evolves and new variants or types are added, helping prevent bugs that could be introduced by unhandled cases.
 
-
-
 ### Summary
 
 Exhaustive checking helps to make your code safer and more maintainable by ensuring that all cases are explicitly handled. This is crucial in complex systems where overlooking a single case can lead to subtle, hard-to-detect bugs.
@@ -309,4 +305,3 @@ Incorporating this discussion on exhaustive checking into your blog post will of
 In the ever-evolving landscape of programming, pattern matching stands as a testament to how older, proven concepts can find new life in modern languages. Rust and TypeScript each offer their unique flavor, optimized for their ecosystems and target audiences. If you’re a developer working with either (or both) of these languages, understanding and leveraging pattern matching can lead to cleaner, more efficient, and robust code.
 
 Whether you aim for the type safety and expressiveness in Rust or the flexibility and ease of adoption in TypeScript, pattern matching has a place in your coding toolbox.
-

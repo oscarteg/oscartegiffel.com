@@ -185,6 +185,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"011_my-system.mdx": {
+	id: "011_my-system.mdx";
+  slug: "011_my-system";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "01_better-react-props.mdx": {
 	id: "01_better-react-props.mdx";
   slug: "01_better-react-props";
@@ -227,23 +234,9 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"07_exhaustive-deps.mdx": {
-	id: "07_exhaustive-deps.mdx";
-  slug: "07_exhaustive-deps";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
 "08_typesafety.mdx": {
 	id: "08_typesafety.mdx";
   slug: "08_typesafety";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"09_chess-engine-part-1.mdx": {
-	id: "09_chess-engine-part-1.mdx";
-  slug: "09_chess-engine-part-1";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
@@ -276,13 +269,6 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"14_effect_in_typescript.mdx": {
-	id: "14_effect_in_typescript.mdx";
-  slug: "14_effect_in_typescript";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
 "15_advent_of_code.mdx": {
 	id: "15_advent_of_code.mdx";
   slug: "15_advent_of_code";
@@ -297,9 +283,30 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"debugging.mdx": {
-	id: "debugging.mdx";
-  slug: "debugging";
+"17_ecosystem.mdx": {
+	id: "17_ecosystem.mdx";
+  slug: "17_ecosystem";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"18_debugging.mdx": {
+	id: "18_debugging.mdx";
+  slug: "18_debugging";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"19_local_first_development.mdx": {
+	id: "19_local_first_development.mdx";
+  slug: "19_local_first_development";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"20_take_the_stairs.mdx": {
+	id: "20_take_the_stairs.mdx";
+  slug: "20_take_the_stairs";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

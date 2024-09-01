@@ -13,15 +13,15 @@ In ES5, we often used a custom clone function:
 ```javascript
 // ES5 clone function
 function clone(obj) {
-    if (null == obj || "object" != typeof obj) return obj;
-    var copy = obj.constructor();
-    for (var attr in obj) {
-        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-    }
-    return copy;
+  if (null == obj || "object" != typeof obj) return obj;
+  var copy = obj.constructor();
+  for (var attr in obj) {
+    if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+  }
+  return copy;
 }
 
-var obj = { a: 1, b: 2, c: [1, 2, 3]};
+var obj = { a: 1, b: 2, c: [1, 2, 3] };
 var copy = clone(obj);
 ```
 
@@ -31,7 +31,7 @@ With ES6, we shifted to using the spread operator:
 
 ```javascript
 // ES6 spread operator
-const obj = { a: 1, b: 2, c: [1, 2, 3]};
+const obj = { a: 1, b: 2, c: [1, 2, 3] };
 const copy = { ...obj };
 ```
 
@@ -42,7 +42,7 @@ These were the primary solutions available at the time. However, both create a s
 A shallow copy only duplicates the first level of the object:
 
 ```javascript
-const obj = { a: 1, b: 2, c: [1, 2, 3]};
+const obj = { a: 1, b: 2, c: [1, 2, 3] };
 const copy = { ...obj };
 copy.c.push(4);
 console.log(obj.c); // Output: [1, 2, 3, 4]
@@ -55,8 +55,8 @@ The modification of `copy.c` also affects `obj.c` because they reference the sam
 
 To create a deep copy, one common method is using JSON:
 
-```javascript 
-const obj = { a: 1, b: 2, c: [1, 2, 3]};
+```javascript
+const obj = { a: 1, b: 2, c: [1, 2, 3] };
 const copy = JSON.parse(JSON.stringify(obj));
 copy.a = 3;
 console.log(obj.a); // Output: 1
@@ -70,7 +70,7 @@ This method is straightforward but has limitations, including poor performance a
 The most recent and optimal solution is `structuredClone`:
 
 ```javascript
-const obj = { a: 1, b: 2, c: [1, 2, 3]};
+const obj = { a: 1, b: 2, c: [1, 2, 3] };
 const copy = structuredClone(obj);
 copy.a = 3;
 console.log(obj.a); // Output: 1
