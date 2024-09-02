@@ -1,20 +1,20 @@
 ---
 import dayjs from "dayjs";
-import type { Post } from "../models";
 import relativeTime from "dayjs/plugin/relativeTime"; // import plugin
+import type { Post } from "../models";
 
 dayjs.extend(relativeTime); // use plugin
 
 export type Props = {
-  post: Post;
+	post: Post;
 };
 
 const {
-  post: {
-    id,
-    slug,
-    data: { title, summary, tags },
-  },
+	post: {
+		id,
+		slug,
+		data: { title, summary, tags },
+	},
 } = Astro.props;
 ---
 

@@ -1,27 +1,27 @@
 import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    tags: z.array(z.string()),
-    image: z.string().optional(),
-    summary: z.string().optional(),
-    draft: z.boolean().optional(),
-    publishDate: z
-      .date()
-      .or(z.date())
-      .transform((val) => new Date(val)),
-  }),
+	schema: z.object({
+		title: z.string(),
+		tags: z.array(z.string()),
+		image: z.string().optional(),
+		summary: z.string().optional(),
+		draft: z.boolean().optional(),
+		publishDate: z
+			.date()
+			.or(z.date())
+			.transform((val) => new Date(val)),
+	}),
 });
 
 const pages = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    desciption: z.string().optional(),
-  }),
+	schema: z.object({
+		title: z.string(),
+		desciption: z.string().optional(),
+	}),
 });
 
 export const collections = {
-  blog,
-  pages,
+	blog,
+	pages,
 };

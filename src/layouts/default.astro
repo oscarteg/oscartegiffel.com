@@ -1,13 +1,13 @@
 ---
+import dayjs from "dayjs";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Background from "../components/background-raster.astro";
-import Footer from "../components/Footer.astro";
-import BaseHead from "../components/BaseHead.astro";
 import type { Post } from "../models";
-import dayjs from "dayjs";
 
 export type Props = Partial<Post["data"]> & {
-  prose?: boolean;
+	prose?: boolean;
 };
 
 const { title, summary, publishDate } = Astro.props;
