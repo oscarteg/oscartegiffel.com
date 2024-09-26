@@ -14,19 +14,36 @@ export const siteMetadata = {
 	socials: [
 		{
 			name: "GitHub",
-			url: "",
+			url: "https://github.com/oscarteg",
 		},
 		{
 			name: "Twitter",
-			url: "",
+			url: "https://twitter.com/oscartegiffel",
 		},
 		{
 			name: "LinkedIn",
-			url: "",
+			url: "https://www.linkedin.com/in/otegiffel",
 		},
 		{
-			name: "Email",
-			url: "",
+			name: "Resume",
+			url: "https://resume.oscartegiffel.com",
 		},
 	],
-};
+	content: {
+		uses: [
+			{
+				title: "Editor & Terminal",
+				items: [
+					"Terminal: Kitty",
+					"Editors: Neovim, Visual Studio Code, IntelliJ",
+					"Font: Dank Mono",
+					"Theme: Custom Theme inspired by Gruber",
+				],
+			},
+			{
+				title: "Teaching tools",
+				items: ["Loom", "Presentify", "Eraser.io", "Repl.it"],
+			},
+		],
+	},
+} as const;

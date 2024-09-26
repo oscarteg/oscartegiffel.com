@@ -1,5 +1,6 @@
 ---
 import dayjs from "dayjs";
+import { MobileMenu } from "../components/../components/mobile-menu.tsx";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
@@ -21,10 +22,12 @@ const { prose = true } = Astro.props;
   </head>
 
   <body
-    class="antialiased container md:px-12 py-24 grid grid-cols-1 auto-rows-max sm:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
+    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
   >
     <Background />
-    <Sidebar className="md:sticky md:top-20 justify-self-center" />
+    <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" />
+    <MobileMenu client:media="(max-width: 768px)" />
+
     <main
       class:list={[
         {
@@ -53,8 +56,6 @@ const { prose = true } = Astro.props;
         </div>
       </article>
     </main>
-    <div class="sm:col-start-2">
-      <Footer />
-    </div>
+      <Footer class="md:col-start-2" />
   </body>
 </html>

@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 ---
 
-<li class="relative py-5 hover:bg-zinc-800 transition rounded px-8 duration-500">
+<li class="relative py-5 hover:bg-zinc-800 transition rounded px-4 duration-500">
   <a class="w-full cursor-pointer" href={`/blog/${slug}`} id={id}>
     <div class="mx-auto flex max-w-4xl justify-between gap-x-6">
       <div class="flex gap-x-4">
@@ -46,14 +46,14 @@ const {
         </div>
       </div>
     </div>
-    <p class="text-sm leading-6 text-gray-900">
+    <div class="text-sm leading-6 flex flex-wrap ">
       {
         tags.map((tag) => (
-          <span class="rounded-md px-2 py-1 text-xs font-medium text-[#FFD900] ring-1 ring-inset ring-[#FFD900]/10">
+          <span class="rounded-md px-2 py-1 text-xs font-medium text-[#FFD900] ring-1 ring-inset ring-[#FFD900]/10 whitespace-nowrap inline-block">
             {tag}
           </span>
         ))
       }
-    </p>
+    </div>
   </a>
 </li>
