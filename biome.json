@@ -3,6 +3,10 @@
 	"organizeImports": {
 		"enabled": true
 	},
+
+	"files": {
+		"ignore": [".astro/"]
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
