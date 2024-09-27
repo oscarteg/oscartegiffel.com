@@ -1,14 +1,16 @@
 ---
 import { siteMetadata } from "../config";
 import ExternalLink from "./ExternalLink.astro";
+
+const { class: className } = Astro.props;
 ---
 
-<footer class="flex justify-center md:justify-start space-x-4 mb-8 hover:text-primary">
-{siteMetadata.socials.map((social) => (
- <ExternalLink href={social.url}>
-    <span class="sr-only">{social.name}</span>
-    {social.name}
-    
-    </ExternalLink>
-))}
+<footer class:list={["flex justify-center md:justify-start space-x-4 mb-8 hover:text-primary", className]}>
+  {siteMetadata.socials.map((social) => (
+  <ExternalLink href={social.url}>
+      <span class="sr-only">{social.name}</span>
+      {social.name}
+      
+      </ExternalLink>
+  ))}
 </footer>
