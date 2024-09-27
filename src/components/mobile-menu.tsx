@@ -106,12 +106,12 @@ const sections = [
 			"Terminal: Kitty",
 			"Editors: Neovim, Visual Studio Code, IntelliJ",
 			"Font: Dank Mono",
-			"Theme: Custom Theme inspired by Gruber",
+			"Theme: Rosebones",
 		],
 	},
 	{
 		title: "Teaching tools",
-		items: ["Loom", "Presentify", "Eraser.io", "Repl.it"],
+		items: ["Excalidraw / Eraser.io", "Presentify", "Repl.it", "Loom"],
 	},
 ];
 
