@@ -1,4 +1,6 @@
+import { execSync } from "node:child_process";
 import type { CollectionEntry } from "astro:content";
+import type { RehypePlugin } from "@astrojs/markdown-remark";
 import clsx, { type ClassValue } from "clsx";
 import { Octokit } from "octokit";
 import { twMerge } from "tailwind-merge";
@@ -69,5 +71,13 @@ export function getPublishedAndSortedPosts(
 }
 
 // helper function to check if date1 is before date2
-export const isDateBefore = (date1: Date, date2: Date) =>
-	date1.getTime() < date2.getTime();
+export function isDateBefore(date1: Date, date2: Date) {
+	return date1.getTime() < date2.getTime();
+}
+
+export const remarkModifiedTime: RehypePlugin = () => (_, file) => {
+	const filepath = file.history[0];
+	const result = execSync(`git log -1 --pretty="format:%cI" "${filepath}"`);
+	// biome-ignore lint/suspicious/noExplicitAny: The type of result is not explicitly defined.
+	(file.data.astro as any).frontmatter.lastModified = result.toString();
+};

@@ -6,6 +6,7 @@ import { defineConfig } from "astro/config";
 import { SITE_URL } from "./src/config";
 
 import solidJs from "@astrojs/solid-js";
+import { remarkModifiedTime } from "./src/utils";
 
 export default defineConfig({
 	site: SITE_URL,
@@ -25,6 +26,7 @@ export default defineConfig({
 		solidJs(),
 	],
 	markdown: {
+		remarkPlugins: [remarkModifiedTime],
 		syntaxHighlight: "prism",
 	},
 	prefetch: true,

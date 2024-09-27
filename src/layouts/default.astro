@@ -12,7 +12,7 @@ export type Props = Partial<Post["data"]> & {
 	prose?: boolean;
 };
 
-const { title, description, publishDate } = Astro.props;
+const { title, description, publishDate, lastModified } = Astro.props;
 
 const { prose = true } = Astro.props;
 ---
@@ -49,6 +49,12 @@ const { prose = true } = Astro.props;
         {
           publishDate && (
             <p class="mt-1 text-sm text-gray-500">Published at: {dayjs(publishDate).format("MMMM D, YYYY")}</p>
+          )
+        }
+
+        {
+          lastModified && (
+            <p class="mt-1 text-sm text-gray-500">Last modifier at: {dayjs(lastModified).format("MMMM D, YYYY")}</p>
           )
         }
         {description && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{description}</p>}

@@ -25,9 +25,9 @@ if (entry === undefined) {
 	return Astro.redirect("/404");
 }
 // 4. (Optional) Render the entry to HTML in the template
-const { Content } = await entry.render();
+const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
 
-<DefaultLayout prose {...entry.data}>
+<DefaultLayout prose {...entry.data} lastModified={remarkPluginFrontmatter.lastModified}>
   <Content />
 </DefaultLayout>
