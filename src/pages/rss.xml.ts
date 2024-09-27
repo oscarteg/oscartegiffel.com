@@ -18,7 +18,7 @@ export async function GET() {
 		items: sortedPosts.map((post) => ({
 			title: post.data.title,
 			pubDate: post.data.publishDate,
-			description: post.data.summary,
+			description: post.data.description,
 			link: `/blog/${post.slug}/`,
 			content: sanitizeHtml(parser.render(post.body), {
 				allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),

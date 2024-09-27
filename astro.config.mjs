@@ -8,12 +8,12 @@ import { SITE_URL } from "./src/config";
 import solidJs from "@astrojs/solid-js";
 
 export default defineConfig({
+	site: SITE_URL,
 	output: "hybrid",
 	adapter: vercel({
 		webAnalytics: true,
 		speedInsights: true,
 	}),
-	site: SITE_URL,
 	integrations: [
 		mdx({
 			drafts: true,
@@ -21,9 +21,7 @@ export default defineConfig({
 		tailwind({
 			applyBaseStyles: false,
 		}),
-		sitemap({
-			filter: (page) => !page.includes("/api/"),
-		}),
+		sitemap(),
 		solidJs(),
 	],
 	markdown: {

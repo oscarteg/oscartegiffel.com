@@ -13,7 +13,7 @@ const {
 	post: {
 		id,
 		slug,
-		data: { title, summary, tags },
+		data: { title, description, tags },
 	},
 } = Astro.props;
 ---
@@ -26,7 +26,7 @@ const {
           <p class="font-semibold leading-6">
             {title}
           </p>
-          {summary && <p class="mt-1 flex text-xs leading-5 text-gray-500 line-clamp-2">{summary}</p>}
+          {description && <p class="mt-1 flex text-xs leading-5 text-gray-500 line-clamp-2">{description}</p>}
         </div>
       </div>
       <div class="flex items-center gap-x-4">

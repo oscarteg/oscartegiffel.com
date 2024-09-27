@@ -12,14 +12,14 @@ export type Props = Partial<Post["data"]> & {
 	prose?: boolean;
 };
 
-const { title, summary, publishDate } = Astro.props;
+const { title, description, publishDate } = Astro.props;
 
 const { prose = true } = Astro.props;
 ---
 
 <html lang="en" class="text-white bg-zinc-900">
   <head>
-    <BaseHead title={title} description={summary} />
+    <BaseHead title={title} description={description} />
   </head>
 
   <body
@@ -51,7 +51,7 @@ const { prose = true } = Astro.props;
             <p class="mt-1 text-sm text-gray-500">Published at: {dayjs(publishDate).format("MMMM D, YYYY")}</p>
           )
         }
-        {summary && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{summary}</p>}
+        {description && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{description}</p>}
         <div class:list={["w-full"]}>
           <slot />
         </div>
