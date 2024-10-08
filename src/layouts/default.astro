@@ -46,17 +46,10 @@ const { prose = true } = Astro.props;
             </h1>
           )
         }
-        {
-          publishDate && (
-            <p class="mt-1 text-sm text-gray-500">Published at: {dayjs(publishDate).format("MMMM D, YYYY")}</p>
-          )
-        }
-
-        {
-          lastModified && (
-            <p class="mt-1 text-sm text-gray-500">Last modifier at: {dayjs(lastModified).format("MMMM D, YYYY")}</p>
-          )
-        }
+        <div class="grid grid-cols-2 divide-x divide-yellow-700">
+          { publishDate && <p class="mt-1 text-sm text-gray-500">publish: {dayjs(publishDate).format("MMMM D, YYYY")}</p> }
+          { lastModified && <p class="mt-1 text-sm text-gray-500">modified: {dayjs(lastModified).format("MMMM D, YYYY")}</p>}
+        </div>
         {description && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{description}</p>}
         <div class:list={["w-full"]}>
           <slot />
