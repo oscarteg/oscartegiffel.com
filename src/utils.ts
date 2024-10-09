@@ -1,9 +1,6 @@
 import { execSync } from "node:child_process";
-import type { CollectionEntry } from "astro:content";
 import type { RehypePlugin } from "@astrojs/markdown-remark";
-import clsx, { type ClassValue } from "clsx";
 import { Octokit } from "octokit";
-import { twMerge } from "tailwind-merge";
 import { siteMetadata } from "./config";
 import type { File, Gist, Post } from "./models";
 
@@ -44,10 +41,6 @@ export async function fetchSnippets() {
 	);
 }
 
-export function cn(...inputs: ClassValue[]) {
-	return twMerge(clsx(inputs));
-}
-
 export function isPublished(post: Post) {
 	if (import.meta.env.PROD) {
 		return !post.data.draft;
@@ -62,12 +55,6 @@ export function sortAsc(post1: Post, post2: Post) {
 	}
 
 	return -1;
-}
-
-export function getPublishedAndSortedPosts(
-	allPosts: CollectionEntry<"blog">[],
-) {
-	return allPosts.filter(isPublished).sort(sortAsc);
 }
 
 // helper function to check if date1 is before date2
