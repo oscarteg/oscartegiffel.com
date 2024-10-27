@@ -5,7 +5,6 @@ import { MobileMenu } from "../components/../components/mobile-menu.tsx";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
-import Background from "../components/background-raster.astro";
 import type { Post } from "../models";
 
 export type Props = Partial<Post["data"]> & {
@@ -25,7 +24,6 @@ const { prose = true } = Astro.props;
   <body
     class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
   >
-    <Background />
     <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" />
     <MobileMenu client:media="(max-width: 768px)" />
 
