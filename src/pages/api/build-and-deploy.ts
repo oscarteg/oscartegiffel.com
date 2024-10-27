@@ -4,7 +4,7 @@ import type { APIRoute } from "astro";
 const { PUBLIC_DEPLOY_HOOK } = import.meta.env;
 
 export const get: APIRoute = async function get() {
-	return fetch(PUBLIC_DEPLOY_HOOK, {
-		method: "POST",
-	});
+  return fetch(PUBLIC_DEPLOY_HOOK, {
+    method: "POST",
+  });
 };

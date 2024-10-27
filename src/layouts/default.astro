@@ -8,7 +8,7 @@ import Sidebar from "../components/Sidebar.astro";
 import type { Post } from "../models";
 
 export type Props = Partial<Post["data"]> & {
-	prose?: boolean;
+  prose?: boolean;
 };
 
 const { title, description, publishDate, lastModified } = Astro.props;

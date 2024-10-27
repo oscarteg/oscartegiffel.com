@@ -9,25 +9,25 @@ import solidJs from "@astrojs/solid-js";
 import { remarkModifiedTime } from "./src/utils";
 
 export default defineConfig({
-	site: SITE_URL,
-	output: "hybrid",
-	adapter: vercel({
-		webAnalytics: true,
-		speedInsights: true,
-	}),
-	integrations: [
-		mdx({
-			drafts: true,
-		}),
-		tailwind({
-			applyBaseStyles: false,
-		}),
-		sitemap(),
-		solidJs(),
-	],
-	markdown: {
-		remarkPlugins: [remarkModifiedTime],
-		syntaxHighlight: "prism",
-	},
-	prefetch: true,
+  site: SITE_URL,
+  output: "hybrid",
+  adapter: vercel({
+    webAnalytics: true,
+    speedInsights: true,
+  }),
+  integrations: [
+    mdx({
+      drafts: true,
+    }),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    sitemap(),
+    solidJs(),
+  ],
+  markdown: {
+    remarkPlugins: [remarkModifiedTime],
+    syntaxHighlight: "prism",
+  },
+  prefetch: true,
 });

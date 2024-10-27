@@ -3,18 +3,18 @@ import { SITE_DESCRIPTION, SITE_LOGO, SITE_TITLE } from "../config";
 import "../styles/global.css";
 
 export type Props = {
-	title?: string | undefined;
-	description?: string | undefined;
-	image?: string;
-	logo?: string;
+  title?: string | undefined;
+  description?: string | undefined;
+  image?: string;
+  logo?: string;
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
-	title = SITE_TITLE,
-	description = SITE_DESCRIPTION,
-	logo = SITE_LOGO,
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  logo = SITE_LOGO,
 } = Astro.props;
 ---
 

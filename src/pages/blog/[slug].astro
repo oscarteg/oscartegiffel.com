@@ -3,18 +3,18 @@ import { getCollection, getEntry } from "astro:content";
 import DefaultLayout from "../../layouts/default.astro";
 
 export async function getStaticPaths() {
-	const blogEntries = await getCollection("blog");
-	return blogEntries.map((entry) => ({
-		params: { slug: entry.slug },
-		props: { entry },
-	}));
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 // 1. Get the slug from the incoming server request
 const { slug } = Astro.params;
 
 if (slug === undefined) {
-	throw new Error("Slug is required");
+  throw new Error("Slug is required");
 }
 
 // 2. Query for the entry directly using the request slug
@@ -22,7 +22,7 @@ const entry = await getEntry("blog", slug);
 
 // 3. Redirect if the entry does not exist
 if (entry === undefined) {
-	return Astro.redirect("/404");
+  return Astro.redirect("/404");
 }
 // 4. (Optional) Render the entry to HTML in the template
 const { Content, remarkPluginFrontmatter } = await entry.render();

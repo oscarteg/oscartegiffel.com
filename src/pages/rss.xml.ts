@@ -8,23 +8,23 @@ import { isPublished, sortAsc } from "../utils";
 const parser = new MarkdownIt();
 
 export async function GET() {
-	const posts = await getCollection("blog", isPublished);
-	const sortedPosts: Post[] = posts.sort(sortAsc);
+  const posts = await getCollection("blog", isPublished);
+  const sortedPosts: Post[] = posts.sort(sortAsc);
 
-	return rss({
-		title: SITE_TITLE,
-		description: SITE_DESCRIPTION,
-		site: SITE_URL,
-		items: sortedPosts.map((post) => ({
-			title: post.data.title,
-			pubDate: post.data.publishDate,
-			description: post.data.description,
-			link: `/blog/${post.slug}/`,
-			content: sanitizeHtml(parser.render(post.body), {
-				allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
-			}),
-		})),
+  return rss({
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    site: SITE_URL,
+    items: sortedPosts.map((post) => ({
+      title: post.data.title,
+      pubDate: post.data.publishDate,
+      description: post.data.description,
+      link: `/blog/${post.slug}/`,
+      content: sanitizeHtml(parser.render(post.body), {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+      }),
+    })),
 
-		customData: "<language>en-us</language>",
-	});
+    customData: "<language>en-us</language>",
+  });
 }

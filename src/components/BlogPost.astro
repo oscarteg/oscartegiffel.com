@@ -6,25 +6,25 @@ import type { Post } from "../models";
 dayjs.extend(relativeTime); // use plugin
 
 export type Props = {
-	post: Post;
+  post: Post;
 };
 
 const {
-	post: {
-		id,
-		slug,
-		data: { title, description, tags },
-	},
+  post: {
+    id,
+    slug,
+    data: { title, description, tags },
+  },
 } = Astro.props;
 ---
 
 <li class="relative py-5 hover:bg-zinc-800 transition rounded px-4 duration-500">
   <a class="w-full cursor-pointer flex gap-y-2" href={`/blog/${slug}`} id={id}>
       <div class="flex-grow space-y-3 ">
-          <p class="font-semibold leading-6">
+          <h3 class="font-semibold leading-6 text-xl">
             {title}
-          </p>
-          {description && <p class="mt-1 flex text-xs leading-5 text-gray-500 line-clamp-2">{description}</p>}
+          </h3>
+          {description && <p class="mt-1 flex text-xs leading-5 text-gray-300 line-clamp-2">{description}</p>}
         <div class="text-sm leading-6 flex flex-wrap ">
           {
             tags.map((tag) => (

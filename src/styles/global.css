@@ -4,121 +4,121 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-	@apply font-mono;
+  @apply font-mono;
 }
 
 @layer base {
-	html {
-		font-size: 18px;
-		scrollbar-gutter: stable;
-	}
+  html {
+    font-size: 18px;
+    scrollbar-gutter: stable;
+  }
 
-	a:hover {
-		@apply transition;
-	}
+  a:hover {
+    @apply transition;
+  }
 
-	::selection {
-		@apply bg-primary text-black;
-	}
+  ::selection {
+    @apply bg-primary text-black;
+  }
 }
 
 /* Apercu Font Family */
 @font-face {
-	font-family: "Apercu";
-	src: url("/fonts/apercu_bold_italic_pro.otf") format("opentype");
-	font-weight: bold;
-	font-style: italic;
+  font-family: "Apercu";
+  src: url("/fonts/apercu_bold_italic_pro.otf") format("opentype");
+  font-weight: bold;
+  font-style: italic;
 }
 
 @font-face {
-	font-family: "Apercu";
-	src: url("/fonts/apercu_bold_pro.otf") format("opentype");
-	font-weight: bold;
-	font-style: normal;
+  font-family: "Apercu";
+  src: url("/fonts/apercu_bold_pro.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "Apercu";
-	src: url("/fonts/apercu_medium_italic_pro.otf") format("opentype");
-	font-weight: 500;
-	font-style: italic;
+  font-family: "Apercu";
+  src: url("/fonts/apercu_medium_italic_pro.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
 }
 
 @font-face {
-	font-family: "Apercu";
-	src: url("/fonts/apercu_medium_pro.otf") format("opentype");
-	font-weight: 500;
-	font-style: normal;
+  font-family: "Apercu";
+  src: url("/fonts/apercu_medium_pro.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "Apercu";
-	src: url("/fonts/apercu_mono_pro.otf") format("opentype");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Apercu";
+  src: url("/fonts/apercu_mono_pro.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "Apercu";
-	src: url("/fonts/apercu_regular_italic_pro.otf") format("opentype");
-	font-weight: normal;
-	font-style: italic;
+  font-family: "Apercu";
+  src: url("/fonts/apercu_regular_italic_pro.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
 }
 
 @font-face {
-	font-family: "Apercu";
-	src: url("/fonts/apercu_regular_pro.otf") format("opentype");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Apercu";
+  src: url("/fonts/apercu_regular_pro.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Dank Mono Font Family */
 @font-face {
-	font-family: "Dank Mono";
-	src: url("/fonts/DankMono-Bold.otf") format("opentype");
-	font-weight: bold;
-	font-style: normal;
+  font-family: "Dank Mono";
+  src: url("/fonts/DankMono-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "Dank Mono";
-	src: url("/fonts/DankMono-Italic.otf") format("opentype");
-	font-weight: normal;
-	font-style: italic;
+  font-family: "Dank Mono";
+  src: url("/fonts/DankMono-Italic.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
 }
 
 @font-face {
-	font-family: "Dank Mono";
-	src: url("/fonts/DankMono-Regular.otf") format("opentype");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Dank Mono";
+  src: url("/fonts/DankMono-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Ogg Font Family */
 
 @font-face {
-	font-family: "Ogg";
-	src: url("/fonts/ogg.ttf") format("opentype");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Ogg";
+  src: url("/fonts/ogg.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "Config Rounded";
-	src: url("/fonts/Config-Rounded-Regular.otf") format("opentype");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Config Rounded";
+  src: url("/fonts/Config-Rounded-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-	font-family: "Config Rounded";
-	src: url("/fonts/Config-Rounded-Semibold.otf") format("opentype");
-	font-weight: 600;
-	font-style: normal;
+  font-family: "Config Rounded";
+  src: url("/fonts/Config-Rounded-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "Config Rounded";
-	src: url("/fonts/Config-Rounded-Bold.otf") format("opentype");
-	font-weight: 700;
-	font-style: normal;
+  font-family: "Config Rounded";
+  src: url("/fonts/Config-Rounded-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
 }

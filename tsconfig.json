@@ -1,17 +1,17 @@
 {
-	"extends": "astro/tsconfigs/strictest",
-	"compilerOptions": {
-		"plugins": [
-			{
-				"name": "@astrojs/ts-plugin"
-			}
-		],
-		"strictNullChecks": true,
-		"paths": {
-			"@components/*": ["./src/components/*"],
-			"@layouts/*": ["./src/layouts/*"]
-		},
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js"
-	}
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ],
+    "strictNullChecks": true,
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"]
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  }
 }
