@@ -4,7 +4,9 @@ const { className } = Astro.props;
 ---
 
 <aside class={className}>
-  <nav class="sm:flex flex-row sm:flex-col space-x-1 sm:space-x-0 sm:pr-10 my-2 sm:mt-0 space-y-0 sm:space-y-1">
+    <h2 class="font-display font-medium text-neutral-900 dark:text-white">Oscar te Giffel</h2>
+  <nav class="sm:flex flex-row sm:flex-col space-x-1 sm:space-x-0 sm:pr-10 my-2 sm:mt-0 space-y-0 sm:space-y-1 border-neutral-100 dark:border-neutral-800 border-1-2">
+
     <Link href="/">home</Link>
     <Link href="/blog">posts</Link>
     <Link href="/uses">uses</Link>
