@@ -122,3 +122,9 @@ pre[class*="language-"] {
   font-weight: 700;
   font-style: normal;
 }
+
+html {
+  min-height: 100%;
+  background-image: url("/background.svg");
+  background-repeat: repeat-y;
+}
