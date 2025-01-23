@@ -44,9 +44,9 @@ const { prose = true } = Astro.props;
             </h1>
           )
         }
-        <div class="grid grid-cols-2">
-          { publishDate && <p class="flex-1 text-sm text-gray-500">publish: {dayjs(publishDate).format("MMMM D, YYYY")}</p> }
-          { lastModified && <p class="flex-1 text-sm text-gray-500">modified: {dayjs(lastModified).format("MMMM D, YYYY")}</p>}
+        <div class="flex gap-4">
+          { publishDate && <p class="flex-1 text-sm text-gray-500">published at: {dayjs(publishDate).format("MMMM D, YYYY")}</p> } / 
+          { lastModified && <p class="flex-1 text-sm text-gray-500">modified at: {dayjs(lastModified).format("MMMM D, YYYY")}</p>}
         </div>
         {description && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{description}</p>}
         <div class:list={["w-full"]}>

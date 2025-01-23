@@ -1,0 +1,117 @@
+---
+title: "TypeScript's satisfies Operator: A Quick Note to Self"
+tags: [typescript, note to self]
+publishDate: 2025-01-01
+description: A quick note to self about the `satisfies` operator in TypeScript
+---
+
+Just jotting down some key points about `satisfies` because I keep mixing up its use cases with type annotations.
+
+Here's the thing - `satisfies` is like a type-checker that doesn't narrow down the type inference. Think of it as telling TypeScript "hey, verify this matches the type, but don't lock it down."
+
+```typescript
+// With type annotation
+const colors: Record<string, string> = {
+  primary: '#0047AB',
+  secondary: '#6082B6'
+} // Type is exactly Record<string, string>
+
+// With satisfies
+const colors2 = {
+  primary: '#0047AB',
+  secondary: '#6082B6'
+} satisfies Record<string, string>
+// Type preserves literal types: { primary: "#0047AB", secondary: "#6082B6" }
+```
+
+The real magic happens when combining `as const` with `satisfies`. It's like putting your object in a type-safe freezer:
+
+```typescript
+const theme = {
+  colors: {
+    primary: '#0047AB',
+    secondary: '#6082B6'
+  },
+  fontSize: {
+    small: 12,
+    medium: 16
+  }
+} as const satisfies {
+  colors: Record<string, string>,
+  fontSize: Record<string, number>
+}
+
+// Now we get autocomplete for 'primary' and 'secondary'
+// AND type checking ensures we're using strings for colors
+theme.colors.primary // Autocomplete works!
+```
+
+## Real-World Use Cases
+
+An common use case I encountered is when working with API responses.
+
+### API Response Typing
+
+When dealing with API responses, `satisfies` shines by ensuring type safety while preserving specific values:
+
+```typescript
+const apiResponse = {
+  status: 200,
+  data: {
+    users: [{
+      id: 1,
+      role: 'admin' as 'admin' | 'user'
+    }]
+  }
+} satisfies APIResponse
+// Now we get exact types for status (200) and role ('admin')
+```
+
+### Configuration Objects
+
+Perfect for environment variables and feature flags:
+
+```typescript
+const config = {
+  api: {
+    endpoint: process.env.API_ENDPOINT,
+    timeout: 5000
+  },
+  features: {
+    darkMode: true,
+    beta: {
+      enabled: false,
+      users: ['admin@example.com']
+    }
+  }
+} as const satisfies AppConfig
+
+// TypeScript knows config.features.darkMode is specifically boolean
+// and config.features.beta.users is readonly string[]
+```
+
+## Common Gotchas
+
+1. Array Type Inference:
+
+```typescript
+// ❌ This loses tuple type inference
+const tuple = [1, 'two', true] satisfies [number, string, boolean]
+// ✅ Use as const to preserve tuple types
+const tuple = [1, 'two', true] as const satisfies readonly [number, string, boolean]
+```
+
+2. Nested Object Properties:
+
+```typescript
+const settings = {
+  theme: {
+    colors: {
+      primary: '#000'
+    }
+  }
+} satisfies Settings
+// Without as const, theme.colors.primary is still widened to string
+```
+
+> Note to future self: Use `satisfies` when you want type checking without losing literal types, and combine with `as const` when you want both immutability and precise type inference. Type annotations are still useful when you explicitly want to widen the type.

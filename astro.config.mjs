@@ -2,6 +2,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import { SITE_URL } from "./src/config";
 
@@ -30,4 +31,7 @@ export default defineConfig({
     syntaxHighlight: "prism",
   },
   prefetch: true,
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
