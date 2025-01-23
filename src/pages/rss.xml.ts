@@ -4,11 +4,11 @@ import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../config";
 import type { Post } from "../models";
-import { isPublished, sortAsc } from "../utils";
+import { filterPosts, sortAsc } from "../utils";
 const parser = new MarkdownIt();
 
 export async function GET() {
-  const posts = await getCollection("blog", isPublished);
+  const posts = await getCollection("blog", filterPosts);
   const sortedPosts: Post[] = posts.sort(sortAsc);
 
   return rss({

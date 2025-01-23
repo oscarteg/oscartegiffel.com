@@ -41,12 +41,19 @@ export async function fetchSnippets() {
   );
 }
 
-export function isPublished(post: Post) {
+export function filterPosts(post: Post) {
+  const currentDate = new Date();
+  const publishDate = new Date(post.data.publishDate);
+
+  const isPublishDateReached = publishDate <= currentDate;
+
   if (import.meta.env.PROD) {
-    return !post.data.draft;
+    return !post.data.draft && isPublishDateReached;
   }
 
-  return siteMetadata.devMode.showDraftPages ? true : !post.data.draft;
+  return siteMetadata.devMode.showDraftPages
+    ? true
+    : !post.data.draft && isPublishDateReached;
 }
 
 export function sortAsc(post1: Post, post2: Post) {
