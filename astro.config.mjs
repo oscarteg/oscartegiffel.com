@@ -20,9 +20,6 @@ export default defineConfig({
     mdx({
       drafts: true,
     }),
-    tailwind({
-      applyBaseStyles: false,
-    }),
     sitemap(),
     solidJs(),
   ],

@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #fbdc4e;
+  --font-sans: "Apercu", sans-serif;
+  --font-serif: "Ogg", serif;
+  --font-mono: "Dank Mono", monospace;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+html {
+  @apply transition;
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
   @apply font-mono;
@@ -97,25 +113,5 @@ pre[class*="language-"] {
   font-family: "Ogg";
   src: url("/fonts/ogg.ttf") format("opentype");
   font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Config Rounded";
-  src: url("/fonts/Config-Rounded-Regular.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Config Rounded";
-  src: url("/fonts/Config-Rounded-Semibold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Config Rounded";
-  src: url("/fonts/Config-Rounded-Bold.otf") format("opentype");
-  font-weight: 700;
   font-style: normal;
 }

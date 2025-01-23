@@ -1,19 +1,22 @@
-/*
-Name:   Duotone Earth
-Author: Simurai, adapted from DuoTone themes for Atom (http://simurai.com/projects/2016/01/01/duotone-themes)
-
-Conversion: Bram de Haan (http://atelierbram.github.io/Base2Tone-prism/output/prism/prism-base2tone-earth-dark.css)
-Generated with Base16 Builder (https://github.com/base16-builder/base16-builder)
-*/
+/**
+ * Gruvbox dark theme
+ *
+ * Adapted from a theme based on:
+ * Vim Gruvbox dark Theme (https://github.com/morhetz/gruvbox)
+ *
+ * @author Azat S. <to@azat.io>
+ * @version 1.0
+ */
 
 code[class*="language-"],
 pre[class*="language-"] {
-  line-height: 1.375;
+  color: #ebdbb2; /* fg1 / fg */
   direction: ltr;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
+  line-height: 1.5;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
@@ -23,160 +26,117 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-  background: #322d29;
-  color: #88786d;
-}
-
-pre > code[class*="language-"] {
-  font-size: 1em;
 }
 
 pre[class*="language-"]::-moz-selection,
 pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::-moz-selection,
 code[class*="language-"] ::-moz-selection {
-  text-shadow: none;
-  background: #6f5849;
+  color: #fbf1c7; /* fg0 */
+  background: #7c6f64; /* bg4 */
 }
 
 pre[class*="language-"]::selection,
 pre[class*="language-"] ::selection,
 code[class*="language-"]::selection,
 code[class*="language-"] ::selection {
-  text-shadow: none;
-  background: #6f5849;
+  color: #fbf1c7; /* fg0 */
+  background: #7c6f64; /* bg4 */
 }
 
 /* Code blocks */
 pre[class*="language-"] {
   padding: 1em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #1d2021; /* bg0_h */
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
+  padding: 0.1em;
+  border-radius: 0.3em;
 }
 
 .token.comment,
 .token.prolog,
-.token.doctype,
 .token.cdata {
-  color: #6a5f58;
+  color: #a89984; /* fg4 / gray1 */
 }
 
-.token.punctuation {
-  color: #6a5f58;
+.token.delimiter,
+.token.boolean,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule {
+  color: #fb4934; /* red2 */
 }
 
-.token.namespace {
-  opacity: 0.7;
+.token.operator,
+.token.punctuation,
+.token.attr-name {
+  color: #a89984; /* fg4 / gray1 */
 }
 
 .token.tag,
-.token.operator,
-.token.number {
-  color: #bfa05a;
+.token.tag .punctuation,
+.token.doctype,
+.token.builtin {
+  color: #fabd2f; /* yellow2 */
+}
+
+.token.entity,
+.token.number,
+.token.symbol {
+  color: #d3869b; /* purple2 */
 }
 
 .token.property,
-.token.function {
-  color: #88786d;
-}
-
-.token.tag-id,
-.token.selector,
-.token.atrule-id {
-  color: #fff3eb;
-}
-
-code.language-javascript,
-.token.attr-name {
-  color: #a48774;
-}
-
-code.language-css,
-code.language-scss,
-.token.boolean,
-.token.string,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.language-scss .token.string,
-.style .token.string,
-.token.attr-value,
-.token.keyword,
-.token.control,
-.token.directive,
-.token.unit,
-.token.statement,
-.token.regex,
-.token.atrule {
-  color: #fcc440;
-}
-
-.token.placeholder,
+.token.constant,
 .token.variable {
-  color: #fcc440;
+  color: #fb4934; /* red2 */
 }
 
-.token.deleted {
-  text-decoration: line-through;
+.token.string,
+.token.char {
+  color: #b8bb26; /* green2 */
 }
 
-.token.inserted {
-  border-bottom: 1px dotted #fff3eb;
-  text-decoration: none;
+.token.attr-value,
+.token.attr-value .punctuation {
+  color: #a89984; /* fg4 / gray1 */
+}
+
+.token.url {
+  color: #b8bb26; /* green2 */
+  text-decoration: underline;
+}
+
+.token.function {
+  color: #fabd2f; /* yellow2 */
+}
+
+.token.regex {
+  background: #b8bb26; /* green2 */
+}
+
+.token.bold {
+  font-weight: bold;
 }
 
 .token.italic {
   font-style: italic;
 }
 
-.token.important,
-.token.bold {
-  font-weight: bold;
+.token.inserted {
+  background: #a89984; /* fg4 / gray1 */
 }
 
-.token.important {
-  color: #a48774;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-pre > code.highlight {
-  outline: .4em solid #816d5f;
-  outline-offset: .4em;
-}
-
-/* overrides color-values for the Line Numbers plugin
- * http://prismjs.com/plugins/line-numbers/
- */
-.line-numbers.line-numbers .line-numbers-rows {
-  border-right-color: #35302b;
-}
-
-.line-numbers .line-numbers-rows > span:before {
-  color: #46403d;
-}
-
-/* overrides color-values for the Line Highlight plugin
-* http://prismjs.com/plugins/line-highlight/
-*/
-.line-highlight.line-highlight {
-  background: rgba(191, 160, 90, 0.2);
-  background: -webkit-linear-gradient(
-    left,
-    rgba(191, 160, 90, 0.2) 70%,
-    rgba(191, 160, 90, 0)
-  );
-  background: linear-gradient(
-    to right,
-    rgba(191, 160, 90, 0.2) 70%,
-    rgba(191, 160, 90, 0)
-  );
+.token.deleted {
+  background: #fb4934; /* red2 */
 }

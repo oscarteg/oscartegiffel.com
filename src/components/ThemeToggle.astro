@@ -1,0 +1,93 @@
+<button
+  id="themeToggle"
+  class="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 relative overflow-hidden z-50"
+  aria-label="Toggle theme"
+>
+  <div class="moon absolute inset-0 transition-transform duration-500 ease-spring translate-y-full dark:translate-y-0">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-800 dark:text-gray-200">
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" stroke="currentColor"/>
+    </svg>
+  </div>
+  <div class="sun absolute inset-0 transition-transform duration-500 ease-spring translate-y-0 dark:-translate-y-full ">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary dark:text-gray-200">
+      <circle cx="12" cy="12" r="4" stroke="currentColor"/>
+      <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" stroke="currentColor"/>
+    </svg>
+  </div>
+</button>
+
+<div id="theme-overlay" class="fixed inset-0 pointer-events-none -z-10"></div>
+
+<style>
+  #theme-overlay {
+    background-color: oklch(0.21 0.006 285.885);
+    /* We'll set the clip-path dynamically in JavaScript */
+    transition: clip-path 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :root {
+    /* background-color: rgb(243, 244, 246); */
+    background-color: oklch(0.92 0.004 286.32);
+  }
+</style>
+
+<script>
+  const button = document.getElementById("themeToggle")!;
+  const overlay = document.getElementById("theme-overlay")!;
+  let isAnimating = false;
+
+  function updateClipPath(expand = false) {
+
+    // Get the button's position relative to the viewport
+    const rect = button.getBoundingClientRect();
+    
+    // Calculate the center point of the button
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // Convert to percentage of viewport width/height
+    const x = (centerX / window.innerWidth) * 100;
+    const y = (centerY / window.innerHeight) * 100;
+    
+    // Set the clip-path with the calculated position
+
+    overlay.style.clipPath = `circle(${expand ? '150%' : '0%'} at ${x}% ${y}%)`;
+  }
+
+  const handleToggleClick = () => {
+    if (isAnimating) return;
+    
+    isAnimating = true;
+    const root = document.documentElement;
+    const isDark = root.classList.contains("dark");
+    
+    // Update clip-path before toggling the class
+    updateClipPath(!isDark);
+    
+    // Toggle dark mode
+    root.classList.toggle("dark");
+    
+    // Store theme preference
+    localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
+    
+    setTimeout(() => {
+      isAnimating = false;
+    }, 750);
+  }
+
+  // Initialize theme and clip-path
+  const theme = localStorage.getItem("theme") ?? "light";
+  if (theme === "dark") {
+    document.documentElement.classList.add("dark");
+    updateClipPath(true);
+  } else {
+    updateClipPath(false);
+  }
+
+  // Update clip-path origin when window is resized
+  window.addEventListener("resize", () => {
+    updateClipPath(document.documentElement.classList.contains("dark"));
+  });
+
+  button.addEventListener("click", handleToggleClick);
+</script>

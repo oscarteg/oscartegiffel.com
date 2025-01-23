@@ -18,24 +18,24 @@ const {
 } = Astro.props;
 ---
 
-<li class="relative py-5 hover:bg-zinc-800/50 transition rounded px-4 duration-500" >
+<li class="relative py-5 dark:hover:bg-zinc-800/50 transition rounded-sm px-4 duration-500" >
   <a class="w-full cursor-pointer flex gap-y-2" href={`/blog/${slug}`} id={id}>
-      <div class="flex-grow space-y-3 ">
+      <div class="grow space-y-3 ">
           <h3 class="font-semibold leading-6 text-xl">
             {title}
           </h3>
-          {description && <p class="mt-1 flex text-xs leading-5 text-gray-300 line-clamp-2">{description}</p>}
+          {description && <p class="mt-1 flex text-sm leading-5 dark:text-gray-300 line-clamp-2">{description}</p>}
         <div class="text-sm leading-6 flex flex-wrap ">
           {
             tags.map((tag) => (
-              <span class="rounded-md px-2 py-1 text-xs font-medium text-[#FFD900] ring-1 ring-inset ring-[#FFD900]/10 whitespace-nowrap inline-block">
+            <span class="rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10 whitespace-nowrap inline-block bg-primary/10" >
                 {tag}
               </span>
             ))
           }
         </div>
       </div>
-      <div class="flex flex-shrink-0 items-center gap-x-4">
+      <div class="flex shrink-0 items-center gap-x-4">
           <svg
             class="h-5 w-5 flex-none text-gray-400"
             xmlns="http://www.w3.org/2000/svg"

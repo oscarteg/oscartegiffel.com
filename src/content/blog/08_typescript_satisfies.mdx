@@ -95,9 +95,9 @@ const config = {
 1. Array Type Inference:
 
 ```typescript
-// ❌ This loses tuple type inference
+// This loses tuple type inference
 const tuple = [1, 'two', true] satisfies [number, string, boolean]
-// ✅ Use as const to preserve tuple types
+// Use as const to preserve tuple types
 const tuple = [1, 'two', true] as const satisfies readonly [number, string, boolean]
 ```
 
@@ -114,4 +114,4 @@ const settings = {
 // Without as const, theme.colors.primary is still widened to string
 ```
 
-> Note to future self: Use `satisfies` when you want type checking without losing literal types, and combine with `as const` when you want both immutability and precise type inference. Type annotations are still useful when you explicitly want to widen the type.
+> __Note to future self__: Use `satisfies` when you want type checking without losing literal types, and combine with `as const` when you want both immutability and precise type inference. Type annotations are still useful when you explicitly want to widen the type.
