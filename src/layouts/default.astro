@@ -8,17 +8,20 @@ import Sidebar from "../components/Sidebar.astro";
 import type { Post } from "../models";
 
 export type Props = Partial<Post["data"]> & {
+  fronmatter?: Post["data"];
   prose?: boolean;
 };
 
 const { title, description, publishDate, lastModified } = Astro.props;
+
+const { frontmatter } = Astro.props;
 
 const { prose = true } = Astro.props;
 ---
 
 <html lang="en" class="dark:text-white dark:bg-zinc-900 text-black bg-zinc-100 dark">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title || frontmatter.title} description={description || frontmatter?.description} />
   </head>
 
   <body
