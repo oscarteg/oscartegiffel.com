@@ -1,22 +1,27 @@
 ---
+import type { MarkdownLayoutProps } from "astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import dayjs from "dayjs";
 import { MobileMenu } from "../components/../components/mobile-menu.tsx";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
-import type { Post } from "../models";
+import type { Page, Post } from "../models";
 
-export type Props = Partial<Post["data"]> & {
-  fronmatter?: Post["data"];
+type Frontmatter = Post["data"] | Page["data"];
+
+type Props = MarkdownLayoutProps<Frontmatter> & {
+  title?: string;
+  description?: string;
   prose?: boolean;
 };
 
-const { title, description, publishDate, lastModified } = Astro.props;
+const { frontmatter, title, description, prose = true } = Astro.props;
 
-const { frontmatter } = Astro.props;
-
-const { prose = true } = Astro.props;
+function isPost(frontmatter?: Frontmatter): frontmatter is Post["data"] {
+  if (!frontmatter) return false;
+  return "publishDate" in frontmatter;
+}
 ---
 
 <html lang="en" class="dark:text-white dark:bg-zinc-900 text-black bg-zinc-100 dark">
@@ -47,10 +52,14 @@ const { prose = true } = Astro.props;
             </h1>
           )
         }
-        <div class="">
-          { publishDate && <p class="flex-1 text-sm text-gray-500">published at: {dayjs(publishDate).format("MMMM D, YYYY")}</p> }  
-          { lastModified && <p class="flex-1 text-sm text-gray-500">modified at: {dayjs(lastModified).format("MMMM D, YYYY")}</p>}
-        </div>
+
+        {
+          isPost(frontmatter) && 
+            <div>
+              { frontmatter.publishDate && <p class="flex-1 text-sm text-gray-500">published at: {dayjs(frontmatter.publishDate).format("MMMM D, YYYY")}</p> }  
+              { frontmatter?.lastModified && <p class="flex-1 text-sm text-gray-500">modified at: {dayjs(frontmatter.lastModified).format("MMMM D, YYYY")}</p>}
+            </div>
+          }
         {description && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{description}</p>}
         <div class:list={["w-full"]}>
           <slot />
