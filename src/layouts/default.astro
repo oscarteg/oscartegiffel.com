@@ -1,6 +1,6 @@
 ---
-import type { MarkdownLayoutProps } from "astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import type { MarkdownLayoutProps } from "astro";
 import dayjs from "dayjs";
 import { MobileMenu } from "../components/../components/mobile-menu.tsx";
 import BaseHead from "../components/BaseHead.astro";
@@ -10,8 +10,9 @@ import type { Page, Post } from "../models";
 
 type Frontmatter = Post["data"] | Page["data"];
 
-type Props = MarkdownLayoutProps<Frontmatter> & {
+type Props = Partial<MarkdownLayoutProps<Frontmatter>> & {
   title?: string;
+  lastModified?: string;
   description?: string;
   prose?: boolean;
 };
@@ -26,7 +27,7 @@ function isPost(frontmatter?: Frontmatter): frontmatter is Post["data"] {
 
 <html lang="en" class="dark:text-white dark:bg-zinc-900 text-black bg-zinc-100 dark">
   <head>
-    <BaseHead title={title || frontmatter.title} description={description || frontmatter?.description} />
+    <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
   </head>
 
   <body
@@ -60,7 +61,7 @@ function isPost(frontmatter?: Frontmatter): frontmatter is Post["data"] {
               { frontmatter?.lastModified && <p class="flex-1 text-sm text-gray-500">modified at: {dayjs(frontmatter.lastModified).format("MMMM D, YYYY")}</p>}
             </div>
           }
-        {description && <p class="mt-2 mb-8 border-y border-y-zinc-500 w-full py-3">{description}</p>}
+        {description && <p class="mt-2 border-y border-y-zinc-500 w-full py-3">{description}</p>}
         <div class:list={["w-full"]}>
           <slot />
         </div>

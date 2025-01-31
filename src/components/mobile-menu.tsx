@@ -103,10 +103,10 @@ const sections = [
   {
     title: "Editor & Terminal",
     items: [
-      "Terminal: Kitty",
+      "Terminal: Ghostty",
       "Editors: Neovim, Visual Studio Code, IntelliJ",
-      "Font: Dank Mono",
-      "Theme: Rosebones",
+      "Font: Berkeley Mono",
+      "Theme: Gruvbox Dark",
     ],
   },
   {

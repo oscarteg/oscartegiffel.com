@@ -221,6 +221,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"10_taking_the_stairs.mdx": {
+	id: "10_taking_the_stairs.mdx";
+  slug: "10_taking_the_stairs";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 };
 "pages": Record<string, {
   id: string;
