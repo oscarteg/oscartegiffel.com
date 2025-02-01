@@ -9,7 +9,7 @@ const posts = await getCollection("blog", filterPosts);
 const reversedPosts = posts.sort(sortAsc);
 ---
 
-<DefaultLayout prose={false} title={"Blog"}>
+<DefaultLayout prose={false} title={"Blog"} description={"A collection of my thoughts and ideas."}>
   <ul role="list" class={"divide-y divide-zinc-700 flex flex-col mt-12"}>
     {reversedPosts.map((post: Post) => <BlogPost post={post} />)}
   </ul>

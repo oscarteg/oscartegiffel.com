@@ -1,33 +1,31 @@
 ---
 import SpeedInsights from "@vercel/speed-insights/astro";
-import type { MarkdownLayoutProps } from "astro";
 import dayjs from "dayjs";
 import { MobileMenu } from "../components/../components/mobile-menu.tsx";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
-import type { Page, Post } from "../models";
 
-type Frontmatter = Post["data"] | Page["data"];
-
-type Props = Partial<MarkdownLayoutProps<Frontmatter>> & {
+type Props = {
   title?: string;
-  lastModified?: string;
-  description?: string;
+  description?: string | undefined;
   prose?: boolean;
+  publishDate?: Date;
+  lastModified?: Date;
 };
 
-const { frontmatter, title, description, prose = true } = Astro.props;
-
-function isPost(frontmatter?: Frontmatter): frontmatter is Post["data"] {
-  if (!frontmatter) return false;
-  return "publishDate" in frontmatter;
-}
+const {
+  title,
+  description,
+  prose = true,
+  publishDate,
+  lastModified,
+} = Astro.props;
 ---
 
 <html lang="en" class="dark:text-white dark:bg-zinc-900 text-black bg-zinc-100 dark">
   <head>
-    <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
+    <BaseHead title={title} description={description} />
   </head>
 
   <body
@@ -55,10 +53,10 @@ function isPost(frontmatter?: Frontmatter): frontmatter is Post["data"] {
         }
 
         {
-          isPost(frontmatter) && 
+          
             <div>
-              { frontmatter.publishDate && <p class="flex-1 text-sm text-gray-500">published at: {dayjs(frontmatter.publishDate).format("MMMM D, YYYY")}</p> }  
-              { frontmatter?.lastModified && <p class="flex-1 text-sm text-gray-500">modified at: {dayjs(frontmatter.lastModified).format("MMMM D, YYYY")}</p>}
+              { publishDate && <p class="flex-1 text-sm text-gray-500">published at: {dayjs(publishDate).format("MMMM D, YYYY")}</p> }  
+              { lastModified && <p class="flex-1 text-sm text-gray-500">modified at: {dayjs(lastModified).format("MMMM D, YYYY")}</p>}
             </div>
           }
         {description && <p class="mt-2 border-y border-y-zinc-500 w-full py-3">{description}</p>}
