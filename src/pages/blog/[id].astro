@@ -1,0 +1,23 @@
+---
+
+import { getCollection, render } from "astro:content";
+import BlogPostLayout from "../../layouts/blog-post.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const { Content, remarkPluginFrontmatter } = await render(post);
+---
+
+<BlogPostLayout post={post} lastModified={remarkPluginFrontmatter.lastModified as Date} >
+  <Content /
+</BlogPostLayout>

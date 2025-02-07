@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import SpeedInsights from "@vercel/speed-insights/astro";
+import dayjs from "dayjs";
+import { MobileMenu } from "../components/../components/mobile-menu.tsx";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
+import type { Post } from "../models";
+
+type Props = {
+  post: Post;
+  lastModified: Date;
+};
+
+const { post, lastModified } = Astro.props;
+
+const { title, description, cover, publishDate } = post.data;
+---
+
+<html lang="en" class="dark:text-white dark:bg-zinc-900 text-black bg-zinc-100 dark">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body
+    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
+  >
+    <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" />
+    <MobileMenu client:media="(max-width: 768px)" />
+
+    <main
+      class="prose dark:prose-invert prose-headings:font-serif prose-a:hover:text-primary prose:transition prose-headings:tracking-wide px-8 md:px-0"
+    >
+      <article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
+        <h1 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl dark:text-white font-serif capitalize">
+          {title}
+        </h1>
+
+          <div class="grid sm:grid-cols-1 md:grid-cols-2">
+            { publishDate && <span class="text-sm text-gray-500">published at: {dayjs(publishDate).format("MMMM D, YYYY")}</span>}  
+            { lastModified && <span class="text-sm text-gray-500">modified at: {dayjs(lastModified).format("MMMM D, YYYY")}</span>}
+          </div>
+
+        {cover && <Image src={cover} alt="cover" class="w-full h-32 object-cover rounded-xl" />}
+        <section class="">
+          {description && <p class="mt-2 border-y border-y-zinc-500 w-full py-3">{description}</p>}
+          <div class="w-full">
+            <slot />
+          </div>
+        </section>
+      </article>
+    </main>
+    <Footer class="md:col-start-2" />
+    <SpeedInsights />
+  </body>
+</html>

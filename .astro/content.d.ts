@@ -4,12 +4,13 @@ declare module 'astro:content' {
 			Content: import('astro').MarkdownInstance<{}>['Content'];
 			headings: import('astro').MarkdownHeading[];
 			remarkPluginFrontmatter: Record<string, any>;
+			components: import('astro').MDXInstance<{}>['components'];
 		}>;
 	}
 }
 
 declare module 'astro:content' {
-	interface RenderResult {
+	export interface RenderResult {
 		Content: import('astro/runtime/server/index.js').AstroComponentFactory;
 		headings: import('astro').MarkdownHeading[];
 		remarkPluginFrontmatter: Record<string, any>;
@@ -41,6 +42,21 @@ declare module 'astro:content' {
 		ContentEntryMap[C]
 	>['slug'];
 
+	export type ReferenceDataEntry<
+		C extends CollectionKey,
+		E extends keyof DataEntryMap[C] = string,
+	> = {
+		collection: C;
+		id: E;
+	};
+	export type ReferenceContentEntry<
+		C extends keyof ContentEntryMap,
+		E extends ValidContentEntrySlug<C> | (string & {}) = string,
+	> = {
+		collection: C;
+		slug: E;
+	};
+
 	/** @deprecated Use `getEntry` instead. */
 	export function getEntryBySlug<
 		C extends keyof ContentEntryMap,
@@ -71,19 +87,17 @@ declare module 'astro:content' {
 	export function getEntry<
 		C extends keyof ContentEntryMap,
 		E extends ValidContentEntrySlug<C> | (string & {}),
-	>(entry: {
-		collection: C;
-		slug: E;
-	}): E extends ValidContentEntrySlug<C>
+	>(
+		entry: ReferenceContentEntry<C, E>,
+	): E extends ValidContentEntrySlug<C>
 		? Promise<CollectionEntry<C>>
 		: Promise<CollectionEntry<C> | undefined>;
 	export function getEntry<
 		C extends keyof DataEntryMap,
 		E extends keyof DataEntryMap[C] | (string & {}),
-	>(entry: {
-		collection: C;
-		id: E;
-	}): E extends keyof DataEntryMap[C]
+	>(
+		entry: ReferenceDataEntry<C, E>,
+	): E extends keyof DataEntryMap[C]
 		? Promise<DataEntryMap[C][E]>
 		: Promise<CollectionEntry<C> | undefined>;
 	export function getEntry<
@@ -102,21 +116,17 @@ declare module 'astro:content' {
 		collection: C,
 		id: E,
 	): E extends keyof DataEntryMap[C]
-		? Promise<DataEntryMap[C][E]>
+		? string extends keyof DataEntryMap[C]
+			? Promise<DataEntryMap[C][E]> | undefined
+			: Promise<DataEntryMap[C][E]>
 		: Promise<CollectionEntry<C> | undefined>;
 
 	/** Resolve an array of entry references from the same collection */
 	export function getEntries<C extends keyof ContentEntryMap>(
-		entries: {
-			collection: C;
-			slug: ValidContentEntrySlug<C>;
-		}[],
+		entries: ReferenceContentEntry<C, ValidContentEntrySlug<C>>[],
 	): Promise<CollectionEntry<C>[]>;
 	export function getEntries<C extends keyof DataEntryMap>(
-		entries: {
-			collection: C;
-			id: keyof DataEntryMap[C];
-		}[],
+		entries: ReferenceDataEntry<C, keyof DataEntryMap[C]>[],
 	): Promise<CollectionEntry<C>[]>;
 
 	export function render<C extends keyof AnyEntryMap>(
@@ -128,14 +138,8 @@ declare module 'astro:content' {
 	): import('astro/zod').ZodEffects<
 		import('astro/zod').ZodString,
 		C extends keyof ContentEntryMap
-			? {
-					collection: C;
-					slug: ValidContentEntrySlug<C>;
-				}
-			: {
-					collection: C;
-					id: keyof DataEntryMap[C];
-				}
+			? ReferenceContentEntry<C, ValidContentEntrySlug<C>>
+			: ReferenceDataEntry<C, keyof DataEntryMap[C]>
 	>;
 	// Allow generic `string` to avoid excessive type errors in the config
 	// if `dev` is not running to update as you edit.
@@ -150,101 +154,22 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"blog": {
-"01_tech-stack-2023.mdx": {
-	id: "01_tech-stack-2023.mdx";
-  slug: "01_tech-stack-2023";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"02_maturity.mdx": {
-	id: "02_maturity.mdx";
-  slug: "02_maturity";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"03_copy_object.mdx": {
-	id: "03_copy_object.mdx";
-  slug: "03_copy_object";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"03_drizzle.mdx": {
-	id: "03_drizzle.mdx";
-  slug: "03_drizzle";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"04_my-system.mdx": {
-	id: "04_my-system.mdx";
-  slug: "04_my-system";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"05_better-react-props.mdx": {
-	id: "05_better-react-props.mdx";
-  slug: "05_better-react-props";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"06_error_handling_in_typescript.mdx": {
-	id: "06_error_handling_in_typescript.mdx";
-  slug: "06_error_handling_in_typescript";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"07_pattern-matching.mdx": {
-	id: "07_pattern-matching.mdx";
-  slug: "07_pattern-matching";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"08_typescript_satisfies.mdx": {
-	id: "08_typescript_satisfies.mdx";
-  slug: "08_typescript_satisfies";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"09_think_originally.mdx": {
-	id: "09_think_originally.mdx";
-  slug: "09_think_originally";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"10_taking_the_stairs.mdx": {
-	id: "10_taking_the_stairs.mdx";
-  slug: "10_taking_the_stairs";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-};
-"pages": Record<string, {
+		
+	};
+
+	type DataEntryMap = {
+		"blog": Record<string, {
   id: string;
-  slug: string;
-  body: string;
-  collection: "pages";
-  data: InferEntrySchema<"pages">;
-  render(): Render[".md"];
+  body?: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">;
+  rendered?: RenderedContent;
+  filePath?: string;
 }>;
 
 	};
 
-	type DataEntryMap = {
-		
-	};
-
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("../../src/content/config.js");
+	export type ContentConfig = typeof import("../src/content.config.js");
 }

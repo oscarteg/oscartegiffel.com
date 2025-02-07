@@ -5,7 +5,7 @@
   },
 
   "files": {
-    "ignore": [".astro/", ".devbox/", ".vscode/", ".vercel"]
+    "ignore": [".astro/", ".devbox/", ".vscode/", ".vercel", "dist/"]
   },
   "formatter": {
     "enabled": true,

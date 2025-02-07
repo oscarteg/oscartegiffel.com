@@ -34,15 +34,15 @@ export const siteMetadata = {
       {
         title: "Editor & Terminal",
         items: [
-          "Terminal: Kitty",
+          "Terminal: Ghostty",
           "Editors: Neovim, Visual Studio Code, IntelliJ",
-          "Font: Dank Mono",
-          "Theme: Custom Theme inspired by Gruber",
+          "Font: Berkeley Mono",
+          "Theme: Gruvbox Dark",
         ],
       },
       {
         title: "Teaching tools",
-        items: ["Loom", "Presentify", "Eraser.io", "Repl.it"],
+        items: ["Loom", "Presentify", "Excalidraw / Eraser.io", "Repl.it"],
       },
     ],
   },
