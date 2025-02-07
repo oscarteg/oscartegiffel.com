@@ -15,12 +15,15 @@ type Props = {
   };
 };
 
-const { prose = true, frontmatter, title, description } = Astro.props;
+const { prose = true, frontmatter } = Astro.props;
+
+const title = Astro.props.title || frontmatter?.title;
+const description = Astro.props.description || frontmatter?.description;
 ---
 
 <html lang="en" class="dark:text-white dark:bg-zinc-900 text-black bg-zinc-100 dark">
   <head>
-    <BaseHead title={title || frontmatter?.title} description={description || frontmatter?.description} />
+    <BaseHead title={title} description={description} />
   </head>
 
   <body

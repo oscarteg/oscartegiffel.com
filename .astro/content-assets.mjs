@@ -1,6 +1,9 @@
 
-import __ASTRO_IMAGE_IMPORT_qnCIH from "./images/08.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F08_typescript_satisfies.mdx";
-import __ASTRO_IMAGE_IMPORT_ZDwAyv from "./images/09.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F09_think_originally.mdx";
-import __ASTRO_IMAGE_IMPORT_Z1ICHoa from "./images/10.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F10_taking_the_stairs.mdx";
-export default new Map([["./images/08.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F08_typescript_satisfies.mdx", __ASTRO_IMAGE_IMPORT_qnCIH], ["./images/09.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F09_think_originally.mdx", __ASTRO_IMAGE_IMPORT_ZDwAyv], ["./images/10.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F10_taking_the_stairs.mdx", __ASTRO_IMAGE_IMPORT_Z1ICHoa]]);
+import __ASTRO_IMAGE_IMPORT_1vYMtS from "./images/08.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F08_typescript_satisfies.mdx";
+import __ASTRO_IMAGE_IMPORT_ZNbTGY from "./images/09.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F09_think_originally.mdx";
+import __ASTRO_IMAGE_IMPORT_4CuBk from "./images/05.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F05_better-react-props.mdx";
+import __ASTRO_IMAGE_IMPORT_Z1Ubga6 from "./images/06.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F06_error_handling_in_typescript.mdx";
+import __ASTRO_IMAGE_IMPORT_ZDJcah from "./images/10.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F10_taking_the_stairs.mdx";
+import __ASTRO_IMAGE_IMPORT_Z1Mkyv0 from "./images/07.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F07_pattern-matching.mdx";
+export default new Map([["./images/08.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F08_typescript_satisfies.mdx", __ASTRO_IMAGE_IMPORT_1vYMtS], ["./images/09.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F09_think_originally.mdx", __ASTRO_IMAGE_IMPORT_ZNbTGY], ["./images/05.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F05_better-react-props.mdx", __ASTRO_IMAGE_IMPORT_4CuBk], ["./images/06.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F06_error_handling_in_typescript.mdx", __ASTRO_IMAGE_IMPORT_Z1Ubga6], ["./images/10.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F10_taking_the_stairs.mdx", __ASTRO_IMAGE_IMPORT_ZDJcah], ["./images/07.webp?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F07_pattern-matching.mdx", __ASTRO_IMAGE_IMPORT_Z1Mkyv0]]);
 		

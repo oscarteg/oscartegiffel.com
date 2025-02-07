@@ -1,11 +1,15 @@
 ---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.webp";
 import Link from "./Link.astro";
 
 const { className } = Astro.props;
 ---
 
 <aside class={className}>
-    <h2 class="font-display font-medium text-neutral-900 dark:text-white">Oscar te Giffel</h2>
+  <a href="/">
+      <Image class="w-24 h-24 object-cover rounded-4xl" src={logo} alt="Oscar Te Giffel" />
+    </a>
   <nav class="sm:flex flex-row sm:flex-col space-x-1 sm:space-x-0 sm:pr-10 my-2 sm:mt-0 space-y-0 sm:space-y-1 border-neutral-100 dark:border-neutral-800 border-1-2">
 
     <Link href="/">home</Link>
@@ -14,6 +18,7 @@ const { className } = Astro.props;
     <Link href="/workflow">workflow</Link>
     <Link href="/roadmap">roadmap</Link>
   </nav>
+
 
    <!-- <ThemeToggle /> -->
 </aside>
