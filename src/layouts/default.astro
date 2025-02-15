@@ -1,9 +1,6 @@
 ---
-import SpeedInsights from "@vercel/speed-insights/astro";
-import { MobileMenu } from "../components/../components/mobile-menu.tsx";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Sidebar from "../components/Sidebar.astro";
+import Body from "../components/Body.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 
 type Props = {
   title?: string;
@@ -17,20 +14,13 @@ type Props = {
 
 const { prose = true, frontmatter } = Astro.props;
 
-const title = Astro.props.title || frontmatter?.title;
-const description = Astro.props.description || frontmatter?.description;
+const title = Astro.props.title || frontmatter?.title || SITE_TITLE;
+const description =
+  Astro.props.description || frontmatter?.description || SITE_DESCRIPTION;
 ---
 
-<html lang="en" class="dark:text-white dark:bg-zinc-900 text-black bg-zinc-100 dark">
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
 
-  <body
-    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
-  >
-    <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" />
-    <MobileMenu client:media="(max-width: 768px)" />
+<Body title={title} description={description}>
 
     <main
       class:list={[
@@ -55,7 +45,4 @@ const description = Astro.props.description || frontmatter?.description;
         </div>
       </article>
     </main>
-    <Footer class="md:col-start-2" />
-    <SpeedInsights />
-  </body>
-</html>
+</Body>

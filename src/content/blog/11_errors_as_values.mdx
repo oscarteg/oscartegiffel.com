@@ -1,0 +1,152 @@
+---
+title: "Errors as Values: Rethinking JavaScript Error Handling"
+tags: [typescript, error-handling]
+publishDate: 2025-13-02
+description: Learn how to embrace errors as values in your JavaScript and TypeScript applications. This approach makes error handling explicit and local to where the operation occurs, while also improving type safety and composability.
+cover: "./images/11.webp"
+---
+
+# Beyond Try-Catch: Modern Error Handling Patterns in JavaScript
+
+Error handling in JavaScript has come a long way from the days of simple try-catch blocks. While I've previously covered implementing [Result types in TypeScript](./06_error_handling_in_typescript), today let's explore broader patterns and emerging trends in JavaScript error handling.
+
+## The Evolution of Error Handling
+
+JavaScript's error handling has evolved through several phases:
+
+1. Basic try-catch blocks (ES3)
+2. Promise-based error handling (ES6)
+3. Async/await error handling (ES2017)
+4. Value-based error handling (Modern patterns)
+
+## Error Handling in the Async World
+
+One area where traditional try-catch falls short is with asynchronous operations. Consider this common pattern:
+
+```javascript
+// Traditional approach
+async function fetchUser(id) {
+  try {
+    const response = await api.get(`/users/${id}`);
+    return response.data;
+  } catch (error) {
+    // What kind of error is this?
+    // Network error? 404? 500? Validation error?
+    console.error(error);
+    throw error;
+  }
+}
+```
+
+This presents several problems:
+
+- Error type ambiguity
+- Loss of error context
+- Difficulty in testing
+- Mixing of concerns
+
+## Modern Patterns for Better Error Handling
+
+### Pattern 1: Domain-Specific Error Types
+
+Instead of generic errors, create specific error types for different failure modes:
+
+```javascript
+class APIError extends Error {
+  constructor(status, message, details) {
+    super(message);
+    this.status = status;
+    this.details = details;
+    this.name = 'APIError';
+  }
+}
+
+class ValidationError extends Error {
+  constructor(fields) {
+    super('Validation Failed');
+    this.fields = fields;
+    this.name = 'ValidationError';
+  }
+}
+```
+
+### Pattern 2: Error Factories
+
+Create factories that standardize error creation across your application:
+
+```javascript
+const ErrorFactory = {
+  network(message, details) {
+    return new APIError(0, message, { type: 'network', ...details });
+  },
+  notFound(resource, id) {
+    return new APIError(404, `${resource} not found`, { id });
+  },
+  validation(fields) {
+    return new ValidationError(fields);
+  }
+};
+```
+
+### Pattern 3: Error Boundaries in Frontend Applications
+
+While React has Error Boundaries, we can implement similar patterns in vanilla JavaScript:
+
+```javascript
+class ErrorBoundary {
+  constructor(fallback) {
+    this.fallback = fallback;
+  }
+
+  async wrap(promise) {
+    try {
+      return await promise;
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        return this.fallback.handleValidation(error);
+      }
+      if (error instanceof APIError) {
+        return this.fallback.handleAPI(error);
+      }
+      return this.fallback.handleUnexpected(error);
+    }
+  }
+}
+```
+
+## Looking to the Future: Effect Systems
+
+The JavaScript ecosystem is continuously evolving, and one exciting development is the emergence of effect systems. Libraries like `effect.schema` promise to bring powerful error handling capabilities similar to what we see in languages like Haskell or PureScript.
+
+While I haven't personally used `effect.schema` in production yet, it's on my radar for future projects. The library aims to provide:
+
+- Type-safe error handling
+- Better composition of effects
+- Runtime validation
+- Improved error tracking
+
+## Choosing the Right Approach
+
+The approach you choose should depend on your specific needs:
+
+1. For simple applications, traditional try-catch might be sufficient
+2. For TypeScript projects, consider the Result type pattern (covered in my previous post)
+3. For large applications, domain-specific error types and factories
+4. For cutting-edge projects, explore effect systems
+
+## Building a Culture of Good Error Handling
+
+Good error handling isn't just about the technical implementation—it's about building a culture where errors are:
+
+- Expected and planned for
+- Well-documented
+- Easy to debug
+- Meaningful to users
+
+## Conclusion
+
+While my previous post focused on implementing the Result type in TypeScript, this broader look at error handling patterns shows there's no one-size-fits-all solution. The key is choosing patterns that make your code more maintainable and your errors more meaningful.
+
+The JavaScript ecosystem continues to evolve, and with libraries like ts-results and effect.schema gaining traction, we have more tools than ever for handling errors effectively. The future of error handling in JavaScript looks promising, moving beyond simple try-catch blocks to more sophisticated patterns that help us build more reliable applications.
+
+What patterns have you found most effective in your projects? I'd love to hear about your experiences in the comments below.

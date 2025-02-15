@@ -39,6 +39,7 @@
     "octokit": "^4.1.1",
     "prismjs": "^1.29.0",
     "sanitize-html": "^2.14.0",
+    "sharp": "^0.33.5",
     "solid-js": "^1.9.4",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.0.4",

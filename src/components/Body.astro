@@ -1,0 +1,32 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+import Footer from "../components/Footer.astro";
+import { MobileMenu } from "../components/mobile-menu.tsx";
+import Sidebar from "../components/Sidebar.astro";
+
+type Props = {
+  title?: string;
+  description?: string | undefined;
+};
+
+const { title, description } = Astro.props;
+---
+<html lang="en" class="dark:text-white dark:bg-stone-800 antialiased  dark">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body
+    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
+  >
+    <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" />
+
+    <MobileMenu client:media="(max-width: 768px)" />
+
+    <slot />
+    <Footer class="md:col-start-2" />
+    <SpeedInsights />
+
+  </body>
+</html>
