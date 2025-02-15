@@ -15,6 +15,7 @@ export default defineConfig({
   adapter: vercel({
     webAnalytics: true,
     speedInsights: true,
+    imageService: true,
   }),
   integrations: [
     mdx({
