@@ -12,7 +12,7 @@ export type Props = {
 const {
   post: {
     id,
-    data: { title, description, tags },
+    data: { title, description, tags, publishDate },
   },
 } = Astro.props;
 ---
@@ -21,7 +21,7 @@ const {
   <a class="w-full cursor-pointer flex gap-y-2 py-5 px-4" href={`/blog/${id}`} id={id}>
       <div class="grow space-y-3 ">
           <h3 class="font-semibold leading-6 text-xl">
-            {title}
+        {title} <span class="text-sm text-gray-500">{dayjs(new Date(publishDate)).fromNow()}</span>
           </h3>
           {description && <p class="mt-1 flex text-sm leading-5 dark:text-gray-300 line-clamp-2">{description}</p>}
         <div class="text-sm leading-6 flex flex-wrap gap-2">
