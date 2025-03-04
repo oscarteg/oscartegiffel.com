@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #fbdc4e;
+  --color-primary: var(--color-amber-700);
   --font-sans: "Apercu", sans-serif;
   --font-serif: "Ogg", serif;
   --font-mono: "Dank Mono", monospace;
