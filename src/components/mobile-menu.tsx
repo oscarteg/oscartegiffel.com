@@ -133,20 +133,20 @@ export function MobileMenu() {
       <button
         type="button"
         onClick={toggleMenu}
-        class="fixed top-4 right-4 z-50 p-2 bg-zinc-600 rounded-full md:hidden"
+        class="fixed top-4 right-4 z-50 p-2 bg-white rounded-full md:hidden"
       >
         {isOpen() ? <X /> : <Menu />}
       </button>
 
       {isOpen() && (
-        <nav class="fixed inset-0 bg-zinc-900 z-40 overflow-y-auto pt-16 pb-8 px-6">
+        <nav class="fixed inset-0 bg-white z-40 overflow-y-auto pt-16 pb-8 px-6">
           <ul class="space-y-4">
             <For each={menuItems}>
               {(item) => (
                 <li>
                   <a
                     href={item.link}
-                    class="block py-2 text-lg hover:text-yellow-400 transition-colors"
+                    class="block py-2 text-lg hover:text-primary transition-colors"
                   >
                     {item.name}
                   </a>
@@ -155,7 +155,7 @@ export function MobileMenu() {
             </For>
           </ul>
 
-          <div class="mt-8 space-y-6 text-white">
+          <div class="mt-8 space-y-6 ">
             <For each={sections}>
               {(section) => (
                 <div>
@@ -174,9 +174,7 @@ export function MobileMenu() {
                   {expandedSection() === section.title && (
                     <ul class="mt-2 ml-4 space-y-2">
                       <For each={section.items}>
-                        {(item) => (
-                          <li class="text-sm text-gray-400">{item}</li>
-                        )}
+                        {(item) => <li class="text-sm ">{item}</li>}
                       </For>
                     </ul>
                   )}
