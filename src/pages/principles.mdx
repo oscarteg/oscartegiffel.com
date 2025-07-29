@@ -1,0 +1,115 @@
+---
+title: Core principles for Software Engineers
+layout: ../layouts/default.astro
+description: Mastery begins with fundamentals. These are the principles I follow as an engineer. Only after deeply understanding the basics can you wisely break the rules you've set for yourself.
+---
+
+### Communicate to Collaborate
+
+Master both written and spoken communication as your foundation. Every aspect of software development—from code reviews to architectural decisions—depends on clear collaboration. Give and receive feedback effectively, listen with empathy, and build solutions as a team rather than in isolation.
+
+### Learn the Rules to Break Them Wisely
+
+Understand your organization's methodology so thoroughly that you recognize when and how to bend the rules. Whether your team uses Kanban, Scrum, or maintains a Tech Radar, navigate these frameworks while keeping the bigger picture in mind.
+
+### Study Your Environment, Not Just Your Code
+
+Invest time learning your environment beyond the technical stack. Understand company culture, hierarchy, and team dynamics. Use this knowledge to adapt your approach—whether you're working in a fast-moving startup or a structured enterprise environment.
+
+### Build Quality In, Don't Bolt It On
+
+Weave quality into every decision rather than treating it as an afterthought. Embed testing, refactoring, and maintainability into your daily work. Make quality improvements part of feature development rather than separate initiatives requiring special permission.
+
+### Understand Needs, Not Just Requirements
+
+Focus on what your stakeholders actually need—not just what they ask for. Sometimes this means building a proof of concept first, other times it requires upfront design work. Calibrate your approach to avoid unnecessary delays while maintaining standards.
+
+### Simplify Relentlessly
+
+Treat simplicity as the ultimate sophistication in software. Constantly work to reduce complexity through modular design, proper separation of concerns, and thoughtful testing strategies. Use these as adjustable levers, not rigid rules.
+
+### Embrace Discomfort to Grow
+
+Make reliability come from adaptability in our rapidly changing field. Admit mistakes publicly, hold yourself accountable, and actively seek uncomfortable learning opportunities. Don't avoid problems you don't understand—lean into them.
+
+### Own Problems, Propose Solutions
+
+Don't just identify problems—propose solutions. Rather than throwing issues "over the fence," take ownership of challenges and work collaboratively to resolve them, regardless of your personality type or role boundaries.
+
+## Data Validation Principles
+
+### Treat Every External Interface as a Trust Boundary
+
+Every connection to external systems—APIs, databases, file uploads—represents a point where your assumptions might break. Validate all data crossing these boundaries, regardless of how confident your type declarations make you feel.
+
+### Question Schemas, Don't Worship Them
+
+OpenAPI and Swagger schemas serve as excellent documentation and client generation tools, but treat them as guidelines, not gospel. API providers change implementations without updating schemas more often than you'd expect, creating dangerous gaps between expectation and reality.
+
+### Validate to Defend, Not Just to Parse
+
+Blindly trusting input shapes creates security vulnerabilities, especially during parsing and deserialization. Runtime validation acts as a critical defense layer against injection attacks, malformed data, and unexpected payloads that slip past type checking.
+
+### Invest in Validation for Better Developer Experience
+
+Robust runtime validation feels like overhead until you need to debug a production issue. Proper validation makes it easier to trace problems, understand data flows, and maintain system integrity. The upfront cost pays dividends in reduced debugging time and clearer error messages.
+
+## Rob Pike's 5 Principles of Programming
+
+### 1. Don't Guess Where the Bottlenecks Are
+
+You can't tell where a program is going to spend its time. Bottlenecks occur in surprising places, so don't try to second guess and put in a speed hack until you've proven that's where the bottleneck is.
+
+### 2. Measure Before You Optimize
+
+Measure. Don't tune for speed until you've measured, and even then don't unless one part of the code overwhelms the rest.
+
+### 3. Keep It Simple When N Is Small
+
+Fancy algorithms are slow when $N$ is small, and $N$ is usually small. Fancy algorithms have big constants. Until you know that $N$ is frequently going to be big, don't get fancy. (Even if $N$ does get big, use Rule 2 first.)
+
+### 4. Choose Simple Over Clever
+
+Fancy algorithms are buggier than simple ones and much harder to implement correctly. Favor simple algorithms paired with simple data structures. Clever code impresses other engineers; simple code ships and works.
+
+### 5. Let Data Drive Your Design
+
+Choose the right data structures first, and the algorithms will often become obvious. Data structures, not algorithms, are central to programming. Well-organized data makes complex problems simple; poorly chosen structures make simple problems complex.
+
+## Principal Engineer Principles
+
+### Lead by Crafting, Not Just Directing
+
+Stay hands-on and lead through exemplary work. Deliver designs, algorithms, and implementations that set the standard for engineering excellence. Only by staying close to the details can you earn the respect needed to be an effective technical leader.
+
+### Embrace Technical Risk and Complexity
+
+Tackle intrinsically hard problems that others avoid. Venture beyond comfortable approaches when the problem demands it. Acquire new expertise as needed, pioneer unexplored spaces, and show others what's possible through fearless technical exploration.
+
+### Shape Culture Through Empathy
+
+Build an inclusive engineering environment where everyone feels heard, respected, and empowered. Be conscious of how your words and presence impact others, especially those with less influence. Take responsibility for that impact and foster productive relationships across teams and disciplines.
+
+### Transform Complexity into Clarity
+
+Bring clarity to complex problems and demonstrate smart ways to simplify. Frame each challenge in its customer and business context, then distill it to its essence. Question assumptions, illuminate hidden pitfalls, and drive shared understanding across diverse stakeholders.
+
+### Adapt Your Approach to the Context
+
+Adjust your methods to meet the needs of each team, project, and product. Actively seek differing perspectives and remain willing to change your mind as you learn. Recognize that multiple viable solutions often exist—and sometimes the best solution is solving a different problem entirely.
+
+### Honor the Systems You Inherit
+
+Appreciate the value of working systems and the hard-won lessons they embody. Understand that many problems aren't fundamentally new—respect what came before while improving upon it thoughtfully.
+
+### Learn Continuously, Teach Broadly
+
+Never stop learning technical knowledge, and share that learning across the organization. Educate others about emerging trends, technologies, and approaches. Combine vision with discretion to drive technology choices that can be truly game-changing.
+
+### Create Lasting Impact Beyond Code
+
+Aim higher than just "delivering results." Make a lasting impact that echoes through the technology, product, and company culture. Amplify your influence by aligning teams toward coherent architectural strategies that outlast any single project.
+
+## Code never dies, you have to kill it
+
+A podcast I was listening to gave me a quote that I want to live by; "Old code never dies, you have to kill it". This is a testament by Grady Booch in the podcast *The Pragmatic Engineer*.

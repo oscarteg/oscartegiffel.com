@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # sst
 .sst
+
+.astro
+

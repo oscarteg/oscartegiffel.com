@@ -12,12 +12,12 @@ export type Props = {
 const {
   post: {
     id,
-    data: { title, description, tags, publishDate },
+    data: { title, description, tags, publishDate, draft },
   },
 } = Astro.props;
 ---
 
-<li class="relative dark:hover:bg-zinc-800/50 transition rounded-sm duration-500" >
+<li class="relative dark:hover:bg-zinc-800/50 transition rounded-sm duration-500" class:list={[{"bg-amber-500/50": draft}]} >
   <a class="w-full cursor-pointer flex gap-y-2 py-5 px-4" href={`/blog/${id}`} id={id}>
       <div class="grow space-y-3 ">
           <h3 class="font-semibold leading-6 text-xl">

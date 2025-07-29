@@ -24,9 +24,9 @@ const { title, description, cover, publishDate } = post.data;
           {title}
         </h1>
 
-          <div class="grid sm:grid-cols-1 md:grid-cols-2">
-            { publishDate && <span class="text-sm text-gray-500">published at: {dayjs(publishDate).format("MMMM D, YYYY")}</span>}  
-            { lastModified && <span class="text-sm text-gray-500">modified at: {dayjs(lastModified).format("MMMM D, YYYY")}</span>}
+          <div class="">
+            { publishDate && <div class="text-sm text-gray-500">published: {dayjs(publishDate).format("YYYY-MM-DD")}</div>}  
+            { lastModified && <div class="text-sm text-gray-500">modified: {dayjs(lastModified).format("YYYY-MM-DD")}</div>}
           </div>
 
         {cover && <Image src={cover} alt="cover" class="w-full h-32 object-cover rounded-xl" />}

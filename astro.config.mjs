@@ -1,21 +1,22 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import { SITE_URL } from "./src/config";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import remarkToc from "remark-toc";
 
 import solidJs from "@astrojs/solid-js";
 import { remarkModifiedTime } from "./src/utils";
 
+import node from "@astrojs/node";
+
 export default defineConfig({
   site: SITE_URL,
   output: "server",
-  adapter: vercel({
-    webAnalytics: true,
-    speedInsights: true,
-    imageService: true,
+  adapter: node({
+    mode: "standalone",
   }),
   integrations: [
     mdx({
@@ -25,7 +26,12 @@ export default defineConfig({
     solidJs(),
   ],
   markdown: {
-    remarkPlugins: [remarkModifiedTime],
+    remarkPlugins: [
+      remarkModifiedTime,
+      remarkMath,
+      [remarkToc, { heading: "toc", maxDepth: 3 }],
+    ],
+    rehypePlugins: [rehypeKatex],
     syntaxHighlight: "prism",
   },
   prefetch: true,

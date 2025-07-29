@@ -1,0 +1,108 @@
+---
+title: "The React Server Components Rant: How We Lost Our Way (And Why Vercel is Leading Us There)"
+description: React Server Components are a confusing mess that sacrifices explicitness for convenience, leading to a fragmented ecosystem and vendor lock-in. Let's talk about how we got here and why we need to rethink our approach.
+publishDate: 2025-06-04
+cover: "./images/11.webp"
+draft: true
+---
+
+Remember when React was groundbreaking because understanding a single render cycle unlocked the entire framework? Those were the days. You could spin up a React app, write some components, manage some state, and ship features. Simple. Predictable. **Explicit.**
+
+Now? Now we're living in the era of React Server Components (RSC), where the lines between server and client are blurred beyond recognition, and I'm starting to wonder if we've completely lost the plot.
+
+## The Magic Problem: When Convenience Becomes Confusion
+
+Here's the thing that's driving me absolutely insane: portions of the React community are genuinely excited about how React is "starting to feel more like PHP" with server actions embedded in what was traditionally client code. Let me say that again—we're **excited** about feeling like PHP.
+
+Think about this for a moment. We spent years moving away from the mixed concerns and implicit behavior that made debugging PHP applications a nightmare. We built clear boundaries between client and server logic. We created predictable, testable architectures. And now we're celebrating... going backwards?
+
+It's like we're building a house where we carefully separated the electrical work from the plumbing, only to have someone suggest running both through the same walls simultaneously. Sure, it might be more "convenient," but good luck debugging when something goes wrong.
+
+## The Ecosystem Lock-In: Vercel's Master Plan
+
+Let's talk about the elephant in the room: Vercel's influence on React's direction. Because if you think the push toward RSC is happening in a vacuum, you haven't been paying attention.
+
+Here's what really bothers me about this whole situation: **the RSC wire format isn't standardized.** Every bundler implements its own format, treating it as an internal implementation detail. This isn't an accident—it's a feature. Want to build a Rust or Erlang backend that can emit RSC-compatible updates? Too bad. You'll need to maintain a JavaScript layer as a microservice, or better yet, just use Vercel's platform where all of this complexity is magically handled for you.
+
+See how that works? Create the problem, sell the solution.
+
+The React team's even acknowledged this limitation, explaining that without JavaScript on the server, you lose much of RSC's core value proposition. But here's the kicker: this isn't a technical limitation—it's an architectural choice that happens to align perfectly with Vercel's business model.
+
+## The Simplicity We Lost
+
+Early React was beautiful because it was **explicit**. You could look at a component and understand exactly what it did, where it ran, and how it behaved. The learning curve was steep at first, but once you grasped the fundamentals, everything clicked.
+
+Now? Now we have:
+
+- Server components (but not all of them)
+- Client components (but they can run on the server during SSR)
+- Server actions (that look like client code)
+- "use client" directives (that don't actually mean what they say)
+- "use server" directives (because why not add more confusion?)
+- A wire format that's different for every bundler
+- Caching behavior that's... well, let's just say it's "magical"
+
+The current React ecosystem feels like a Swiss Army knife designed by committee—it can do everything, but you need a manual to figure out which tool you're actually using.
+
+## The Real Cost of "Developer Experience"
+
+The React team keeps talking about "developer experience," but whose experience are we optimizing for? Because it sure as hell isn't the developers trying to understand what's happening in their applications.
+
+Let me paint you a picture of modern React development:
+
+```jsx
+// Is this running on the server? Client? Both? 
+// Welcome to Schrödinger's Component!
+export default function MyComponent({ data }) {
+  // This fetch might be cached, might not be
+  // Depends on... well, good luck figuring that out
+  const result = await fetch('/api/data')
+  
+  return (
+    <div>
+      {/* This button click handler definitely runs on the client... right? */}
+      <button onClick={() => console.log('clicked')}>
+        Click me
+      </button>
+    </div>
+  )
+}
+```
+
+The mental model is shot. Debugging is a nightmare. Testing requires understanding the runtime environment better than the React team does. And for what? So we can avoid writing a proper API endpoint?
+
+## The Interoperability Disaster
+
+Here's what really gets me: the lack of interoperability. If you want to integrate with any backend that isn't JavaScript, you're increasingly out of luck. The ecosystem is becoming more isolated by design, not by accident.
+
+This isn't innovation—it's vendor lock-in with extra steps.
+
+Remember when React was just a view library? You could drop it into any application, regardless of your backend stack. Those days are dead and buried. Now you need the "full stack" React experience, complete with bundler-specific wire formats and magical server actions.
+
+## The Path Forward: Choose Simplicity
+
+Look, I'm not saying RSC doesn't have its place. For specific use cases—particularly content-heavy applications that benefit from server rendering—it can provide real value. But it shouldn't be the default recommendation for every React application.
+
+What we need is a return to explicit, understandable patterns:
+
+1. **Clear Boundaries**: If something runs on the server, make it obvious. If it runs on the client, make that obvious too.
+
+2. **Standard Protocols**: Stop treating wire formats as implementation details. If we're going to build an ecosystem around server/client communication, let's use actual standards.
+
+3. **Escape Hatches**: Don't force developers into a paradigm that doesn't fit their needs. Sometimes a simple SPA is the right choice.
+
+4. **Documentation Over Magic**: Instead of hiding complexity behind abstractions, help developers understand what's actually happening.
+
+## The Bottom Line
+
+React Server Components feel like a solution in search of a problem, dressed up as innovation but serving primarily to funnel developers into specific platform choices. We've traded the elegant simplicity that made React special for a complex, magical system that benefits vendors more than developers.
+
+The React community used to pride itself on explicit, understandable code. Now we're celebrating the return of mixed concerns and implicit behavior. We're excited about feeling like PHP again.
+
+Maybe it's time to ask ourselves: is this really progress, or are we just being led down a path that serves someone else's business interests?
+
+I know which way I'm leaning.
+
+---
+
+*Still using React Server Components? That's fine—just make sure you understand what you're signing up for. And maybe keep a traditional SPA framework bookmarked, just in case you want to remember what explicit, predictable code feels like.*

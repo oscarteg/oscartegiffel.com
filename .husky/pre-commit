@@ -1,1 +1,1 @@
-bunx biome check --write --no-errors-on-unmatched
+bun run check -- --no-errors-on-unmatched
