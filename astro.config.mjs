@@ -10,14 +10,9 @@ import remarkToc from "remark-toc";
 import solidJs from "@astrojs/solid-js";
 import { remarkModifiedTime } from "./src/utils";
 
-import node from "@astrojs/node";
-
 export default defineConfig({
   site: SITE_URL,
-  output: "server",
-  adapter: node({
-    mode: "standalone",
-  }),
+  output: "static",
   server: {
     port: 8080,
     host: "0.0.0.0",

@@ -2,8 +2,9 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo.webp";
 import Link from "./Link.astro";
+import TableOfContents from "./TableOfContents.astro";
 
-const { className } = Astro.props;
+const { className, headings } = Astro.props;
 ---
 
 <aside class={className}>
@@ -20,6 +21,11 @@ const { className } = Astro.props;
     <Link href="/principles">principles</Link>
   </nav>
 
+  {headings && headings.length > 0 && (
+    <div class="mt-8 pr-10">
+      <TableOfContents headings={headings} />
+    </div>
+  )}
 
    <!-- <ThemeToggle /> -->
 </aside>

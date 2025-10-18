@@ -6,13 +6,14 @@ type Props = {
   title?: string;
   description?: string | undefined;
   prose?: boolean;
+  headings?: { depth: number; slug: string; text: string }[];
   frontmatter?: {
     title: string;
     description?: string;
   };
 };
 
-const { prose = true, frontmatter } = Astro.props;
+const { prose = true, frontmatter, headings } = Astro.props;
 
 const title = Astro.props.title || frontmatter?.title || SITE_TITLE;
 const description =
@@ -20,11 +21,11 @@ const description =
 ---
 
 
-<Body title={title} description={description}>
+<Body title={title} description={description} headings={headings}>
     <main
       class:list={[
         {
-          ["prose dark:prose-invert prose-headings:font-serif prose-a:hover:text-primary prose:transition prose-headings:tracking-wide"]:
+          ["prose dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-wide"]:
             prose,
         },
         "px-8 md:px-0",
@@ -33,7 +34,7 @@ const description =
       <article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
         {
           title && (
-            <h1 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl dark:text-white font-serif capitalize">
+            <h1 class="mt-8 mb-4 text-2xl font-normal tracking-tight md:text-4xl dark:text-white font-serif capitalize">
               {title}
             </h1>
           )

@@ -15,9 +15,9 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const { Content, remarkPluginFrontmatter } = await render(post);
+const { Content, remarkPluginFrontmatter, headings } = await render(post);
 ---
 
-<BlogPostLayout post={post} lastModified={remarkPluginFrontmatter.lastModified as Date} >
-  <Content /
+<BlogPostLayout post={post} lastModified={remarkPluginFrontmatter.lastModified as Date} headings={headings} >
+  <Content />
 </BlogPostLayout>

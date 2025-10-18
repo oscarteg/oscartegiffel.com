@@ -6,27 +6,27 @@ import Body from "../components/Body.astro";
 import type { Post } from "../models";
 
 type Props = {
-  post: Post;
-  lastModified: Date;
+	post: Post;
+	lastModified: Date;
+	headings?: { depth: number; slug: string; text: string }[];
 };
 
-const { post, lastModified } = Astro.props;
+const { post, lastModified, headings } = Astro.props;
 
 const { title, description, cover, publishDate } = post.data;
 ---
 
-<Body title={title} description={description}>
+<Body title={title} description={description} headings={headings}>
     <main
-      class="prose dark:prose-invert prose-headings:font-serif prose-a:hover:text-primary prose:transition prose-headings:tracking-wide px-8 md:px-0"
+      class="prose dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-wide px-8 md:px-0"
     >
       <article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
-        <h1 class="mt-8 mb-4 text-2xl font-bold tracking-tight md:text-4xl dark:text-white font-serif capitalize">
+        <h1 class="mt-8 mb-4 text-2xl font-normal tracking-tight md:text-4xl dark:text-white font-serif capitalize">
           {title}
         </h1>
 
           <div class="">
-            { publishDate && <div class="text-sm text-gray-500">published: {dayjs(publishDate).format("YYYY-MM-DD")}</div>}  
-            { lastModified && <div class="text-sm text-gray-500">modified: {dayjs(lastModified).format("YYYY-MM-DD")}</div>}
+            { publishDate && <div class="text-sm text-gray-500">{dayjs(publishDate).format("YYYY-MM-DD")}</div>}
           </div>
 
         {cover && <Image src={cover} alt="cover" class="w-full h-32 object-cover rounded-xl" />}

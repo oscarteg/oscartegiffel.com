@@ -7,11 +7,12 @@ import { MobileMenu } from "../components/mobile-menu.tsx";
 type Props = {
   title?: string;
   description?: string | undefined;
+  headings?: { depth: number; slug: string; text: string }[];
 };
 
-const { title, description } = Astro.props;
+const { title, description, headings } = Astro.props;
 ---
-<html lang="en" class="dark:text-white dark:bg-stone-800 antialiased">
+<html lang="en" class="dark:text-white dark:bg-background-dark antialiased bg-background">
   <head>
     <BaseHead title={title} description={description} />
   </head>
@@ -19,7 +20,7 @@ const { title, description } = Astro.props;
   <body
     class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
   >
-    <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" />
+    <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" headings={headings} />
 
     <MobileMenu client:media="(max-width: 768px)" />
 
