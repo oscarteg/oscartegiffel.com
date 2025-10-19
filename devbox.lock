@@ -49,54 +49,6 @@
         }
       }
     },
-    "flyctl@latest": {
-      "last_modified": "2025-07-18T03:30:42Z",
-      "resolved": "github:NixOS/nixpkgs/e821e03193486359aa942372be2d9c1f377b7a18#flyctl",
-      "source": "devbox-search",
-      "version": "0.3.157",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/9cg95nfdlpfii66abcl3p5jhyas4ic1b-flyctl-0.3.157",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/9cg95nfdlpfii66abcl3p5jhyas4ic1b-flyctl-0.3.157"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/hs0a08nwj299gcpf94gs1vr2jgd4z8xh-flyctl-0.3.157",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/hs0a08nwj299gcpf94gs1vr2jgd4z8xh-flyctl-0.3.157"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/fs8ii155n83nfysmwbdcg2vs3cah876n-flyctl-0.3.157",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/fs8ii155n83nfysmwbdcg2vs3cah876n-flyctl-0.3.157"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/zhagispz795lklq13ccppf34ny9mss48-flyctl-0.3.157",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/zhagispz795lklq13ccppf34ny9mss48-flyctl-0.3.157"
-        }
-      }
-    },
     "github:NixOS/nixpkgs/nixpkgs-unstable": {
       "resolved": "github:NixOS/nixpkgs/5954d3359cc7178623da6c7fd23dc7f7504d7187?lastModified=1740762151&narHash=sha256-Rn0j0gP6po1m46RsW%2F4jrn7938TZGR%2BwRZ0%2BMSZThBg%3D"
     }
