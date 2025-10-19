@@ -1,13 +1,13 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import Sidebar from "../components/Sidebar.astro";
 import { MobileMenu } from "../components/mobile-menu.tsx";
+import Sidebar from "../components/Sidebar.astro";
 
 type Props = {
-  title?: string;
-  description?: string | undefined;
-  headings?: { depth: number; slug: string; text: string }[];
+	title?: string;
+	description?: string | undefined;
+	headings?: { depth: number; slug: string; text: string }[];
 };
 
 const { title, description, headings } = Astro.props;

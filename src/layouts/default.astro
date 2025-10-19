@@ -3,21 +3,21 @@ import Body from "../components/Body.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 
 type Props = {
-  title?: string;
-  description?: string | undefined;
-  prose?: boolean;
-  headings?: { depth: number; slug: string; text: string }[];
-  frontmatter?: {
-    title: string;
-    description?: string;
-  };
+	title?: string;
+	description?: string | undefined;
+	prose?: boolean;
+	headings?: { depth: number; slug: string; text: string }[];
+	frontmatter?: {
+		title: string;
+		description?: string;
+	};
 };
 
 const { prose = true, frontmatter, headings } = Astro.props;
 
 const title = Astro.props.title || frontmatter?.title || SITE_TITLE;
 const description =
-  Astro.props.description || frontmatter?.description || SITE_DESCRIPTION;
+	Astro.props.description || frontmatter?.description || SITE_DESCRIPTION;
 ---
 
 
