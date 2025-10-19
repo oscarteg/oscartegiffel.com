@@ -6,11 +6,11 @@ import Sidebar from "../components/Sidebar.astro";
 
 type Props = {
 	title?: string;
-	description?: string | undefined;
+	description?: string;
 	headings?: { depth: number; slug: string; text: string }[];
 };
 
-const { title, description, headings } = Astro.props;
+const { title, description, headings = [] } = Astro.props;
 ---
 <html lang="en" class="dark:text-white dark:bg-background-dark antialiased bg-background">
   <head>

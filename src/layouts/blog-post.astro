@@ -11,9 +11,9 @@ type Props = {
 	headings?: { depth: number; slug: string; text: string }[];
 };
 
-const { post, lastModified, headings } = Astro.props;
+const { post, headings = [] } = Astro.props;
 
-const { title, description, cover, publishDate } = post.data;
+const { title, description = "", cover, publishDate } = post.data;
 ---
 
 <Body title={title} description={description} headings={headings}>

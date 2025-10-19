@@ -4,7 +4,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 
 type Props = {
 	title?: string;
-	description?: string | undefined;
+	description?: string;
 	prose?: boolean;
 	headings?: { depth: number; slug: string; text: string }[];
 	frontmatter?: {
@@ -13,7 +13,7 @@ type Props = {
 	};
 };
 
-const { prose = true, frontmatter, headings } = Astro.props;
+const { prose = true, frontmatter, headings = [] } = Astro.props;
 
 const title = Astro.props.title || frontmatter?.title || SITE_TITLE;
 const description =
