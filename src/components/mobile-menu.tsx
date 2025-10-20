@@ -95,8 +95,8 @@ const menuItems = [
 	{ name: "Blog", link: "/blog" },
 	{ name: "Uses", link: "/uses" },
 	{ name: "Workflow", link: "/workflow" },
-	{ name: "Resources", link: "/resources" },
-	{ name: "Snippets", link: "/snippets" },
+	{ name: "Roadmap", link: "/roadmap" },
+	{ name: "Principles", link: "/principles" },
 ];
 
 const sections = [

@@ -11,30 +11,32 @@ import solidJs from "@astrojs/solid-js";
 import { remarkModifiedTime } from "./src/utils";
 
 export default defineConfig({
-  site: SITE_URL,
-  output: "static",
-  server: {
-    port: 8080,
-    host: "0.0.0.0",
-  },
-  integrations: [
-    mdx({
-      drafts: true,
-    }),
-    sitemap(),
-    solidJs(),
-  ],
-  markdown: {
-    remarkPlugins: [
-      remarkModifiedTime,
-      remarkMath,
-      [remarkToc, { heading: "toc", maxDepth: 3 }],
-    ],
-    rehypePlugins: [rehypeKatex],
-    syntaxHighlight: "prism",
-  },
-  prefetch: true,
-  vite: {
-    plugins: [tailwindcss()],
-  },
+	site: SITE_URL,
+	output: "static",
+	server: {
+		port: 8080,
+		host: "0.0.0.0",
+	},
+	integrations: [
+		mdx({
+			drafts: true,
+		}),
+		sitemap(),
+		solidJs(),
+	],
+	markdown: {
+		remarkPlugins: [
+			remarkModifiedTime,
+			remarkMath,
+			[remarkToc, { heading: "toc", maxDepth: 3 }],
+		],
+		rehypePlugins: [rehypeKatex],
+		shikiConfig: {
+			wrap: true,
+		},
+	},
+	prefetch: true,
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });
