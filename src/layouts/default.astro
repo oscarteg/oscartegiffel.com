@@ -19,12 +19,13 @@ const {
 	frontmatter,
 	headings = [],
 	title: propsTitle,
-	description: propsDescription
+	description: propsDescription,
 } = Astro.props;
 
 // Priority: props > frontmatter > defaults
 const title = propsTitle || frontmatter?.title || SITE_TITLE;
-const description = propsDescription || frontmatter?.description || SITE_DESCRIPTION;
+const description =
+	propsDescription || frontmatter?.description || SITE_DESCRIPTION;
 const toc = frontmatter?.toc === true;
 ---
 
@@ -43,7 +44,7 @@ const toc = frontmatter?.toc === true;
 			)}
 
 			{description && (
-				<p class="mt-2 border-y border-y-zinc-500 w-full py-3">
+				<p class="mt-2 mb-0 border-y border-y-zinc-500 w-full py-3">
 					{description}
 				</p>
 			)}
