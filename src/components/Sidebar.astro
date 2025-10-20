@@ -4,15 +4,20 @@ import logo from "../assets/logo.webp";
 import Link from "./Link.astro";
 import TableOfContents from "./TableOfContents.astro";
 
-const { className, headings = [] } = Astro.props;
+type Props = {
+	className?: string;
+	toc?: boolean;
+	headings?: { depth: number; slug: string; text: string }[];
+};
+
+const { className, headings = [], toc = false } = Astro.props;
 ---
 
 <aside class={className}>
   <a href="/">
       <Image class="w-24 h-24 object-cover rounded-4xl" src={logo} alt="Oscar Te Giffel" />
     </a>
-  <nav class="sm:flex flex-row sm:flex-col space-x-1 sm:space-x-0 sm:pr-10 my-5 sm:mt-5 space-y-0 sm:space-y-1 border-neutral-100 dark:border-neutral-800 border-1-2">
-
+  <nav class="flex flex-col gap-1 my-5 font-semibold">
     <Link href="/">home</Link>
     <Link href="/blog">posts</Link>
     <Link href="/uses">uses</Link>
@@ -21,11 +26,9 @@ const { className, headings = [] } = Astro.props;
     <Link href="/principles">principles</Link>
   </nav>
 
-  {headings.length > 0 && (
-    <div class="mt-8 pr-10">
-      <TableOfContents headings={headings} />
-    </div>
-  )}
+  <div class="mt-8 pr-10">
+    {toc && <TableOfContents headings={headings} />}
+  </div>
 
    <!-- <ThemeToggle /> -->
 </aside>

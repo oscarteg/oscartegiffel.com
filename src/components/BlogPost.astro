@@ -17,13 +17,11 @@ const {
 } = Astro.props;
 ---
 
-<li class="relative transition duration-500 mb-12" class:list={[{"bg-amber-500/50": draft}]} >
+<li class="relative transition duration-500 py-6" class:list={[{"bg-amber-500/50": draft}]} >
   <a class="w-full cursor-pointer block" href={`/blog/${id}`} id={id}>
-      <div class="space-y-4">
-          <h3 class="font-serif italic font-normal text-3xl md:text-4xl leading-tight tracking-tight">
+      <h3 class="font-serif italic font-normal text-xl leading-tight tracking-tight">
         {title}
-          </h3>
-          {description && <p class="text-base md:text-lg leading-relaxed dark:text-gray-300">{description}</p>}
-      </div>
+      </h3>
+      {description && <p class="leading-relaxed dark:text-gray-300">{description}</p>}
   </a>
 </li>

@@ -13,10 +13,10 @@ type Props = {
 
 const { post, headings = [] } = Astro.props;
 
-const { title, description = "", cover, publishDate } = post.data;
+const { title, description = "", cover, publishDate, toc = false } = post.data;
 ---
 
-<Body title={title} description={description} headings={headings}>
+<Body title={title} description={description} headings={headings} toc={toc}>
     <main
       class="prose dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-wide px-8 md:px-0"
     >

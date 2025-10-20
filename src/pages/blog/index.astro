@@ -10,7 +10,7 @@ const reversedPosts = posts.sort(sortAsc);
 ---
 
 <DefaultLayout prose={false} title={"Blog"} description={"A collection of my thoughts and ideas."} >
-  <ul role="list" class={"flex flex-col mt-12"}>
+  <ul role="list" class={"flex flex-col mt-12 divide-y divide-stone-300"}>
     {reversedPosts.map((post: Post) => <BlogPost post={post} />)}
   </ul>
 </DefaultLayout>

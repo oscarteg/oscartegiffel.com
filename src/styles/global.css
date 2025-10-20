@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-	--color-primary: var(--color-amber-700);
+	--color-primary: #ffbf00;
 	--color-background: #ededed;
 	--color-background-dark: #292524;
 	--font-sans: "Tiempos Text", serif;
@@ -33,12 +33,15 @@ pre[class*="language-"] {
 		@apply transition;
 	}
 
-	::selection {
-		@apply bg-primary text-black;
-	}
-
 	.prose .katex-display {
 		color: var(--tw-prose-body);
+	}
+
+	.prose strong {
+		text-decoration: underline;
+		text-decoration-color: #ffbf00;
+		text-decoration-thickness: 2px;
+		text-underline-offset: 2px;
 	}
 }
 

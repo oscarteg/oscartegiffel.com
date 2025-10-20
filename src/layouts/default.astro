@@ -10,10 +10,12 @@ type Props = {
 	frontmatter?: {
 		title: string;
 		description?: string;
+		toc?: boolean;
 	};
 };
 
 const { prose = true, frontmatter, headings = [] } = Astro.props;
+const toc = frontmatter?.toc === true;
 
 const title = Astro.props.title || frontmatter?.title || SITE_TITLE;
 const description =
@@ -21,7 +23,7 @@ const description =
 ---
 
 
-<Body title={title} description={description} headings={headings}>
+<Body title={title} description={description} headings={headings} toc={toc}>
     <main
       class:list={[
         {

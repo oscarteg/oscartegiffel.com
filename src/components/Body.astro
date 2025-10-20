@@ -8,9 +8,10 @@ type Props = {
 	title?: string;
 	description?: string;
 	headings?: { depth: number; slug: string; text: string }[];
+	toc: boolean;
 };
 
-const { title, description, headings = [] } = Astro.props;
+const { title, description, headings = [], toc = false } = Astro.props;
 ---
 <html lang="en" class="dark:text-white dark:bg-background-dark antialiased bg-background">
   <head>
@@ -18,9 +19,9 @@ const { title, description, headings = [] } = Astro.props;
   </head>
 
   <body
-    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto justify-center md:justify-start"
+    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto"
   >
-    <Sidebar className="md:sticky md:top-20 justify-self-center hidden md:block" headings={headings} />
+    <Sidebar className="md:sticky md:top-20 justify-self-start hidden md:block" headings={headings} toc={toc} />
 
     <MobileMenu client:media="(max-width: 768px)" />
 
