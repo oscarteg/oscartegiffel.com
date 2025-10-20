@@ -25,23 +25,12 @@ pre[class*="language-"] {
 
 @layer base {
 	html {
-		font-size: 18px;
+		font-size: 16px;
 		scrollbar-gutter: stable;
-	}
-
-	a:hover {
-		@apply transition;
 	}
 
 	.prose .katex-display {
 		color: var(--tw-prose-body);
-	}
-
-	.prose strong {
-		text-decoration: underline;
-		text-decoration-color: #ffbf00;
-		text-decoration-thickness: 2px;
-		text-underline-offset: 2px;
 	}
 }
 

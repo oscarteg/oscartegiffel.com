@@ -15,10 +15,8 @@ const { post, headings = [] } = Astro.props;
 const { title, description = "", cover, publishDate, toc = false } = post.data;
 ---
 
-<DefaultLayout title={title} description={description} headings={headings} frontmatter={{ title, description, toc }}>
-  <div class="mb-4">
-    {publishDate && <div class="text-sm text-gray-500">{dayjs(publishDate).format("YYYY-MM-DD")}</div>}
-  </div>
+<DefaultLayout title={title} description={description} headings={headings} frontmatter={{ title, description, toc }} >
+    {publishDate && <div class="text-sm text-gray-500mt-4">{dayjs(publishDate).format("YYYY-MM-DD")}</div>}
 
   {cover && <Image src={cover} alt="cover" class="w-full h-32 object-cover rounded-xl mb-4" />}
 

@@ -32,8 +32,9 @@ const toc = frontmatter?.toc === true;
 <Body title={title} description={description} headings={headings} toc={toc}>
 	<main
 		class:list={[
-			prose && "prose prose-custom dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-wide",
+			prose && "prose prose-custom dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-wide prose-headings:mt-1",
 			"px-8 md:px-0",
+      prose && "prose-strong:underline prose-strong:decoration-primary prose-strong:decoration-2 prose:strong:underline-offset-2"
 		]}
 	>
 		<article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
@@ -44,14 +45,11 @@ const toc = frontmatter?.toc === true;
 			)}
 
 			{description && (
-				<p class="mt-2 mb-0 border-y border-y-zinc-500 w-full py-3">
+				<p class="mt-2 border-y border-y-zinc-500 w-full py-3">
 					{description}
 				</p>
 			)}
-
-			<div class="w-full">
-				<slot />
-			</div>
+      <slot />
 		</article>
 	</main>
 </Body>
