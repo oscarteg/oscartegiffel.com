@@ -37,48 +37,54 @@ pre[class*="language-"] {
 /* Tiempos Text Font Family */
 @font-face {
 	font-family: "Tiempos Text";
-	src: url("https://rawcdn.githack.com/downbeat-academy/cadence-design-system/9f513bd717e08eadefff7cfff8c95234d43b3993/public/fonts/tiempos-text/TiemposText-Regular.woff2")
-		format("woff2");
+	src: url("/fonts/TiemposText-Regular.woff2") format("woff2"),
+	     url("/fonts/TiemposText-Regular.woff") format("woff"),
+	     url("/fonts/TiemposText-Regular.otf") format("opentype");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: "Tiempos Text";
-	src: url("https://rawcdn.githack.com/downbeat-academy/cadence-design-system/9f513bd717e08eadefff7cfff8c95234d43b3993/public/fonts/tiempos-text/TiemposText-RegularItalic.woff2")
-		format("woff2");
+	src: url("/fonts/TiemposText-RegularItalic.woff2") format("woff2"),
+	     url("/fonts/TiemposText-RegularItalic.woff") format("woff"),
+	     url("/fonts/TiemposText-RegularItalic.otf") format("opentype");
 	font-weight: normal;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: "Tiempos Text";
-	src: url("https://rawcdn.githack.com/downbeat-academy/cadence-design-system/9f513bd717e08eadefff7cfff8c95234d43b3993/public/fonts/tiempos-text/TiemposText-Semibold.woff2")
-		format("woff2");
+	src: url("/fonts/TiemposText-Semibold.woff2") format("woff2"),
+	     url("/fonts/TiemposText-Semibold.woff") format("woff"),
+	     url("/fonts/TiemposText-Semibold.otf") format("opentype");
 	font-weight: 600;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: "Tiempos Text";
-	src: url("https://rawcdn.githack.com/downbeat-academy/cadence-design-system/9f513bd717e08eadefff7cfff8c95234d43b3993/public/fonts/tiempos-text/TiemposText-SemiboldItalic.woff2")
-		format("woff2");
+	src: url("/fonts/TiemposText-SemiboldItalic.woff2") format("woff2"),
+	     url("/fonts/TiemposText-SemiboldItalic.woff") format("woff"),
+	     url("/fonts/TiemposText-SemiboldItalic.otf") format("opentype");
 	font-weight: 600;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: "Tiempos Text";
-	src: url("https://rawcdn.githack.com/downbeat-academy/cadence-design-system/9f513bd717e08eadefff7cfff8c95234d43b3993/public/fonts/tiempos-text/TiemposText-Bold.woff2")
-		format("woff2");
+	src: url("/fonts/TiemposText-Bold.woff2") format("woff2"),
+	     url("/fonts/TiemposText-Bold.woff") format("woff"),
+	     url("/fonts/TiemposText-Bold.otf") format("opentype");
 	font-weight: bold;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: "Tiempos Text";
-	src: url("https://rawcdn.githack.com/downbeat-academy/cadence-design-system/9f513bd717e08eadefff7cfff8c95234d43b3993/public/fonts/tiempos-text/TiemposText-BoldItalic.woff2")
-		format("woff2");
+	src: url("/fonts/TiemposText-BoldItalic.woff2") format("woff2"),
+	     url("/fonts/TiemposText-BoldItalic.woff") format("woff"),
+	     url("/fonts/TiemposText-BoldItalic.otf") format("opentype");
 	font-weight: bold;
 	font-style: italic;
 }
