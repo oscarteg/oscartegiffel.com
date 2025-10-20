@@ -8,43 +8,49 @@ type Props = {
 	prose?: boolean;
 	headings?: { depth: number; slug: string; text: string }[];
 	frontmatter?: {
-		title: string;
+		title?: string;
 		description?: string;
 		toc?: boolean;
 	};
 };
 
-const { prose = true, frontmatter, headings = [] } = Astro.props;
-const toc = frontmatter?.toc === true;
+const {
+	prose = true,
+	frontmatter,
+	headings = [],
+	title: propsTitle,
+	description: propsDescription
+} = Astro.props;
 
-const title = Astro.props.title || frontmatter?.title || SITE_TITLE;
-const description =
-	Astro.props.description || frontmatter?.description || SITE_DESCRIPTION;
+// Priority: props > frontmatter > defaults
+const title = propsTitle || frontmatter?.title || SITE_TITLE;
+const description = propsDescription || frontmatter?.description || SITE_DESCRIPTION;
+const toc = frontmatter?.toc === true;
 ---
 
-
 <Body title={title} description={description} headings={headings} toc={toc}>
-    <main
-      class:list={[
-        {
-          ["prose dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-wide"]:
-            prose,
-        },
-        "px-8 md:px-0",
-      ]}
-    >
-      <article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
-        {
-          title && (
-            <h1 class="mt-8 mb-4 text-2xl font-normal tracking-tight md:text-4xl dark:text-white font-serif capitalize">
-              {title}
-            </h1>
-          )
-        }
-        {description && <p class="mt-2 border-y border-y-zinc-500 w-full py-3">{description}</p>}
-        <div class="w-full">
-          <slot />
-        </div>
-      </article>
-    </main>
+	<main
+		class:list={[
+			prose && "prose prose-custom dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-wide",
+			"px-8 md:px-0",
+		]}
+	>
+		<article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
+			{title && (
+				<h1 class="mt-8 mb-4 text-2xl font-normal tracking-tight md:text-4xl dark:text-white font-serif capitalize">
+					{title}
+				</h1>
+			)}
+
+			{description && (
+				<p class="mt-2 border-y border-y-zinc-500 w-full py-3">
+					{description}
+				</p>
+			)}
+
+			<div class="w-full">
+				<slot />
+			</div>
+		</article>
+	</main>
 </Body>

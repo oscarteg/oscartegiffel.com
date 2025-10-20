@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import { MobileMenu } from "../components/mobile-menu.tsx";
 import Sidebar from "../components/Sidebar.astro";
+import TableOfContents from "../components/TableOfContents.astro";
 
 type Props = {
 	title?: string;
@@ -19,14 +20,33 @@ const { title, description, headings = [], toc = false } = Astro.props;
   </head>
 
   <body
-    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] gap-8 mx-auto"
+    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] 2xl:grid-cols-[200px_1fr_1fr] gap-8 mx-auto"
   >
-    <Sidebar className="md:sticky md:top-20 justify-self-start hidden md:block" headings={headings} toc={toc} />
+    <div class="md:sticky md:top-20 justify-self-start hidden md:block 2xl:flex 2xl:flex-col">
+      <Sidebar className="" />
+
+      {toc && headings.length > 0 && (
+        <div class="hidden md:block 2xl:hidden mt-8">
+          <h2 class="text-sm font-semibold mb-2">Table of Contents</h2>
+          <TableOfContents headings={headings} />
+        </div>
+      )}
+    </div>
 
     <MobileMenu client:media="(max-width: 768px)" />
 
-    <slot />
-    <Footer class="md:col-start-2" />
+    <div class="flex flex-col px-8 md:px-0">
+      <slot />
+    </div>
+
+    {toc && headings.length > 0 && (
+      <aside class="hidden 2xl:block self-start">
+        <h2 class="text-sm font-semibold mb-2">Table of Contents</h2>
+        <TableOfContents headings={headings} />
+      </aside>
+    )}
+
+    <Footer class="md:col-start-2 2xl:col-start-2" />
 
   </body>
 </html>

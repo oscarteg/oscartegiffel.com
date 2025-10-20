@@ -2,15 +2,12 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo.webp";
 import Link from "./Link.astro";
-import TableOfContents from "./TableOfContents.astro";
 
 type Props = {
 	className?: string;
-	toc?: boolean;
-	headings?: { depth: number; slug: string; text: string }[];
 };
 
-const { className, headings = [], toc = false } = Astro.props;
+const { className } = Astro.props;
 ---
 
 <aside class={className}>
@@ -25,10 +22,6 @@ const { className, headings = [], toc = false } = Astro.props;
     <Link href="/roadmap">roadmap</Link>
     <Link href="/principles">principles</Link>
   </nav>
-
-  <div class="mt-8 pr-10">
-    {toc && <TableOfContents headings={headings} />}
-  </div>
 
    <!-- <ThemeToggle /> -->
 </aside>
