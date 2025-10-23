@@ -37,3 +37,21 @@ export const remarkModifiedTime: RehypePlugin = () => (_, file) => {
 	// biome-ignore lint/suspicious/noExplicitAny: The type of result is not explicitly defined.
 	(file.data.astro as any).frontmatter.lastModified = result.toString();
 };
+
+type GroupBy<T> = {
+	[key: string]: T[];
+};
+
+export function groupBy<T>(
+	items: T[],
+	keyExtractor: (item: T) => string,
+): GroupBy<T> {
+	return items.reduce((grouped: GroupBy<T>, item: T) => {
+		const groupKey = keyExtractor(item); // Extract the grouping key
+		if (!grouped[groupKey]) {
+			grouped[groupKey] = [];
+		}
+		grouped[groupKey].push(item);
+		return grouped;
+	}, {});
+}
