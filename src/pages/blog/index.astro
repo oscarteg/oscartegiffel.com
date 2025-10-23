@@ -7,10 +7,27 @@ import { filterPosts, sortAsc } from "../../utils";
 
 const posts = await getCollection("blog", filterPosts);
 const reversedPosts = posts.sort(sortAsc);
+
+// Group posts by year
+const postsByYear = reversedPosts.reduce((groups, post) => {
+	const year = new Date(post.data.publishDate).getFullYear();
+	if (!groups[year]) {
+		groups[year] = [];
+	}
+	groups[year].push(post);
+	return groups;
+}, {});
 ---
 
-<DefaultLayout prose={false} title="Blog" description="A collection of my thoughts and ideas." >
-  <ul role="list" class="flex flex-col divide-y divide-stone-300">
-    {reversedPosts.map((post: Post) => <BlogPost post={post} />)}
-  </ul>
+<DefaultLayout prose={false} title="Blog" description="A collection of my thoughts and ideas.">
+  {Object.keys(postsByYear)
+    .sort((a, b) => b - a) // Sort years in descending order
+    .map((year) => (
+      <section key={year} class="mb-8">
+        <h2 class="text-xl font-semibold italic">{year}</h2>
+        <ul role="list" class="flex flex-col">
+          {postsByYear[year].map((post: Post) => <BlogPost post={post} />)}
+        </ul>
+      </section>
+    ))}
 </DefaultLayout>
