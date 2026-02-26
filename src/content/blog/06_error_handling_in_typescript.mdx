@@ -2,20 +2,20 @@
 title: Effective Error Handling with Result Types in TypeScript
 tags: [typescript, error-handling]
 publishDate: 2024-04-07
-description: Elevate your TypeScript error handling with the powerful 'Result' type. Learn how to implement this functional programming concept for clearer, safer, and more composable code that explicitly manages success and failure states
+description: TypeScript has no built-in way to represent "this function might fail" in the type system. Here's how to build one.
 cover: "./images/06.webp"
 ---
 
-TypeScript, while powerful, lacks a built-in construct specifically designed for function-level error handling. The standard `Error` type, while useful, doesn't quite fit the bill for representing potential failures in a type-safe manner. Let's explore how we can fill this gap with a custom `Result` type.
+TypeScript doesn't have a built-in way to say "this function might fail" at the type level. You can throw errors, sure, but the caller has no idea from the function signature. The `Result` type fixes that.
 
 ## The Result Type
 
-The `Result` type encapsulates the outcome of a function that may succeed or fail. It adheres to two key principles:
+A `Result` wraps the outcome of a function that can succeed or fail. Two things it needs to do:
 
-1. It can unwrap the underlying value.
-2. It allows building upon the underlying value.
+1. Let you unwrap the underlying value.
+2. Let you build on top of it without unwrapping first.
 
-Here's a straightforward implementation:
+Here's the implementation:
 
 ```typescript
 enum ResultKind {
@@ -71,8 +71,6 @@ export function err<E>(e: E): Err<E> {
 
 ## Using the Result Type
 
-Here's how you might use the `Result` type in practice:
-
 ```typescript
 function divide(a: number, b: number): Result<number, string> {
   return b === 0 ? err("Division by zero") : ok(a / b);
@@ -94,18 +92,14 @@ result2.match({
 });
 ```
 
-## Benefits of the Result Type
+## Why Bother
 
-This implementation shares some properties with monads, though it's a simplified version. The main advantages are:
+This shares some properties with monads, though it's a simplified version. The main wins:
 
-1. Improved function clarity: The return type explicitly indicates that an error might occur.
-2. Type safety: TypeScript ensures that both success and error cases are handled.
-3. Composability: Results can be chained together easily.
+1. __The return type tells you an error might happen.__ No more guessing.
+2. __TypeScript forces you to handle both cases.__ You can't ignore the error path.
+3. __Results chain together.__ `map` and `bind` let you compose operations without unwrapping at every step.
 
-While it would be ideal to have such functionality at the language level, this pattern provides a workable solution for more robust error handling in TypeScript applications.
+It would be ideal to have this at the language level, but this gets us most of the way there.
 
-## Conclusion
-
-The `Result` type offers a pragmatic approach to error handling in TypeScript. By adopting this pattern, you can write more predictable and maintainable code. Consider incorporating it into your projects and see how it impacts your error management strategy.
-
-While I encourage creating this pattern in your own projects, there are numerous projects that have amazing API's like [ts-results](https://github.com/vultix/ts-results).
+I'd encourage building this yourself to understand how it works, but if you want a battle-tested version, check out [ts-results](https://github.com/vultix/ts-results).

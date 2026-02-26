@@ -2,14 +2,14 @@
 title: Moving to Drizzle and back
 publishDate: 2024-03-01
 tags: [typescript, orm]
-description: A deep dive into Drizzle vs. Prisma. Discover the challenges of complex relational queries, the importance of developer experience, and valuable lessons learned when switching database tools. Perfect for TypeScript developers seeking insights on ORM selection and performance optimization.
+description: I tried switching from Prisma to Drizzle. Many-to-many relationships sent me right back.
 ---
 
-In the ever-evolving world of software development, exploring new tools and technologies is essential. As a seasoned software engineer, I've always advocated for trying new approaches. Recently, I decided to put my own advice into practice by experimenting with Drizzle, an alternative to my usual ORM of choice.
+I'm always trying new tools. It's part of the job and honestly I just enjoy it. So when Drizzle started getting traction as a lighter alternative to Prisma, I figured I'd give it a shot.
 
-My primary requirements for an ORM are straightforward: excellent developer experience, a clean API for queries and mutations, and robust TypeScript support. Unfortunately, Drizzle fell short of these expectations, particularly in one crucial use case.
+My requirements for an ORM are pretty simple: good DX, a clean API for queries and mutations, and solid TypeScript support. Drizzle fell short on one specific use case that killed it for me.
 
-Consider a simple schema with users and groups:
+Here's a simple schema with users and groups:
 
 ```typescript
 export const users = mysqlTable("users", {
@@ -23,9 +23,9 @@ export const groups = mysqlTable("groups", {
 });
 ```
 
-I opted for varchar as the id type, generating UUIDs in the application rather than relying on database-generated ids. This approach sidesteps potential issues with MySQL's `LAST_INSERT_ID()` function in serverless environments.
+I'm using varchar for the id type and generating UUIDs in the application. This avoids issues with MySQL's `LAST_INSERT_ID()` in serverless environments.
 
-Creating a many-to-many relationship between these tables in Drizzle requires manual creation of a junction table:
+For a many-to-many relationship you have to manually create the junction table in Drizzle:
 
 ```typescript
 export const usersToGroups = mysqlTable(
@@ -46,7 +46,7 @@ export const usersToGroups = mysqlTable(
 // Relation definitions omitted for brevity
 ```
 
-While this setup seems reasonable, the API for querying related data leaves much to be desired. Fetching a single user with their associated group requires a convoluted query structure:
+Fine so far. But the API for querying related data is where it gets ugly. Fetching a user with their groups:
 
 ```typescript
 await db.query.users.findFirst({
@@ -62,7 +62,7 @@ await db.query.users.findFirst({
 });
 ```
 
-The resulting data structure is equally cumbersome:
+And the resulting data structure is just as messy:
 
 ```json
 {
@@ -84,6 +84,6 @@ The resulting data structure is equally cumbersome:
 }
 ```
 
-This experience led me back to Prisma, which offers a more intuitive API and cleaner data structures for managing relationships. While Drizzle may have its merits, it failed to provide the seamless developer experience I sought in this particular scenario.
+That nested `groups[0].group` structure is not something I want to deal with across an entire codebase. Back to Prisma it was.
 
-In the end, this journey reinforced the importance of thoroughly evaluating tools against specific use cases before committing to a switch. Sometimes, the grass isn't always greener on the other side, and there's value in recognizing when to stick with a tried-and-true solution.
+Drizzle might work well for simpler schemas or if you prefer staying close to SQL. But for relational queries with any complexity, Prisma's API is just better. Sometimes the grass isn't greener.

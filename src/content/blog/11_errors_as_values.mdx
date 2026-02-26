@@ -2,14 +2,14 @@
 title: "Errors as Values: Rethinking JavaScript Error Handling"
 tags: [typescript, error-handling]
 publishDate: 2025-10-20
-description: Learn how to embrace errors as values in your JavaScript and TypeScript applications. This approach makes error handling explicit and local to where the operation occurs, while also improving type safety and composability.
+description: Beyond try-catch -- modern patterns for handling errors in JavaScript and TypeScript.
 cover: "./images/11.webp"
 draft: true
 ---
 
-One of the pitfalls of starting out as a software developer is not thinking about the _unhappy path_. As you further along in your career as a developer you encounter more cases where things aren't working as expected. Where you delve into the realm of things going wrong without knowing how.
+When you start out as a developer, you mostly think about the happy path. As you get further in your career you run into more cases where things just don't work the way you expected -- and you have no idea why.
 
-Error handling in JavaScript has come a long way from the days of simple try-catch blocks. While I've previously covered implementing [Result types in TypeScript](./06_error_handling_in_typescript), today let's explore broader patterns and emerging trends in JavaScript error handling.
+I've previously written about [Result types in TypeScript](./06_error_handling_in_typescript). This post takes a broader look at error handling patterns and where things are heading.
 
 ## The Evolution of Error Handling
 
@@ -115,11 +115,11 @@ class ErrorBoundary {
 }
 ```
 
-## Looking to the Future: Effect Systems
+## Looking Ahead: Effect Systems
 
-The JavaScript ecosystem is continuously evolving, and one exciting development is the emergence of effect systems. Libraries like `effect.schema` promise to bring powerful error handling capabilities similar to what we see in languages like Haskell or PureScript.
+One thing I'm keeping an eye on is effect systems. Libraries like `effect.schema` are bringing ideas from Haskell and PureScript into the JavaScript world.
 
-While I haven't personally used `effect.schema` in production yet, it's on my radar for future projects. The library aims to provide:
+I haven't used it in production yet, but it's on my list. What it promises:
 
 - Type-safe error handling
 - Better composition of effects
@@ -135,19 +135,13 @@ The approach you choose should depend on your specific needs:
 3. For large applications, domain-specific error types and factories
 4. For cutting-edge projects, explore effect systems
 
-## Building a Culture of Good Error Handling
+## Building Good Error Handling Habits
 
-Good error handling isn't just about the technical implementation—it's about building a culture where errors are:
+The technical patterns matter, but so does the mindset. Errors should be:
 
 - Expected and planned for
 - Well-documented
 - Easy to debug
-- Meaningful to users
+- Meaningful to the person reading them
 
-## Conclusion
-
-While my previous post focused on implementing the Result type in TypeScript, this broader look at error handling patterns shows there's no one-size-fits-all solution. The key is choosing patterns that make your code more maintainable and your errors more meaningful.
-
-The JavaScript ecosystem continues to evolve, and with libraries like ts-results and effect.schema gaining traction, we have more tools than ever for handling errors effectively. The future of error handling in JavaScript looks promising, moving beyond simple try-catch blocks to more sophisticated patterns that help us build more reliable applications.
-
-What patterns have you found most effective in your projects? I'd love to hear about your experiences in the comments below.
+There's no one-size-fits-all approach. Pick the patterns that make your code more maintainable and your errors more useful. With libraries like ts-results and effect.schema gaining traction, we have more options than ever -- the hard part is choosing the right one for your context.

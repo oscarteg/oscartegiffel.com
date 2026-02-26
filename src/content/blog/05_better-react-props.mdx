@@ -2,13 +2,13 @@
 title: Better React Props
 tags: [react, typescript]
 publishDate: 2024-02-01
-description: Learn how to write more type-safe React components using discriminated unions - a powerful TypeScript pattern that helps prevent prop-related bugs and improves code maintainability. This technical guide demonstrates practical examples of implementing discriminated unions in both React props and reducers to ensure better component design and state management.
+description: Using discriminated unions to make your React props type-safe and impossible to misuse.
 cover: "./images/05.webp"
 ---
 
-A simple pattern, yet not widely utilized, is _discriminated unions_. When using React, you can enhance your props by employing discriminated unions. This powerful pattern can be employed in various ways, although I often find it underutilized. In this post, I will demonstrate how to utilize it to improve React props.
+Discriminated unions are underused in React. I see it all the time -- components with optional props that shouldn't be combined, but nothing stops you from doing it anyway. Here's how to fix that.
 
-Let's consider the following component:
+Consider this component:
 
 ```tsx
 type Props = {
@@ -20,7 +20,7 @@ function Button(props: Props): JSX.Element {
 }
 ```
 
-This Button component receives an `onClick` function, which is the most common use case. However, what if we want to pass an `href` prop instead and render an `a` tag? We could do something like this:
+Simple enough. But what if we also want it to render as an anchor tag when given an `href`? The naive approach:
 
 ```tsx
 type Props = {
@@ -45,7 +45,7 @@ function Button(props: Props): JSX.Element {
 }
 ```
 
-While this solution works, it is not ideal. We need to check for the existence of each prop and return the correct element. Additionally, we can pass both the `onClick` and `href` props, which is not desirable. To address these concerns, we can utilize discriminated unions. By doing so, we can create a type that only allows one of the props to be passed. Let's see how that looks:
+This works but it's not great. You have to check each prop manually, and nothing stops you from passing both `onClick` and `href` at the same time. Discriminated unions fix this:
 
 ```tsx
 type Props =
@@ -63,15 +63,11 @@ type Props =
 <Button type="button" onClick={() => {}} href="/home" />;
 ```
 
-This approach provides several benefits:
-
-1. It ensures that only valid combinations of props are used. You can't pass both onClick and href props simultaneously.
-2. It provides clear guidance to the user of the component on which props are allowed.
-3. It improves type safety, as TypeScript will catch any incorrect usages at compile-time.
+Now TypeScript enforces the constraint. You can't pass both `onClick` and `href`. The consumer knows exactly which props are valid for each variant. Mistakes are caught at compile-time, not runtime.
 
 ## Using Discriminated Unions on React Reducers
 
-Discriminated unions can also be useful when working with reducers in React. They provide a way to handle different actions and their associated payloads in a type-safe manner. Here's an example:
+The same pattern works great for reducers:
 
 ```ts
 type State =
@@ -112,17 +108,9 @@ dispatch({ type: "FETCH_SUCCESS", payload: books });
 dispatch({ type: "FETCH_ERROR", payload: error });
 ```
 
-In this example, we use discriminated unions to represent different states of a fetch operation in the State type. Each state, such as 'pending', 'loading', 'success', or 'error', includes additional data.
+Each state variant only carries the data it needs. When the status is `"success"`, `data` exists. When it's `"error"`, `error` exists. TypeScript narrows the type based on the discriminant, so you get autocomplete and type safety in your switch branches for free.
 
-The Action type defines various actions that can be dispatched to the reducer, representing different state transitions. Each action has a specific type and optional data associated with it.
-
-By using a switch statement, the reducer function handles each action type individually and updates the state accordingly based on the current state and the action received.
-
-Using discriminated unions in this way improves type safety and makes managing state in React applications more straightforward for developers.
-
----
-
-The importance of this is garanty of type safety. By utilizing discriminated unions in React props and reducers, we enhance type safety, ensuring that only valid combinations of props are used and that actions and state transitions are handled correctly. TypeScript, with its static type checking, becomes a valuable tool in catching potential errors and providing early feedback during development. With type safety, we can confidently refactor, collaborate, and build robust React applications that are less prone to runtime errors, improving overall development productivity and code quality.
+The pattern is simple but the guarantee of type safety is what matters. Invalid states become unrepresentable.
 
 ### Useful Sources
 
