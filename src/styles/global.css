@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-	--color-primary: #ffbf00;
-	--color-background: #ededed;
+	--color-primary: #ffd600;
+	--color-background: #f9f9f8;
 	--color-background-dark: #292524;
-	--font-sans: "Tiempos Text", serif;
+	--color-text-main: #1a1a1a;
+	--color-text-muted: #6b6b6b;
+	--font-sans: "Rubik", sans-serif;
 	--font-serif: "Tiempos Text", serif;
 	--font-mono: ui-monospace, monospace;
 }
 
-@variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
@@ -27,11 +29,105 @@ pre[class*="language-"] {
 	html {
 		font-size: 16px;
 		scrollbar-gutter: stable;
+		font-feature-settings:
+			"kern" 1,
+			"liga" 1;
+	}
+
+	body {
+		background-color: var(--color-background);
+		color: var(--color-text-main);
+	}
+
+	.dark body {
+		background-color: var(--color-background-dark);
+		color: #e5e5e5;
 	}
 
 	.prose .katex-display {
 		color: var(--tw-prose-body);
 	}
+}
+
+/* Rubik Font Family */
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-Light.ttf") format("truetype");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-LightItalic.ttf") format("truetype");
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-Italic.ttf") format("truetype");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-MediumItalic.ttf") format("truetype");
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-SemiBoldItalic.ttf") format("truetype");
+	font-weight: 600;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Rubik";
+	src: url("/fonts/Rubik-BoldItalic.ttf") format("truetype");
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
 }
 
 /* Tiempos Text Font Family */
@@ -43,6 +139,7 @@ pre[class*="language-"] {
 		url("/fonts/TiemposText-Regular.otf") format("opentype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -53,6 +150,7 @@ pre[class*="language-"] {
 		url("/fonts/TiemposText-RegularItalic.otf") format("opentype");
 	font-weight: normal;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
@@ -63,6 +161,7 @@ pre[class*="language-"] {
 		url("/fonts/TiemposText-Semibold.otf") format("opentype");
 	font-weight: 600;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -73,6 +172,7 @@ pre[class*="language-"] {
 		url("/fonts/TiemposText-SemiboldItalic.otf") format("opentype");
 	font-weight: 600;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
@@ -83,6 +183,7 @@ pre[class*="language-"] {
 		url("/fonts/TiemposText-Bold.otf") format("opentype");
 	font-weight: bold;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -93,4 +194,25 @@ pre[class*="language-"] {
 		url("/fonts/TiemposText-BoldItalic.otf") format("opentype");
 	font-weight: bold;
 	font-style: italic;
+	font-display: swap;
+}
+
+/* Navigation link styles */
+.nav-link {
+	@apply relative py-1 transition-colors duration-200;
+}
+
+.nav-link-active::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: var(--color-primary);
+}
+
+/* Blog post row hover effect */
+.post-row:hover .post-title {
+	color: var(--color-text-muted);
 }

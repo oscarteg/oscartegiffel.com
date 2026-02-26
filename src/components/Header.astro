@@ -1,0 +1,29 @@
+---
+import Link from "./Link.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<header class="max-w-2xl mx-auto px-6 pt-16 md:pt-24 text-center">
+  <div class="mb-12">
+    <a href="/" class="no-underline">
+      <h1 class="font-serif text-4xl md:text-5xl font-normal tracking-tight mb-2">
+        Thoughts & Code
+      </h1>
+    </a>
+    <div class="flex items-center justify-center gap-2">
+      <p class="text-text-muted text-sm uppercase tracking-[0.2em] font-light">
+        A Developer's Journal
+      </p>
+      <ThemeToggle />
+    </div>
+  </div>
+
+  <nav class="flex justify-center items-center border-b border-black/5 dark:border-white/10 pb-8">
+    <ul class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-[13px] font-medium uppercase tracking-widest text-text-muted">
+      <li><Link href="/">Home</Link></li>
+      <li><Link href="/blog">Posts</Link></li>
+      <li><Link href="/uses">Uses</Link></li>
+      <li><Link href="/principles">Principles</Link></li>
+    </ul>
+  </nav>
+</header>

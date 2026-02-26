@@ -2,12 +2,11 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
-import { SITE_URL } from "./src/config";
-import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 import remarkToc from "remark-toc";
+import { SITE_URL } from "./src/config";
 
-import solidJs from "@astrojs/solid-js";
 import { remarkModifiedTime } from "./src/utils";
 
 export default defineConfig({
@@ -22,7 +21,6 @@ export default defineConfig({
 			drafts: true,
 		}),
 		sitemap(),
-		solidJs(),
 	],
 	markdown: {
 		remarkPlugins: [

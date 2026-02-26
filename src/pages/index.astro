@@ -1,0 +1,108 @@
+---
+import { getCollection } from "astro:content";
+import BlogPost from "../components/BlogPost.astro";
+import Body from "../components/Body.astro";
+import { filterPosts, sortAsc } from "../utils";
+
+const posts = await getCollection("blog", filterPosts);
+const recentPosts = posts.sort(sortAsc).slice(0, 5);
+---
+
+<Body title="Oscar te Giffel" description="Finding meaning in code, life and humans" toc={false}>
+  <!-- Intro -->
+  <section class="mb-20">
+    <p class="text-lg leading-relaxed">
+      Hi there! I'm Oscar, a <strong class="font-semibold">Senior Fullstack Engineer</strong> working as a <strong class="font-semibold">freelancer</strong>.
+      I specialize in <strong class="font-semibold">frontend development</strong> with <strong class="font-semibold">React</strong> and <strong class="font-semibold">software architecture</strong>.
+      I find the best technical fit for each problem and build scalable solutions that deliver great user experience and developer experience.
+    </p>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="mb-20">
+    <div class="flex items-center gap-4 mb-10">
+      <h2 class="font-serif italic text-2xl text-text-muted opacity-60">Roadmap</h2>
+      <div class="h-[1px] flex-1 bg-black/5 dark:bg-white/10"></div>
+    </div>
+    <p class="text-text-muted italic font-serif mb-8">currently learning / building</p>
+
+    <div class="mb-10">
+      <h3 class="text-[11px] uppercase tracking-[0.2em] text-text-muted font-medium mb-6">Core Focus</h3>
+      <div class="space-y-6">
+        <div class="flex items-start gap-3">
+          <span class="w-1.5 h-1.5 bg-primary rounded-full mt-2 shrink-0"></span>
+          <div>
+            <h4 class="font-semibold">Termzig</h4>
+            <p class="text-text-muted text-sm">Building a terminal emulator in Zig.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="w-1.5 h-1.5 bg-primary rounded-full mt-2 shrink-0"></span>
+          <div>
+            <h4 class="font-semibold">OpenGL & Graphics</h4>
+            <p class="text-text-muted text-sm">Exploring WebGL and graphics programming.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="w-1.5 h-1.5 bg-primary rounded-full mt-2 shrink-0"></span>
+          <div>
+            <h4 class="font-semibold">Data Structures & Algorithms</h4>
+            <p class="text-text-muted text-sm">Deepening fundamentals in algorithms and problem solving.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-black/5 dark:border-white/10 pt-8">
+      <h3 class="text-[11px] uppercase tracking-[0.2em] text-text-muted font-medium mb-6">Coming Up</h3>
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="w-1.5 h-1.5 bg-primary rounded-full shrink-0"></span>
+          <span class="font-medium">C/C++ & Systems Programming</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-1.5 h-1.5 bg-primary rounded-full shrink-0"></span>
+          <span class="font-medium">Assembly & Computer Systems</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-1.5 h-1.5 bg-primary rounded-full shrink-0"></span>
+          <span class="font-medium">Operating Systems & Embedded</span>
+        </div>
+      </div>
+    </div>
+
+    <a
+      href="https://github.com/oscarteg"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mt-8 border-b border-current pb-0.5"
+    >
+      Follow the progress on GitHub
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14m-7-7 7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- Recent Posts -->
+  <section>
+    <div class="flex items-center gap-4 mb-6">
+      <h2 class="font-serif italic text-2xl text-text-muted opacity-60">Recent Posts</h2>
+      <div class="h-[1px] flex-1 bg-black/5 dark:bg-white/10"></div>
+    </div>
+    <div class="space-y-0">
+      {recentPosts.map((post) => (
+        <BlogPost post={post} />
+      ))}
+    </div>
+    <a
+      href="/blog"
+      class="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mt-6 border-b border-current pb-0.5"
+    >
+      View all posts
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14m-7-7 7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+</Body>

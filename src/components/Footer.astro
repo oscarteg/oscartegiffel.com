@@ -1,16 +1,23 @@
 ---
 import { siteMetadata } from "../config";
-import ExternalLink from "./ExternalLink.astro";
-
-const { class: className } = Astro.props;
 ---
 
-<footer class:list={["flex justify-center md:justify-start space-x-4 mb-8", className]}>
-  {siteMetadata.socials.map((social) => (
-  <ExternalLink href={social.url}>
-      <span class="sr-only">{social.name}</span>
-      {social.name}
-      
-      </ExternalLink>
-  ))}
+<footer class="max-w-2xl mx-auto px-6 pb-24 mt-12 border-t border-black/5 dark:border-white/10 pt-12">
+  <div class="flex flex-col items-center gap-8">
+    <div class="flex gap-8 text-[11px] uppercase tracking-[0.2em] text-text-muted">
+      {siteMetadata.socials.map((social) => (
+        <a
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-primary transition-colors"
+        >
+          {social.name}
+        </a>
+      ))}
+    </div>
+    <p class="text-[11px] text-text-muted opacity-50 font-light">
+      &copy; {new Date().getFullYear()} &mdash; Built with precision.
+    </p>
+  </div>
 </footer>

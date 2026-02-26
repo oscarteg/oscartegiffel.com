@@ -5,25 +5,24 @@ export interface Props {
 
 const { headings } = Astro.props;
 
-// Filter to only show h2 and h3 headings
 const tocHeadings = headings.filter((h) => h.depth <= 3);
 ---
 
 {tocHeadings.length > 0 && (
-  <nav class="toc space-y-1 text-sm">
-    <ul class="space-y-1">
+  <nav class="toc space-y-0.5 text-[13px]">
+    <ul class="space-y-0.5">
       {tocHeadings.map((heading) => (
         <li
           class:list={[
             {
               "pl-0": heading.depth === 2,
-              "pl-4": heading.depth === 3,
+              "pl-3": heading.depth === 3,
             },
           ]}
         >
           <a
             href={`#${heading.slug}`}
-            class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition block py-1"
+            class="text-text-muted hover:text-primary transition-colors block py-0.5"
           >
             {heading.text}
           </a>

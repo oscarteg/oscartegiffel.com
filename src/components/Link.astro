@@ -1,5 +1,4 @@
 ---
-// Link.astro
 const { href } = Astro.props;
 const path = Astro.url.pathname;
 const isActive = href === "/" ? path === href : path.startsWith(href);
@@ -8,8 +7,8 @@ const isActive = href === "/" ? path === href : path.startsWith(href);
 <a
   href={href}
   class:list={[
-    "inline-block px-1 rounded-md transition ease-in-out hover:bg-primary/30 w-fit",
-    { "bg-primary text-black": isActive }
+    "nav-link transition-colors duration-200 hover:text-text-main dark:hover:text-white",
+    isActive ? "nav-link-active text-text-main dark:text-white" : "text-text-muted",
   ]}
 >
   <slot />

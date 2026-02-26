@@ -14,11 +14,20 @@ const {
 } = Astro.props;
 ---
 
-<li class="relative transition duration-500 py-2" class:list={[{"outline outline-red-500": draft}]} >
-  <p class="font-serif font-normal text-xl leading-tight tracking-tight ">
-    <a class="inline-block cursor-pointer rounded hover:bg-primary/60 transition ease-in-out px-1" href={`/blog/${id}`}>
-      {title}
-    </a>
-    <span class="text-gray-400 text-sm">{dayjs(publishDate).format("MM/DD")}</span>
-  </p>
-</li>
+<a
+  class="post-row group block"
+  class:list={[{ "outline outline-red-500 outline-1 rounded": draft }]}
+  href={`/blog/${id}`}
+>
+  <div class="flex justify-between items-baseline py-3">
+    <div class="flex items-center min-w-0">
+      <span class="w-1 h-1 bg-primary rounded-full inline-block mr-3 shrink-0"></span>
+      <h3 class="post-title font-serif text-xl md:text-2xl transition-colors truncate">
+        {title}
+      </h3>
+    </div>
+    <span class="text-text-muted text-xs font-light tabular-nums tracking-wider uppercase ml-4 shrink-0">
+      {dayjs(publishDate).format("MMM DD")}
+    </span>
+  </div>
+</a>

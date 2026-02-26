@@ -22,7 +22,6 @@ const {
 	description: propsDescription,
 } = Astro.props;
 
-// Priority: props > frontmatter > defaults
 const title = propsTitle || frontmatter?.title || SITE_TITLE;
 const description =
 	propsDescription || frontmatter?.description || SITE_DESCRIPTION;
@@ -32,23 +31,24 @@ const toc = frontmatter?.toc === true;
 <Body title={title} description={description} headings={headings} toc={toc}>
 	<main
 		class:list={[
-			prose && "prose prose-custom dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose:transition prose-headings:tracking-tight prose-headings:mt-1",
-      prose && "prose-strong:underline prose-strong:decoration-primary prose-strong:decoration-2 prose:strong:underline-offset-2"
+			prose && "prose dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose-headings:tracking-tight prose-headings:mt-1",
+			prose && "prose-strong:underline prose-strong:decoration-primary prose-strong:decoration-2 prose-strong:underline-offset-2",
+			prose && "prose-blockquote:border-l-primary prose-blockquote:border-l-2 prose-blockquote:italic prose-blockquote:font-serif",
 		]}
 	>
-		<article class="flex flex-col items-start justify-center w-full max-w-2xl mb-16">
+		<article class="flex flex-col items-start justify-center w-full max-w-2xl">
 			{title && (
-				<h1 class="mb-4 text-2xl font-normal tracking-tight md:text-4xl dark:text-white font-serif capitalize italic">
+				<h1 class="font-serif text-3xl md:text-5xl font-normal tracking-tight mb-2 capitalize italic">
 					{title}
 				</h1>
 			)}
 
 			{description && (
-				<p class="mb-2 border-y border-y-zinc-500 w-full py-3">
+				<p class="text-text-muted text-base border-l-2 border-l-primary pl-4 italic font-serif mb-8">
 					{description}
 				</p>
 			)}
-      <slot />
+			<slot />
 		</article>
 	</main>
 </Body>

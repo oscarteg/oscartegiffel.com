@@ -1,8 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import { MobileMenu } from "../components/mobile-menu.tsx";
-import Sidebar from "../components/Sidebar.astro";
+import Header from "../components/Header.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 
 type Props = {
@@ -13,40 +12,34 @@ type Props = {
 };
 
 const { title, description, headings = [], toc = false } = Astro.props;
+const hasToc = toc && headings.length > 0;
 ---
-<html lang="en" class="dark:text-white dark:bg-background-dark antialiased bg-background">
+<html lang="en" class="scroll-smooth antialiased">
   <head>
     <BaseHead title={title} description={description} />
   </head>
 
-  <body
-    class="antialiased container md:px-10 py-16 grid grid-cols-1 auto-rows-max md:grid-cols-[200px_1fr] 2xl:grid-cols-[200px_1fr_1fr] gap-8 mx-auto"
-  >
-    <div class="md:sticky md:top-20 justify-self-start hidden md:block 2xl:flex 2xl:flex-col">
-      <Sidebar className="" />
+  <body class="font-sans min-h-screen flex flex-col">
+    <Header />
 
-      {toc && headings.length > 0 && (
-        <div class="hidden md:block 2xl:hidden mt-8">
-          <h2 class="text-sm font-semibold mb-2">Table of Contents</h2>
-          <TableOfContents headings={headings} />
+    {hasToc ? (
+      <div class="max-w-5xl mx-auto px-6 py-16 md:py-20 w-full flex-1">
+        <div class="flex gap-16">
+          <div class="flex-1 min-w-0 max-w-2xl">
+            <slot />
+          </div>
+          <aside class="hidden xl:block w-56 shrink-0 self-start sticky top-24">
+            <h2 class="text-[11px] uppercase tracking-[0.2em] text-text-muted font-medium mb-4">On this page</h2>
+            <TableOfContents headings={headings} />
+          </aside>
         </div>
-      )}
-    </div>
-
-    <MobileMenu client:media="(max-width: 768px)" />
-
-    <div class="flex flex-col px-4 md:px-0">
-      <slot />
-    </div>
-
-    {toc && headings.length > 0 && (
-      <aside class="hidden 2xl:block self-start">
-        <h2 class="text-sm font-semibold mb-2">Table of Contents</h2>
-        <TableOfContents headings={headings} />
-      </aside>
+      </div>
+    ) : (
+      <main class="max-w-2xl mx-auto px-6 py-16 md:py-20 w-full flex-1">
+        <slot />
+      </main>
     )}
 
-    <Footer class="md:col-start-2 2xl:col-start-2" />
-
+    <Footer />
   </body>
 </html>

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BlogPost from "../../components/BlogPost.astro";
-import DefaultLayout from "../../layouts/default.astro";
+import Body from "../../components/Body.astro";
 import { filterPosts, groupBy, sortAsc } from "../../utils";
 
 const posts = await getCollection("blog", filterPosts);
@@ -11,23 +11,27 @@ const postsByYear = groupBy(reversedPosts, (post) => {
 	const year = new Date(post.data.publishDate).getFullYear();
 	return year.toString();
 });
+
+const sortedYears = Object.keys(postsByYear)
+	.map((year) => Number(year))
+	.sort((a, b) => b - a);
 ---
 
-<DefaultLayout prose={false} title="Blog" description="A collection of my thoughts and ideas.">
-  {Object.keys(postsByYear)
-    .map((year) => Number(year)) // Convert keys to numbers for sorting
-    .sort((a, b) => b - a) // Sort years in descending order
-    .map((year) => {
-      const yearKey = year.toString(); // Convert back to string for accessing the object
-      return (
-        <section class="mb-8">
-          <h2 class="text-xl font-semibold italic">{year}</h2>
-          <ul role="list" class="flex flex-col">
-            {postsByYear[yearKey]?.map((post) => (
-              <BlogPost post={post} />
-            ))}
-          </ul>
-        </section>
-      );
-    })}
-</DefaultLayout>;
+<Body title="Posts" description="A collection of my thoughts and ideas." toc={false}>
+  {sortedYears.map((year, index) => {
+    const yearKey = year.toString();
+    return (
+      <section class:list={[index < sortedYears.length - 1 ? "mb-16" : "mb-8"]}>
+        <div class="flex items-center gap-4 mb-6">
+          <h2 class="font-serif italic text-2xl text-text-muted opacity-60">{year}</h2>
+          <div class="h-[1px] flex-1 bg-black/5 dark:bg-white/10"></div>
+        </div>
+        <div class="space-y-0">
+          {postsByYear[yearKey]?.map((post) => (
+            <BlogPost post={post} />
+          ))}
+        </div>
+      </section>
+    );
+  })}
+</Body>
