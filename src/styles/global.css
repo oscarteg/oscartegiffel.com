@@ -25,6 +25,40 @@ pre[class*="language-"] {
 	@apply font-mono;
 }
 
+/* Code block styling — gruvbox hard */
+pre.astro-code {
+	border-left: 3px solid var(--color-primary);
+	border-radius: 0;
+	padding: 1.25rem 1.5rem;
+	font-size: 0.9rem;
+	line-height: 1.7;
+}
+
+/* Activate Shiki dark theme colors when .dark is present */
+.dark pre.astro-code,
+.dark pre.astro-code span {
+	color: var(--shiki-dark) !important;
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+.dark pre.astro-code {
+	background-color: var(--shiki-dark-bg, #1d2021) !important;
+}
+
+/* Inline code styling */
+.prose :where(code):not(:where(pre code)) {
+	background-color: #f2e5bc;
+	padding: 0.15rem 0.4rem;
+	border-radius: 0.25rem;
+	font-size: 0.875em;
+}
+
+.dark .prose :where(code):not(:where(pre code)) {
+	background-color: #3c3836;
+}
+
 @layer base {
 	html {
 		font-size: 16px;

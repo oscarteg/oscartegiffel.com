@@ -31,6 +31,10 @@ export default defineConfig({
 		rehypePlugins: [rehypeKatex],
 		shikiConfig: {
 			wrap: true,
+			themes: {
+				light: "gruvbox-light-hard",
+				dark: "gruvbox-dark-hard",
+			},
 		},
 	},
 	prefetch: true,
