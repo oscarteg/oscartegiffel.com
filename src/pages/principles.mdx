@@ -77,6 +77,26 @@ If every time you modify function A you also modify function B, they belong in t
 
 This is [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) made practical. High cohesion within modules, loose coupling between them. Code that changes together should live together. Code that changes independently should live apart.
 
+### Don't Guess Where the Bottlenecks Are
+
+You can't tell where a program is going to spend its time. Bottlenecks show up in surprising places. Don't put in a speed hack until you've proven that's where the bottleneck actually is.
+
+### Measure Before You Optimize
+
+Measure. Don't tune for speed until you've measured, and even then don't unless one part of the code overwhelms the rest.
+
+### Keep It Simple When N Is Small
+
+Fancy algorithms are slow when $N$ is small, and $N$ is usually small. Fancy algorithms have big constants. Until you know that $N$ is frequently going to be big, don't get fancy. (Even if $N$ does get big, use the rule above first.)
+
+### Choose Simple Over Clever
+
+Fancy algorithms are buggier than simple ones and much harder to implement correctly. Favor simple algorithms paired with simple data structures. Clever code impresses other engineers; simple code ships and works.
+
+### Let Data Drive Your Design
+
+Choose the right data structures first, and the algorithms will often become obvious. Data structures, not algorithms, are central to programming. Well-organized data makes complex problems simple; poorly chosen structures make simple problems complex.
+
 ## Data Validation
 
 In distributed systems, validation isn't paranoia. It's architecture. Every boundary between systems is a point where assumptions break, schemas drift, and bad input enters.
@@ -104,30 +124,6 @@ Defense in depth means validating at every boundary, even when you "control" bot
 Validation feels like overhead until you need to debug a production issue. Good validation turns "something broke in production" into "received invalid email format from the checkout service at 14:23:47 UTC."
 
 That specificity is worth its weight in gold at 3 AM.
-
-## Rob Pike's 5 Principles of Programming
-
-Rob Pike, co-creator of Go and UTF-8 and Unix pioneer at Bell Labs, distilled decades of systems programming wisdom into five rules. From his [*Notes on Programming in C*](https://www.lysator.liu.se/c/pikestyle.html).
-
-### 1. Don't Guess Where the Bottlenecks Are
-
-You can't tell where a program is going to spend its time. Bottlenecks show up in surprising places. Don't put in a speed hack until you've proven that's where the bottleneck actually is.
-
-### 2. Measure Before You Optimize
-
-Measure. Don't tune for speed until you've measured, and even then don't unless one part of the code overwhelms the rest.
-
-### 3. Keep It Simple When N Is Small
-
-Fancy algorithms are slow when $N$ is small, and $N$ is usually small. Fancy algorithms have big constants. Until you know that $N$ is frequently going to be big, don't get fancy. (Even if $N$ does get big, use Rule 2 first.)
-
-### 4. Choose Simple Over Clever
-
-Fancy algorithms are buggier than simple ones and much harder to implement correctly. Favor simple algorithms paired with simple data structures. Clever code impresses other engineers; simple code ships and works.
-
-### 5. Let Data Drive Your Design
-
-Choose the right data structures first, and the algorithms will often become obvious. Data structures, not algorithms, are central to programming. Well-organized data makes complex problems simple; poorly chosen structures make simple problems complex.
 
 ## Modular Design
 
