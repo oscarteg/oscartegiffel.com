@@ -11,8 +11,7 @@
 		"lint": "biome lint --write src/",
 		"check": "biome check --write src/",
 		"cypress:open": "cypress open",
-		"cypress:run": "cypress run",
-		"prepare": "husky"
+		"cypress:run": "cypress run"
 	},
 	"dependencies": {
 		"@astrojs/check": "0.9.6",
@@ -45,16 +44,12 @@
 	"devDependencies": {
 		"@astrojs/tailwind": "6.0.2",
 		"@biomejs/biome": "2.4.4",
-		"@commitlint/cli": "^20.4.2",
-		"@commitlint/config-conventional": "^20.4.2",
 		"@octokit/types": "^16.0.0",
 		"@types/markdown-it": "^14.1.2",
 		"@types/node": "^25.3.1",
 		"@types/sanitize-html": "^2.16.0",
 		"constructs": "10.5.1",
 		"cypress": "^15.11.0",
-		"husky": "^9.1.7",
-		"lint-staged": "^16.2.7",
 		"typescript": "^5.9.3"
 	}
 }
