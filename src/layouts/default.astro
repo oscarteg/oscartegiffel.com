@@ -1,5 +1,7 @@
 ---
+import { readFile } from "node:fs/promises";
 import Body from "../components/Body.astro";
+import CopyAsMarkdown from "../components/CopyAsMarkdown.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 
 type Props = {
@@ -11,6 +13,8 @@ type Props = {
 		title?: string;
 		description?: string;
 		toc?: boolean;
+		copyAsMarkdown?: boolean;
+		file?: string;
 	};
 };
 
@@ -26,6 +30,13 @@ const title = propsTitle || frontmatter?.title || SITE_TITLE;
 const description =
 	propsDescription || frontmatter?.description || SITE_DESCRIPTION;
 const toc = frontmatter?.toc === true;
+const copyAsMarkdown = frontmatter?.copyAsMarkdown === true;
+
+let rawMarkdown = "";
+if (copyAsMarkdown && frontmatter?.file) {
+	const source = await readFile(frontmatter.file, "utf-8");
+	rawMarkdown = source.replace(/^---[\s\S]*?---\n*/, "");
+}
 ---
 
 <Body title={title} description={description} headings={headings} toc={toc}>
@@ -38,9 +49,12 @@ const toc = frontmatter?.toc === true;
 	>
 		<article class="flex flex-col items-start justify-center w-full max-w-2xl">
 			{title && (
-				<h1 class="font-serif text-3xl md:text-5xl font-normal tracking-tight mb-2 capitalize italic">
-					{title}
-				</h1>
+				<div class="flex items-baseline justify-between w-full gap-4">
+					<h1 class="font-serif text-3xl md:text-5xl font-normal tracking-tight mb-2 capitalize italic">
+						{title}
+					</h1>
+					{copyAsMarkdown && <CopyAsMarkdown content={rawMarkdown} />}
+				</div>
 			)}
 
 			{description && (
