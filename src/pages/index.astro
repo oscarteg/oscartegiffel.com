@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
 import Body from "../components/Body.astro";
+import Projects from "../components/Projects.astro";
+import WorkExperience from "../components/WorkExperience.astro";
 import { filterPosts, sortAsc } from "../utils";
 
 const posts = await getCollection("blog", filterPosts);
@@ -17,6 +19,12 @@ const recentPosts = posts.sort(sortAsc).slice(0, 5);
       I find the best technical fit for each problem and build scalable solutions that deliver great user experience and developer experience.
     </p>
   </section>
+
+  <!-- Work Experience -->
+  <WorkExperience />
+
+  <!-- Projects -->
+  <Projects />
 
   <!-- Roadmap -->
   <section class="mb-20">

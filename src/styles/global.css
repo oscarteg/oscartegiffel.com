@@ -1,17 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-	--color-primary: #ffd600;
-	--color-background: #f9f9f8;
-	--color-background-dark: #292524;
-	--color-text-main: #1a1a1a;
-	--color-text-muted: #6b6b6b;
+	--color-primary: #1b365d;
+	--color-primary-soft: #eef2f7;
+	--color-background: #f5f4ed;
+	--color-background-dark: #1a1a17;
+	--color-text-main: #141413;
+	--color-text-muted: #6b6a64;
+	--color-border-soft: #e8e6dc;
 	--font-sans: "Rubik", sans-serif;
 	--font-serif: "Tiempos Text", serif;
 	--font-mono: ui-monospace, monospace;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* In dark mode, brand navy reads too dim — lift to a softer sky-navy. */
+.dark {
+	--color-primary: #9ab4d4;
+	--color-primary-soft: rgba(154, 180, 212, 0.12);
+	--color-border-soft: rgba(255, 255, 255, 0.1);
+}
 
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
@@ -49,14 +58,17 @@ pre.astro-code {
 
 /* Inline code styling */
 .prose :where(code):not(:where(pre code)) {
-	background-color: #f2e5bc;
+	background-color: var(--color-primary-soft);
+	color: var(--color-primary);
 	padding: 0.15rem 0.4rem;
 	border-radius: 0.25rem;
 	font-size: 0.875em;
+	font-weight: 500;
 }
 
 .dark .prose :where(code):not(:where(pre code)) {
-	background-color: #3c3836;
+	background-color: var(--color-primary-soft);
+	color: var(--color-primary);
 }
 
 @layer base {

@@ -1,0 +1,58 @@
+---
+import { siteMetadata } from "../config";
+
+const projects = siteMetadata.content.projects;
+---
+
+<section class="mb-20">
+	<div class="flex items-center gap-4 mb-10">
+		<h2 class="font-serif italic text-2xl text-text-muted opacity-60">Projects</h2>
+		<div class="h-[1px] flex-1 bg-black/5 dark:bg-white/10"></div>
+	</div>
+
+	<div class="space-y-12">
+		{projects.map((project) => (
+			<article>
+				<a
+					href={project.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="block relative rounded-2xl border border-black/5 dark:border-white/10 p-4 sm:p-8 mb-6 overflow-hidden transition hover:border-primary/40 group"
+					style="background-image: repeating-linear-gradient(-45deg, rgba(0,0,0,0.04) 0, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 10px);"
+				>
+					<div class="rounded-xl overflow-hidden shadow-xl shadow-black/10 ring-1 ring-black/5 dark:ring-white/10 bg-white">
+						<img
+							src={project.image}
+							alt={`${project.name} preview`}
+							loading="lazy"
+							decoding="async"
+							class="w-full h-auto block group-hover:scale-[1.01] transition-transform duration-500"
+						/>
+					</div>
+				</a>
+
+				<div class="flex flex-wrap items-center gap-3 mb-3">
+					<h3 class="font-semibold text-lg">{project.name}</h3>
+					<span class="text-[11px] uppercase tracking-[0.2em] text-primary font-medium bg-primary-soft rounded-full px-2 py-0.5">
+						{project.status}
+					</span>
+				</div>
+				<p class="text-text-muted leading-relaxed mb-3 [&_strong]:font-semibold [&_strong]:text-text-main dark:[&_strong]:text-white [&_strong]:underline [&_strong]:decoration-primary [&_strong]:decoration-2 [&_strong]:underline-offset-2" set:html={project.description}></p>
+				<p class="text-[11px] tracking-[0.15em] text-text-muted/70 mb-4 font-mono uppercase">
+					{project.stack.join(" · ")}
+				</p>
+				<a
+					href={project.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors border-b border-current pb-0.5"
+				>
+					{project.url.replace(/^https?:\/\//, "")}
+					<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 12h14m-7-7 7 7-7 7"/>
+					</svg>
+				</a>
+			</article>
+		))}
+	</div>
+</section>
