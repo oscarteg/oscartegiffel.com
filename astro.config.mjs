@@ -9,20 +9,25 @@ import { SITE_URL } from "./src/config";
 
 import { remarkModifiedTime } from "./src/utils";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
-	site: SITE_URL,
-	output: "static",
-	server: {
+    site: SITE_URL,
+    output: "static",
+
+    server: {
 		port: 8080,
 		host: "0.0.0.0",
 	},
-	integrations: [
+
+    integrations: [
 		mdx({
 			drafts: true,
 		}),
 		sitemap(),
 	],
-	markdown: {
+
+    markdown: {
 		remarkPlugins: [
 			remarkModifiedTime,
 			remarkMath,
@@ -37,8 +42,12 @@ export default defineConfig({
 			},
 		},
 	},
-	prefetch: true,
-	vite: {
+
+    prefetch: true,
+
+    vite: {
 		plugins: [tailwindcss()],
 	},
+
+    adapter: cloudflare()
 });
