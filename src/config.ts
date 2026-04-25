@@ -52,7 +52,7 @@ export const siteMetadata = {
 				company: "DPG Media",
 				via: "freelance",
 				description:
-					"Restructuring the frontend to ship pages through a <strong>CMS</strong>, migrating from <strong>legacy Node.js to Next.js</strong>.",
+					"Building a <strong>video player component library</strong>, and pushing DPG to ship <strong>components as products</strong>, not services.",
 				stack: ["React", "Next.js", "TypeScript", "Kotlin"],
 			},
 			{
