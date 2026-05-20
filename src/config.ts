@@ -84,6 +84,15 @@ export const siteMetadata = {
 				stack: ["TanStack Start", "React", "Convex", "TypeScript"],
 				url: "https://justwhisk.com",
 			},
+			{
+				name: "Blackjack Learner",
+				status: "In development",
+				image: "/images/projects/blackjacklearner.webp",
+				description:
+					"A practice tool for learning <strong>basic strategy</strong> and <strong>card counting</strong>",
+				stack: ["SolidJS", "TypeScript"],
+				url: "https://blackjack.oscartegiffel.com/",
+			},
 		],
 	},
 } as const;
