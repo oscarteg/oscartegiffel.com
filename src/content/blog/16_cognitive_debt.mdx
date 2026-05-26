@@ -1,0 +1,22 @@
+---
+title: "Cognitive Debt"
+tags: [engineering, ai, programming]
+publishDate: 2026-05-26
+description: "Clean code you can't explain is a worse problem than messy code that works."
+---
+
+Technical debt is what we talk about when code works but is hard to maintain. Cognitive debt is the inverse: code that works, looks clean, and which you cannot explain.
+
+The distinction matters more now that we ship code we didn't write. An agent produces two hundred lines, the tests pass, you merge. A week later something breaks. You open the file and feel that small wrongness — *who wrote this?* Technically you did. Functionally you didn't.
+
+That gap between the codebase and your mental model of it doesn't show up in any metric. No linter catches it. CI stays green. It compounds quietly, and you only notice when you have to debug, plan, or extend the thing under pressure.
+
+**Speed is borrowed.** Every diff you scanned but didn't read is interest accruing on a future moment of confusion. Tests passing doesn't mean you understand. Tests cover the cases you thought of. Failure starts where you weren't looking.
+
+The fix is mundane. Review the diff like someone else wrote it, because someone else did. Make the agent explain its code back to you, line by line — if the explanation is fuzzy, you don't understand it, and neither does the agent. Flip TDD: let the agent write the implementation, but write the tests yourself. Keep diffs small enough that scanning isn't an option.
+
+You don't need to understand every line. You need to understand behavior, constraints, and how things fail. The moment you can't say *why* something works, you've taken on debt. It stays invisible until it isn't.
+
+> You can outsource your thinking, but you can't outsource your understanding.
+
+Someone has to stay the director. Otherwise the system drifts somewhere no one knows how to bring it back from.
