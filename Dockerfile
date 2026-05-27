@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
   apt-get install -y python-is-python3 pkg-config build-essential git
 
 # Install dependencies
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
 # Copy application code
