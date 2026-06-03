@@ -1,20 +1,19 @@
 ---
-import { readFile } from "node:fs/promises";
 import Body from "../components/Body.astro";
-import CopyAsMarkdown from "../components/CopyAsMarkdown.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
+import type { Post } from "../models";
 
 type Props = {
 	title?: string;
 	description?: string;
 	prose?: boolean;
 	headings?: { depth: number; slug: string; text: string }[];
+	post?: Post;
 	frontmatter?: {
 		title?: string;
 		description?: string;
 		toc?: boolean;
-		copyAsMarkdown?: boolean;
-		file?: string;
+		markdownUrl?: string;
 	};
 };
 
@@ -24,22 +23,17 @@ const {
 	headings = [],
 	title: propsTitle,
 	description: propsDescription,
+	post,
 } = Astro.props;
 
 const title = propsTitle || frontmatter?.title || SITE_TITLE;
 const description =
 	propsDescription || frontmatter?.description || SITE_DESCRIPTION;
 const toc = frontmatter?.toc === true;
-const copyAsMarkdown = frontmatter?.copyAsMarkdown === true;
-
-let rawMarkdown = "";
-if (copyAsMarkdown && frontmatter?.file) {
-	const source = await readFile(frontmatter.file, "utf-8");
-	rawMarkdown = source.replace(/^---[\s\S]*?---\n*/, "");
-}
+const markdownUrl = frontmatter?.markdownUrl;
 ---
 
-<Body title={title} description={description} headings={headings} toc={toc}>
+<Body title={title} description={description} headings={headings} toc={toc} post={post}>
 	<main
 		class:list={[
 			prose && "prose dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose-headings:tracking-tight prose-headings:mt-1",
@@ -53,7 +47,16 @@ if (copyAsMarkdown && frontmatter?.file) {
 					<h1 class="font-serif text-3xl md:text-5xl font-normal tracking-tight mb-2 capitalize italic">
 						{title}
 					</h1>
-					{copyAsMarkdown && <CopyAsMarkdown content={rawMarkdown} />}
+					{markdownUrl && (
+						<a
+							href={markdownUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="text-xs uppercase tracking-[0.2em] text-text-muted hover:text-primary font-light no-underline shrink-0"
+						>
+							View as .md
+						</a>
+					)}
 				</div>
 			)}
 

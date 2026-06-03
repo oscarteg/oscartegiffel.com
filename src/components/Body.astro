@@ -3,20 +3,22 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import TableOfContents from "../components/TableOfContents.astro";
+import type { Post } from "../models";
 
 type Props = {
 	title?: string;
 	description?: string;
 	headings?: { depth: number; slug: string; text: string }[];
 	toc: boolean;
+	post?: Post;
 };
 
-const { title, description, headings = [], toc = false } = Astro.props;
+const { title, description, headings = [], toc = false, post } = Astro.props;
 const hasToc = toc && headings.length > 0;
 ---
 <html lang="en" class="scroll-smooth antialiased">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} post={post} />
   </head>
 
   <body class="font-sans min-h-screen flex flex-col">

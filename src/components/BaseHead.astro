@@ -1,12 +1,16 @@
 ---
-import { SITE_DESCRIPTION, SITE_LOGO, SITE_TITLE } from "../config";
+import { SITE_DESCRIPTION, SITE_LOGO, SITE_TITLE, SITE_URL } from "../config";
+import { buildGraph } from "../json-ld";
+import type { Post } from "../models";
 import "../styles/global.css";
+import JsonLd from "./JsonLd.astro";
 
 export type Props = {
 	title?: string | undefined;
 	description?: string | undefined;
 	image?: string;
 	logo?: string;
+	post?: Post;
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -15,7 +19,19 @@ const {
 	title = SITE_TITLE,
 	description = SITE_DESCRIPTION,
 	logo = SITE_LOGO,
+	post,
 } = Astro.props;
+
+const path = Astro.url.pathname;
+const pageUrl = `${SITE_URL}${path}`;
+
+const jsonLdGraph = post
+	? buildGraph({ type: "blog-post", post, url: pageUrl })
+	: path === "/"
+		? buildGraph({ type: "home" })
+		: path === "/blog" || path === "/blog/"
+			? buildGraph({ type: "blog-index" })
+			: buildGraph({ type: "page", url: pageUrl, name: title });
 ---
 
 <!-- Global Metadata -->
@@ -56,3 +72,6 @@ const {
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={new URL("rss.xml", Astro.site)} />
+
+<!-- Structured data for search engines and LLM crawlers -->
+<JsonLd graph={jsonLdGraph} />

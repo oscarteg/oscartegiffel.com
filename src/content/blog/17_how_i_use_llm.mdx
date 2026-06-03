@@ -1,0 +1,150 @@
+---
+title: "How I Use LLMs"
+tags: [ai, programming, tools]
+publishDate: 2026-06-03
+description: "Pick a harness. Pick a workflow. Add tools only when something has hurt twice."
+draft: true
+---
+
+LLMs got powerful enough that the bottleneck moved. Used to be: *can the model do this?* Now it's: *did I set up the harness, the skills, the workflow, so the model can actually do it?*
+
+There are two ways to lose here: keep adding random tools until the stack is a mystery, or refuse to add anything and re-prompt the same context every session. I went a third way -- one opinionated workflow with quality gates baked in, and everything else built around it.
+
+## Which harness?
+
+A harness is the thing that wraps the LLM. The shell, the loop, the tool router. The model thinks, the harness does.
+
+Plenty to choose from -- Claude Code, OpenCode, Cursor, Windsurf, Aider. I picked **OpenCode**.
+
+### Why not Claude Code?
+
+It's good. Terminal-native, low ceremony, the official Anthropic thing. But it's also Anthropic's product on Anthropic's roadmap. The plugin story is newer, agent customization is shallower, and I want a harness I can shape, not one I have to live with. If Anthropic changes their mind about how a feature should work, I want to be able to keep working the way I already do.
+
+### Why OpenCode?
+
+Open source and plugin-first. Skills, commands, subagents, workflows -- all markdown files I can read, edit, and swap. Superpowers, OAC, meridian, my own scraps. Plug it in or rip it out in a line of config. Provider-agnostic, so I can mix models without switching tools.
+
+### Using my Claude Max subscription with it
+
+OpenCode bills against the model API by default. I already pay for Claude Max, and I'm not paying for the same tokens twice. Fix is the [`opencode-with-claude`](https://github.com/sst/opencode) plugin -- a tiny local proxy that translates OpenCode's API calls into Claude.ai requests authenticated through the Max subscription. OpenCode gets to use Claude. I keep one bill.
+
+In `opencode.json` it looks like this:
+
+```jsonc
+{
+  "plugin": ["opencode-with-claude"],
+  "provider": {
+    "anthropic": {
+      "options": {
+        "baseURL": "http://127.0.0.1:3456",
+        "apiKey": "dummy"
+      }
+    }
+  }
+}
+```
+
+The proxy listens on `127.0.0.1:3456`, the `apiKey` is a placeholder because the Max subscription handles auth on the other side.
+
+Actual stack: **OpenCode as the harness, Claude as the model, Max as the wallet, OAC as the workflow on top**. The best harness is the one that disappears -- for me that means one I can shape to disappear, not one handed to me with someone else's defaults.
+
+## Which workflow?
+
+The harness gives you a loop. You still have to decide what happens inside it. I use [OpenAgentsControl (OAC)](https://github.com/darrenhinde/OpenAgentsControl) for that.
+
+OAC sits on top of the harness and replaces "model writes code" with a six-stage flow: **discover** the project patterns, **propose** a plan, wait for me to **approve**, **execute** one step at a time, **validate** (type-check, lint, tests, optional code review), then **hand off** a clean summary ready to commit.
+
+It's slower than letting an agent freewheel. That's the point. Every step where I would have gotten a surprise becomes a step where I get a choice instead. Repeatable workflow beats clever automation.
+
+## What about the stuff that isn't coding?
+
+Cloud LLMs are great for writing software. Overkill for "restart this container" or "tail the logs".
+
+For anything around the homelab, I lean local. Two pieces:
+
+- **Ollama running Qwen** on the homelab for sysadmin. SSH in, ask it to restart a docker container, tail nginx, find the process eating CPU. Boring stuff, handled.
+- **Hermes wired up as a Discord bot.** Same homelab, different surface. I can ping it from my phone without opening a terminal -- "is paperless still up?", "what's in the morning's cron output?" Chat thread instead of SSH.
+
+No round-trip to Anthropic, no rate limits, no API bill, no laptop required. Neither is as smart as Claude. Both are smart enough for what I use them for.
+
+## What are skills?
+
+Skills are reusable instructions you load on demand. A markdown file with a bit of frontmatter. When the task matches the description, the harness pulls the skill into context. When it doesn't, it stays out of the way.
+
+The point is to stop repeating yourself in every prompt. The ones I actually use are short -- a brainstorming workflow that forces a spec before any code gets written, a debugging workflow that insists on reproducing the bug first. Maybe one or two project-specific ones. That's it.
+
+If I'm pasting the same paragraph into a prompt twice, that's a skill waiting to happen. If I'm pasting it once, it isn't.
+
+A few of mine, as worked examples, [live as a gist](https://gist.github.com/oscarteg/0552f0d028e179ca053ecc548621e807):
+
+- `typescript-strict` -- the patterns I want every TypeScript file to follow (no `any`, no enums, named exports, type aliases, valibot)
+- `react-components` -- component house style (named function declarations, accessibility, composition over variant flags)
+- `react-testing` -- behavior over implementation, Testing Library + MSW, integration over unit
+
+Drop them into `~/.claude/skills/` or `~/.config/opencode/skills/` and they load when the task matches the description.
+
+## How the pieces fit
+
+Once you start adding things, it helps to have a mental model of what each piece is actually doing. Two questions sort it out:
+
+1. **Who triggers it?** -- you, the model, or always-on
+2. **What does it change?** -- capability, behavior, or workflow
+
+```
+Layer          Triggered by         Changes
+────────────────────────────────────────────────────
+Model          —                    thinks
+Harness        —                    runs the loop
+Plugins        you (install once)   capability
+Commands       you (each invoke)    workflow
+Skills         model (per task)     behavior
+Subagents      model (delegation)   isolates context
+Skill packs    you (install once)   bundle of the above
+```
+
+Model and harness are the floor. Brain and body, always loaded.
+
+**Plugins** bolt new capabilities onto the harness -- tools, integrations, sometimes commands. Installed once, always present. Permanent context, permanent failure surface.
+
+**Commands** are hotkeys: `/clear`, `/compact`, `/loop`, anything you invoke yourself when you want a specific action right now. Not behavior -- shortcuts.
+
+**Skills**, as above, are the model's playbooks. It picks one when the task matches. Plugins give it the wrench; skills tell it which bolts to turn.
+
+**Subagents** are a special case. The main agent delegates a slice of the work to a separate LLM instance with its own context window and a narrow job -- write the tests, run the code review, fetch the docs. They keep the main context clean and isolate failure modes. OAC ships eight of them.
+
+**Skill packs** (superpowers, gastown, OAC itself) are opinionated kits -- a curated set of skills, often with commands, subagents, and sometimes plugins along for the ride. A workflow philosophy in a box. Useful if the philosophy matches yours; expensive baggage if it doesn't.
+
+The packaging blurs the lines -- a plugin can ship commands, a skill pack is technically a plugin, skills can invoke skills -- but the trigger axis stays clean. That's the part to anchor on when you're deciding whether something belongs.
+
+## Commands or skills?
+
+The two get confused because they're both extensions of the harness, but they answer different questions. Commands change *what happens next*. Skills change *how the model thinks about a task*.
+
+A few tests:
+
+- Imperative ("do X now") -> command
+- Conditional ("when X, do Y") -> skill
+- Would you type the same thing every time at the start of a task? -> command (or `AGENTS.md` if it's *every* task)
+- Should this only apply when the model is doing a specific kind of work? -> skill
+
+`/commit`, `/test`, `/clear` -- commands. Verbs. You invoke them. "When writing TypeScript, prefer type aliases over interfaces" -- skill. You don't invoke that, the model picks it up when the task matches the description.
+
+## What else? (and what I left out)
+
+OAC pulls in a lot at once -- subagents, commands, a context system, the workflow itself. That's the trade when you adopt an opinionated kit. People stack more on top: plugins, hooks, remote triggers, doc fetchers, MCP servers, every integration you can imagine. Each one has a permanent cost -- context, failure surface, another thing to remember exists.
+
+So the rule I settled on: **add a tool only when you've felt the pain twice**. First time, do it by hand. Second time, notice the pattern. Third time, install the thing, write the skill, add the command. If you would have used the tool the second time, it earns its place. Otherwise it doesn't.
+
+Most things don't earn it.
+
+## So what's the actual setup?
+
+OpenCode on the laptop, running Claude through my Max subscription via `opencode-with-claude`, with OAC sitting on top driving the propose-approve loop. Ollama + Qwen on a Raspberry Pi for sysadmin and offline. Hermes in Discord for ambient, mobile-friendly chat. A handful of skills I actually reuse (a few of them in the gist above). An Obsidian vault as the long-term memory layer.
+
+That's the whole thing. Boring on purpose.
+
+## The point
+
+LLMs reward structure. An agent without quality gates produces fast slop. An agent wrapped in a propose-approve loop produces code that actually ships. The work isn't in the model -- it's in the workflow you build around it.
+
+> Pick a harness. Pick a workflow. Wire your patterns into the context layer. Add tools only when something has hurt twice.

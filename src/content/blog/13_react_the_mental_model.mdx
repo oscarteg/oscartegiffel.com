@@ -1,0 +1,39 @@
+---
+title: "Next.js Broke the React Mental Model"
+description: "Writing code that might run on the server, the client, or both was a mistake. The model collapses fastest when you try to ship a component library."
+publishDate: 2026-06-04
+cover: "./images/11.webp"
+draft: true
+---
+
+Every React component I write in a Next.js app now has the same question hanging over it: *where does this actually run?*
+
+Sometimes server. Sometimes client. Sometimes both. The `"use client"` directive helps a bit, but it's a leaky boundary -- a "client component" still renders on the server during SSR, just not in the same way as a server component. Try keeping that in your head three months after you wrote it.
+
+For app code I can mostly get away with it. The pain shows up the moment you try to ship a component library.
+
+## You can't bundle
+
+A component library that ships server components has to ship them as separate files. Directives like `"use client"` have to live at module boundaries the bundler can see. Bundle them into a single `dist` file and you've stripped the only signal the framework uses to decide where things run. So you ship a tree of small files, plus extra exports, plus build configuration most consumers don't know they need to care about.
+
+## You don't know where your code will run
+
+Same component, two consumers, two runtimes. One renders it inside a server component -- no hooks, no event handlers, no browser APIs. The other renders it client-side -- no direct DB calls, no server-only imports. The author either supports both shapes or picks one and documents the limitation. There is no good third option.
+
+A server-only utility imported into a client tree is a build error if you're lucky, a runtime explosion if you're not. The reverse silently bloats your server bundle with code that will never execute.
+
+## The model collapsed
+
+React used to have one mental model: components render, state updates, components re-render. Done. Five minutes to explain, productive that afternoon.
+
+Now there are three runtimes (server, client, SSR), two directives (`"use client"`, `"use server"`), a wire format nobody outside Vercel reads, and every library has to pick a side. The directive is invisible at the call site. The runtime is implicit. Error messages assume you already understand the system you're trying to debug.
+
+For library authors it gets worse. You ship something without knowing which runtime your consumer is in. You can't pick one without halving your audience. You can't support both without doubling your test matrix and adding caveats to every component that touches state, network, or the DOM.
+
+## The honest take
+
+Some apps benefit from RSC: content-heavy, mostly-static, deployed on Vercel, written by a team that lives inside Next.js. Fine.
+
+For everyone else it traded one good mental model for a worse one. For component library authors specifically, it traded a working ecosystem for a fragmented one where the only safe assumption is "this might break in someone's setup and I won't find out for six months."
+
+> The framework that taught us "just components" forgot the part where the model was supposed to fit in your head.

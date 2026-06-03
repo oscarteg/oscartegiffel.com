@@ -1,0 +1,23 @@
+---
+/**
+ * Renders a single <script type="application/ld+json"> block containing a
+ * schema.org graph. The browser does not execute it -- only crawlers parse
+ * the contents. Escapes "<" in the JSON output so a stray "</script>" in the
+ * data cannot terminate the tag.
+ */
+
+type Props = {
+	graph: object[];
+};
+
+const { graph } = Astro.props;
+
+const document = {
+	"@context": "https://schema.org",
+	"@graph": graph,
+};
+
+const serialized = JSON.stringify(document).replace(/</g, "\\u003c");
+---
+
+<script type="application/ld+json" is:inline set:html={serialized} />

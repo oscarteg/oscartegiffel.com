@@ -13,13 +13,15 @@
 	--font-mono: ui-monospace, monospace;
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
 /* In dark mode, brand navy reads too dim — lift to a softer sky-navy. */
-.dark {
-	--color-primary: #9ab4d4;
-	--color-primary-soft: rgba(154, 180, 212, 0.12);
-	--color-border-soft: rgba(255, 255, 255, 0.1);
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-primary: #9ab4d4;
+		--color-primary-soft: rgba(154, 180, 212, 0.12);
+		--color-border-soft: rgba(255, 255, 255, 0.1);
+	}
 }
 
 @plugin "@tailwindcss/typography";
@@ -43,17 +45,19 @@ pre.astro-code {
 	line-height: 1.7;
 }
 
-/* Activate Shiki dark theme colors when .dark is present */
-.dark pre.astro-code,
-.dark pre.astro-code span {
-	color: var(--shiki-dark) !important;
-	font-style: var(--shiki-dark-font-style) !important;
-	font-weight: var(--shiki-dark-font-weight) !important;
-	text-decoration: var(--shiki-dark-text-decoration) !important;
-}
+/* Activate Shiki dark theme colors under prefers-color-scheme: dark */
+@media (prefers-color-scheme: dark) {
+	pre.astro-code,
+	pre.astro-code span {
+		color: var(--shiki-dark) !important;
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
 
-.dark pre.astro-code {
-	background-color: var(--shiki-dark-bg, #1d2021) !important;
+	pre.astro-code {
+		background-color: var(--shiki-dark-bg, #1d2021) !important;
+	}
 }
 
 /* Inline code styling */
@@ -66,9 +70,11 @@ pre.astro-code {
 	font-weight: 500;
 }
 
-.dark .prose :where(code):not(:where(pre code)) {
-	background-color: var(--color-primary-soft);
-	color: var(--color-primary);
+@media (prefers-color-scheme: dark) {
+	.prose :where(code):not(:where(pre code)) {
+		background-color: var(--color-primary-soft);
+		color: var(--color-primary);
+	}
 }
 
 @layer base {
@@ -85,9 +91,11 @@ pre.astro-code {
 		color: var(--color-text-main);
 	}
 
-	.dark body {
-		background-color: var(--color-background-dark);
-		color: #e5e5e5;
+	@media (prefers-color-scheme: dark) {
+		body {
+			background-color: var(--color-background-dark);
+			color: #e5e5e5;
+		}
 	}
 
 	.prose .katex-display {

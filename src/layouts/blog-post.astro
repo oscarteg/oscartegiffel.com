@@ -15,7 +15,7 @@ const { post, headings = [] } = Astro.props;
 const { title, description = "", cover, publishDate, toc = false } = post.data;
 ---
 
-<DefaultLayout title={title} description={description} headings={headings} frontmatter={{ title, description, toc }}>
+<DefaultLayout title={title} description={description} headings={headings} post={post} frontmatter={{ title, description, toc }}>
   {publishDate && (
     <div class="text-xs uppercase tracking-[0.2em] text-text-muted font-light mb-8">
       {dayjs(publishDate).format("MMM DD, YYYY")}

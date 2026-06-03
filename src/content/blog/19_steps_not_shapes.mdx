@@ -1,0 +1,106 @@
+---
+title: "Shape or Process?"
+tags: [ai, programming, design, llm]
+publishDate: 2026-06-16
+description: "Before the agent writes code, there's a question it should be asking. It almost never does."
+draft: true
+---
+
+{/* SCAFFOLD - draft. Replace TODOs with concrete examples from your own agent sessions. */}
+
+My agent shipped working code. Tests passed, types checked, the feature went out. Then I read it back, and the shape was off -- a registry expressed as three almost-identical `if` branches, a derivation expressed as a procedure that built an object and then mutated it.
+
+It worked. It was also the wrong tool for the job. Not because procedural code is bad -- because *this* problem wasn't procedural.
+
+The agent never stopped to ask which it was.
+
+## The question
+
+Most coding problems are one of two things:
+
+- **A shape.** A closed set of cases, a mapping, a derivation, a registry. The structure of the data tells you most of the answer. Think: "what's the canonical form, and what falls out of it?"
+- **A process.** A sequence with state, ordering, or side effects that matter. The structure of the *steps* is the answer. Think: "what happens first, what depends on what, what has to be undone if it fails."
+
+Both are legitimate. Neither is automatically better. **The skill is naming which one you're holding before you start writing.**
+
+A render loop, a TCP handshake, a deployment script, a state machine -- those are processes. The procedure *is* the model. Treat them as shapes and you'll invent a static structure that doesn't exist and end up writing the procedure anyway.
+
+A pricing table, a feature flag resolver, a parser dispatch, a permissions check -- those are shapes. The data *is* the model. Treat them as processes and you get an `if/else` chain that grows by one branch every time the spec adds a case.
+
+The mistake the agent makes is consistent in one direction: it treats shapes as processes. Almost never the other way.
+
+## What that looks like
+
+When an agent misclassifies a shape as a process, the tells are concrete:
+
+- **Branching on a string, three times in a row.** `if (kind === 'a') return ...; if (kind === 'b') return ...` -- a lookup table written as a flowchart.
+- **Build-then-mutate.** Construct a base object, then patch it property by property, then branch on a flag and patch some more. A procedural recipe instead of a derived value.
+- **Loops in disguise.** `Array.from({ length: n }, (_, i) => ...)` when `n` is fixed and the items are named in the spec. The agent wanted "do this N times" and reached for the loop, not the list.
+- **Computed values that are constants.** `` `Variant ${i + 1}` `` when there are three variants and they have names. The data is known. The agent stamped it out instead of writing it down.
+- **Index-based mutation.** `things[0].x = ...; things[1].y = ...` -- positional thinking, not "what is each thing."
+
+Each of those is the agent quietly answering *process* to a question that was *shape*.
+
+## Why agents skip the question
+
+A few overlapping reasons. {/* TODO: trim to the ones you actually believe. */}
+
+1. **Models generate tokens forward.** `if x { ... } else if y { ... }` writes itself left-to-right. A table or a discriminated union requires backing up to define the structure before populating it. The shape needs lookahead. Steps don't.
+2. **"Think step by step" is the default prompting style.** Chain-of-thought, planning prompts, "walk me through your reasoning" -- all of these bias toward sequencing. None of them ask *"what kind of problem is this?"*
+3. **Procedural code is easier to extend wrongly than to refactor rightly.** When a tenth case shows up, adding another `if` is one token decision. Recognising "this should have been a table" is a category change, and category changes don't show up in the next-token distribution.
+4. **It works.** The misclassified version passes the test. There's no error signal for "the wrong tool, used correctly." Working code with the wrong shape is invisible to every gate except a human reading it.
+
+## What it costs
+
+Nothing, until the scope grows.
+
+When you treat a shape as a process:
+
+- **Invariants stop being structural.** "Every case is handled" was something a discriminated union could check. Now it's something you have to count, by reading.
+- **Composition gets harder.** You can union two tables, merge two records, derive one shape from another. You can't compose two procedures the same way without inventing glue.
+- **New cases cost code, not data.** Add a row vs add a branch, a test, and a sweep across every place that field is mentioned.
+- **Correctness moves from types to tests.** A shape can be wrong at compile time. A procedure has to be wrong at runtime.
+
+When you treat a process as a shape -- the other failure mode, which agents rarely make but humans sometimes do -- you waste time inventing a static model for something that's inherently sequential, and the model leaks every time the order matters.
+
+{/* TODO: concrete before/after from your own work -- the agent's first draft, the shape it should have been, the diff. */}
+
+## How to overcome it
+
+The fix isn't "prefer declarative." It's **force the classification step**.
+
+### 1. Ask the question explicitly, before any code.
+
+Before the agent writes anything, the prompt is:
+
+> Is this a shape problem or a process problem? Name it, then justify.
+
+If it says "shape," ask for the data: the closed set, the table, the type. If it says "process," ask for the sequence: what happens first, what depends on what, what fails how.
+
+The point isn't to get the right answer every time. It's to make the classification a visible step instead of an invisible one.
+
+### 2. When it picks "process" for something that smells like a shape, push back.
+
+The smell list above is the review checklist. If you see three `if (x === ...)` branches in a row, the next message is:
+
+> Is this actually a lookup table? Rewrite the cases as data, the function as a read.
+
+The model can do it. It just won't reach for it unprompted.
+
+### 3. Use types as a forcing function.
+
+A discriminated union doesn't just describe the data -- it makes the procedural shortcut harder to type. The agent has to consider the cases as a closed set, which is most of the shape question answered for free.
+
+### 4. Bake the question into the workflow.
+
+{/* TODO: if you have a "classify first" step in your propose-approve loop, describe it. Otherwise leave this as a one-liner about adding one. */}
+
+In a propose-approve loop, the classification is its own step. The agent proposes "this is a shape, here's the data" or "this is a process, here's the sequence." You approve or push back. Only then does it write the code.
+
+The cost is one extra round-trip. The payoff is that the wrong-shaped draft never gets written in the first place.
+
+## The point
+
+The agent isn't bad at declarative code. It's bad at *deciding when declarative code is the answer*. The procedure is what falls out by default when no one asks the question.
+
+> Shape or process? Make the agent answer before it writes. The rest is just typing.

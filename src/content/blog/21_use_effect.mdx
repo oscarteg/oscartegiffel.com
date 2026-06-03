@@ -1,0 +1,31 @@
+---
+title: "useEffect Is Not a Trigger"
+tags: [react, programming, engineering]
+publishDate: 2026-03-19
+description: "TODO: one sentence, concrete. The single claim this post argues."
+draft: true
+---
+
+{/* SCAFFOLD - draft. Replace each hint with your own prose. Delete the hints as you go. */}
+
+{/* Cold open: a concrete moment. The useEffect you or a colleague wrote that "watched" a value and ran code when it changed. One or two sentences, first person, no setup. */}
+
+{/* The wrong model in one bolded line: **"When X changes, do Y."** Say that this is how most people reach for it -- and that it's the wrong frame. */}
+
+## What it's actually for
+
+{/* Name the real purpose: synchronizing your component with an external system. */}
+{/* Define "external system" concretely -- a DOM node, a subscription, a timer, a global variable, a non-React store. Anything outside React that can change and that your component has to stay in step with. */}
+{/* One concrete example of a legitimate effect from your own code. The kind that has to exist because the thing it syncs with lives outside React. */}
+
+## The dependency array isn't a trigger list
+
+{/* Reframe: the array is what the effect *depends on*, not what *fires* it. Same values -> no re-run; changed values -> re-sync. */}
+{/* Why exhaustive-deps follows from that framing rather than the other way around -- the rule keeps the effect honest about what it reads, it isn't a nag about what should trigger it. */}
+
+## What it costs
+
+{/* The "works but not optimal" cost in concrete terms: effects that run more than they need to, the bug that only shows up once the component grows and the wrong mental model compounds. */}
+{/* Your specific example here if you have one -- the effect that fired too often, or the stale value that became a bug. */}
+
+{/* Close: one > pullquote. The line you'd want screenshotted. */}
