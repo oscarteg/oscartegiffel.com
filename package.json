@@ -24,7 +24,7 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.3.0",
 		"@webcomponents/template-shadowroot": "^0.2.1",
-		"astro": "6.3.5",
+		"astro": "6.4.6",
 		"autoprefixer": "^10.5.0",
 		"clsx": "^2.1.1",
 		"dayjs": "^1.11.20",
