@@ -6,11 +6,11 @@ import TableOfContents from "../components/TableOfContents.astro";
 import type { Post } from "../models";
 
 type Props = {
-	title?: string;
-	description?: string;
+	title?: string | undefined;
+	description?: string | undefined;
 	headings?: { depth: number; slug: string; text: string }[];
 	toc: boolean;
-	post?: Post;
+	post?: Post | undefined;
 };
 
 const { title, description, headings = [], toc = false, post } = Astro.props;

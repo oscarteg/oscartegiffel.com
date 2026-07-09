@@ -10,7 +10,7 @@ export type Props = {
 	description?: string | undefined;
 	image?: string;
 	logo?: string;
-	post?: Post;
+	post?: Post | undefined;
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
