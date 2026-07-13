@@ -14,6 +14,17 @@ const blog = defineCollection({
 				.date()
 				.or(z.date())
 				.transform((val) => new Date(val)),
+			resources: z
+				.array(
+					z.object({
+						title: z.string().optional(),
+						url: z.string().url(),
+					}),
+				)
+				.default([]),
+			series: z.string().optional(),
+			seriesOrder: z.number().optional(),
+			showResources: z.boolean().optional().default(true),
 			tags: z.array(z.string()).default([]),
 			title: z.string(),
 			toc: z.boolean().optional().default(true),

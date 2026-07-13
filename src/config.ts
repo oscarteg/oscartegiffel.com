@@ -30,21 +30,6 @@ export const siteMetadata = {
 		},
 	],
 	content: {
-		uses: [
-			{
-				title: "Editor & Terminal",
-				items: [
-					"Terminal: Ghostty",
-					"Editors: Neovim, Visual Studio Code, IntelliJ",
-					"Font: Berkeley Mono",
-					"Theme: Gruvbox Dark",
-				],
-			},
-			{
-				title: "Teaching tools",
-				items: ["Loom", "Presentify", "Excalidraw / Eraser.io", "Repl.it"],
-			},
-		],
 		workExperience: [
 			{
 				period: "2023 — Present",
@@ -96,3 +81,137 @@ export const siteMetadata = {
 		],
 	},
 } as const;
+
+export type UseItem = {
+	name: string;
+	description?: string;
+	href?: string;
+};
+
+export type UseCategory = {
+	title: string;
+	items: UseItem[];
+};
+
+export const uses: UseCategory[] = [
+	{
+		title: "Editor & Terminal",
+		items: [
+			{ name: "Ghostty", description: "Terminal." },
+			{
+				name: "Neovim, Visual Studio Code, IntelliJ",
+				description: "Editors, depending on the job.",
+			},
+			{ name: "Berkeley Mono", description: "Font." },
+			{
+				name: "Koda",
+				description: "Neovim theme.",
+				href: "https://github.com/oskarnurm/koda.nvim",
+			},
+		],
+	},
+	{
+		title: "Development Workflow",
+		items: [
+			{
+				name: "tmux + Neovim",
+				description:
+					"A simple combination of tmux with Neovim gives me the sweet spot to configure it specifically to my needs. How this all works can be found in my dotfiles.",
+				href: "https://github.com/oscarteg/dotfiles",
+			},
+		],
+	},
+	{
+		title: "Teaching Tools",
+		items: [
+			{ name: "Presentify", href: "https://presentify.app/" },
+			{ name: "Excalidraw", href: "https://excalidraw.com" },
+		],
+	},
+	{
+		title: "macOS Apps",
+		items: [
+			{ name: "Linear", href: "https://linear.app/" },
+			{
+				name: "Aerospace",
+				description: "Tiling window manager.",
+				href: "https://nikitabobko.github.io/aerospace/guide",
+			},
+			{ name: "Raycast" },
+			{ name: "Day One" },
+			{ name: "Things" },
+			{ name: "Habitify" },
+			{ name: "Obsidian", href: "https://obsidian.md/" },
+		],
+	},
+	{
+		title: "Daily Process",
+		items: [
+			{
+				name: "Things",
+				description:
+					"A simple Getting Things Done workflow. Every single task and thought goes into a bucket, and every week I review all of them. I don't do everything at once, but I never forget what needs to be done.",
+			},
+			{
+				name: "Day One",
+				description:
+					"Every morning and evening I reflect on my goals and write it down.",
+			},
+		],
+	},
+	{
+		title: "Learning Workflow",
+		items: [
+			{
+				name: "Anki",
+				description:
+					"Stamping knowledge into my brain. Useful for learning a new language.",
+			},
+			{
+				name: "Obsidian",
+				description:
+					"Note taking. No overengineering with the Zettelkasten method anymore.",
+			},
+			{ name: "Habitify", description: "Building new skills." },
+		],
+	},
+	{
+		title: "Gear",
+		items: [
+			{ name: "Backpack" },
+			{
+				name: "Bellroy Tech Kit Compact",
+				description: "Cable case.",
+				href: "https://www.bellroy.com/tech-kit",
+			},
+		],
+	},
+	{
+		title: "Accessories",
+		items: [
+			{ name: "iPhone 15 Pro" },
+			{ name: 'iPad Pro 11"' },
+			{ name: "Apple Watch 5" },
+			{ name: "AirPods Pro 3" },
+		],
+	},
+	{
+		title: "Workstation",
+		items: [
+			{ name: "MacBook Pro M4 16-inch 2024" },
+			{ name: "LG Ergo 32UN880", description: "Monitor." },
+			{ name: "Samsung Odyssey G7 LS32BG700EUXEN", description: "Monitor." },
+			{ name: "Keychron Q10" },
+			{ name: "Logitech C922 Webcam" },
+			{ name: "Wacom Intuos M" },
+			{ name: "Logitech MX Master 3" },
+			{ name: "Herman Miller Aeron Chair" },
+			{ name: "Shure MV6", description: "USB gaming microphone." },
+			{
+				name: "PC",
+				description: "Full parts list on PCPartPicker.",
+				href: "https://pcpartpicker.com/list/sNkNN6",
+			},
+		],
+	},
+];

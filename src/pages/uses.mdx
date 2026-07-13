@@ -3,76 +3,18 @@ layout: ../layouts/default.astro
 title: "Uses"
 description: "Tools, apps, and workflows I use daily."
 ---
+import Uses from "../components/Uses.astro";
 
-## Editor & Terminal
+My day-to-day, in a nutshell:
 
-- Terminal: Ghostty
-- Editors: Neovim, Visual Studio Code, Intellij
-- Font: Berkeley Mono
-- Theme: [Koda](https://github.com/oskarnurm/koda.nvim)
+```js
+// Pseudocode, not real code:
+let task;
+while ((task = todoList.pop())) {
+  const result = task();
+  const feedback = await Promise.all([review(result), review(result)]);
+  await apply(feedback, result);
+}
+```
 
-## Development Workflow
-
-Using a simple combination of tmux with neovim gives me the sweet spot to configure it specifically to my needs. How this all works can be found in my [dotfiles](https://github.com/oscarteg/dotfiles).
-
-## Teaching Tools
-
-- [Presentify](https://presentify.app/)
-- [Excalidraw](https://excalidraw.com) / [Eraser.io](https://app.eraser.io)
-- [Repl.it](https://repl.it/)
-
-## macOS Apps
-
-- [Linear.app](https://linear.app/)
-- [Aerospace tiling window manager](https://nikitabobko.github.io/aerospace/guide)
-- 1Password
-- Raycast
-- Day One
-- Things
-- Habitify
-- [Obsidian](https://obsidian.md/)
-
-## iPad Apps
-
-- [Notability](https://notability.com/) / [Goodnotes](https://goodnotes.com/)
-- Things
-- Anki
-- Day One
-- Forestapp
-
-## Daily Process
-
-I use __Things__ for a simple Getting Things Done workflow. Every single task and thought goes into a bucket, and every week I review all the tasks. I don't do everything at once but I never forget what needs to be done.
-
-Every morning and evening I reflect on goals and write it down in __Day One__ journal.
-
-## Learning Workflow
-
-- __Anki__ for stamping knowledge into my brain. Useful for learning a new language.
-- __Obsidian__ for note taking. No overengineering with the Zettelkasten method anymore.
-- __Habitify__ for building new skills.
-
-## Gear
-
-- Backpack
-- [Cable case Bellroy Tech Kit Compact](https://www.bellroy.com/tech-kit)
-
-### Accessories
-
-- Bowers & Wilkins PX
-- iPhone 15 Pro
-- iPad Pro 11"
-- Apple Watch 5
-- Airpods Pro 2
-
-## Desk Setup
-
-- Macbook Pro M4 16-inch 2024
-- Monitors
-  - LG Ergo 32UN880
-  - Samsung Odyssey G7 LS32BG700EUXEN
-- Keychron Q10
-- Logitech C922 Webcam
-- Wacom Intuos M Zwart
-- Logitech MX Master 3 Mouse
-- PC [PartPicker](https://pcpartpicker.com/list/sNkNN6)
+<Uses />
