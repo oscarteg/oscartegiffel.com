@@ -2,8 +2,9 @@
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import Body from "../../components/Body.astro";
+import DraftMarker from "../../components/DraftMarker.astro";
 import ListRow from "../../components/ListRow.astro";
-import { filterPosts, groupBy, sortAsc } from "../../utils";
+import { filterPosts, groupBy, postVisibility, sortAsc } from "../../utils";
 
 const posts = await getCollection("blog", filterPosts);
 const reversedPosts = posts.sort(sortAsc);
@@ -28,15 +29,24 @@ const sortedYears = Object.keys(postsByYear)
         <div class="year">
           <div class="year__label">{year}</div>
           <div>
-            {yearPosts.map((post, index) => (
-              <ListRow
-                title={post.data.title}
-                subtitle={post.data.description}
-                meta={dayjs(post.data.publishDate).format("MMM DD")}
-                href={`/blog/${post.id}`}
-                lastBorder={index === yearPosts.length - 1}
-              />
-            ))}
+            {yearPosts.map((post, index) => {
+              const visibility = postVisibility(post);
+              return (
+                <ListRow
+                  title={post.data.title}
+                  subtitle={post.data.description}
+                  meta={dayjs(post.data.publishDate).format("MMM DD")}
+                  href={`/blog/${post.id}`}
+                  lastBorder={index === yearPosts.length - 1}
+                >
+                  {visibility.kind !== "live" && (
+                    <span class="post__marker">
+                      <DraftMarker visibility={visibility} />
+                    </span>
+                  )}
+                </ListRow>
+              );
+            })}
           </div>
         </div>
       );
@@ -51,6 +61,11 @@ const sortedYears = Object.keys(postsByYear)
 		color: var(--text-heading);
 		max-width: 18ch;
 		margin: 0 0 12px;
+	}
+
+	.post__marker {
+		display: block;
+		margin-top: 8px;
 	}
 
 	/* Year in the margin, posts in the column — the year is a running index,

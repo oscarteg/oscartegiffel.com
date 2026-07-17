@@ -2,11 +2,12 @@
 
 import { getCollection, render } from "astro:content";
 import BlogPostLayout from "../../layouts/blog-post.astro";
+import { filterPosts } from "../../utils";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-	const posts = await getCollection("blog");
+	const posts = await getCollection("blog", filterPosts);
 	return posts.map((post) => ({
 		params: { id: post.id },
 		props: { post },

@@ -6,12 +6,13 @@
 export type Props = {
 	label?: string | undefined;
 	showDot?: boolean | undefined;
+	accent?: boolean | undefined;
 };
 
-const { label = "Available", showDot = true } = Astro.props;
+const { label = "Available", showDot = true, accent = false } = Astro.props;
 ---
 
-<span class="status-badge">
+<span class:list={["status-badge", accent && "status-badge--accent"]}>
   {showDot && <span class="status-badge__dot" aria-hidden="true"></span>}
   {label}
 </span>
@@ -25,6 +26,10 @@ const { label = "Available", showDot = true } = Astro.props;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		color: var(--text-muted);
+	}
+
+	.status-badge--accent {
+		color: var(--accent-fg);
 	}
 
 	.status-badge__dot {

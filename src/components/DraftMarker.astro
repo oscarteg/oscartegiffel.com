@@ -1,0 +1,25 @@
+---
+/**
+ * Marks a post that production won't build — a draft, or one whose publish
+ * date hasn't arrived. Renders nothing for a live post, so it's safe to drop
+ * into any post surface unconditionally.
+ */
+import dayjs from "dayjs";
+import type { PostVisibility } from "../utils";
+import StatusBadge from "./StatusBadge.astro";
+
+export type Props = {
+	visibility: PostVisibility;
+};
+
+const { visibility } = Astro.props;
+
+const label =
+	visibility.kind === "draft"
+		? "Draft"
+		: visibility.kind === "scheduled"
+			? `Scheduled · ${dayjs(visibility.publishDate).format("MMM DD")}`
+			: null;
+---
+
+{label && <StatusBadge label={label} accent />}

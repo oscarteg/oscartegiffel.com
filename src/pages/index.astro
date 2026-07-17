@@ -3,13 +3,14 @@ import { getCollection } from "astro:content";
 import Body from "../components/Body.astro";
 import Books from "../components/Books.astro";
 import Button from "../components/Button.astro";
+import DraftMarker from "../components/DraftMarker.astro";
 import Kicker from "../components/Kicker.astro";
 import ListRow from "../components/ListRow.astro";
 import Pipeline from "../components/Pipeline.astro";
 import Projects from "../components/Projects.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import WorkExperience from "../components/WorkExperience.astro";
-import { filterPosts, sortAsc } from "../utils";
+import { filterPosts, postVisibility, sortAsc } from "../utils";
 
 const posts = await getCollection("blog", filterPosts);
 const recentPosts = posts.sort(sortAsc).slice(0, 5);
@@ -79,14 +80,23 @@ const comingUp = [
   <section class="section">
     <SectionHeader number="06" label="Writing" action={{ label: "All ↗", href: "/blog" }} />
     {
-      recentPosts.map((post, index) => (
-        <ListRow
-          title={post.data.title}
-          subtitle={post.data.description}
-          href={`/blog/${post.id}`}
-          lastBorder={index === recentPosts.length - 1}
-        />
-      ))
+      recentPosts.map((post, index) => {
+        const visibility = postVisibility(post);
+        return (
+          <ListRow
+            title={post.data.title}
+            subtitle={post.data.description}
+            href={`/blog/${post.id}`}
+            lastBorder={index === recentPosts.length - 1}
+          >
+            {visibility.kind !== "live" && (
+              <span class="post__marker">
+                <DraftMarker visibility={visibility} />
+              </span>
+            )}
+          </ListRow>
+        );
+      })
     }
   </section>
 </Body>
@@ -109,6 +119,11 @@ const comingUp = [
 
 	.lead strong {
 		font-weight: var(--weight-semibold);
+	}
+
+	.post__marker {
+		display: block;
+		margin-top: 8px;
 	}
 
 	.roadmap__intro {

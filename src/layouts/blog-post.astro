@@ -2,8 +2,10 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
+import DraftMarker from "../components/DraftMarker.astro";
 import Kicker from "../components/Kicker.astro";
 import type { Post } from "../models";
+import { filterPosts, postVisibility } from "../utils";
 import DefaultLayout from "./default.astro";
 
 type Props = {
@@ -28,22 +30,21 @@ const {
 const visibleResources = showResources ? resources : [];
 
 const seriesPosts = series
-	? (await getCollection("blog"))
+	? (await getCollection("blog", filterPosts))
 			.filter((entry) => entry.data.series === series)
 			.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0))
 	: [];
 
 const currentPart = seriesPosts.findIndex((entry) => entry.id === post.id) + 1;
+
+const visibility = postVisibility(post);
 ---
 
 <DefaultLayout title={title} description={description} headings={headings} post={post} frontmatter={{ title, description, toc }}>
-  {
-    publishDate && (
-      <div class="post__date">
-        <Kicker>{dayjs(publishDate).format("MMM DD, YYYY")}</Kicker>
-      </div>
-    )
-  }
+  <div class="post__meta">
+    {publishDate && <Kicker>{dayjs(publishDate).format("MMM DD, YYYY")}</Kicker>}
+    <DraftMarker visibility={visibility} />
+  </div>
 
   {
     seriesPosts.length > 0 && (
@@ -105,7 +106,11 @@ const currentPart = seriesPosts.findIndex((entry) => entry.id === post.id) + 1;
 </DefaultLayout>
 
 <style>
-	.post__date {
+	.post__meta {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px 16px;
 		margin-bottom: 32px;
 	}
 

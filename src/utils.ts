@@ -3,19 +3,35 @@ import type { RehypePlugin } from "@astrojs/markdown-remark";
 import { siteMetadata } from "./config";
 import type { Post } from "./models";
 
-export function filterPosts(post: Post) {
-	const currentDate = new Date();
-	const publishDate = new Date(post.data.publishDate);
+/** Why a post is — or isn't — public. Only `live` posts are built in production. */
+export type PostVisibility =
+	| { kind: "live" }
+	| { kind: "draft" }
+	| { kind: "scheduled"; publishDate: Date };
 
-	const isPublishDateReached = publishDate <= currentDate;
-
-	if (import.meta.env.PROD) {
-		return !post.data.draft && isPublishDateReached;
+export function postVisibility(post: Post): PostVisibility {
+	if (post.data.draft) {
+		return { kind: "draft" };
 	}
 
-	return siteMetadata.devMode.showDraftPages
-		? true
-		: !post.data.draft && isPublishDateReached;
+	const publishDate = new Date(post.data.publishDate);
+	if (publishDate > new Date()) {
+		return { kind: "scheduled", publishDate };
+	}
+
+	return { kind: "live" };
+}
+
+/**
+ * The single gate on every `getCollection("blog")` — including `getStaticPaths`,
+ * or drafts get built as reachable pages and land in the sitemap.
+ */
+export function filterPosts(post: Post) {
+	if (postVisibility(post).kind === "live") {
+		return true;
+	}
+
+	return !import.meta.env.PROD && siteMetadata.devMode.showDraftPages;
 }
 
 export function sortAsc(post1: Post, post2: Post) {
