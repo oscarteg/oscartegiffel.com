@@ -31,9 +31,11 @@ export default defineConfig({
 		rehypePlugins: [rehypeKatex],
 		shikiConfig: {
 			wrap: true,
+			// Muted themes, so code doesn't compete with the single Braun-orange
+			// accent. Backgrounds are overridden to raised paper in global.css.
 			themes: {
-				light: "gruvbox-light-hard",
-				dark: "gruvbox-dark-hard",
+				light: "vitesse-light",
+				dark: "vitesse-black",
 			},
 		},
 	},

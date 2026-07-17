@@ -38,7 +38,38 @@ const jsonLdGraph = post
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+<!--
+  The design system themes on [data-theme], so the attribute has to exist
+  before first paint or the page flashes light before going dark. Inline and
+  render-blocking on purpose; `is:inline` keeps Astro from deferring it.
+-->
+<script is:inline>
+	(() => {
+		const query = window.matchMedia("(prefers-color-scheme: dark)");
+		const apply = (isDark) => {
+			document.documentElement.dataset.theme = isDark ? "dark" : "light";
+		};
+		apply(query.matches);
+		query.addEventListener("change", (event) => apply(event.matches));
+	})();
+</script>
+
+<!-- Let form controls, scrollbars and the like follow the theme. -->
+<meta name="color-scheme" content="light dark" />
+
 <link rel="icon" type="image/png" href="/favicon.png" />
+
+<!--
+  The grotesk carries every page; preloading the latin subset avoids a
+  flash of fallback text. Other subsets and the mono load on demand.
+-->
+<link
+  rel="preload"
+  href="/fonts/Archivo-var-latin.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
 <link rel="canonical" href={canonicalURL} />
 <link
   rel="stylesheet"
