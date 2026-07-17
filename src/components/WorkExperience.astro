@@ -1,42 +1,57 @@
 ---
 import { siteMetadata } from "../config";
+import ListRow from "./ListRow.astro";
+import SectionHeader from "./SectionHeader.astro";
 
+export type Props = {
+	number: string;
+};
+
+const { number } = Astro.props;
 const entries = siteMetadata.content.workExperience;
-const badgeClass =
-	"inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-primary-soft text-primary";
 ---
 
-<section class="mb-20">
-	<div class="flex items-center gap-4 mb-10">
-		<h2 class="font-serif italic text-2xl text-text-muted opacity-60">Work Experience</h2>
-		<div class="h-[1px] flex-1 bg-black/5 dark:bg-white/10"></div>
-	</div>
+<section class="section">
+  <SectionHeader number={number} label="Experience" />
 
-	<div class="space-y-10">
-		{entries.map((entry) => (
-			<div class="grid md:grid-cols-[140px_1fr] gap-2 md:gap-6">
-				<div class="text-[11px] uppercase tracking-[0.2em] text-text-muted font-medium md:text-sm md:tracking-normal md:normal-case md:pt-0.5">
-					{entry.period}
-				</div>
-				<div>
-					<div class="flex flex-wrap items-center gap-x-2 gap-y-1 mb-3">
-						<span class="font-semibold">{entry.role} at</span>
-						<span class={badgeClass}>{entry.company}</span>
-						{entry.via && (
-							<span class="text-xs text-text-muted italic font-serif">({entry.via})</span>
-						)}
-					</div>
-					<div class="flex items-start gap-3">
-						<span class="text-primary mt-0.5 shrink-0 leading-none" aria-hidden="true">▷</span>
-						<div class="min-w-0">
-							<p class="text-text-muted text-sm leading-relaxed [&_strong]:font-semibold [&_strong]:text-text-main dark:[&_strong]:text-white [&_strong]:underline [&_strong]:decoration-primary [&_strong]:decoration-2 [&_strong]:underline-offset-2" set:html={entry.description}></p>
-							<p class="text-[11px] tracking-[0.15em] text-text-muted/70 mt-3 font-mono uppercase">
-								{entry.stack.join(" · ")}
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		))}
-	</div>
+  {
+    entries.map((entry, index) => (
+      <ListRow
+        left={entry.period}
+        title={`${entry.role} · ${entry.company}`}
+        meta={entry.stack.join(" · ")}
+        lastBorder={index === entries.length - 1}
+      >
+        {entry.via && <span class="work__via">{entry.via}</span>}
+        <p class="work__description" set:html={entry.description} />
+      </ListRow>
+    ))
+  }
 </section>
+
+<style>
+	.section {
+		margin-bottom: 52px;
+	}
+
+	.work__via {
+		display: block;
+		font: var(--text-mono-sm);
+		color: var(--text-meta);
+		margin-top: 3px;
+	}
+
+	.work__description {
+		font: var(--text-small);
+		color: var(--ink-soft);
+		margin-top: 8px;
+		max-width: var(--measure);
+	}
+
+	/* The descriptions carry <strong> from config. The system has no
+	   underline ornament, so emphasis is weight alone. */
+	.work__description :global(strong) {
+		font-weight: var(--weight-semibold);
+		color: var(--text-heading);
+	}
+</style>

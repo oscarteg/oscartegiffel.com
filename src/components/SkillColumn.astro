@@ -1,0 +1,59 @@
+---
+/** A titled skill/spec column: ruled heading with a square marker + a list. */
+export type Props = {
+	title: string;
+	/** Plain-text entries. For rich entries, use the default slot instead. */
+	items?: string[] | undefined;
+};
+
+const { title, items = [] } = Astro.props;
+---
+
+<div>
+  <div class="skill-column__head">
+    <span class="skill-column__marker" aria-hidden="true"></span>
+    <span class="skill-column__title">{title}</span>
+  </div>
+  <div class="skill-column__items">
+    {items.map((item) => <span class="skill-column__item">{item}</span>)}
+    <slot />
+  </div>
+</div>
+
+<style>
+	.skill-column__head {
+		display: flex;
+		align-items: baseline;
+		gap: 10px;
+		padding-bottom: 10px;
+		border-bottom: var(--border-strong-w) solid var(--border-strong);
+	}
+
+	/* One of the system's two ornaments: the small orange square. */
+	.skill-column__marker {
+		width: var(--marker-size);
+		height: var(--marker-size);
+		background: var(--marker);
+		flex-shrink: 0;
+	}
+
+	.skill-column__title {
+		font: var(--text-h3);
+		font-weight: var(--weight-semibold);
+	}
+
+	.skill-column__items {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-top: 14px;
+	}
+
+	/* The kit reaches for var(--text-body) here, but that name resolves to a
+	   font shorthand rather than a colour, so items silently inherit. Body
+	   copy colour is --ink-soft. */
+	.skill-column__item {
+		font: var(--text-small);
+		color: var(--ink-soft);
+	}
+</style>

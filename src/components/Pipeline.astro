@@ -1,0 +1,59 @@
+---
+/** Stepped process pipeline. The step at activeIndex is ink-filled. */
+export type Props = {
+	steps: string[];
+	activeIndex?: number | undefined;
+};
+
+const { steps, activeIndex = 0 } = Astro.props;
+---
+
+<div class="pipeline">
+  {
+    steps.map((step, index) => (
+      <>
+        <span
+          class:list={[
+            "pipeline__step",
+            index === activeIndex && "pipeline__step--active",
+          ]}
+        >
+          {step}
+        </span>
+        {index < steps.length - 1 && (
+          <span class="pipeline__arrow" aria-hidden="true">
+            →
+          </span>
+        )}
+      </>
+    ))
+  }
+</div>
+
+<style>
+	.pipeline {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		font: var(--text-mono);
+		font-size: 13px;
+	}
+
+	.pipeline__step {
+		padding: 9px 15px;
+		background: var(--surface-card);
+		border: var(--border-hairline-w) solid var(--border-hairline);
+	}
+
+	.pipeline__step--active {
+		background: var(--ink);
+		color: var(--on-ink);
+		border-color: var(--ink);
+	}
+
+	/* The kit hardcodes #B9B2A6 here, which stays light-grey on charcoal. */
+	.pipeline__arrow {
+		color: var(--text-meta);
+		padding: 0 9px;
+	}
+</style>

@@ -1,0 +1,38 @@
+---
+/**
+ * Halo dot + uppercase mono label. Signals availability / live status.
+ * One of the system's two brand ornaments (the other is the square marker).
+ */
+export type Props = {
+	label?: string | undefined;
+	showDot?: boolean | undefined;
+};
+
+const { label = "Available", showDot = true } = Astro.props;
+---
+
+<span class="status-badge">
+  {showDot && <span class="status-badge__dot" aria-hidden="true"></span>}
+  {label}
+</span>
+
+<style>
+	.status-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 9px;
+		font: var(--text-mono-sm);
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.status-badge__dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--accent);
+		/* The halo is a ring, not a shadow — elevation is never blurred here. */
+		box-shadow: 0 0 0 4px var(--accent-tint);
+	}
+</style>

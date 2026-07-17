@@ -1,0 +1,99 @@
+---
+/**
+ * A top-ruled record row: optional left column (year/label), a title
+ * block, and right-aligned mono meta. Used for experience, posts, contact.
+ */
+export type Props = {
+	left?: string | undefined;
+	title: string;
+	/** Plain-text secondary line. For rich content, use the default slot. */
+	subtitle?: string | undefined;
+	meta?: string | undefined;
+	href?: string | undefined;
+	/** Rows stack, so only the last one draws a closing rule. */
+	lastBorder?: boolean | undefined;
+};
+
+const { left, title, subtitle, meta, href, lastBorder = false } = Astro.props;
+const isExternal = href?.startsWith("http") ?? false;
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  class:list={[
+    "list-row",
+    left && "list-row--with-left",
+    lastBorder && "list-row--last",
+  ]}
+  {...href ? { href } : {}}
+  {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+>
+  {left && <span class="list-row__left">{left}</span>}
+  <span>
+    <span class="list-row__title">{title}</span>
+    {subtitle && <span class="list-row__subtitle">{subtitle}</span>}
+    <slot />
+  </span>
+  {meta && <span class="list-row__meta">{meta}</span>}
+</Tag>
+
+<style>
+	.list-row {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 24px;
+		align-items: baseline;
+		padding: 15px 0;
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
+		color: var(--text-heading);
+		text-decoration: none;
+	}
+
+	.list-row--with-left {
+		grid-template-columns: 150px 1fr auto;
+	}
+
+	.list-row--last {
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+	}
+
+	a.list-row:hover .list-row__title {
+		color: var(--link);
+	}
+
+	.list-row__left {
+		font: var(--text-mono);
+		color: var(--accent-fg);
+	}
+
+	.list-row__title {
+		font: var(--text-h3);
+		font-weight: var(--weight-semibold);
+		transition: color var(--dur) var(--ease);
+	}
+
+	.list-row__subtitle {
+		display: block;
+		font: var(--text-small);
+		color: var(--text-muted);
+		margin-top: 3px;
+	}
+
+	.list-row__meta {
+		font: var(--text-mono-sm);
+		color: var(--text-meta);
+		white-space: nowrap;
+	}
+
+	@media (max-width: 640px) {
+		.list-row,
+		.list-row--with-left {
+			grid-template-columns: 1fr;
+			gap: 6px;
+		}
+
+		.list-row__meta {
+			white-space: normal;
+		}
+	}
+</style>

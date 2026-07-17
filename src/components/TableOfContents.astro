@@ -1,33 +1,53 @@
 ---
-export interface Props {
+export type Props = {
 	headings: { depth: number; slug: string; text: string }[];
-}
+};
 
 const { headings } = Astro.props;
 
-const tocHeadings = headings.filter((h) => h.depth <= 3);
+const tocHeadings = headings.filter((heading) => heading.depth <= 3);
 ---
 
-{tocHeadings.length > 0 && (
-  <nav class="toc space-y-0.5 text-[13px]">
-    <ul class="space-y-0.5">
-      {tocHeadings.map((heading) => (
-        <li
-          class:list={[
-            {
-              "pl-0": heading.depth === 2,
-              "pl-3": heading.depth === 3,
-            },
-          ]}
-        >
-          <a
-            href={`#${heading.slug}`}
-            class="text-text-muted hover:text-primary transition-colors block py-0.5"
-          >
-            {heading.text}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-)}
+{
+  tocHeadings.length > 0 && (
+    <nav class="toc">
+      <ul>
+        {tocHeadings.map((heading) => (
+          <li class:list={[heading.depth === 3 && "toc__item--nested"]}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+	.toc ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
+	}
+
+	.toc li {
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+	}
+
+	.toc__item--nested a {
+		padding-left: 14px;
+		color: var(--text-meta);
+	}
+
+	.toc a {
+		display: block;
+		padding: 7px 0;
+		font: var(--text-small);
+		color: var(--text-muted);
+		text-decoration: none;
+	}
+
+	.toc a:hover {
+		color: var(--link-hover);
+	}
+</style>

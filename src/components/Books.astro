@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import BookCover from "./BookCover.astro";
+import SectionHeader from "./SectionHeader.astro";
+
+export type Props = {
+	number: string;
+};
+
+const { number } = Astro.props;
+
+/* Featured is an explicit flag in books.yaml rather than anything derived —
+   the point of the file is that the shelf is hand-curated. */
+const featured = (await getCollection("books"))
+	.filter((book) => book.data.featured)
+	.slice(0, 4);
+---
+
+{
+  featured.length > 0 && (
+    <section class="section">
+      <SectionHeader number={number} label="Books" action={{ label: "More ↗", href: "/books" }} />
+      <ul class="books">
+        {featured.map((book) => (
+          <li>
+            <a href="/books">
+              <BookCover cover={book.data.cover} title={book.data.title} author={book.data.author} />
+              <p class="books__title">{book.data.title}</p>
+              <p class="books__author">{book.data.author}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+	.section {
+		margin-bottom: 52px;
+	}
+
+	.books {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 20px;
+	}
+
+	.books a {
+		text-decoration: none;
+		display: block;
+	}
+
+	.books__title {
+		font: var(--text-small);
+		font-weight: var(--weight-semibold);
+		color: var(--text-heading);
+		margin: 10px 0 0;
+	}
+
+	.books__author {
+		font: var(--text-mono-sm);
+		color: var(--text-meta);
+		margin: 3px 0 0;
+	}
+
+	.books a:hover .books__title {
+		color: var(--link);
+	}
+
+	@media (max-width: 640px) {
+		.books {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

@@ -1,9 +1,10 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 import TableOfContents from "../components/TableOfContents.astro";
-import type { Post } from "../models";
+import { siteMetadata } from "../config";
+import type { Post, RailNavItem } from "../models";
+import RailNav from "./RailNav.astro";
+import StatusBadge from "./StatusBadge.astro";
 
 type Props = {
 	title?: string | undefined;
@@ -15,33 +16,184 @@ type Props = {
 
 const { title, description, headings = [], toc = false, post } = Astro.props;
 const hasToc = toc && headings.length > 0;
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+	href === "/" ? path === "/" : path.startsWith(href);
+
+const navItems: RailNavItem[] = [
+	{ label: "Home", index: "01", href: "/" },
+	{ label: "Writing", index: "02", href: "/blog" },
+	{ label: "Books", index: "03", href: "/books" },
+	{ label: "Principles", index: "04", href: "/principles" },
+	{ label: "Uses", index: "05", href: "/uses" },
+	{ label: "Résumé", index: "↗", href: "https://resume.oscartegiffel.com" },
+].map((item) => ({ ...item, active: isActive(item.href) }));
+
+/* Résumé lives in the menu as its own row, so the rail's social list is
+   everything else. */
+const socials = siteMetadata.socials.filter(
+	(social) => social.name !== "Resume",
+);
 ---
+
 <html lang="en" class="scroll-smooth antialiased">
   <head>
     <BaseHead title={title} description={description} post={post} />
   </head>
 
-  <body class="font-sans min-h-screen flex flex-col">
-    <Header />
+  <body>
+    <div class="shell">
+      <!-- Identity / menu rail. No logo: the brand mark is the name in the grotesk. -->
+      <aside class="rail">
+        <a href="/" class="rail__name">Oscar<br />te Giffel</a>
 
-    {hasToc ? (
-      <div class="max-w-5xl mx-auto px-6 py-16 md:py-20 w-full flex-1">
-        <div class="flex gap-16">
-          <div class="flex-1 min-w-0 max-w-2xl">
-            <slot />
-          </div>
-          <aside class="hidden xl:block w-56 shrink-0 self-start sticky top-24">
-            <h2 class="text-[11px] uppercase tracking-[0.2em] text-text-muted font-medium mb-4">On this page</h2>
-            <TableOfContents headings={headings} />
-          </aside>
+        <p class="rail__role">Senior Fullstack Engineer<br />Freelance · Amersfoort, NL</p>
+
+        <div class="rail__status">
+          <StatusBadge />
         </div>
-      </div>
-    ) : (
-      <main class="max-w-2xl mx-auto px-6 py-16 md:py-20 w-full flex-1">
+
+        <div class="rail__menu">
+          <RailNav items={navItems} />
+        </div>
+
+        {
+          hasToc && (
+            <div class="rail__toc">
+              <p class="rail__kicker">On this page</p>
+              <TableOfContents headings={headings} />
+            </div>
+          )
+        }
+
+        {
+          Astro.slots.has("rail") && (
+            <div class="rail__extra">
+              <slot name="rail" />
+            </div>
+          )
+        }
+
+        <div class="rail__socials">
+          {
+            socials.map((social) => (
+              <a href={social.url} target="_blank" rel="noopener noreferrer">
+                {social.name}
+              </a>
+            ))
+          }
+        </div>
+      </aside>
+
+      <main class="column">
         <slot />
       </main>
-    )}
-
-    <Footer />
+    </div>
   </body>
 </html>
+
+<style>
+	.shell {
+		max-width: var(--page-max);
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: var(--rail-width) 1fr;
+		gap: var(--rail-gap);
+		padding: var(--page-pad) 48px 96px;
+		align-items: start;
+	}
+
+	.rail {
+		position: sticky;
+		top: var(--page-pad);
+		align-self: start;
+	}
+
+	.rail__name {
+		display: block;
+		font: var(--text-h1);
+		letter-spacing: var(--track-tight);
+		line-height: 1.02;
+		color: var(--text-heading);
+		text-decoration: none;
+	}
+
+	.rail__role {
+		margin-top: 14px;
+		font: var(--text-small);
+		color: var(--text-muted);
+		line-height: 1.5;
+	}
+
+	.rail__status {
+		margin-top: 18px;
+	}
+
+	.rail__menu {
+		margin-top: 34px;
+	}
+
+	.rail__toc,
+	.rail__extra {
+		margin-top: 34px;
+	}
+
+	.rail__kicker {
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--text-meta);
+		margin-bottom: 12px;
+	}
+
+	.rail__socials {
+		display: flex;
+		gap: 18px;
+		margin-top: 22px;
+		font: var(--text-mono);
+	}
+
+	.rail__socials a {
+		color: var(--text-heading);
+		text-decoration: none;
+	}
+
+	.rail__socials a:hover {
+		color: var(--link-hover);
+	}
+
+	.column {
+		max-width: var(--content-max);
+		min-width: 0;
+	}
+
+	/* The kit only describes the desktop rail. Narrow viewports stack it into a
+	   header — same parts, same order, no new ornament. */
+	@media (max-width: 900px) {
+		.shell {
+			grid-template-columns: 1fr;
+			gap: 40px;
+			padding: 32px 24px 64px;
+		}
+
+		.rail {
+			position: static;
+		}
+
+		.rail__name {
+			font: var(--text-h2);
+			letter-spacing: var(--track-heading);
+		}
+
+		.rail__name br {
+			display: none;
+		}
+
+		/* The rail's own reading order already matches the stacked one; only the
+		   table of contents is better out of the way on a small screen. */
+		.rail__toc {
+			display: none;
+		}
+	}
+</style>

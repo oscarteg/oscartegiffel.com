@@ -1,0 +1,25 @@
+---
+/** Uppercase monospace label — the recurring kicker/eyebrow voice. */
+export type Props = {
+	accent?: boolean | undefined;
+};
+
+const { accent = false } = Astro.props;
+---
+
+<span class:list={["kicker", accent && "kicker--accent"]}>
+  <slot />
+</span>
+
+<style>
+	.kicker {
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.kicker--accent {
+		color: var(--accent-fg);
+	}
+</style>

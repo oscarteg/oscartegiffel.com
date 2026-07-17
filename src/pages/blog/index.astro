@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import BlogPost from "../../components/BlogPost.astro";
+import dayjs from "dayjs";
 import Body from "../../components/Body.astro";
+import ListRow from "../../components/ListRow.astro";
 import { filterPosts, groupBy, sortAsc } from "../../utils";
 
 const posts = await getCollection("blog", filterPosts);
@@ -18,20 +19,68 @@ const sortedYears = Object.keys(postsByYear)
 ---
 
 <Body title="Posts" description="A collection of my thoughts and ideas." toc={false}>
-  {sortedYears.map((year, index) => {
-    const yearKey = year.toString();
-    return (
-      <section class:list={[index < sortedYears.length - 1 ? "mb-16" : "mb-8"]}>
-        <div class="flex items-center gap-4 mb-6">
-          <h2 class="font-serif italic text-2xl text-text-muted opacity-60">{year}</h2>
-          <div class="h-[1px] flex-1 bg-black/5 dark:bg-white/10"></div>
+  <h1 class="page-title">A collection of my thoughts and ideas.</h1>
+
+  {
+    sortedYears.map((year) => {
+      const yearPosts = postsByYear[year.toString()] ?? [];
+      return (
+        <div class="year">
+          <div class="year__label">{year}</div>
+          <div>
+            {yearPosts.map((post, index) => (
+              <ListRow
+                title={post.data.title}
+                subtitle={post.data.description}
+                meta={dayjs(post.data.publishDate).format("MMM DD")}
+                href={`/blog/${post.id}`}
+                lastBorder={index === yearPosts.length - 1}
+              />
+            ))}
+          </div>
         </div>
-        <div class="space-y-0">
-          {postsByYear[yearKey]?.map((post) => (
-            <BlogPost post={post} />
-          ))}
-        </div>
-      </section>
-    );
-  })}
+      );
+    })
+  }
 </Body>
+
+<style>
+	.page-title {
+		font: var(--text-display);
+		letter-spacing: var(--track-tight);
+		color: var(--text-heading);
+		max-width: 18ch;
+		margin: 0 0 12px;
+	}
+
+	/* Year in the margin, posts in the column — the year is a running index,
+	   like the section numbers elsewhere. */
+	.year {
+		display: grid;
+		grid-template-columns: 64px 1fr;
+		gap: 28px;
+		padding-top: 32px;
+	}
+
+	.year__label {
+		font: var(--text-mono);
+		color: var(--accent-fg);
+		padding-top: 15px;
+	}
+
+	@media (max-width: 640px) {
+		.page-title {
+			font: var(--text-h1);
+			max-width: none;
+		}
+
+		.year {
+			grid-template-columns: 1fr;
+			gap: 4px;
+		}
+
+		.year__label {
+			padding-top: 24px;
+		}
+	}
+</style>

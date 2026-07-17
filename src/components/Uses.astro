@@ -1,38 +1,77 @@
 ---
 import { uses } from "../config";
+import SkillColumn from "./SkillColumn.astro";
 ---
 
-<div class="not-prose w-full space-y-14 mt-12">
-	{uses.map((category) => (
-		<section class="grid grid-cols-1 gap-x-8 gap-y-6 border-t border-black/5 dark:border-white/10 pt-8 md:grid-cols-[7rem_1fr]">
-			<h2 class="text-[11px] uppercase tracking-[0.2em] text-text-muted font-medium md:pt-1">
-				{category.title}
-			</h2>
-			<div class="space-y-6">
-				{category.items.map((item) => (
-					<div>
-						<h3 class="font-semibold leading-snug">
-							{item.href ? (
-								<a
-									href={item.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="hover:text-primary transition-colors"
-								>
-									{item.name}
-								</a>
-							) : (
-								item.name
-							)}
-						</h3>
-						{item.description && (
-							<p class="text-text-muted text-sm leading-relaxed mt-1">
-								{item.description}
-							</p>
-						)}
-					</div>
-				))}
-			</div>
-		</section>
-	))}
+<div class="not-prose uses">
+  {
+    uses.map((category) => (
+      <div class="uses__column">
+        <SkillColumn title={category.title}>
+          {category.items.map((item) => (
+            <div class="uses__item">
+              <h3>
+                {item.href ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    {item.name} ↗
+                  </a>
+                ) : (
+                  item.name
+                )}
+              </h3>
+              {item.description && <p>{item.description}</p>}
+            </div>
+          ))}
+        </SkillColumn>
+      </div>
+    ))
+  }
 </div>
+
+<style>
+	/* Masonry via columns: the categories are wildly uneven in length, so
+	   letting them flow beats a grid full of holes. */
+	.uses {
+		width: 100%;
+		margin-top: 48px;
+		columns: 2;
+		column-gap: 40px;
+	}
+
+	.uses__column {
+		break-inside: avoid;
+		margin-bottom: 40px;
+	}
+
+	.uses__item {
+		display: block;
+	}
+
+	.uses__item h3 {
+		font: var(--text-small);
+		font-weight: var(--weight-semibold);
+		color: var(--text-heading);
+		margin: 0;
+	}
+
+	.uses__item a {
+		color: var(--text-heading);
+		text-decoration: none;
+	}
+
+	.uses__item a:hover {
+		color: var(--link-hover);
+	}
+
+	.uses__item p {
+		font: var(--text-small);
+		color: var(--text-muted);
+		margin: 2px 0 0;
+	}
+
+	@media (max-width: 900px) {
+		.uses {
+			columns: 1;
+		}
+	}
+</style>

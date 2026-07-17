@@ -1,0 +1,71 @@
+---
+/**
+ * The signature section divider: a mono index number, an uppercase mono
+ * label, a hairline rule that fills the remaining width, and an optional
+ * trailing action link.
+ */
+export type Props = {
+	number?: string | undefined;
+	label: string;
+	action?: { label: string; href: string } | undefined;
+};
+
+const { number, label, action } = Astro.props;
+const isExternal = action?.href.startsWith("http") ?? false;
+---
+
+<div class="section-header">
+  {number && <span class="section-header__number">{number}</span>}
+  <span class="section-header__label">{label}</span>
+  <span class="section-header__rule"></span>
+  {
+    action && (
+      <a
+        href={action.href}
+        class="section-header__action"
+        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        {action.label}
+      </a>
+    )
+  }
+</div>
+
+<style>
+	.section-header {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		margin-bottom: 20px;
+	}
+
+	.section-header__number {
+		font: var(--text-mono);
+		color: var(--accent-fg);
+	}
+
+	.section-header__label {
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	/* The rule divides by filling whatever width is left over. */
+	.section-header__rule {
+		flex: 1;
+		height: var(--border-hairline-w);
+		background: var(--border-hairline);
+	}
+
+	.section-header__action {
+		font: var(--text-mono-sm);
+		color: var(--link);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.section-header__action:hover {
+		color: var(--link-hover);
+	}
+</style>

@@ -1,5 +1,20 @@
 ---
+import Button from "../components/Button.astro";
 import DefaultLayout from "../layouts/default.astro";
 ---
 
-<DefaultLayout title="404" description="Are you sure you are in then right place?">
+<DefaultLayout title="404" description="Are you sure you are in the right place?">
+  <p class="four-oh-four">
+    That page doesn't exist — or it moved. Nothing here is lost for long.
+  </p>
+  <Button href="/" variant="ghost">← Back home</Button>
+</DefaultLayout>
+
+<style>
+	.four-oh-four {
+		font: var(--text-body-lg);
+		color: var(--text-muted);
+		max-width: var(--measure);
+		margin: 0 0 32px;
+	}
+</style>

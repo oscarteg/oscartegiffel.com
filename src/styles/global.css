@@ -1,81 +1,194 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
+/* ============================================================
+   RAMS DOCUMENT — Braun / Dieter Rams editorial system.
+   Warm off-white paper, near-black ink, one restrained orange.
+   Greyscale does the work; the accent is used sparingly.
+
+   Two layers, deliberately:
+     1. the base ramp (--paper, --ink, --accent…) — re-pointed by theme
+     2. semantic aliases (--surface-page, --text-heading…) — what you author against
+
+   Only layer 1 is re-pointed for dark; every alias inherits.
+   ============================================================ */
+
+:root {
+	/* --- base neutrals (warm paper stack) --- */
+	--paper: #efebe3; /* page background */
+	--paper-raised: #e8e3d9; /* cards, code chips, raised fills */
+	--paper-deep: #dedad1; /* device/tray fills */
+
+	--ink: #1b1917; /* primary text + strong 2px rules */
+	--ink-soft: #33302b; /* body copy */
+	--muted: #6e6a62; /* secondary text, roles, captions */
+	--faint: #8a857d; /* metadata, placeholders */
+
+	--rule: #d4cec3; /* hairline rules / dividers */
+	--rule-soft: #e1dcd2; /* faint inner dividers */
+
+	--on-ink: #efebe3; /* text/marks on ink surfaces */
+
+	/* --- accent (Braun orange) --- */
+	--accent: #dc4b12;
+	--accent-press: #b23a0c;
+	--accent-tint: rgba(220, 75, 18, 0.15); /* status-dot halo */
+
+	/* --- semantic aliases — prefer these when authoring --- */
+	--surface-page: var(--paper);
+	--surface-card: var(--paper-raised);
+	--surface-ink: var(--ink);
+
+	--text-heading: var(--ink);
+	--text-muted: var(--muted);
+	--text-meta: var(--faint);
+	--text-on-ink: var(--on-ink);
+
+	--border-hairline: var(--rule);
+	--border-soft: var(--rule-soft);
+	--border-strong: var(--ink);
+
+	--accent-fg: var(--accent);
+	--link: var(--accent);
+	--link-hover: var(--accent-press);
+	--marker: var(--accent); /* the small square / bullet marks */
+
+	/* NOTE: the kit also aliases `--text-body` to a colour, but its own
+	   typography scale defines `--text-body` as a font shorthand and is
+	   imported second — so the colour alias never survives. The kit's
+	   components reflect this: they use `font: var(--text-body)` and take
+	   body colour from `--ink-soft`. The colour alias is omitted here on
+	   purpose. Use --ink-soft for body copy. */
+
+	/* ============================================================
+	   TYPOGRAPHY — two families only. A grotesk for everything
+	   structural, a monospace for labels / numbers / metadata.
+	   ============================================================ */
+
+	/* weights */
+	--weight-regular: 400;
+	--weight-medium: 500;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+
+	/* display / headings (grotesk, tight tracking) */
+	--text-display: 700 52px / 1 var(--font-sans); /* page titles */
+	--text-h1: 700 44px / 1 var(--font-sans);
+	--text-h2: 600 22px / 1.05 var(--font-sans);
+	--text-lead: 400 26px / 1.42 var(--font-sans); /* intro paragraph */
+	--text-h3: 600 18px / 1.15 var(--font-sans);
+
+	/* body */
+	--text-body-lg: 400 16px / 1.65 var(--font-sans);
+	--text-body: 400 15px / 1.62 var(--font-sans);
+	--text-small: 400 14px / 1.6 var(--font-sans);
+
+	/* mono labels — always uppercase w/ wide tracking */
+	--text-kicker: 700 11px / 1.2 var(--font-mono); /* SECTION LABELS */
+	--text-mono: 400 12px / 1.5 var(--font-mono); /* metadata */
+	--text-mono-sm: 400 11px / 1.4 var(--font-mono);
+
+	/* tracking */
+	--track-tight: -0.025em; /* large display */
+	--track-heading: -0.01em;
+	--track-kicker: 0.14em; /* uppercase mono labels */
+	--track-mono: 0.06em;
+
+	/* ============================================================
+	   SPACING, LAYOUT, BORDERS — a functional grid: a fixed
+	   identity/menu rail beside a flexible content column.
+	   Rules (not shadows) divide.
+	   ============================================================ */
+	--page-max: 1240px; /* content max width */
+	--rail-width: 300px; /* identity / menu rail */
+	--rail-gap: 72px; /* rail → content gap */
+	--page-pad: 52px; /* outer padding */
+	--content-max: 860px; /* main reading column cap */
+	--measure: 64ch; /* body copy line length */
+
+	--border-hairline-w: 1px;
+	--border-strong-w: 2px; /* section rules / active underlines */
+	--radius: 0px; /* the system is square by default */
+	--radius-chip: 2px; /* code blocks, subtle chips */
+	--marker-size: 7px; /* the small orange square */
+
+	/* There is deliberately no shadow token: elevation reads through rules
+	   and fills, not blur. The kit keeps one for genuinely floating cards;
+	   nothing here floats, so it isn't carried over. */
+
+	/* motion — restrained, no bounce */
+	--ease: cubic-bezier(0.2, 0, 0, 1);
+	--dur: 140ms;
+}
+
+/* ============================================================
+   DARK THEME — warm charcoal paper, off-white ink, same orange.
+   Only the base ramp is re-pointed; semantic aliases inherit.
+   Set on <html> by the pre-paint script in BaseHead.astro.
+   ============================================================ */
+[data-theme="dark"] {
+	--paper: #17140f;
+	--paper-raised: #211e18;
+	--paper-deep: #2a2620;
+
+	--ink: #efebe3;
+	--ink-soft: #d6d1c6;
+	--muted: #9b968c;
+	--faint: #78736a;
+
+	--rule: #37332b;
+	--rule-soft: #26231d;
+
+	--on-ink: #17140f; /* dark text on the now-light "ink" surface */
+
+	/* accent stays Braun orange; hover LIGHTENS on dark */
+	--accent: #e4571f;
+	--accent-press: #f07038;
+	--accent-tint: rgba(228, 87, 31, 0.18);
+}
+
+/* `inline` keeps the utilities pointing at the vars rather than copying
+   their values, so re-pointing the ramp under [data-theme] flows through. */
+@theme inline {
+	--color-paper: var(--paper);
+	--color-paper-raised: var(--paper-raised);
+	--color-paper-deep: var(--paper-deep);
+
+	--color-ink: var(--ink);
+	--color-ink-soft: var(--ink-soft);
+	--color-muted: var(--muted);
+	--color-faint: var(--faint);
+
+	--color-rule: var(--rule);
+	--color-rule-soft: var(--rule-soft);
+	--color-on-ink: var(--on-ink);
+
+	--color-accent: var(--accent);
+	--color-accent-press: var(--accent-press);
+	--color-accent-tint: var(--accent-tint);
+
+	--radius-none: var(--radius);
+	--radius-chip: var(--radius-chip);
+
+	--ease-firm: var(--ease);
+}
+
+/* Font stacks don't change per theme, so they're plain theme values.
+   Helvetica Neue is preferred where installed; Archivo is the webfont
+   stand-in everywhere else. */
 @theme {
-	--color-primary: #1b365d;
-	--color-primary-soft: #eef2f7;
-	--color-background: #f5f4ed;
-	--color-background-dark: #1a1a17;
-	--color-text-main: #141413;
-	--color-text-muted: #6b6a64;
-	--color-border-soft: #e8e6dc;
-	--font-sans: "Rubik", sans-serif;
-	--font-serif: "Tiempos Text", serif;
-	--font-mono: ui-monospace, monospace;
+	--font-sans: "Helvetica Neue", Helvetica, "Archivo", system-ui, sans-serif;
+	--font-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
-@custom-variant dark (@media (prefers-color-scheme: dark));
-
-/* In dark mode, brand navy reads too dim — lift to a softer sky-navy. */
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-primary: #9ab4d4;
-		--color-primary-soft: rgba(154, 180, 212, 0.12);
-		--color-border-soft: rgba(255, 255, 255, 0.1);
-	}
-}
+/* Nothing authors against `dark:` — the semantic aliases handle the theme on
+   their own. It's re-pointed at the attribute anyway so that if anything ever
+   does, it follows the kit rather than silently falling back to the media
+   query and disagreeing with everything else. */
+@custom-variant dark ([data-theme="dark"] &);
 
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
-
-html {
-	@apply transition;
-}
-
-code[class*="language-"],
-pre[class*="language-"] {
-	@apply font-mono;
-}
-
-/* Code block styling — gruvbox hard */
-pre.astro-code {
-	border-left: 3px solid var(--color-primary);
-	border-radius: 0;
-	padding: 1.25rem 1.5rem;
-	font-size: 0.9rem;
-	line-height: 1.7;
-}
-
-/* Activate Shiki dark theme colors under prefers-color-scheme: dark */
-@media (prefers-color-scheme: dark) {
-	pre.astro-code,
-	pre.astro-code span {
-		color: var(--shiki-dark) !important;
-		font-style: var(--shiki-dark-font-style) !important;
-		font-weight: var(--shiki-dark-font-weight) !important;
-		text-decoration: var(--shiki-dark-text-decoration) !important;
-	}
-
-	pre.astro-code {
-		background-color: var(--shiki-dark-bg, #1d2021) !important;
-	}
-}
-
-/* Inline code styling */
-.prose :where(code):not(:where(pre code)) {
-	background-color: var(--color-primary-soft);
-	color: var(--color-primary);
-	padding: 0.15rem 0.4rem;
-	border-radius: 0.25rem;
-	font-size: 0.875em;
-	font-weight: 500;
-}
-
-@media (prefers-color-scheme: dark) {
-	.prose :where(code):not(:where(pre code)) {
-		background-color: var(--color-primary-soft);
-		color: var(--color-primary);
-	}
-}
 
 @layer base {
 	html {
@@ -87,15 +200,27 @@ pre.astro-code {
 	}
 
 	body {
-		background-color: var(--color-background);
-		color: var(--color-text-main);
+		background-color: var(--surface-page);
+		color: var(--ink-soft);
+		font: var(--text-body);
+		letter-spacing: var(--track-heading);
 	}
 
-	@media (prefers-color-scheme: dark) {
-		body {
-			background-color: var(--color-background-dark);
-			color: #e5e5e5;
-		}
+	/* Motion is restrained: colour and background only, never layout. */
+	a,
+	button {
+		transition:
+			color var(--dur) var(--ease),
+			background-color var(--dur) var(--ease),
+			border-color var(--dur) var(--ease);
+	}
+
+	a {
+		color: var(--link);
+	}
+
+	a:hover {
+		color: var(--link-hover);
 	}
 
 	.prose .katex-display {
@@ -103,170 +228,34 @@ pre.astro-code {
 	}
 }
 
-/* Rubik Font Family */
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-Light.ttf") format("truetype");
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
+/* ============================================================
+   CODE — Shiki (vitesse-light / vitesse-black), sat on raised
+   paper. The system is square; code blocks are the one place
+   the kit allows a hint of radius.
+   ============================================================ */
+pre.astro-code {
+	border-left: var(--border-strong-w) solid var(--accent);
+	border-radius: var(--radius-chip);
+	background-color: var(--surface-card) !important;
+	padding: 1.25rem 1.5rem;
+	font-size: 0.9rem;
+	line-height: 1.7;
 }
 
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-LightItalic.ttf") format("truetype");
-	font-weight: 300;
-	font-style: italic;
-	font-display: swap;
+[data-theme="dark"] pre.astro-code,
+[data-theme="dark"] pre.astro-code span {
+	color: var(--shiki-dark) !important;
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-Regular.ttf") format("truetype");
+.prose :where(code):not(:where(pre code)) {
+	background-color: var(--surface-card);
+	color: var(--ink-soft);
+	border: var(--border-hairline-w) solid var(--border-hairline);
+	padding: 0.15rem 0.4rem;
+	border-radius: var(--radius-chip);
+	font-size: 0.875em;
 	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-Italic.ttf") format("truetype");
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-Medium.ttf") format("truetype");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-MediumItalic.ttf") format("truetype");
-	font-weight: 500;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-SemiBold.ttf") format("truetype");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-SemiBoldItalic.ttf") format("truetype");
-	font-weight: 600;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-Bold.ttf") format("truetype");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Rubik";
-	src: url("/fonts/Rubik-BoldItalic.ttf") format("truetype");
-	font-weight: 700;
-	font-style: italic;
-	font-display: swap;
-}
-
-/* Tiempos Text Font Family */
-@font-face {
-	font-family: "Tiempos Text";
-	src:
-		url("/fonts/TiemposText-Regular.woff2") format("woff2"),
-		url("/fonts/TiemposText-Regular.woff") format("woff"),
-		url("/fonts/TiemposText-Regular.otf") format("opentype");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Tiempos Text";
-	src:
-		url("/fonts/TiemposText-RegularItalic.woff2") format("woff2"),
-		url("/fonts/TiemposText-RegularItalic.woff") format("woff"),
-		url("/fonts/TiemposText-RegularItalic.otf") format("opentype");
-	font-weight: normal;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Tiempos Text";
-	src:
-		url("/fonts/TiemposText-Semibold.woff2") format("woff2"),
-		url("/fonts/TiemposText-Semibold.woff") format("woff"),
-		url("/fonts/TiemposText-Semibold.otf") format("opentype");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Tiempos Text";
-	src:
-		url("/fonts/TiemposText-SemiboldItalic.woff2") format("woff2"),
-		url("/fonts/TiemposText-SemiboldItalic.woff") format("woff"),
-		url("/fonts/TiemposText-SemiboldItalic.otf") format("opentype");
-	font-weight: 600;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Tiempos Text";
-	src:
-		url("/fonts/TiemposText-Bold.woff2") format("woff2"),
-		url("/fonts/TiemposText-Bold.woff") format("woff"),
-		url("/fonts/TiemposText-Bold.otf") format("opentype");
-	font-weight: bold;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Tiempos Text";
-	src:
-		url("/fonts/TiemposText-BoldItalic.woff2") format("woff2"),
-		url("/fonts/TiemposText-BoldItalic.woff") format("woff"),
-		url("/fonts/TiemposText-BoldItalic.otf") format("opentype");
-	font-weight: bold;
-	font-style: italic;
-	font-display: swap;
-}
-
-/* Navigation link styles */
-.nav-link {
-	@apply relative py-1 transition-colors duration-200;
-}
-
-.nav-link-active::after {
-	content: "";
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 1px;
-	background-color: var(--color-primary);
-}
-
-/* Blog post row hover effect */
-.post-row:hover .post-title {
-	color: var(--color-text-muted);
 }

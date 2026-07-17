@@ -1,0 +1,36 @@
+---
+/** Squared surface: raised paper fill + hairline. Optionally a link. */
+export type Props = {
+	href?: string | undefined;
+};
+
+const { href } = Astro.props;
+const isExternal = href?.startsWith("http") ?? false;
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  class="card"
+  {...href ? { href } : {}}
+  {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+>
+  <slot />
+</Tag>
+
+<style>
+	/* Elevation reads through the raised fill + hairline, never a shadow. */
+	.card {
+		display: block;
+		background: var(--surface-card);
+		border: var(--border-hairline-w) solid var(--border-hairline);
+		border-radius: var(--radius);
+		padding: 22px;
+		color: var(--text-heading);
+		text-decoration: none;
+		transition: border-color var(--dur) var(--ease);
+	}
+
+	a.card:hover {
+		border-color: var(--border-strong);
+	}
+</style>

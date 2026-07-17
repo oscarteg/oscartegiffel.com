@@ -1,0 +1,70 @@
+---
+import type { RailNavItem } from "../models";
+
+/**
+ * The vertical identity-rail menu: a 2px ink top rule, then rows with a
+ * label and a mono index/glyph, divided by hairlines. Active row is orange.
+ */
+export type Props = {
+	items: RailNavItem[];
+};
+
+const { items } = Astro.props;
+---
+
+<nav class="rail-nav">
+  {
+    items.map((item) => {
+      const isExternal = item.href.startsWith("http");
+      return (
+        <a
+          href={item.href}
+          class="rail-nav__row"
+          aria-current={item.active ? "page" : undefined}
+          {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          {item.label}
+          {item.index && <span class="rail-nav__index">{item.index}</span>}
+        </a>
+      );
+    })
+  }
+</nav>
+
+<style>
+	.rail-nav {
+		display: flex;
+		flex-direction: column;
+		border-top: var(--border-strong-w) solid var(--border-strong);
+	}
+
+	.rail-nav__row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 12px 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		font: var(--text-body);
+		font-weight: var(--weight-regular);
+		color: var(--text-heading);
+		text-decoration: none;
+	}
+
+	.rail-nav__row:hover {
+		color: var(--link-hover);
+	}
+
+	.rail-nav__row[aria-current="page"] {
+		font-weight: var(--weight-semibold);
+		color: var(--link);
+	}
+
+	.rail-nav__index {
+		font: var(--text-mono-sm);
+		color: var(--text-meta);
+	}
+
+	.rail-nav__row[aria-current="page"] .rail-nav__index {
+		color: var(--accent-fg);
+	}
+</style>

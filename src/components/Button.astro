@@ -1,0 +1,75 @@
+---
+/**
+ * Text-forward action. Variants: "link" (inline orange, default),
+ * "ghost" (hairline box), "solid" (ink fill). Squared corners.
+ */
+export type Props = {
+	href?: string | undefined;
+	variant?: "link" | "ghost" | "solid" | undefined;
+	arrow?: boolean | undefined;
+};
+
+const { href, variant = "link", arrow = false } = Astro.props;
+const isExternal = href?.startsWith("http") ?? false;
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class:list={["button", `button--${variant}`]}
+  {...href ? { href } : { type: "button" as const }}
+  {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+>
+  <slot />
+  {arrow && <span aria-hidden="true">↗</span>}
+</Tag>
+
+<style>
+	.button {
+		font: var(--text-small);
+		font-weight: var(--weight-medium);
+		text-decoration: none;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		border-radius: var(--radius);
+		transition:
+			color var(--dur) var(--ease),
+			background var(--dur) var(--ease),
+			border-color var(--dur) var(--ease);
+	}
+
+	.button--link {
+		color: var(--link);
+		padding: 0;
+		background: none;
+		border: none;
+	}
+
+	.button--link:hover {
+		color: var(--link-hover);
+	}
+
+	.button--ghost {
+		color: var(--ink);
+		padding: 10px 18px;
+		background: transparent;
+		border: var(--border-hairline-w) solid var(--border-strong);
+	}
+
+	.button--ghost:hover {
+		background: var(--surface-card);
+	}
+
+	.button--solid {
+		color: var(--on-ink);
+		padding: 10px 18px;
+		background: var(--ink);
+		border: var(--border-hairline-w) solid var(--ink);
+	}
+
+	.button--solid:hover {
+		background: var(--ink-soft);
+		border-color: var(--ink-soft);
+	}
+</style>

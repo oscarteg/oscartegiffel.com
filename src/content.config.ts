@@ -1,5 +1,5 @@
 import { defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 import { z } from "zod";
 
 const blog = defineCollection({
@@ -31,4 +31,24 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+/**
+ * Seeded once from a Goodreads CSV export and hand-maintained since —
+ * Goodreads has had no API since 2020, so books.yaml is the source of truth.
+ * Adding, removing or recategorising a book is an edit to that file.
+ */
+const books = defineCollection({
+	loader: file("./src/content/books/books.yaml"),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			author: z.string(),
+			status: z.enum(["read", "reading", "to-read"]),
+			isbn: z.string().optional(),
+			rating: z.number().int().min(1).max(5).optional(),
+			/** Absent for a third of the shelf; those fall back to a type tile. */
+			cover: image().optional(),
+			featured: z.boolean().default(false),
+		}),
+});
+
+export const collections = { blog, books };

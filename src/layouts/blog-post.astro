@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
+import Kicker from "../components/Kicker.astro";
 import type { Post } from "../models";
 import DefaultLayout from "./default.astro";
 
@@ -36,73 +37,207 @@ const currentPart = seriesPosts.findIndex((entry) => entry.id === post.id) + 1;
 ---
 
 <DefaultLayout title={title} description={description} headings={headings} post={post} frontmatter={{ title, description, toc }}>
-  {publishDate && (
-    <div class="text-xs uppercase tracking-[0.2em] text-text-muted font-light mb-8">
-      {dayjs(publishDate).format("MMM DD, YYYY")}
-    </div>
-  )}
+  {
+    publishDate && (
+      <div class="post__date">
+        <Kicker>{dayjs(publishDate).format("MMM DD, YYYY")}</Kicker>
+      </div>
+    )
+  }
 
-  {seriesPosts.length > 0 && (
-    <nav class="not-prose w-full mb-10 rounded-lg border border-l-2 border-black/5 border-l-primary bg-black/[0.02] dark:border-white/10 dark:bg-white/[0.03] px-5 py-4">
-      <p class="text-[11px] uppercase tracking-[0.2em] text-primary font-light mb-3">
-        {series} · Part {currentPart} of {seriesPosts.length}
-      </p>
-      <ol class="flex flex-col gap-1.5">
-        {seriesPosts.map((entry, index) => (
-          <li class="flex items-baseline gap-3 text-sm">
-            <span class="text-text-muted tabular-nums text-xs shrink-0">{index + 1}.</span>
-            {entry.id === post.id ? (
-              <span class="font-medium">{entry.data.title}</span>
-            ) : (
-              <a
-                href={`/blog/${entry.id}`}
-                class="text-text-muted hover:text-primary transition-colors"
-              >
-                {entry.data.title}
-              </a>
-            )}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  )}
+  {
+    seriesPosts.length > 0 && (
+      <nav class="not-prose series">
+        <p class="series__label">
+          {series} · Part {currentPart} of {seriesPosts.length}
+        </p>
+        <ol class="series__list">
+          {seriesPosts.map((entry, index) => (
+            <li>
+              <span class="series__index">{index + 1}</span>
+              {entry.id === post.id ? (
+                <span class="series__current">{entry.data.title}</span>
+              ) : (
+                <a href={`/blog/${entry.id}`}>{entry.data.title}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )
+  }
 
-  {cover && <Image src={cover} alt="cover" class="w-full h-48 object-cover rounded-lg mb-8" />}
+  {
+    cover && (
+      <div class="not-prose post__cover">
+        <Image src={cover} alt="cover" />
+      </div>
+    )
+  }
 
   <slot />
 
-  {visibleResources.length > 0 && (
-    <section class="not-prose w-full mt-16">
-      <h2 class="text-xs uppercase tracking-[0.2em] text-text-muted font-light mb-4">
-        Resources
-      </h2>
-      <ul class="flex flex-col gap-2">
-        {visibleResources.map((resource) => (
-          <li class="flex items-baseline gap-3">
-            <span class="w-1 h-1 bg-primary rounded-full inline-block shrink-0 translate-y-[-2px]"></span>
-            <a
-              href={resource.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-sm text-text-muted hover:text-primary transition-colors underline decoration-black/10 dark:decoration-white/15 underline-offset-4 break-words"
-            >
-              {resource.title ?? new URL(resource.url).hostname.replace(/^www\./, "")}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
+  {
+    visibleResources.length > 0 && (
+      <section class="not-prose resources">
+        <p class="resources__label">Resources</p>
+        <ul>
+          {visibleResources.map((resource) => (
+            <li>
+              <span class="resources__marker" aria-hidden="true" />
+              <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                {resource.title ?? new URL(resource.url).hostname.replace(/^www\./, "")}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 
-  <hr class="not-prose w-full mt-16 border-t border-black/5 dark:border-white/10" />
-
-  <aside class="not-prose w-full mt-8 rounded-lg border border-l-2 border-black/5 border-l-primary bg-black/[0.02] dark:border-white/10 dark:bg-white/[0.03] px-5 py-4">
-    <p class="text-[11px] uppercase tracking-[0.2em] text-primary font-light mb-2">
-      How it was written
-    </p>
-    <p class="text-sm text-text-muted font-light leading-relaxed italic font-serif">
+  <aside class="not-prose colophon">
+    <p class="colophon__label">How it was written</p>
+    <p class="colophon__body">
       Most of the content was written by my own hand, but I did leverage AI for
       many things, such as polishing, structuring, research and review.
     </p>
   </aside>
 </DefaultLayout>
+
+<style>
+	.post__date {
+		margin-bottom: 32px;
+	}
+
+	/* Raised paper + a hairline, with the accent carried by a single
+	   left rule — elevation without shadow. */
+	.series,
+	.colophon {
+		width: 100%;
+		background: var(--surface-card);
+		border: var(--border-hairline-w) solid var(--border-hairline);
+		border-left: var(--border-strong-w) solid var(--accent);
+		border-radius: var(--radius);
+		padding: 16px 20px;
+	}
+
+	.series {
+		margin-bottom: 40px;
+	}
+
+	.colophon {
+		margin-top: 32px;
+	}
+
+	.series__label,
+	.colophon__label {
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--accent-fg);
+		margin: 0 0 12px;
+	}
+
+	.colophon__body {
+		font: var(--text-small);
+		color: var(--text-muted);
+		margin: 0;
+	}
+
+	.series__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.series__list li {
+		display: flex;
+		align-items: baseline;
+		gap: 12px;
+		font: var(--text-small);
+	}
+
+	.series__index {
+		font: var(--text-mono-sm);
+		color: var(--text-meta);
+		flex-shrink: 0;
+	}
+
+	.series__current {
+		font-weight: var(--weight-semibold);
+	}
+
+	.series__list a {
+		color: var(--text-muted);
+		text-decoration: none;
+	}
+
+	.series__list a:hover {
+		color: var(--link-hover);
+	}
+
+	/* Images sit in hairline frames; never full-bleed, never rounded. */
+	.post__cover {
+		border: var(--border-hairline-w) solid var(--border-hairline);
+		border-radius: var(--radius);
+		margin-bottom: 32px;
+	}
+
+	.post__cover :global(img) {
+		display: block;
+		width: 100%;
+		height: 12rem;
+		object-fit: cover;
+	}
+
+	.resources {
+		width: 100%;
+		margin-top: 64px;
+		border-top: var(--border-strong-w) solid var(--border-strong);
+		padding-top: 16px;
+	}
+
+	.resources__label {
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin: 0 0 14px;
+	}
+
+	.resources ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.resources li {
+		display: flex;
+		align-items: baseline;
+		gap: 12px;
+	}
+
+	.resources__marker {
+		width: var(--marker-size);
+		height: var(--marker-size);
+		background: var(--marker);
+		flex-shrink: 0;
+	}
+
+	.resources a {
+		font: var(--text-small);
+		color: var(--text-muted);
+		text-decoration: none;
+		word-break: break-word;
+	}
+
+	.resources a:hover {
+		color: var(--link-hover);
+	}
+</style>

@@ -14,6 +14,8 @@ type Props = {
 		description?: string;
 		toc?: boolean;
 		markdownUrl?: string;
+		/** Pins each `##` group label while its section scrolls past. */
+		stickyGroups?: boolean;
 	};
 };
 
@@ -34,38 +36,144 @@ const markdownUrl = frontmatter?.markdownUrl;
 ---
 
 <Body title={title} description={description} headings={headings} toc={toc} post={post}>
-	<main
-		class:list={[
-			prose && "prose dark:prose-invert prose-headings:font-serif prose-headings:italic prose-headings:font-normal prose-a:hover:text-primary prose-headings:tracking-tight prose-headings:mt-1",
-			prose && "prose-strong:underline prose-strong:decoration-primary prose-strong:decoration-2 prose-strong:underline-offset-2",
-			prose && "prose-blockquote:border-l-primary prose-blockquote:border-l-2 prose-blockquote:italic prose-blockquote:font-serif",
-		]}
-	>
-		<article class="flex flex-col items-start justify-center w-full max-w-2xl">
-			{title && (
-				<div class="flex items-baseline justify-between w-full gap-4">
-					<h1 class="font-serif text-3xl md:text-5xl font-normal tracking-tight mb-2 capitalize italic">
-						{title}
-					</h1>
-					{markdownUrl && (
-						<a
-							href={markdownUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="text-xs uppercase tracking-[0.2em] text-text-muted hover:text-primary font-light no-underline shrink-0"
-						>
-							View as .md
-						</a>
-					)}
-				</div>
-			)}
+  <!-- The shell owns the <main> landmark; this is just the prose scope. -->
+  <div class:list={[prose && "prose", frontmatter?.stickyGroups && "prose--sticky-groups"]}>
+    <article class="reading">
+      {
+        title && (
+          <div class="reading__head">
+            <h1>{title}</h1>
+            {markdownUrl && (
+              <a
+                class="reading__md"
+                href={markdownUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View as .md ↗
+              </a>
+            )}
+          </div>
+        )
+      }
 
-			{description && (
-				<p class="text-text-muted text-base border-l-2 border-l-primary pl-4 italic font-serif mb-8">
-					{description}
-				</p>
-			)}
-			<slot />
-		</article>
-	</main>
+      {description && <p class="reading__description">{description}</p>}
+
+      <slot />
+    </article>
+  </div>
 </Body>
+
+<style>
+	/* The kit caps the reading column tighter than the document column. */
+	.reading {
+		width: 100%;
+		max-width: 720px;
+	}
+
+	.reading__head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 16px;
+		width: 100%;
+	}
+
+	.reading__head h1 {
+		font: var(--text-h1);
+		letter-spacing: var(--track-tight);
+		color: var(--text-heading);
+		margin: 0 0 8px;
+	}
+
+	.reading__md {
+		font: var(--text-mono-sm);
+		color: var(--link);
+		text-decoration: none;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+
+	.reading__md:hover {
+		color: var(--link-hover);
+	}
+
+	.reading__description {
+		font: var(--text-body-lg);
+		color: var(--text-muted);
+		border-left: var(--border-strong-w) solid var(--accent);
+		padding-left: 16px;
+		margin: 0 0 32px;
+	}
+</style>
+
+<style is:global>
+	/* Retune the typography plugin onto paper. Everything below is the prose
+	   voice: grotesk throughout (the system has no serif), rules instead of
+	   boxes, and the accent used only for links and markers. */
+	.prose {
+		--tw-prose-body: var(--ink-soft);
+		--tw-prose-headings: var(--ink);
+		--tw-prose-lead: var(--muted);
+		--tw-prose-links: var(--accent);
+		--tw-prose-bold: var(--ink);
+		--tw-prose-counters: var(--faint);
+		--tw-prose-bullets: var(--accent);
+		--tw-prose-hr: var(--rule);
+		--tw-prose-quotes: var(--ink-soft);
+		--tw-prose-quote-borders: var(--accent);
+		--tw-prose-captions: var(--faint);
+		--tw-prose-code: var(--ink);
+		--tw-prose-th-borders: var(--rule);
+		--tw-prose-td-borders: var(--rule);
+
+		font-family: var(--font-sans);
+		max-width: none;
+	}
+
+	.prose :where(h1, h2, h3, h4) {
+		font-family: var(--font-sans);
+		letter-spacing: var(--track-heading);
+	}
+
+	.prose :where(blockquote) {
+		border-left-width: var(--border-strong-w);
+		font-style: normal;
+		font-weight: var(--weight-regular);
+	}
+
+	/* Emphasis is weight, not ornament — no underline decoration. */
+	.prose :where(strong) {
+		font-weight: var(--weight-semibold);
+	}
+
+	/* Images sit in hairline frames; no rounded photo cards. */
+	.prose :where(img) {
+		border: var(--border-hairline-w) solid var(--border-hairline);
+		border-radius: var(--radius);
+	}
+
+	.prose :where(hr) {
+		border-top-width: var(--border-hairline-w);
+	}
+
+	.prose .katex-display {
+		color: var(--tw-prose-body);
+	}
+
+	/* Group labels ride along with their section: a mono kicker over a 2px ink
+	   rule, pinned while the entries beneath it scroll past. */
+	.prose--sticky-groups :where(h2) {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		background: var(--surface-page);
+		border-bottom: var(--border-strong-w) solid var(--border-strong);
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--text-muted);
+		padding: 12px 0 10px;
+		margin-bottom: 24px;
+	}
+</style>
