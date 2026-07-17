@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from "astro";
+import BooksPage from "../../components/BooksPage.astro";
+
+export const getStaticPaths = (() => {
+	return [
+		{ params: { status: "read" } },
+		{ params: { status: "reading" } },
+		{ params: { status: "to-read" } },
+	];
+}) satisfies GetStaticPaths;
+
+const { status } = Astro.params;
+---
+
+<BooksPage active={status as "read" | "reading" | "to-read"} />

@@ -163,6 +163,34 @@
 	--accent-tint: rgba(228, 87, 31, 0.18);
 }
 
+/* No-JS fallback: honour the OS's dark preference before/without the pre-paint
+   script. Scoped to :not([data-theme]) so it only fills the gap while no
+   attribute is set — the moment the script (or a future manual toggle) pins one,
+   the explicit [data-theme] rule above wins and this never fights it. Values
+   mirror the ramp above; keep the two in step. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme]) {
+		--paper: #17140f;
+		--paper-raised: #211e18;
+		--paper-deep: #2a2620;
+
+		--ink: #efebe3;
+		--ink-soft: #d6d1c6;
+		--muted: #9b968c;
+		--faint: #78736a;
+
+		--rule: #37332b;
+		--rule-soft: #26231d;
+		--spine-blank: #423d34;
+
+		--on-ink: #17140f;
+
+		--accent: #e4571f;
+		--accent-press: #f07038;
+		--accent-tint: rgba(228, 87, 31, 0.18);
+	}
+}
+
 /* `inline` keeps the utilities pointing at the vars rather than copying
    their values, so re-pointing the ramp under [data-theme] flows through. */
 @theme inline {

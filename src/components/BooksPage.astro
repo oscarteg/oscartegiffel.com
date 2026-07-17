@@ -1,0 +1,214 @@
+---
+import { getCollection } from "astro:content";
+import Body from "./Body.astro";
+import BookCover from "./BookCover.astro";
+
+/**
+ * The shelf, filtered by status at build time. There is no client script:
+ * each filter is a link to its own pre-rendered page, so the shelf works
+ * with JavaScript disabled. `all` is the /books landing; the three statuses
+ * live at /books/<status>.
+ */
+export type BookFilter = "all" | "read" | "reading" | "to-read";
+
+export type Props = {
+	active: BookFilter;
+};
+
+const { active } = Astro.props;
+
+const STATUS_LABELS = {
+	read: "Read",
+	reading: "Reading",
+	"to-read": "Will read",
+} as const;
+
+const HEADINGS: Record<BookFilter, string> = {
+	all: "What I've read, what I'm reading, and what's next.",
+	read: "What I've read.",
+	reading: "What I'm reading.",
+	"to-read": "What's next.",
+};
+
+/* Links, not buttons: the whole point of the rewrite is that filtering is
+   navigation. `all` is the bare /books; the rest hang off it. */
+const filters = [
+	{ value: "all", label: "All", href: "/books" },
+	{ value: "read", label: "Read", href: "/books/read" },
+	{ value: "reading", label: "Reading", href: "/books/reading" },
+	{ value: "to-read", label: "Will read", href: "/books/to-read" },
+] as const;
+
+const books = (await getCollection("books")).sort((a, b) =>
+	a.data.title.localeCompare(b.data.title),
+);
+
+const counts = {
+	all: books.length,
+	read: books.filter((book) => book.data.status === "read").length,
+	reading: books.filter((book) => book.data.status === "reading").length,
+	"to-read": books.filter((book) => book.data.status === "to-read").length,
+};
+
+const shelf =
+	active === "all"
+		? books
+		: books.filter((book) => book.data.status === active);
+---
+
+<Body title="Books" description="What I've read, what I'm reading, and what's next." toc={false}>
+  <nav slot="rail" class="controls">
+    <p class="controls__kicker">Shelf</p>
+    <div class="controls__group">
+      {
+        filters.map((filter) => (
+          <a href={filter.href} aria-current={filter.value === active ? "page" : undefined}>
+            {filter.label}
+            <span>{counts[filter.value]}</span>
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <h1 class="page-title">{HEADINGS[active]}</h1>
+
+  {
+    shelf.length > 0 ? (
+      <ul class="shelf">
+        {shelf.map((book) => (
+          <li>
+            <BookCover cover={book.data.cover} title={book.data.title} author={book.data.author} />
+            <p class="shelf__status">{STATUS_LABELS[book.data.status]}</p>
+            <p class="shelf__title">{book.data.title}</p>
+            <p class="shelf__author">{book.data.author}</p>
+            {book.data.rating && (
+              <p class="shelf__rating">
+                {book.data.rating}<span>/5</span>
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="shelf__empty">Nothing on this shelf yet.</p>
+    )
+  }
+</Body>
+
+<style>
+	.page-title {
+		font: var(--text-display);
+		letter-spacing: var(--track-tight);
+		color: var(--text-heading);
+		max-width: 18ch;
+		margin: 0 0 40px;
+	}
+
+	.controls__kicker {
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--text-meta);
+		margin: 0 0 10px;
+	}
+
+	.controls__group {
+		display: flex;
+		flex-direction: column;
+		border-top: var(--border-strong-w) solid var(--border-strong);
+	}
+
+	.controls__group a {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 9px 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		font: var(--text-body);
+		color: var(--text-heading);
+		text-align: left;
+		text-decoration: none;
+	}
+
+	.controls__group a span {
+		font: var(--text-mono-sm);
+		color: var(--text-meta);
+	}
+
+	.controls__group a:hover {
+		color: var(--link-hover);
+	}
+
+	.controls__group a[aria-current="page"] {
+		font-weight: var(--weight-semibold);
+		color: var(--link);
+	}
+
+	.controls__group a[aria-current="page"] span {
+		color: var(--accent-fg);
+	}
+
+	.shelf {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 32px 20px;
+	}
+
+	.shelf__status {
+		font: var(--text-mono-sm);
+		text-transform: uppercase;
+		color: var(--text-meta);
+		margin: 10px 0 0;
+	}
+
+	.shelf__title {
+		font: var(--text-small);
+		font-weight: var(--weight-semibold);
+		color: var(--text-heading);
+		margin: 4px 0 0;
+	}
+
+	.shelf__author {
+		font: var(--text-small);
+		color: var(--text-muted);
+		margin: 2px 0 0;
+	}
+
+	/* Ratings are mono numerals, not stars — a second gold accent would break
+	   the one-accent rule, and only a handful of books are rated anyway. */
+	.shelf__rating {
+		font: var(--text-mono-sm);
+		color: var(--accent-fg);
+		margin: 4px 0 0;
+	}
+
+	.shelf__rating span {
+		color: var(--text-meta);
+	}
+
+	.shelf__empty {
+		font: var(--text-body);
+		color: var(--text-muted);
+	}
+
+	@media (max-width: 900px) {
+		.page-title {
+			font: var(--text-h1);
+			max-width: none;
+		}
+
+		.shelf {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.shelf {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>
