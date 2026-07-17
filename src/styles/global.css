@@ -27,6 +27,11 @@
 	--rule: #d4cec3; /* hairline rules / dividers */
 	--rule-soft: #e1dcd2; /* faint inner dividers */
 
+	/* The spine of a book with no jacket to slice a colour from. On the ramp
+	   because it has to invert: a face turned from the light is darker than
+	   the paper here and lighter than it in dark, same as the rules. */
+	--spine-blank: #b3ada1;
+
 	--on-ink: #efebe3; /* text/marks on ink surfaces */
 
 	/* --- accent (Braun orange) --- */
@@ -119,6 +124,16 @@
 	/* motion — restrained, no bounce */
 	--ease: cubic-bezier(0.2, 0, 0, 1);
 	--dur: 140ms;
+	/* Movement gets its own duration: --dur is tuned for a colour swapping
+	   in place, and an element travelling the width of a grid in 140ms reads
+	   as a snap rather than a move. Still well inside the 300ms ceiling. */
+	--dur-move: 240ms;
+
+	/* Book covers are the one place the system renders an object rather than
+	   a surface, so they carry a depth. Everything else stays flat. Sized to
+	   a real paperback — about 15% of the jacket's width — rather than to the
+	   chunky thumbnails this is adapted from, which only read at 58px wide. */
+	--book-depth: 28px;
 }
 
 /* ============================================================
@@ -138,6 +153,7 @@
 
 	--rule: #37332b;
 	--rule-soft: #26231d;
+	--spine-blank: #423d34;
 
 	--on-ink: #17140f; /* dark text on the now-light "ink" surface */
 

@@ -59,6 +59,9 @@ const featured = (await getCollection("books"))
 		font-weight: var(--weight-semibold);
 		color: var(--text-heading);
 		margin: 10px 0 0;
+		/* The hover lives on the anchor but the colour lands here, so the
+		   transition has to as well — same reason as ListRow's title. */
+		transition: color var(--dur) var(--ease);
 	}
 
 	.books__author {

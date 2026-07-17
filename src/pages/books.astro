@@ -54,7 +54,11 @@ const counts = {
   <ul class="shelf" data-shelf>
     {
       books.map((book) => (
-        <li data-status={book.data.status} data-title={book.data.title.toLowerCase()}>
+        <li
+          data-status={book.data.status}
+          data-title={book.data.title.toLowerCase()}
+          data-id={book.id}
+        >
           <BookCover cover={book.data.cover} title={book.data.title} author={book.data.author} />
           <p class="shelf__status">{STATUS_LABELS[book.data.status]}</p>
           <p class="shelf__title">{book.data.title}</p>
@@ -110,6 +114,44 @@ const counts = {
 			setPressed("data-sorts", "sort", direction);
 		};
 
+		/* Filtering and sorting move every book at once, and a shelf that
+		   teleports is a shelf you lose your place in. The DOM work is
+		   unchanged — the browser just tweens each book from where it was to
+		   where it lands. Not everyone has the API; they get the jump. */
+		type ViewTransitionDocument = Document & {
+			startViewTransition?: (callback: () => void) => unknown;
+		};
+		const view = document as ViewTransitionDocument;
+
+		/* Naming a book lifts it out of the page snapshot into one of its own,
+		   and each one costs: naming all 250 spends ~700ms capturing before
+		   anything moves, against ~250ms for a dozen. Nearly all of that is
+		   spent on books scrolled out of sight — which is wasted twice over,
+		   since you can't lose track of a book you can't see. So only the ones
+		   on screen are worth animating. */
+		const nameOnscreen = () => {
+			const margin = 200;
+			for (const book of books) {
+				const box = book.getBoundingClientRect();
+				const onscreen =
+					!book.hidden &&
+					box.bottom > -margin &&
+					box.top < window.innerHeight + margin;
+				book.style.viewTransitionName = onscreen
+					? `book-${book.dataset.id}`
+					: "none";
+			}
+		};
+
+		const run = (status: string, direction: string) => {
+			if (!view.startViewTransition) {
+				apply(status, direction);
+				return;
+			}
+			nameOnscreen();
+			view.startViewTransition(() => apply(status, direction));
+		};
+
 		// Defaults to `read`: the shelf is 78% aspiration, so opening on
 		// everything would bury what's actually been read.
 		let status = "read";
@@ -118,19 +160,45 @@ const counts = {
 		for (const button of document.querySelectorAll<HTMLElement>("[data-filter]")) {
 			button.addEventListener("click", () => {
 				status = button.dataset.filter ?? "read";
-				apply(status, direction);
+				run(status, direction);
 			});
 		}
 		for (const button of document.querySelectorAll<HTMLElement>("[data-sort]")) {
 			button.addEventListener("click", () => {
 				direction = button.dataset.sort ?? "asc";
-				apply(status, direction);
+				run(status, direction);
 			});
 		}
 
+		// The first pass is the page arriving, not a change to react to.
 		apply(status, direction);
 	}
 </script>
+
+{/* The view-transition pseudos hang off the document root, not off anything
+    in this component, so scoped styles would never reach them. */}
+<style is:global>
+	/* The shelf is the only thing on the page that changes, so the full-page
+	   cross-fade the root snapshot gives us by default is just a flash across
+	   the rail and the title. Opt the root out and let the books carry it. */
+	::view-transition-image-pair(root) {
+		isolation: auto;
+	}
+
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+		mix-blend-mode: normal;
+		display: block;
+	}
+
+	/* Movement, so --dur-move rather than --dur. Where the wildcard isn't
+	   understood the books still animate, just on the UA's own default. */
+	::view-transition-group(*) {
+		animation-duration: var(--dur-move);
+		animation-timing-function: var(--ease);
+	}
+</style>
 
 <style>
 	.page-title {

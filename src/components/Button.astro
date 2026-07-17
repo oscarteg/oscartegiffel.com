@@ -50,6 +50,14 @@ const Tag = href ? "a" : "button";
 		color: var(--link-hover);
 	}
 
+	/* Pressing is a colour event here, not a physical one — the system doesn't
+	   move things. Every :active below has to differ from the *rest* state
+	   rather than the hover state: on a touchscreen there is no hover to
+	   depart from, and an unchanged tap is an unanswered one. */
+	.button--link:active {
+		background: var(--accent-tint);
+	}
+
 	.button--ghost {
 		color: var(--ink);
 		padding: 10px 18px;
@@ -59,6 +67,12 @@ const Tag = href ? "a" : "button";
 
 	.button--ghost:hover {
 		background: var(--surface-card);
+	}
+
+	/* Raised paper on hover, tray fill on press — the ramp already reads as
+	   depth, so it can stand in for the travel. */
+	.button--ghost:active {
+		background: var(--paper-deep);
 	}
 
 	.button--solid {
@@ -71,5 +85,13 @@ const Tag = href ? "a" : "button";
 	.button--solid:hover {
 		background: var(--ink-soft);
 		border-color: var(--ink-soft);
+	}
+
+	/* The one place the accent earns a whole fill: an ink button has nowhere
+	   darker to go, and going back to --ink would read as nothing at all on
+	   touch. --accent-press finally gets used for the state it's named after. */
+	.button--solid:active {
+		background: var(--accent-press);
+		border-color: var(--accent-press);
 	}
 </style>

@@ -54,6 +54,12 @@ const { items } = Astro.props;
 		color: var(--link-hover);
 	}
 
+	/* The rows already spend orange on hover and on the current page, so a
+	   press has to answer with a fill rather than another colour. */
+	.rail-nav__row:active {
+		background: var(--accent-tint);
+	}
+
 	.rail-nav__row[aria-current="page"] {
 		font-weight: var(--weight-semibold);
 		color: var(--link);
