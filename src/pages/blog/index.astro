@@ -1,10 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import dayjs from "dayjs";
 import Body from "../../components/Body.astro";
-import DraftMarker from "../../components/DraftMarker.astro";
-import ListRow from "../../components/ListRow.astro";
-import { filterPosts, groupBy, postVisibility, sortAsc } from "../../utils";
+import PageIntro from "../../components/PageIntro.astro";
+import PostRow from "../../components/PostRow.astro";
+import { filterPosts, groupBy, sortAsc } from "../../utils";
 
 const posts = await getCollection("blog", filterPosts);
 const reversedPosts = posts.sort(sortAsc);
@@ -19,83 +18,34 @@ const sortedYears = Object.keys(postsByYear)
 	.sort((a, b) => b - a);
 ---
 
-<Body title="Posts" description="A collection of my thoughts and ideas." toc={false}>
-  <h1 class="page-title">A collection of my thoughts and ideas.</h1>
+<Body title="Writing" description="Notes on engineering and how I work.">
+  <PageIntro eyebrow="Writing" title="Notes on engineering and how I work" />
 
-  {
-    sortedYears.map((year) => {
-      const yearPosts = postsByYear[year.toString()] ?? [];
-      return (
-        <div class="year">
-          <div class="year__label">{year}</div>
-          <div>
-            {yearPosts.map((post, index) => {
-              const visibility = postVisibility(post);
-              return (
-                <ListRow
-                  title={post.data.title}
-                  subtitle={post.data.description}
-                  meta={dayjs(post.data.publishDate).format("MMM DD")}
-                  href={`/blog/${post.id}`}
-                  lastBorder={index === yearPosts.length - 1}
-                >
-                  {visibility.kind !== "live" && (
-                    <span class="post__marker">
-                      <DraftMarker visibility={visibility} />
-                    </span>
-                  )}
-                </ListRow>
-              );
-            })}
+  <section>
+    {
+      sortedYears.map((year) => {
+        const yearPosts = postsByYear[year.toString()] ?? [];
+        return (
+          <div class="year">
+            <h2 class="label year__label">{year}</h2>
+            {yearPosts.map((post) => (
+              <PostRow post={post} variant="inline" />
+            ))}
           </div>
-        </div>
-      );
-    })
-  }
+        );
+      })
+    }
+  </section>
 </Body>
 
 <style>
-	.page-title {
-		font: var(--text-display);
-		letter-spacing: var(--track-tight);
-		color: var(--text-heading);
-		max-width: 18ch;
-		margin: 0 0 12px;
-	}
-
-	.post__marker {
-		display: block;
-		margin-top: 8px;
-	}
-
-	/* Year in the margin, posts in the column — the year is a running index,
-	   like the section numbers elsewhere. */
-	.year {
-		display: grid;
-		grid-template-columns: 64px 1fr;
-		gap: 28px;
-		padding-top: 32px;
-	}
-
 	.year__label {
-		font: var(--text-mono);
-		color: var(--accent-fg);
-		padding-top: 15px;
+		padding: 44px 0 12px;
+		margin: 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-strong);
 	}
 
-	@media (max-width: 640px) {
-		.page-title {
-			font: var(--text-h1);
-			max-width: none;
-		}
-
-		.year {
-			grid-template-columns: 1fr;
-			gap: 4px;
-		}
-
-		.year__label {
-			padding-top: 24px;
-		}
+	.year:first-child .year__label {
+		padding-top: 0;
 	}
 </style>

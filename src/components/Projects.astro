@@ -1,42 +1,34 @@
 ---
 import { siteMetadata } from "../config";
-import Card from "./Card.astro";
-import SectionHeader from "./SectionHeader.astro";
 
-export type Props = {
-	number: string;
-};
-
-const { number } = Astro.props;
-const projects = siteMetadata.content.projects;
+const { projects, projectsIntro } = siteMetadata.content;
 ---
 
 <section class="section">
-  <SectionHeader number={number} label="Selected work" />
+  <div class="section__head">
+    <h2 class="section__title">Projects<span class="stop">.</span></h2>
+    <p class="section__intro">{projectsIntro}</p>
+  </div>
 
   <div class="projects">
     {
-      projects.map((project) => (
-        <Card href={project.url}>
-          <div class="project__head">
-            <span class="project__name">{project.name}</span>
-            <span class="project__status">{project.status} ↗</span>
-          </div>
-
-          {/* Type-and-rule first: the shot sits in a hairline frame, square
-              and unshadowed, rather than a floating rounded card. */}
-          <div class="project__frame">
-            <img
-              src={project.image}
-              alt={`${project.name} preview`}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-
-          <p class="project__description" set:html={project.description} />
-          <div class="project__stack">{project.stack.join(" · ")}</div>
-        </Card>
+      projects.map((project, index) => (
+        <a href={project.url} target="_blank" rel="noopener noreferrer" class="project">
+          <span class="label label--tight label--body project__head">
+            {String(index + 1).padStart(2, "0")} <span aria-hidden="true">↗</span>
+            <span class="project__status">{project.status}</span>
+          </span>
+          <img
+            src={project.image}
+            alt={`${project.name} preview`}
+            loading="lazy"
+            decoding="async"
+            class="project__image"
+          />
+          <span class="project__name">{project.name}</span>
+          <span class="project__description">{project.description}</span>
+          <span class="label label--tight project__stack">{project.stack.join(" · ")}</span>
+        </a>
       ))
     }
   </div>
@@ -44,67 +36,111 @@ const projects = siteMetadata.content.projects;
 
 <style>
 	.section {
-		margin-bottom: 52px;
+		border-top: var(--border-hairline-w) solid var(--border-soft);
+		padding: var(--section-pad) 0 var(--section-pad-bottom);
+	}
+
+	.section__head {
+		display: grid;
+		grid-template-columns: 1fr 340px;
+		gap: 64px;
+		align-items: end;
+		margin-bottom: 60px;
+	}
+
+	.section__title {
+		font: var(--type-h2);
+		letter-spacing: var(--track-display);
+		color: var(--text-heading);
+		margin: 0;
+	}
+
+	.section__intro {
+		font: var(--type-fine);
+		color: var(--text-muted);
+		margin: 0 0 6px;
 	}
 
 	.projects {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 20px;
+	}
+
+	.project {
+		display: block;
+		min-width: 0;
+		color: var(--text-heading);
 	}
 
 	.project__head {
 		display: flex;
-		justify-content: space-between;
 		align-items: baseline;
-		gap: 12px;
-	}
-
-	.project__name {
-		font: var(--text-h3);
-		font-weight: var(--weight-semibold);
+		gap: 6px;
+		margin-bottom: 10px;
 	}
 
 	.project__status {
-		font: var(--text-mono-sm);
-		color: var(--accent);
-		text-transform: uppercase;
-		white-space: nowrap;
+		margin-left: auto;
+		color: var(--accent-fg);
 	}
 
-	.project__frame {
-		margin: 14px 0;
-		border: var(--border-hairline-w) solid var(--border-hairline);
-		border-radius: var(--radius);
-		background: var(--surface-page);
-	}
-
-	.project__frame img {
+	.project__image {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 340px;
+		object-fit: cover;
+		object-position: top;
+		border: var(--border-hairline-w) solid var(--border-soft);
+	}
+
+	.project__name {
+		display: block;
+		font: var(--type-item);
+		font-size: 13.5px;
+		margin-top: 14px;
+		transition: color var(--dur) var(--ease);
+	}
+
+	.project:hover .project__name {
+		color: var(--text-meta);
 	}
 
 	.project__description {
-		font: var(--text-body);
-		color: var(--ink-soft);
-		margin-bottom: 14px;
-	}
-
-	.project__description :global(strong) {
-		font-weight: var(--weight-semibold);
-		color: var(--text-heading);
+		display: block;
+		font: var(--type-fine);
+		color: var(--text-muted);
+		margin-top: 5px;
+		max-width: 52ch;
 	}
 
 	.project__stack {
-		font: var(--text-mono-sm);
-		color: var(--text-meta);
-		text-transform: uppercase;
+		display: block;
+		font-weight: var(--weight-regular);
+		letter-spacing: 0.06em;
+		margin-top: 8px;
 	}
 
 	@media (max-width: 900px) {
+		.section__head {
+			grid-template-columns: 1fr;
+			gap: 16px;
+			margin-bottom: 40px;
+		}
+
+		.section__intro {
+			margin: 0;
+		}
+	}
+
+	@media (max-width: 640px) {
 		.projects {
 			grid-template-columns: 1fr;
+			gap: 40px;
+		}
+
+		.project__image {
+			height: 220px;
 		}
 	}
 </style>

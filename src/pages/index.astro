@@ -1,21 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 import Body from "../components/Body.astro";
-import Books from "../components/Books.astro";
-import Button from "../components/Button.astro";
-import DraftMarker from "../components/DraftMarker.astro";
-import Kicker from "../components/Kicker.astro";
-import ListRow from "../components/ListRow.astro";
-import Pipeline from "../components/Pipeline.astro";
+import PostRow from "../components/PostRow.astro";
 import Projects from "../components/Projects.astro";
-import SectionHeader from "../components/SectionHeader.astro";
+import StatusBadge from "../components/StatusBadge.astro";
 import WorkExperience from "../components/WorkExperience.astro";
-import { filterPosts, postVisibility, sortAsc } from "../utils";
+import { filterPosts, sortAsc } from "../utils";
 
 const posts = await getCollection("blog", filterPosts);
 const recentPosts = posts.sort(sortAsc).slice(0, 5);
 
-const coreFocus = [
+const roadmap = [
 	{ title: "Termzig", description: "Building a terminal emulator in Zig." },
 	{
 		title: "OpenGL & Graphics",
@@ -32,115 +27,432 @@ const comingUp = [
 	"Assembly",
 	"Operating Systems & Embedded",
 ];
+
+/* Three verses from the taste bible, quoted on the home page. The anchors
+   are the slugs rehype gives the `### n:m Title` headings in taste.mdx. */
+const verses = [
+	{
+		ref: "Verse 2:4",
+		href: "/taste#24-code-never-dies-you-have-to-kill-it",
+		title: "Code never dies, you have to kill it",
+		body: "Deletion is a feature. A pull request that removes 1,000 lines of dead code is often more valuable than one that adds 1,000 lines of new features.",
+	},
+	{
+		ref: "Verse 6:10",
+		href: "/taste#610-duplication-is-cheaper-than-the-wrong-abstraction",
+		title: "Duplication is cheaper than the wrong abstraction",
+		body: "Copy the code. Wait. When the pattern is clear, the right abstraction is obvious.",
+	},
+	{
+		ref: "Verse 6:5",
+		href: "/taste#65-parse-at-the-boundary-dont-validate-inside",
+		title: "Parse at the boundary, don't validate inside",
+		body: "Validate at system boundaries. Once data passes, the rest of the code treats it as fully typed and asks no further questions.",
+	},
+];
 ---
 
-<Body title="Oscar te Giffel" description="Finding meaning in code, life and humans" toc={false}>
-  <section class="section">
-    <SectionHeader number="01" label="Introduction" />
-    <p class="lead">
-      Hi there! I'm Oscar, a <strong>Senior Fullstack Engineer</strong> working as a <strong>freelancer</strong>.
-      I specialize in <strong>fullstack development</strong> with <strong>React/Kotlin</strong> and <strong>software architecture</strong>.
-      I find the best technical fit for each problem and build scalable solutions that deliver great user experience and developer experience.
-    </p>
-  </section>
+<Body title="Oscar te Giffel" description="Finding meaning in code, life and humans">
+  <section class="hero">
+    <p class="label label--wide hero__eyebrow">Freelance · Senior Fullstack Engineer</p>
+    <h1 class="hero__title">Finding meaning in code, life and humans<span class="stop">.</span></h1>
 
-  <WorkExperience number="02" />
-
-  <Projects number="03" />
-
-  <section class="section">
-    <SectionHeader number="04" label="Roadmap" />
-
-    <p class="roadmap__intro">currently learning / building</p>
-
-    {
-      coreFocus.map((item, index) => (
-        <ListRow
-          title={item.title}
-          subtitle={item.description}
-          lastBorder={index === coreFocus.length - 1}
-        />
-      ))
-    }
-
-    <div class="roadmap__next">
-      <Kicker>Coming up</Kicker>
-      <div class="roadmap__pipeline">
-        <Pipeline steps={comingUp} activeIndex={0} />
+    <div class="hero__grid">
+      <ul class="facts">
+        <li class="facts__row">TypeScript · Kotlin · Go</li>
+        <li class="facts__row">Amersfoort · Worldwide</li>
+        <li class="facts__row"><StatusBadge label="Available for work" tone="live" /></li>
+        <li class="facts__row"><a href="mailto:hello@oscartegiffel.com">hello@oscartegiffel.com</a></li>
+      </ul>
+      <div class="hero__copy">
+        <p>I'm a fullstack engineer, freelance since 2023. The paid work is mostly React, TypeScript and Kotlin for large Dutch organisations like DPG Media and KVK: codebases that have been around for a decade and will be around for another one. Off the clock it's Go, Rust, Zig and Swift, a homelab in Terraform, and side projects that solve a real problem for me or my family.</p>
+        <p>What you get is someone who still cares about the code after the sprint ends. I'll tell you when a shortcut costs more than it saves, and I'll leave the codebase in a state your next hire can pick up.</p>
       </div>
     </div>
+  </section>
 
-    <div class="roadmap__action">
-      <Button href="https://github.com/oscarteg" arrow>Follow the progress on GitHub</Button>
+  <section class="section now">
+    <div>
+      <p class="label label--wide label--accent now__eyebrow">Right now</p>
+      <h2 class="now__title">Helping organizations adopt AI end-to-end<span class="stop">.</span></h2>
+    </div>
+    <div class="now__copy">
+      <p>Most teams already have AI writing some of their code. Fewer have it anywhere else. On my own projects every change starts as a spec in Linear; an agent turns it into a branch and a pull request, a second agent reviews it, and I read what comes back before anything merges. I built the tooling that makes that work, from the review skills to a Linear agent you can @mention on an issue.</p>
+      <p>I help teams get there: where to let the agent run, where to keep a person in the loop, and how to keep understanding code you didn't type. I do my best work with people who talk plainly. Little ego, no politics, and honest feedback in both directions.</p>
     </div>
   </section>
 
-  <Books number="05" />
+  <WorkExperience />
+
+  <Projects />
 
   <section class="section">
-    <SectionHeader number="06" label="Writing" action={{ label: "All ↗", href: "/blog" }} />
-    {
-      recentPosts.map((post, index) => {
-        const visibility = postVisibility(post);
-        return (
-          <ListRow
-            title={post.data.title}
-            subtitle={post.data.description}
-            href={`/blog/${post.id}`}
-            lastBorder={index === recentPosts.length - 1}
-          >
-            {visibility.kind !== "live" && (
-              <span class="post__marker">
-                <DraftMarker visibility={visibility} />
-              </span>
-            )}
-          </ListRow>
-        );
-      })
-    }
+    <div class="section__head section__head--wide">
+      <h2 class="section__title">Roadmap<span class="stop">.</span></h2>
+      <p class="section__intro">Currently learning / building.</p>
+    </div>
+
+    <ul class="cells">
+      {
+        roadmap.map((item, index) => (
+          <li class="cell">
+            <p class="label label--tight cell__label">{String(index + 1).padStart(2, "0")}</p>
+            <h3 class="cell__title">{item.title}</h3>
+            <p class="cell__body">{item.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="pipeline">
+      <span class="label pipeline__label">Coming up</span>
+      {
+        comingUp.map((step, index) => (
+          <>
+            {index > 0 && <span class="pipeline__arrow" aria-hidden="true">→</span>}
+            <span class:list={["pipeline__step", index === 0 && "pipeline__step--active"]}>{step}</span>
+          </>
+        ))
+      }
+      <a href="https://github.com/oscarteg" target="_blank" rel="noopener noreferrer" class="label label--tight label--ink pipeline__action">
+        Follow the progress on GitHub ↗
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Taste<span class="stop">.</span></h2>
+      <a href="/taste" class="label label--tight label--body section__action">All 34 verses →</a>
+    </div>
+
+    <ul class="cells">
+      {
+        verses.map((verse) => (
+          <li class="cell">
+            <a href={verse.href} class="cell__link">
+              <p class="label label--tight label--accent cell__label">{verse.ref}</p>
+              <h3 class="cell__title cell__title--verse">{verse.title}</h3>
+              <p class="cell__body cell__body--loose">{verse.body}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section section--last">
+    <div class="section__head section__head--tight">
+      <h2 class="section__title">Writing<span class="stop">.</span></h2>
+      <a href="/blog" class="label label--tight label--body section__action">All posts →</a>
+    </div>
+
+    <div>
+      {recentPosts.map((post) => <PostRow post={post} variant="stacked" />)}
+    </div>
   </section>
 </Body>
 
 <style>
-	.section {
-		margin-bottom: 52px;
+	/* --- hero --- */
+	.hero {
+		padding: 100px 0 96px;
 	}
 
-	.section:last-child {
+	.hero__eyebrow {
+		margin: 0 0 40px;
+	}
+
+	.hero__title {
+		font: var(--type-display);
+		letter-spacing: var(--track-display);
+		color: var(--text-heading);
+		max-width: 17ch;
+		margin: 0;
+	}
+
+	.hero__grid {
+		display: grid;
+		grid-template-columns: 260px 1fr 340px;
+		gap: 64px;
+		align-items: end;
+		margin-top: 84px;
+	}
+
+	.facts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.facts__row {
+		display: flex;
+		align-items: center;
+		padding: 10px 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label);
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.facts__row a {
+		color: inherit;
+	}
+
+	.facts__row a:hover {
+		color: var(--text-heading);
+	}
+
+	.hero__copy {
+		grid-column: 3;
+	}
+
+	.hero__copy p {
+		font: var(--type-small);
+		font-size: 12.5px;
+		color: var(--text-body);
+		margin: 0 0 12px;
+	}
+
+	.hero__copy p:last-child {
 		margin-bottom: 0;
 	}
 
-	.lead {
-		font: var(--text-lead);
-		letter-spacing: -0.015em;
+	/* --- sections --- */
+	.section {
+		border-top: var(--border-hairline-w) solid var(--border-soft);
+		padding: var(--section-pad) 0 var(--section-pad-bottom);
+	}
+
+	.section--last {
+		padding-bottom: 40px;
+	}
+
+	.section__head {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 64px;
+		align-items: end;
+		margin-bottom: 60px;
+	}
+
+	.section__head--wide {
+		grid-template-columns: 1fr 340px;
+	}
+
+	.section__head--tight {
+		margin-bottom: 52px;
+	}
+
+	.section__title {
+		font: var(--type-h2);
+		letter-spacing: var(--track-display);
 		color: var(--text-heading);
-		max-width: var(--measure);
+		margin: 0;
 	}
 
-	.lead strong {
-		font-weight: var(--weight-semibold);
+	.section__intro {
+		font: var(--type-fine);
+		color: var(--text-muted);
+		margin: 0 0 6px;
 	}
 
-	.post__marker {
+	.section__action {
+		padding-bottom: 8px;
+	}
+
+	.section__action:hover {
+		color: var(--text-heading);
+	}
+
+	/* --- right now --- */
+	.now {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 440px;
+		gap: 64px;
+		align-items: start;
+	}
+
+	.now__eyebrow {
+		margin: 0 0 26px;
+	}
+
+	.now__title {
+		font: var(--type-h2-sm);
+		letter-spacing: var(--track-heading);
+		color: var(--text-heading);
+		max-width: 16ch;
+		margin: 0;
+	}
+
+	.now__copy {
+		padding-top: 44px;
+	}
+
+	.now__copy p {
+		font: var(--type-small);
+		color: var(--text-body);
+		margin: 0 0 14px;
+	}
+
+	.now__copy p:last-child {
+		margin-bottom: 0;
+	}
+
+	/* --- three-up cells (roadmap, taste) --- */
+	.cells {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 24px;
+	}
+
+	.cell {
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
+		padding-top: 16px;
+	}
+
+	.cell__link {
 		display: block;
+		color: inherit;
+	}
+
+	.cell__label {
+		margin: 0 0 8px;
+	}
+
+	.cell__title {
+		font: var(--type-card);
+		letter-spacing: var(--track-card);
+		color: var(--text-heading);
+		margin: 0;
+		transition: color var(--dur) var(--ease);
+	}
+
+	.cell__title--verse {
+		max-width: 24ch;
+	}
+
+	.cell__link:hover .cell__title {
+		color: var(--text-meta);
+	}
+
+	.cell__body {
+		font: var(--type-fine);
+		color: var(--text-muted);
+		margin: 6px 0 0;
+	}
+
+	.cell__body--loose {
+		line-height: 1.65;
 		margin-top: 8px;
 	}
 
-	.roadmap__intro {
-		font: var(--text-small);
-		color: var(--text-muted);
-		margin-bottom: 20px;
+	/* --- coming up pipeline --- */
+	.pipeline {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 14px;
+		margin-top: 48px;
+		padding-top: 20px;
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
 	}
 
-	.roadmap__next {
-		margin-top: 32px;
+	.pipeline__label {
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label);
 	}
 
-	.roadmap__pipeline {
-		margin-top: 12px;
+	.pipeline__step {
+		font: var(--type-fine);
+		font-size: 11px;
+		color: var(--text-meta);
 	}
 
-	.roadmap__action {
-		margin-top: 32px;
+	.pipeline__step--active {
+		color: var(--text-heading);
+	}
+
+	.pipeline__arrow {
+		color: var(--border-strong);
+	}
+
+	.pipeline__action {
+		margin-left: auto;
+	}
+
+	.pipeline__action:hover {
+		color: var(--text-meta);
+	}
+
+	/* --- narrow --- */
+	@media (max-width: 1000px) {
+		.hero__grid {
+			grid-template-columns: 260px 1fr;
+			gap: 48px;
+		}
+
+		.hero__copy {
+			grid-column: 2;
+		}
+
+		.now {
+			grid-template-columns: 1fr;
+			gap: 32px;
+		}
+
+		.now__copy {
+			padding-top: 0;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.hero {
+			padding: 56px 0 64px;
+		}
+
+		.hero__eyebrow {
+			margin-bottom: 28px;
+		}
+
+		.hero__grid {
+			grid-template-columns: 1fr;
+			gap: 40px;
+			margin-top: 56px;
+		}
+
+		.hero__copy {
+			grid-column: 1;
+		}
+
+		.section {
+			padding: 56px 0 64px;
+		}
+
+		.section__head,
+		.section__head--wide {
+			grid-template-columns: 1fr;
+			gap: 12px;
+			margin-bottom: 36px;
+		}
+
+		.section__intro,
+		.section__action {
+			margin: 0;
+			padding: 0;
+		}
+
+		.cells {
+			grid-template-columns: 1fr;
+		}
+
+		.pipeline__action {
+			margin-left: 0;
+			width: 100%;
+		}
 	}
 </style>

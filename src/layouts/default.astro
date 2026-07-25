@@ -1,25 +1,37 @@
 ---
 import Body from "../components/Body.astro";
+import PageIntro from "../components/PageIntro.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 import type { Post } from "../models";
 
+/**
+ * The reading layout: a title page, then a prose column. Markdown pages
+ * (uses, taste) pick it through `layout:` in their frontmatter; the blog
+ * post layout wraps it with its own head.
+ */
 type Props = {
 	title?: string;
 	description?: string;
 	prose?: boolean;
-	headings?: { depth: number; slug: string; text: string }[];
 	post?: Post;
 	frontmatter?: {
 		title?: string;
 		description?: string;
-		toc?: boolean;
+		/** Uppercase eyebrow above the title. Defaults to the title. */
+		eyebrow?: string;
+		/** Edition date, appended to the eyebrow on a versioned page. */
+		edition?: string;
+		/** Widens the prose column to the full page. */
+		wide?: boolean;
+		markdownUrl?: string;
+		/** Pins each `##` group label while its section scrolls past. */
+		stickyGroups?: boolean;
 	};
 };
 
 const {
 	prose = true,
 	frontmatter,
-	headings = [],
 	title: propsTitle,
 	description: propsDescription,
 	post,
@@ -28,110 +40,49 @@ const {
 const title = propsTitle || frontmatter?.title || SITE_TITLE;
 const description =
 	propsDescription || frontmatter?.description || SITE_DESCRIPTION;
-const toc = frontmatter?.toc === true;
+const markdownUrl = frontmatter?.markdownUrl;
+const edition = frontmatter?.edition;
+const eyebrowBase = frontmatter?.eyebrow ?? title;
+const eyebrow = edition ? `${eyebrowBase} · Edition ${edition}` : eyebrowBase;
 ---
 
-<Body title={title} description={description} headings={headings} toc={toc} post={post}>
-  <!-- The shell owns the <main> landmark; this is just the prose scope. -->
-  <div class:list={[prose && "prose"]}>
-    <article class="reading">
-      {
-        title && (
-          <div class="reading__head">
-            <h1>{title}</h1>
-          </div>
-        )
-      }
+<Body title={title} description={description} post={post}>
+  {markdownUrl && <Fragment slot="head"><link rel="alternate" type="text/markdown" href={new URL(markdownUrl, Astro.site).href} /></Fragment>}
 
-      {description && <p class="reading__description">{description}</p>}
+  {
+    Astro.slots.has("intro") ? (
+      <slot name="intro" />
+    ) : (
+      <PageIntro eyebrow={eyebrow} title={title} compact>
+        {markdownUrl && (
+          <a class="label label--tight reading__md" href={markdownUrl} target="_blank" rel="noopener noreferrer">
+            View as .md ↗
+          </a>
+        )}
+      </PageIntro>
+    )
+  }
 
-      <slot />
-    </article>
+  <div class:list={["reading", frontmatter?.wide && "reading--wide", prose && "prose", frontmatter?.stickyGroups && "prose--sticky-groups"]}>
+    <slot />
   </div>
 </Body>
 
 <style>
-	/* The kit caps the reading column tighter than the document column. */
 	.reading {
 		width: 100%;
-		max-width: 720px;
+		max-width: var(--reading-max);
 	}
 
-	.reading__head {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		gap: 16px;
-		width: 100%;
-	}
-
-	.reading__head h1 {
-		font: var(--text-h1);
-		letter-spacing: var(--track-tight);
-		color: var(--text-heading);
-		margin: 0 0 8px;
-	}
-
-	.reading__description {
-		font: var(--text-body-lg);
-		color: var(--text-muted);
-		border-left: var(--border-strong-w) solid var(--accent);
-		padding-left: 16px;
-		margin: 0 0 32px;
-	}
-</style>
-
-<style is:global>
-	/* Retune the typography plugin onto paper. Everything below is the prose
-	   voice: grotesk throughout (the system has no serif), rules instead of
-	   boxes, and the accent used only for links and markers. */
-	.prose {
-		--tw-prose-body: var(--ink-soft);
-		--tw-prose-headings: var(--ink);
-		--tw-prose-lead: var(--muted);
-		--tw-prose-links: var(--accent);
-		--tw-prose-bold: var(--ink);
-		--tw-prose-counters: var(--faint);
-		--tw-prose-bullets: var(--accent);
-		--tw-prose-hr: var(--rule);
-		--tw-prose-quotes: var(--ink-soft);
-		--tw-prose-quote-borders: var(--accent);
-		--tw-prose-captions: var(--faint);
-		--tw-prose-code: var(--ink);
-		--tw-prose-th-borders: var(--rule);
-		--tw-prose-td-borders: var(--rule);
-
-		font-family: var(--font-sans);
+	.reading--wide {
 		max-width: none;
 	}
 
-	.prose :where(h1, h2, h3, h4) {
-		font-family: var(--font-sans);
-		letter-spacing: var(--track-heading);
+	.reading__md {
+		display: inline-block;
 	}
 
-	.prose :where(blockquote) {
-		border-left-width: var(--border-strong-w);
-		font-style: normal;
-		font-weight: var(--weight-regular);
-	}
-
-	/* Emphasis is weight, not ornament — no underline decoration. */
-	.prose :where(strong) {
-		font-weight: var(--weight-semibold);
-	}
-
-	/* Images sit in hairline frames; no rounded photo cards. */
-	.prose :where(img) {
-		border: var(--border-hairline-w) solid var(--border-hairline);
-		border-radius: var(--radius);
-	}
-
-	.prose :where(hr) {
-		border-top-width: var(--border-hairline-w);
-	}
-
-	.prose .katex-display {
-		color: var(--tw-prose-body);
+	.reading__md:hover {
+		color: var(--text-heading);
 	}
 </style>

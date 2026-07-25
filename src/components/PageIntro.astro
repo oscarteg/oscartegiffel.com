@@ -1,0 +1,55 @@
+---
+/**
+ * The title page every section opens with: an uppercase eyebrow, a large
+ * heading ending on the tan full stop, and room for an intro paragraph.
+ */
+export type Props = {
+	eyebrow: string;
+	title: string;
+	/** Tightens the bottom padding for pages whose content starts with a rule. */
+	compact?: boolean | undefined;
+};
+
+const { eyebrow, title, compact = false } = Astro.props;
+---
+
+<section class:list={["intro", compact && "intro--compact"]}>
+  <p class="label label--wide intro__eyebrow">{eyebrow}</p>
+  <h1 class="intro__title">{title}<span class="stop">.</span></h1>
+  <slot />
+</section>
+
+<style>
+	.intro {
+		padding: 88px 0 72px;
+	}
+
+	.intro--compact {
+		padding-bottom: 64px;
+	}
+
+	.intro__eyebrow {
+		margin: 0 0 32px;
+	}
+
+	.intro__title {
+		font: var(--type-title);
+		letter-spacing: var(--track-display);
+		color: var(--text-heading);
+		margin: 0;
+	}
+
+	.intro__title:not(:last-child) {
+		margin-bottom: 20px;
+	}
+
+	@media (max-width: 640px) {
+		.intro {
+			padding: 48px 0 40px;
+		}
+
+		.intro__eyebrow {
+			margin-bottom: 20px;
+		}
+	}
+</style>

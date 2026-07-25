@@ -1,0 +1,162 @@
+---
+/**
+ * One post in a list. Two voices: `stacked` (date over title, blurb right —
+ * the homepage) and `inline` (date, title, blurb on one baseline — the
+ * writing index). Both end on a hairline.
+ */
+import dayjs from "dayjs";
+import type { Post } from "../models";
+import { postVisibility } from "../utils";
+import DraftMarker from "./DraftMarker.astro";
+
+export type Props = {
+	post: Post;
+	variant?: "stacked" | "inline" | undefined;
+};
+
+const { post, variant = "stacked" } = Astro.props;
+const visibility = postVisibility(post);
+const date = dayjs(post.data.publishDate);
+---
+
+<a href={`/blog/${post.id}`} class:list={["row", `row--${variant}`]}>
+  <span class="row__date">
+    {variant === "stacked" ? date.format("DD MMM YYYY") : date.format("DD MMM")}
+  </span>
+  <span class="row__title">
+    {post.data.title}
+    {visibility.kind !== "live" && (
+      <span class="row__marker">
+        <DraftMarker visibility={visibility} />
+      </span>
+    )}
+  </span>
+  {
+    post.data.description && (
+      <span class="row__blurb">
+        {variant === "stacked" && <span class="row__arrow" aria-hidden="true">→</span>}
+        {post.data.description}
+      </span>
+    )
+  }
+</a>
+
+<style>
+	.row {
+		display: grid;
+		gap: 24px;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		color: var(--text-heading);
+	}
+
+	.row__title {
+		display: block;
+		transition: color var(--dur) var(--ease);
+	}
+
+	.row:hover .row__title {
+		color: var(--text-meta);
+	}
+
+	.row__marker {
+		display: inline-block;
+		margin-left: 12px;
+		vertical-align: middle;
+	}
+
+	.row__blurb {
+		font: var(--type-fine);
+		color: var(--text-muted);
+		max-width: 44ch;
+	}
+
+	/* --- stacked: date above the title, blurb bottom-right --- */
+	.row--stacked {
+		grid-template-columns: minmax(0, 1fr) auto;
+		grid-template-areas:
+			"date blurb"
+			"title blurb";
+		align-items: end;
+		padding-bottom: 16px;
+		margin-bottom: 24px;
+	}
+
+	.row--stacked:last-child {
+		margin-bottom: 0;
+	}
+
+	.row--stacked .row__date {
+		grid-area: date;
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label-tight);
+		text-transform: uppercase;
+		color: var(--text-meta);
+		margin-bottom: 7px;
+	}
+
+	.row--stacked .row__title {
+		grid-area: title;
+		font: var(--type-row);
+		letter-spacing: var(--track-entry);
+	}
+
+	.row--stacked .row__blurb {
+		grid-area: blurb;
+		display: flex;
+		gap: 10px;
+		align-items: baseline;
+		padding-bottom: 2px;
+	}
+
+	.row__arrow {
+		color: var(--text-meta);
+	}
+
+	/* --- inline: a ledger row --- */
+	.row--inline {
+		grid-template-columns: 110px minmax(0, 1fr) auto;
+		align-items: baseline;
+		padding: 20px 0;
+		border-bottom-color: var(--border-soft);
+	}
+
+	.row--inline .row__date {
+		font: var(--type-fine);
+		font-size: 11px;
+		color: var(--text-meta);
+	}
+
+	.row--inline .row__title {
+		font: var(--type-row);
+		font-size: 19px;
+		letter-spacing: var(--track-entry);
+	}
+
+	.row--inline .row__blurb {
+		text-align: right;
+	}
+
+	@media (max-width: 760px) {
+		.row--stacked {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"date"
+				"title"
+				"blurb";
+			gap: 0;
+		}
+
+		.row--stacked .row__blurb {
+			margin-top: 8px;
+		}
+
+		.row--inline {
+			grid-template-columns: 1fr;
+			gap: 4px;
+		}
+
+		.row--inline .row__blurb {
+			text-align: left;
+		}
+	}
+</style>

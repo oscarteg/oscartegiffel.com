@@ -42,26 +42,9 @@ const jsonLdGraph = post
 <!-- Client-side routing (View Transitions) so ambient audio survives navigation. -->
 <ClientRouter />
 
-<!--
-  The design system themes on [data-theme], so the attribute has to exist
-  before first paint or the page flashes light before going dark. Inline and
-  render-blocking on purpose; `is:inline` keeps Astro from deferring it.
--->
-<script is:inline>
-	(() => {
-		const query = window.matchMedia("(prefers-color-scheme: dark)");
-		const apply = (isDark) => {
-			document.documentElement.dataset.theme = isDark ? "dark" : "light";
-		};
-		apply(query.matches);
-		query.addEventListener("change", (event) => apply(event.matches));
-		// ClientRouter swaps the document; re-assert the theme before paint.
-		document.addEventListener("astro:after-swap", () => apply(query.matches));
-	})();
-</script>
 
-<!-- Let form controls, scrollbars and the like follow the theme. -->
-<meta name="color-scheme" content="light dark" />
+<!-- Paper only: form controls and scrollbars stay light. -->
+<meta name="color-scheme" content="light" />
 
 <link rel="icon" type="image/png" href="/favicon.png" />
 

@@ -1,57 +1,134 @@
 ---
 import { siteMetadata } from "../config";
-import ListRow from "./ListRow.astro";
-import SectionHeader from "./SectionHeader.astro";
 
-export type Props = {
-	number: string;
-};
-
-const { number } = Astro.props;
 const entries = siteMetadata.content.workExperience;
 ---
 
 <section class="section">
-  <SectionHeader number={number} label="Experience" />
+  <h2 class="section__title">Experience<span class="stop">.</span></h2>
 
-  {
-    entries.map((entry, index) => (
-      <ListRow
-        left={entry.period}
-        title={`${entry.role} · ${entry.company}`}
-        meta={entry.stack.join(" · ")}
-        lastBorder={index === entries.length - 1}
-      >
-        {entry.via && <span class="work__via">{entry.via}</span>}
-        <p class="work__description" set:html={entry.description} />
-      </ListRow>
-    ))
-  }
+  <div>
+    {
+      entries.map((entry) => (
+        <article class="entry">
+          <div>
+            <p class="label label--tight entry__period">
+              {entry.period} · {entry.via}
+            </p>
+            <h3 class="entry__title">
+              {entry.role} · {entry.company}
+            </h3>
+            <p class="entry__description">{entry.description}</p>
+            {entry.highlights.length > 0 && (
+              <ul class="entry__highlights">
+                {entry.highlights.map((highlight) => (
+                  <li>
+                    <strong>{highlight.title}</strong> — {highlight.body}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <p class="label label--tight entry__stack">
+            {entry.stack.slice(0, 2).join(" · ")}
+            <br />
+            {entry.stack.slice(2).join(" · ")}
+          </p>
+        </article>
+      ))
+    }
+  </div>
 </section>
 
 <style>
 	.section {
-		margin-bottom: 52px;
+		border-top: var(--border-hairline-w) solid var(--border-soft);
+		padding: var(--section-pad) 0 var(--section-pad-bottom);
 	}
 
-	.work__via {
-		display: block;
-		font: var(--text-mono-sm);
-		color: var(--text-meta);
-		margin-top: 3px;
+	.section__title {
+		font: var(--type-h2);
+		letter-spacing: var(--track-display);
+		color: var(--text-heading);
+		margin: 0 0 64px;
 	}
 
-	.work__description {
-		font: var(--text-small);
-		color: var(--ink-soft);
-		margin-top: 8px;
+	.entry {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 24px;
+		align-items: end;
+		padding-bottom: 20px;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		margin-bottom: 26px;
+	}
+
+	.entry:last-child {
+		margin-bottom: 0;
+	}
+
+	.entry__period {
+		margin: 0 0 8px;
+	}
+
+	.entry__title {
+		font: var(--type-entry);
+		letter-spacing: var(--track-entry);
+		color: var(--text-heading);
+		margin: 0;
+	}
+
+	.entry__description {
+		font: var(--type-small);
+		color: var(--text-body);
 		max-width: var(--measure);
+		margin: 8px 0 0;
 	}
 
-	/* The descriptions carry <strong> from config. The system has no
-	   underline ornament, so emphasis is weight alone. */
-	.work__description :global(strong) {
+	.entry__highlights {
+		list-style: none;
+		margin: 20px 0 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 14px 28px;
+		max-width: 66ch;
+		font: var(--type-fine);
+		color: var(--text-muted);
+	}
+
+	.entry__highlights strong {
 		font-weight: var(--weight-semibold);
 		color: var(--text-heading);
+	}
+
+	.entry__stack {
+		text-align: right;
+		padding-bottom: 3px;
+		margin: 0;
+		white-space: nowrap;
+	}
+
+	@media (max-width: 640px) {
+		.section__title {
+			margin-bottom: 40px;
+		}
+
+		.entry {
+			grid-template-columns: 1fr;
+			gap: 12px;
+		}
+
+		.entry__highlights {
+			grid-template-columns: 1fr;
+		}
+
+		.entry__stack {
+			text-align: left;
+		}
+
+		.entry__stack br {
+			display: none;
+		}
 	}
 </style>

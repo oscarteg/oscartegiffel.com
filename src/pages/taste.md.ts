@@ -5,6 +5,7 @@ import raw from "./taste.mdx?raw";
 const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n/;
 const EDITION = /^edition:\s*"?([^"\n]+?)"?\s*$/m;
 const DESCRIPTION = /^description:\s*(.+?)\s*$/m;
+const PREFACE = /^preface:\r?\n((?: {2}- .+\r?\n?)+)/m;
 
 /**
  * The machine-readable edition of The Taste Bible: the same prose as
@@ -25,6 +26,14 @@ export const GET: APIRoute = () => {
 
 	const description = block.match(DESCRIPTION)?.[1] ?? "";
 
+	// The preface lives in frontmatter so the HTML edition can set it on the
+	// title page; here it goes back where a reader expects it.
+	const preface = (block.match(PREFACE)?.[1] ?? "")
+		.split(/\r?\n/)
+		.filter((line) => line.startsWith("  - "))
+		.map((line) => line.slice(4))
+		.join("\n\n");
+
 	// Cross-verse anchors are relative to the HTML edition, which lives at a
 	// different URL than this file.
 	const body = raw
@@ -41,6 +50,12 @@ updated: ${edition}
 ---
 
 # The Taste Bible
+
+## Preface
+
+${preface}
+
+This book is also available as plain markdown at ${SITE_URL}/taste.md and indexed in ${SITE_URL}/llms.txt for machine readers.
 
 ${body}`;
 

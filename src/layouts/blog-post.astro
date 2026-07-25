@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import DraftMarker from "../components/DraftMarker.astro";
-import Kicker from "../components/Kicker.astro";
 import type { Post } from "../models";
 import { filterPosts, postVisibility } from "../utils";
 import DefaultLayout from "./default.astro";
@@ -14,14 +13,13 @@ type Props = {
 	headings?: { depth: number; slug: string; text: string }[];
 };
 
-const { post, headings = [] } = Astro.props;
+const { post } = Astro.props;
 
 const {
 	title,
 	description = "",
 	cover,
 	publishDate,
-	toc = false,
 	resources = [],
 	showResources = true,
 	series,
@@ -38,24 +36,30 @@ const seriesPosts = series
 const currentPart = seriesPosts.findIndex((entry) => entry.id === post.id) + 1;
 
 const visibility = postVisibility(post);
+const kind = series ? "Series" : "Essay";
 ---
 
-<DefaultLayout title={title} description={description} headings={headings} post={post} frontmatter={{ title, description, toc }}>
-  <div class="post__meta">
-    {publishDate && <Kicker>{dayjs(publishDate).format("MMM DD, YYYY")}</Kicker>}
-    <DraftMarker visibility={visibility} />
-  </div>
+<DefaultLayout title={title} description={description} post={post} frontmatter={{ title, description }}>
+  <header slot="intro" class="post__head">
+    <a href="/blog" class="label label--tight post__back">← Writing</a>
+    <p class="label label--tight post__meta">
+      {publishDate && <span>{dayjs(publishDate).format("DD MMM YYYY")} · {kind}</span>}
+      <DraftMarker visibility={visibility} />
+    </p>
+    <h1 class="post__title">{title}<span class="stop">.</span></h1>
+    {description && <p class="post__description">{description}</p>}
+  </header>
 
   {
     seriesPosts.length > 0 && (
       <nav class="not-prose series">
-        <p class="series__label">
+        <p class="label label--accent series__label">
           {series} · Part {currentPart} of {seriesPosts.length}
         </p>
         <ol class="series__list">
           {seriesPosts.map((entry, index) => (
             <li>
-              <span class="series__index">{index + 1}</span>
+              <span class="series__index">{String(index + 1).padStart(2, "0")}</span>
               {entry.id === post.id ? (
                 <span class="series__current">{entry.data.title}</span>
               ) : (
@@ -81,11 +85,10 @@ const visibility = postVisibility(post);
   {
     visibleResources.length > 0 && (
       <section class="not-prose resources">
-        <p class="resources__label">Resources</p>
+        <p class="label resources__label">Resources</p>
         <ul>
           {visibleResources.map((resource) => (
             <li>
-              <span class="resources__marker" aria-hidden="true" />
               <a href={resource.url} target="_blank" rel="noopener noreferrer">
                 {resource.title ?? new URL(resource.url).hostname.replace(/^www\./, "")}
               </a>
@@ -97,7 +100,7 @@ const visibility = postVisibility(post);
   }
 
   <aside class="not-prose colophon">
-    <p class="colophon__label">How it was written</p>
+    <p class="label label--accent colophon__label">How it was written</p>
     <p class="colophon__body">
       Most of the content was written by my own hand, but I did leverage AI for
       many things, such as polishing, structuring, research and review.
@@ -106,47 +109,47 @@ const visibility = postVisibility(post);
 </DefaultLayout>
 
 <style>
+	.post__head {
+		max-width: var(--reading-max);
+		padding: 80px 0 48px;
+	}
+
+	.post__back:hover {
+		color: var(--text-heading);
+	}
+
 	.post__meta {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 10px 16px;
-		margin-bottom: 32px;
+		gap: 8px 16px;
+		margin: 36px 0 14px;
 	}
 
-	/* Raised paper + a hairline, with the accent carried by a single
-	   left rule — elevation without shadow. */
-	.series,
-	.colophon {
-		width: 100%;
-		background: var(--surface-card);
-		border: var(--border-hairline-w) solid var(--border-hairline);
-		border-left: var(--border-strong-w) solid var(--accent);
-		border-radius: var(--radius);
-		padding: 16px 20px;
+	.post__title {
+		font: var(--type-h2);
+		font-size: clamp(36px, 4vw, 52px);
+		letter-spacing: var(--track-display);
+		color: var(--text-heading);
+		margin: 0 0 16px;
 	}
 
+	.post__description {
+		font: var(--type-lead);
+		color: var(--text-body);
+		margin: 0;
+	}
+
+	/* --- series --- */
 	.series {
+		width: 100%;
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
+		padding-top: 18px;
 		margin-bottom: 40px;
 	}
 
-	.colophon {
-		margin-top: 32px;
-	}
-
-	.series__label,
-	.colophon__label {
-		font: var(--text-kicker);
-		letter-spacing: var(--track-kicker);
-		text-transform: uppercase;
-		color: var(--accent-fg);
+	.series__label {
 		margin: 0 0 12px;
-	}
-
-	.colophon__body {
-		font: var(--text-small);
-		color: var(--text-muted);
-		margin: 0;
 	}
 
 	.series__list {
@@ -162,32 +165,32 @@ const visibility = postVisibility(post);
 		display: flex;
 		align-items: baseline;
 		gap: 12px;
-		font: var(--text-small);
+		font: var(--type-small);
 	}
 
 	.series__index {
-		font: var(--text-mono-sm);
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label-tight);
 		color: var(--text-meta);
 		flex-shrink: 0;
 	}
 
 	.series__current {
-		font-weight: var(--weight-semibold);
+		font-weight: var(--weight-medium);
+		color: var(--text-heading);
 	}
 
 	.series__list a {
 		color: var(--text-muted);
-		text-decoration: none;
 	}
 
 	.series__list a:hover {
-		color: var(--link-hover);
+		color: var(--text-heading);
 	}
 
 	/* Images sit in hairline frames; never full-bleed, never rounded. */
 	.post__cover {
-		border: var(--border-hairline-w) solid var(--border-hairline);
-		border-radius: var(--radius);
+		border: var(--border-hairline-w) solid var(--border-soft);
 		margin-bottom: 32px;
 	}
 
@@ -198,19 +201,33 @@ const visibility = postVisibility(post);
 		object-fit: cover;
 	}
 
-	.resources {
+	/* --- resources + colophon: ruled asides --- */
+	.resources,
+	.colophon {
 		width: 100%;
-		margin-top: 64px;
-		border-top: var(--border-strong-w) solid var(--border-strong);
-		padding-top: 16px;
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
+		padding-top: 18px;
 	}
 
-	.resources__label {
-		font: var(--text-kicker);
-		letter-spacing: var(--track-kicker);
-		text-transform: uppercase;
+	.resources {
+		margin-top: 44px;
+	}
+
+	.colophon {
+		margin-top: 32px;
+	}
+
+	.resources__label,
+	.colophon__label {
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label);
+		margin: 0 0 8px;
+	}
+
+	.colophon__body {
+		font: var(--type-small);
 		color: var(--text-muted);
-		margin: 0 0 14px;
+		margin: 0;
 	}
 
 	.resources ul {
@@ -219,30 +236,22 @@ const visibility = postVisibility(post);
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
-	}
-
-	.resources li {
-		display: flex;
-		align-items: baseline;
-		gap: 12px;
-	}
-
-	.resources__marker {
-		width: var(--marker-size);
-		height: var(--marker-size);
-		background: var(--marker);
-		flex-shrink: 0;
+		gap: 6px;
 	}
 
 	.resources a {
-		font: var(--text-small);
+		font: var(--type-small);
 		color: var(--text-muted);
-		text-decoration: none;
 		word-break: break-word;
 	}
 
 	.resources a:hover {
-		color: var(--link-hover);
+		color: var(--text-heading);
+	}
+
+	@media (max-width: 640px) {
+		.post__head {
+			padding: 40px 0 32px;
+		}
 	}
 </style>

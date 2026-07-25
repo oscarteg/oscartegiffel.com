@@ -18,8 +18,8 @@ const label =
 	visibility.kind === "draft"
 		? "Draft"
 		: visibility.kind === "scheduled"
-			? `Scheduled · ${dayjs(visibility.publishDate).format("MMM DD")}`
+			? `Scheduled · ${dayjs(visibility.publishDate).format("DD MMM")}`
 			: null;
 ---
 
-{label && <StatusBadge label={label} accent />}
+{label && <StatusBadge label={label} tone="accent" />}

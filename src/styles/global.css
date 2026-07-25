@@ -2,46 +2,40 @@
 @import "./fonts.css";
 
 /* ============================================================
-   RAMS DOCUMENT — Braun / Dieter Rams editorial system.
-   Warm off-white paper, near-black ink, one restrained orange.
-   Greyscale does the work; the accent is used sparingly.
+   GROTESK — warm off-white paper, near-black ink, one tan accent
+   spent on the full stop after a heading and on the odd label.
+   Greyscale does the rest. Rules divide; nothing floats.
 
    Two layers, deliberately:
-     1. the base ramp (--paper, --ink, --accent…) — re-pointed by theme
+     1. the base ramp (--paper, --ink, --accent…)
      2. semantic aliases (--surface-page, --text-heading…) — what you author against
-
-   Only layer 1 is re-pointed for dark; every alias inherits.
    ============================================================ */
 
-/* `.book` opts out of the theme by taking the ramp here and never being
-   matched by the dark rules below, which only ever target the root element.
-   A book is an object, not a surface: it stays paper on a dark desk. */
-:root,
-.book {
+:root {
 	/* --- base neutrals (warm paper stack) --- */
-	--paper: #efebe3; /* page background */
-	--paper-raised: #e8e3d9; /* cards, code chips, raised fills */
-	--paper-deep: #dedad1; /* device/tray fills */
+	--paper: #f4f3f0; /* page background */
+	--paper-raised: #ebe9e4; /* code blocks, chips */
+	--paper-deep: #e5e0d7; /* selection, pressed fills */
 
-	--ink: #1b1917; /* primary text + strong 2px rules */
-	--ink-soft: #33302b; /* body copy */
-	--muted: #6e6a62; /* secondary text, roles, captions */
-	--faint: #8a857d; /* metadata, placeholders */
+	--ink: #1a1a19; /* headings, nav, strong rules */
+	--ink-soft: #2b2a27; /* long-form reading copy */
+	--body: #55544f; /* body copy */
+	--muted: #6b6a66; /* secondary copy, descriptions */
+	--faint: #8f8e89; /* labels, dates, metadata */
 
-	--rule: #d4cec3; /* hairline rules / dividers */
-	--rule-soft: #e1dcd2; /* faint inner dividers */
+	--rule: #dedcd6; /* row dividers */
+	--rule-soft: #e6e4de; /* section dividers, image frames */
+	--rule-strong: #c9c7c0; /* group-label underlines, blockquote bar */
 
-	/* The spine of a book with no jacket to slice a colour from. On the ramp
-	   because it has to invert: a face turned from the light is darker than
-	   the paper here and lighter than it in dark, same as the rules. */
-	--spine-blank: #b3ada1;
+	--spine-blank: #b3ada1; /* a jacketless book's spine */
 
-	--on-ink: #efebe3; /* text/marks on ink surfaces */
+	--on-ink: #f4f3f0; /* text on ink surfaces */
 
-	/* --- accent (Braun orange) --- */
-	--accent: #dc4b12;
-	--accent-press: #b23a0c;
-	--accent-tint: rgba(220, 75, 18, 0.15); /* status-dot halo */
+	/* --- accent (warm tan) + the one signal colour --- */
+	--accent: #a08b74;
+	--accent-press: #8a7660;
+	--accent-tint: rgba(160, 139, 116, 0.16);
+	--live: #3f8f5b; /* the availability dot */
 
 	/* --- semantic aliases — prefer these when authoring --- */
 	--surface-page: var(--paper);
@@ -49,154 +43,92 @@
 	--surface-ink: var(--ink);
 
 	--text-heading: var(--ink);
+	--text-reading: var(--ink-soft);
+	--text-body: var(--body);
 	--text-muted: var(--muted);
 	--text-meta: var(--faint);
 	--text-on-ink: var(--on-ink);
 
 	--border-hairline: var(--rule);
 	--border-soft: var(--rule-soft);
-	--border-strong: var(--ink);
+	--border-strong: var(--rule-strong);
 
 	--accent-fg: var(--accent);
-	--link: var(--accent);
-	--link-hover: var(--accent-press);
-	--marker: var(--accent); /* the small square / bullet marks */
-
-	/* NOTE: the kit also aliases `--text-body` to a colour, but its own
-	   typography scale defines `--text-body` as a font shorthand and is
-	   imported second — so the colour alias never survives. The kit's
-	   components reflect this: they use `font: var(--text-body)` and take
-	   body colour from `--ink-soft`. The colour alias is omitted here on
-	   purpose. Use --ink-soft for body copy. */
+	--link: var(--ink);
+	--link-hover: var(--faint);
 
 	/* ============================================================
-	   TYPOGRAPHY — two families only. A grotesk for everything
-	   structural, a monospace for labels / numbers / metadata.
+	   TYPOGRAPHY — one grotesk, weight 500 for anything that leads,
+	   uppercase tracked labels for anything that annotates. Mono is
+	   reserved for code.
 	   ============================================================ */
 
-	/* weights */
 	--weight-regular: 400;
 	--weight-medium: 500;
 	--weight-semibold: 600;
-	--weight-bold: 700;
 
-	/* display / headings (grotesk, tight tracking) */
-	--text-display: 700 52px / 1 var(--font-sans); /* page titles */
-	--text-h1: 700 44px / 1 var(--font-sans);
-	--text-h2: 600 22px / 1.05 var(--font-sans);
-	--text-lead: 400 26px / 1.42 var(--font-sans); /* intro paragraph */
-	--text-h3: 600 18px / 1.15 var(--font-sans);
+	/* display / headings */
+	--type-display: 500 clamp(44px, 5.4vw, 72px) / 1.06 var(--font-sans);
+	--type-title: 500 clamp(40px, 4.4vw, 58px) / 1.08 var(--font-sans);
+	--type-h2: 500 clamp(36px, 3.6vw, 50px) / 1.1 var(--font-sans);
+	--type-h2-sm: 500 clamp(30px, 3vw, 42px) / 1.12 var(--font-sans);
+	--type-entry: 500 22px / 1.3 var(--font-sans); /* experience rows */
+	--type-row: 500 20px / 1.3 var(--font-sans); /* post rows */
+	--type-card: 500 17px / 1.35 var(--font-sans); /* small headed cells */
+	--type-item: 500 14px / 1.5 var(--font-sans); /* list item names */
 
 	/* body */
-	--text-body-lg: 400 16px / 1.65 var(--font-sans);
-	--text-body: 400 15px / 1.62 var(--font-sans);
-	--text-small: 400 14px / 1.6 var(--font-sans);
+	--type-lead: 400 16px / 1.6 var(--font-sans);
+	--type-reading: 400 15px / 1.78 var(--font-sans); /* long-form */
+	--type-body: 400 14px / 1.7 var(--font-sans);
+	--type-small: 400 13px / 1.65 var(--font-sans);
+	--type-fine: 400 12px / 1.6 var(--font-sans);
 
-	/* mono labels — always uppercase w/ wide tracking */
-	--text-kicker: 700 11px / 1.2 var(--font-mono); /* SECTION LABELS */
-	--text-mono: 400 12px / 1.5 var(--font-mono); /* metadata */
-	--text-mono-sm: 400 11px / 1.4 var(--font-mono);
+	/* labels — always uppercase with wide tracking */
+	--type-label: 500 11px / 1.2 var(--font-sans);
+	--type-label-sm: 500 10px / 1.2 var(--font-sans);
+
+	/* code */
+	--type-code: 400 13px / 1.7 var(--font-mono);
 
 	/* tracking */
-	--track-tight: -0.025em; /* large display */
-	--track-heading: -0.01em;
-	--track-kicker: 0.14em; /* uppercase mono labels */
-	--track-mono: 0.06em;
+	--track-display: -0.03em;
+	--track-heading: -0.025em;
+	--track-entry: -0.015em;
+	--track-card: -0.01em;
+	--track-label: 0.1em;
+	--track-label-wide: 0.12em;
+	--track-label-tight: 0.08em;
 
 	/* ============================================================
-	   SPACING, LAYOUT, BORDERS — a functional grid: a fixed
-	   identity/menu rail beside a flexible content column.
-	   Rules (not shadows) divide.
+	   LAYOUT — a single centred column under a slim header.
 	   ============================================================ */
-	--page-max: 1240px; /* content max width */
-	--rail-width: 300px; /* identity / menu rail */
-	--rail-gap: 72px; /* rail → content gap */
-	--page-pad: 52px; /* outer padding */
-	--content-max: 860px; /* main reading column cap */
-	--measure: 64ch; /* body copy line length */
+	--page-max: 1200px;
+	--page-pad: 52px;
+	--page-pad-narrow: 24px;
+	--reading-max: 660px;
+	--measure: 62ch;
+
+	--section-pad: 88px;
+	--section-pad-bottom: 100px;
 
 	--border-hairline-w: 1px;
-	--border-strong-w: 2px; /* section rules / active underlines */
-	--radius: 0px; /* the system is square by default */
-	--radius-chip: 2px; /* code blocks, subtle chips */
-	--marker-size: 7px; /* the small orange square */
+	--border-strong-w: 2px;
+	--radius: 0px;
+	--radius-chip: 2px;
 
-	/* There is deliberately no shadow token: elevation reads through rules
-	   and fills, not blur. The kit keeps one for genuinely floating cards;
-	   nothing here floats, so it isn't carried over. */
-
-	/* motion — restrained, no bounce */
+	/* motion — colour only, never layout */
 	--ease: cubic-bezier(0.2, 0, 0, 1);
 	--dur: 140ms;
-	/* Movement gets its own duration: --dur is tuned for a colour swapping
-	   in place, and an element travelling the width of a grid in 140ms reads
-	   as a snap rather than a move. Still well inside the 300ms ceiling. */
 	--dur-move: 240ms;
 
 	/* Book covers are the one place the system renders an object rather than
-	   a surface, so they carry a depth. Everything else stays flat. Sized to
-	   a real paperback — about 15% of the jacket's width — rather than to the
-	   chunky thumbnails this is adapted from, which only read at 58px wide. */
+	   a surface. Sized to a real paperback: ~15% of the jacket's width. */
 	--book-depth: 28px;
 }
 
-/* ============================================================
-   DARK THEME — warm charcoal paper, off-white ink, same orange.
-   Only the base ramp is re-pointed; semantic aliases inherit.
-   Set on <html> by the pre-paint script in BaseHead.astro.
-   ============================================================ */
-[data-theme="dark"] {
-	--paper: #17140f;
-	--paper-raised: #211e18;
-	--paper-deep: #2a2620;
-
-	--ink: #efebe3;
-	--ink-soft: #d6d1c6;
-	--muted: #9b968c;
-	--faint: #78736a;
-
-	--rule: #37332b;
-	--rule-soft: #26231d;
-	--spine-blank: #423d34;
-
-	--on-ink: #17140f; /* dark text on the now-light "ink" surface */
-
-	/* accent stays Braun orange; hover LIGHTENS on dark */
-	--accent: #e4571f;
-	--accent-press: #f07038;
-	--accent-tint: rgba(228, 87, 31, 0.18);
-}
-
-/* No-JS fallback: honour the OS's dark preference before/without the pre-paint
-   script. Scoped to :not([data-theme]) so it only fills the gap while no
-   attribute is set — the moment the script (or a future manual toggle) pins one,
-   the explicit [data-theme] rule above wins and this never fights it. Values
-   mirror the ramp above; keep the two in step. */
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme]) {
-		--paper: #17140f;
-		--paper-raised: #211e18;
-		--paper-deep: #2a2620;
-
-		--ink: #efebe3;
-		--ink-soft: #d6d1c6;
-		--muted: #9b968c;
-		--faint: #78736a;
-
-		--rule: #37332b;
-		--rule-soft: #26231d;
-		--spine-blank: #423d34;
-
-		--on-ink: #17140f;
-
-		--accent: #e4571f;
-		--accent-press: #f07038;
-		--accent-tint: rgba(228, 87, 31, 0.18);
-	}
-}
-
 /* `inline` keeps the utilities pointing at the vars rather than copying
-   their values, so re-pointing the ramp under [data-theme] flows through. */
+   their values. */
 @theme inline {
 	--color-paper: var(--paper);
 	--color-paper-raised: var(--paper-raised);
@@ -204,16 +136,19 @@
 
 	--color-ink: var(--ink);
 	--color-ink-soft: var(--ink-soft);
+	--color-body: var(--body);
 	--color-muted: var(--muted);
 	--color-faint: var(--faint);
 
 	--color-rule: var(--rule);
 	--color-rule-soft: var(--rule-soft);
+	--color-rule-strong: var(--rule-strong);
 	--color-on-ink: var(--on-ink);
 
 	--color-accent: var(--accent);
 	--color-accent-press: var(--accent-press);
 	--color-accent-tint: var(--accent-tint);
+	--color-live: var(--live);
 
 	--radius-none: var(--radius);
 	--radius-chip: var(--radius-chip);
@@ -221,27 +156,12 @@
 	--ease-firm: var(--ease);
 }
 
-/* Font stacks don't change per theme, so they're plain theme values.
-   Helvetica Neue is preferred where installed; Archivo is the webfont
-   stand-in everywhere else. */
+/* Helvetica Neue where installed; Archivo is the webfont stand-in. */
 @theme {
-	--font-sans: "Helvetica Neue", Helvetica, "Archivo", system-ui, sans-serif;
-	--font-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
-
-	/* The deliberate exception to "the system has no serif": /taste is an
-	   object, not a page, so it gets a text face. Same strategy as
-	   --font-sans, and no webfont — a book that arrives late is worse than
-	   one set in Georgia. */
-	--font-serif:
-		"Iowan Old Style", Charter, "Charter BT", Palatino, "Palatino Linotype",
-		Georgia, serif;
+	--font-sans:
+		"Helvetica Neue", Helvetica, "Archivo", Arial, system-ui, sans-serif;
+	--font-mono: ui-monospace, "SF Mono", Menlo, "Space Mono", monospace;
 }
-
-/* Nothing authors against `dark:` — the semantic aliases handle the theme on
-   their own. It's re-pointed at the attribute anyway so that if anything ever
-   does, it follows the kit rather than silently falling back to the media
-   query and disagreeing with everything else. */
-@custom-variant dark ([data-theme="dark"] &);
 
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
@@ -250,6 +170,7 @@
 	html {
 		font-size: 16px;
 		scrollbar-gutter: stable;
+		-webkit-font-smoothing: antialiased;
 		font-feature-settings:
 			"kern" 1,
 			"liga" 1;
@@ -257,9 +178,12 @@
 
 	body {
 		background-color: var(--surface-page);
-		color: var(--ink-soft);
-		font: var(--text-body);
-		letter-spacing: var(--track-heading);
+		color: var(--text-body);
+		font: var(--type-body);
+	}
+
+	::selection {
+		background: var(--paper-deep);
 	}
 
 	/* Motion is restrained: colour and background only, never layout. */
@@ -273,45 +197,225 @@
 
 	a {
 		color: var(--link);
+		text-decoration: none;
 	}
 
 	a:hover {
 		color: var(--link-hover);
 	}
 
-	.prose .katex-display {
-		color: var(--tw-prose-body);
+	:focus-visible {
+		outline: var(--border-strong-w) solid var(--accent);
+		outline-offset: 3px;
 	}
 }
 
 /* ============================================================
-   CODE — Shiki (vitesse-light / vitesse-black), sat on raised
-   paper. The system is square; code blocks are the one place
-   the kit allows a hint of radius.
+   SHARED VOICES — the two label styles and the heading full stop,
+   used across pages. Everything else is component-scoped.
    ============================================================ */
-pre.astro-code {
-	border-left: var(--border-strong-w) solid var(--accent);
-	border-radius: var(--radius-chip);
-	background-color: var(--surface-card) !important;
-	padding: 1.25rem 1.5rem;
-	font-size: 0.9rem;
-	line-height: 1.7;
+
+/* Uppercase tracked label: the annotation voice. */
+.label {
+	font: var(--type-label);
+	letter-spacing: var(--track-label);
+	text-transform: uppercase;
+	color: var(--text-meta);
 }
 
-[data-theme="dark"] pre.astro-code,
-[data-theme="dark"] pre.astro-code span {
-	color: var(--shiki-dark) !important;
-	font-style: var(--shiki-dark-font-style) !important;
-	font-weight: var(--shiki-dark-font-weight) !important;
-	text-decoration: var(--shiki-dark-text-decoration) !important;
+.label--wide {
+	letter-spacing: var(--track-label-wide);
+}
+
+.label--tight {
+	letter-spacing: var(--track-label-tight);
+}
+
+.label--accent {
+	color: var(--accent-fg);
+}
+
+.label--ink {
+	color: var(--text-heading);
+}
+
+.label--body {
+	color: var(--text-body);
+}
+
+/* Every leading heading ends on a tan full stop. */
+.stop {
+	color: var(--accent-fg);
+}
+
+/* ============================================================
+   CODE — Shiki (vitesse-light / vitesse-black) on raised paper with
+   a rule down the left, like the pseudocode block on /uses.
+   ============================================================ */
+pre.astro-code {
+	border-left: var(--border-strong-w) solid var(--rule-strong);
+	border-radius: 0;
+	background-color: transparent !important;
+	padding: 4px 0 4px 20px;
+	font: var(--type-code);
+	color: var(--text-reading);
 }
 
 .prose :where(code):not(:where(pre code)) {
 	background-color: var(--surface-card);
-	color: var(--ink-soft);
-	border: var(--border-hairline-w) solid var(--border-hairline);
+	color: var(--text-reading);
 	padding: 0.15rem 0.4rem;
 	border-radius: var(--radius-chip);
 	font-size: 0.875em;
 	font-weight: 400;
+}
+
+/* ============================================================
+   PROSE — the typography plugin retuned onto paper. Shared by every
+   markdown surface (posts, uses, the taste bible).
+   ============================================================ */
+/* Retune the typography plugin onto paper. Grotesk throughout, rules
+   instead of boxes, the accent reserved for links and markers. */
+.prose {
+	--tw-prose-body: var(--text-reading);
+	--tw-prose-headings: var(--text-heading);
+	--tw-prose-lead: var(--text-body);
+	--tw-prose-links: var(--text-heading);
+	--tw-prose-bold: var(--text-heading);
+	--tw-prose-counters: var(--text-meta);
+	--tw-prose-bullets: var(--accent);
+	--tw-prose-hr: var(--rule);
+	--tw-prose-quotes: var(--text-body);
+	--tw-prose-quote-borders: var(--rule-strong);
+	--tw-prose-captions: var(--text-meta);
+	--tw-prose-code: var(--text-reading);
+	--tw-prose-th-borders: var(--rule);
+	--tw-prose-td-borders: var(--rule);
+
+	font: var(--type-reading);
+	font-family: var(--font-sans);
+	max-width: none;
+}
+
+.prose :where(p):not(:where(.not-prose, .not-prose *)) {
+	margin: 0 0 20px;
+}
+
+.prose :where(a):not(:where(.not-prose, .not-prose *)) {
+	text-decoration: underline;
+	text-decoration-color: var(--rule-strong);
+	text-underline-offset: 3px;
+	font-weight: var(--weight-regular);
+}
+
+.prose :where(a):not(:where(.not-prose, .not-prose *)):hover {
+	color: var(--text-meta);
+}
+
+.prose :where(h1, h2, h3, h4):not(:where(.not-prose, .not-prose *)) {
+	font-family: var(--font-sans);
+	font-weight: var(--weight-medium);
+	letter-spacing: var(--track-entry);
+}
+
+.prose :where(h2):not(:where(.not-prose, .not-prose *)) {
+	font-size: 26px;
+	line-height: 1.2;
+	margin: 56px 0 20px;
+}
+
+.prose :where(h3):not(:where(.not-prose, .not-prose *)) {
+	font-size: 19px;
+	line-height: 1.3;
+	margin: 36px 0 12px;
+}
+
+.prose :where(blockquote):not(:where(.not-prose, .not-prose *)) {
+	border-left: var(--border-strong-w) solid var(--rule-strong);
+	padding: 2px 0 2px 20px;
+	font-size: 16.5px;
+	line-height: 1.6;
+	font-style: italic;
+	font-weight: var(--weight-regular);
+	color: var(--text-body);
+}
+
+.prose
+	:where(blockquote p:first-of-type):not(
+		:where(.not-prose, .not-prose *)
+	)::before,
+.prose
+	:where(blockquote p:last-of-type):not(
+		:where(.not-prose, .not-prose *)
+	)::after {
+	content: none;
+}
+
+/* Emphasis is weight, not ornament. */
+.prose :where(strong):not(:where(.not-prose, .not-prose *)) {
+	font-weight: var(--weight-semibold);
+}
+
+.prose :where(img):not(:where(.not-prose, .not-prose *)) {
+	border: var(--border-hairline-w) solid var(--border-soft);
+	border-radius: var(--radius);
+}
+
+.prose :where(hr):not(:where(.not-prose, .not-prose *)) {
+	border-top-width: var(--border-hairline-w);
+}
+
+.prose .katex-display {
+	color: var(--tw-prose-body);
+}
+
+/* Group labels ride along with their section: an uppercase label over a
+   rule, pinned while the entries beneath it scroll past. */
+.prose--sticky-groups :where(h2):not(:where(.not-prose, .not-prose *)) {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	background: var(--surface-page);
+	border-bottom: var(--border-hairline-w) solid var(--rule-strong);
+	font: var(--type-label);
+	letter-spacing: var(--track-label);
+	text-transform: uppercase;
+	color: var(--text-meta);
+	padding: 12px 0 12px;
+	margin: 44px 0 24px;
+}
+
+/* ============================================================
+   PAPER — printing any page drops the site chrome and goes to
+   black on white. The résumé adds its own tightening on top.
+   ============================================================ */
+@media print {
+	:root {
+		--paper: #ffffff;
+	}
+
+	html {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
+	body {
+		background: #ffffff;
+	}
+
+	.masthead,
+	.colophon,
+	.ambient {
+		display: none !important;
+	}
+
+	.shell {
+		max-width: none;
+		min-height: 0;
+		padding: 0;
+	}
+
+	a {
+		color: inherit;
+	}
 }

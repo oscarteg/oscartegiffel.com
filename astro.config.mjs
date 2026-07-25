@@ -7,7 +7,7 @@ import remarkMath from "remark-math";
 import remarkToc from "remark-toc";
 import { SITE_URL } from "./src/config";
 
-import { rehypeBookHeadings, remarkModifiedTime } from "./src/utils";
+import { remarkModifiedTime } from "./src/utils";
 
 export default defineConfig({
 	site: SITE_URL,
@@ -33,15 +33,12 @@ export default defineConfig({
 			remarkMath,
 			[remarkToc, { heading: "toc", maxDepth: 3 }],
 		],
-		rehypePlugins: [rehypeKatex, rehypeBookHeadings],
+		rehypePlugins: [rehypeKatex],
 		shikiConfig: {
 			wrap: true,
-			// Muted themes, so code doesn't compete with the single Braun-orange
-			// accent. Backgrounds are overridden to raised paper in global.css.
-			themes: {
-				light: "vitesse-light",
-				dark: "vitesse-black",
-			},
+			// A muted theme, so code doesn't compete with the single tan accent.
+			// The background is overridden to bare paper in global.css.
+			theme: "vitesse-light",
 		},
 	},
 	prefetch: false,

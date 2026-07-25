@@ -1,0 +1,118 @@
+---
+/**
+ * The colophon row: wordmark, e-mail, the secondary links (the ones that
+ * don't earn a place in the masthead), and a single ink button for the
+ * résumé — the only filled surface on the site.
+ */
+import { siteMetadata } from "../config";
+
+const socials = siteMetadata.socials;
+---
+
+<footer class="colophon">
+  <span class="colophon__wordmark">Oscar te Giffel<span class="colophon__mark">®</span></span>
+  <a href="mailto:hello@oscartegiffel.com" class="colophon__mail">hello@oscartegiffel.com</a>
+  <nav class="colophon__nav" aria-label="Secondary">
+    <a href="/uses">Uses</a>
+    {
+      socials.map((social) => (
+        <a href={social.url} target="_blank" rel="noopener noreferrer">
+          {social.name}
+        </a>
+      ))
+    }
+  </nav>
+  <a href="/resume" class="colophon__cta">
+    View resume<span aria-hidden="true">→</span>
+  </a>
+</footer>
+
+<style>
+	.colophon {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 18px 26px;
+		margin-top: var(--section-pad-bottom);
+		padding-top: 26px;
+		border-top: var(--border-hairline-w) solid var(--border-soft);
+	}
+
+	.colophon__wordmark {
+		font: var(--type-label);
+		font-weight: var(--weight-semibold);
+		letter-spacing: var(--track-label-tight);
+		text-transform: uppercase;
+		color: var(--text-heading);
+		white-space: nowrap;
+	}
+
+	.colophon__mark {
+		font-size: 8px;
+		vertical-align: super;
+	}
+
+	.colophon__mail {
+		font: var(--type-fine);
+		letter-spacing: 0.04em;
+		color: var(--text-body);
+		border-bottom: var(--border-hairline-w) solid var(--border-strong);
+		padding-bottom: 1px;
+	}
+
+	.colophon__mail:hover {
+		color: var(--text-heading);
+		border-color: var(--text-heading);
+	}
+
+	.colophon__nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px 20px;
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label-tight);
+		text-transform: uppercase;
+	}
+
+	.colophon__nav a {
+		color: var(--text-meta);
+	}
+
+	.colophon__nav a:hover {
+		color: var(--text-heading);
+	}
+
+	.colophon__cta {
+		margin-left: auto;
+		display: inline-flex;
+		align-items: baseline;
+		gap: 14px;
+		padding: 13px 18px;
+		border-radius: var(--radius-chip);
+		background: var(--surface-ink);
+		color: var(--text-on-ink);
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label);
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.colophon__cta span {
+		font-size: 11px;
+	}
+
+	.colophon__cta:hover {
+		background: var(--ink-soft);
+		color: var(--text-on-ink);
+	}
+
+	.colophon__cta:active {
+		background: var(--accent-press);
+	}
+
+	@media (max-width: 640px) {
+		.colophon__cta {
+			margin-left: 0;
+		}
+	}
+</style>

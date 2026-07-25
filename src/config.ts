@@ -24,10 +24,6 @@ export const siteMetadata = {
 			name: "LinkedIn",
 			url: "https://www.linkedin.com/in/otegiffel",
 		},
-		{
-			name: "Resume",
-			url: "https://resume.oscartegiffel.com",
-		},
 	],
 	content: {
 		workExperience: [
@@ -35,9 +31,27 @@ export const siteMetadata = {
 				period: "2023 — Present",
 				role: "Senior Frontend Developer",
 				company: "DPG Media",
-				via: "freelance",
+				via: "Freelance",
 				description:
-					"Building a <strong>video player component library</strong>, and pushing DPG to ship <strong>components as products</strong>, not services.",
+					"Started as a Senior Developer for the Freemium brands (AD, HLN); became the person teams across the company reach out to for a second opinion on code, vision and architecture. Introduced React best practices — and frontend as a whole.",
+				highlights: [
+					{
+						title: "Legacy migration",
+						body: "led the Thymeleaf → Next.js transition for high-traffic article and dossier pages, with heavy emphasis on performance and stability.",
+					},
+					{
+						title: "Design bridge",
+						body: "initiated a multidimensional token system that works across brands, built with designers on Style Dictionary and Token Studio.",
+					},
+					{
+						title: "Guardrail for quality",
+						body: "gatekeeper for the Next.js and UI repositories; no shortcuts that hurt us later, even when the pressure was on.",
+					},
+					{
+						title: "Team rhythm",
+						body: "re-energized a team in a rut by shifting focus to solid, high-quality software instead of just rushing to hit deadlines.",
+					},
+				],
 				stack: ["React", "Next.js", "TypeScript", "Kotlin"],
 			},
 			{
@@ -46,7 +60,8 @@ export const siteMetadata = {
 				company: "Polariks",
 				via: "via HeadFWD",
 				description:
-					"Building the frontend for a <strong>greenhouse data platform</strong> — tuning GraphQL and caching to handle large datasets.",
+					"Building the frontend for a greenhouse data platform — tuning GraphQL and caching to handle large datasets.",
+				highlights: [],
 				stack: ["React", "TypeScript", "GraphQL", "NestJS"],
 			},
 			{
@@ -55,17 +70,20 @@ export const siteMetadata = {
 				company: "KVK",
 				via: "via HeadFWD",
 				description:
-					"Leading frontend across <strong>seven services used by every Dutch business</strong> — introduced <strong>DDD</strong> and started the move to microservices.",
+					"Leading frontend across seven services used by every Dutch business — introduced DDD and started the move to microservices.",
+				highlights: [],
 				stack: ["React", "TypeScript", "Redux", "xState"],
 			},
 		],
+		projectsIntro:
+			"Side projects double as my lab — each one solves a real problem for myself or my family.",
 		projects: [
 			{
 				name: "JustWhisk",
 				status: "In development",
 				image: "/images/projects/justwhisk.webp",
 				description:
-					"Solving an annoying problem for myself and my family: online recipes buried under blog stories, and <strong>grandma's family recipes</strong> stuck on paper. Building a place that fixes both.",
+					"Online recipes buried under blog stories, and grandma's family recipes stuck on paper. Building a place that fixes both.",
 				stack: ["TanStack Start", "React", "Convex", "TypeScript"],
 				url: "https://justwhisk.com",
 			},
@@ -74,7 +92,7 @@ export const siteMetadata = {
 				status: "In development",
 				image: "/images/projects/blackjacklearner.webp",
 				description:
-					"A practice tool for learning <strong>basic strategy</strong> and <strong>card counting</strong>",
+					"A practice tool for learning basic strategy and card counting.",
 				stack: ["SolidJS", "TypeScript"],
 				url: "https://blackjack.oscartegiffel.com/",
 			},

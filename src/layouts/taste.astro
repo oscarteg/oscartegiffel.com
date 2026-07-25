@@ -1,0 +1,216 @@
+---
+import Body from "../components/Body.astro";
+import PageIntro from "../components/PageIntro.astro";
+
+/**
+ * The Taste Bible's own layout: a title page with the preface, then the
+ * chapter grid from the design — every chapter a ruled cell listing its
+ * verses — and finally the verses themselves, so the grid doubles as the
+ * table of contents and the home page's verse anchors still resolve.
+ */
+type Heading = { depth: number; slug: string; text: string };
+
+type Props = {
+	headings: Heading[];
+	frontmatter: {
+		title: string;
+		description: string;
+		eyebrow: string;
+		edition: string;
+		markdownUrl: string;
+		preface: string[];
+		/** Chapters still being written, flagged in the grid. */
+		draftChapters?: number[];
+	};
+};
+
+const { headings, frontmatter } = Astro.props;
+const {
+	title,
+	description,
+	eyebrow,
+	edition,
+	markdownUrl,
+	preface,
+	draftChapters = [],
+} = frontmatter;
+
+const CHAPTER = /^Chapter (\d+) — (.+)$/;
+const VERSE = /^\d+:\d+ (.+)$/;
+
+type Chapter = {
+	number: number;
+	title: string;
+	slug: string;
+	draft: boolean;
+	verses: { title: string; slug: string }[];
+};
+
+/* Fold the flat heading list into chapters: an h2 that reads "Chapter N — …"
+   opens one, each h3 beneath it is a verse. Anything else (Preface,
+   Revisions) is left out of the grid. */
+const chapters = headings.reduce<Chapter[]>((acc, heading) => {
+	const chapter = heading.depth === 2 ? heading.text.match(CHAPTER) : null;
+	if (chapter?.[1] && chapter[2]) {
+		const number = Number(chapter[1]);
+		acc.push({
+			number,
+			title: chapter[2],
+			slug: heading.slug,
+			draft: draftChapters.includes(number),
+			verses: [],
+		});
+		return acc;
+	}
+
+	const verse = heading.depth === 3 ? heading.text.match(VERSE) : null;
+	const current = acc.at(-1);
+	if (verse?.[1] && current) {
+		current.verses.push({ title: verse[1], slug: heading.slug });
+	}
+	return acc;
+}, []);
+---
+
+<Body title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="alternate" type="text/markdown" href={new URL(markdownUrl, Astro.site).href} />
+  </Fragment>
+
+  <PageIntro eyebrow={`${eyebrow} · Edition ${edition}`} title={title}>
+    {preface.map((paragraph) => <p class="preface">{paragraph}</p>)}
+    <p class="preface preface--aside">
+      Also available as <a href={markdownUrl} target="_blank" rel="noopener noreferrer">plain markdown ↗</a>.
+    </p>
+  </PageIntro>
+
+  <nav class="chapters" aria-label="Chapters">
+    {
+      chapters.map((chapter) => (
+        <div class="chapter">
+          <h2 class="chapter__head">
+            <span class="label label--tight">Ch. {chapter.number}</span>
+            <a href={`#${chapter.slug}`} class="chapter__title">
+              {chapter.title}
+              {chapter.draft && <span class="chapter__draft">Working draft</span>}
+            </a>
+          </h2>
+          <p class="chapter__verses">
+            {chapter.verses.map((verse, index) => (
+              <>
+                {index > 0 && <span class="chapter__sep" aria-hidden="true"> · </span>}
+                <a href={`#${verse.slug}`}>{verse.title}</a>
+              </>
+            ))}
+          </p>
+        </div>
+      ))
+    }
+  </nav>
+
+  <div class="reading prose prose--sticky-groups">
+    <slot />
+  </div>
+</Body>
+
+<style>
+	.preface {
+		font: var(--type-small);
+		font-size: 13.5px;
+		line-height: 1.7;
+		color: var(--text-body);
+		max-width: 60ch;
+		margin: 0 0 14px;
+	}
+
+	.preface--aside {
+		color: var(--text-meta);
+		margin: 0;
+	}
+
+	.preface a {
+		color: var(--text-body);
+		border-bottom: var(--border-hairline-w) solid var(--border-strong);
+	}
+
+	.preface a:hover {
+		color: var(--text-heading);
+	}
+
+	/* --- the chapter grid --- */
+	.chapters {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 52px 64px;
+	}
+
+	.chapter__head {
+		display: flex;
+		align-items: baseline;
+		gap: 12px;
+		padding-bottom: 12px;
+		margin: 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-strong);
+	}
+
+	.chapter__title {
+		font: var(--type-card);
+		font-size: 16px;
+		letter-spacing: var(--track-card);
+		color: var(--text-heading);
+	}
+
+	.chapter__title:hover {
+		color: var(--text-meta);
+	}
+
+	.chapter__draft {
+		margin-left: 8px;
+		font: var(--type-label);
+		font-weight: var(--weight-regular);
+		letter-spacing: var(--track-label-tight);
+		text-transform: uppercase;
+		color: var(--accent-fg);
+	}
+
+	.chapter__verses {
+		font: var(--type-small);
+		line-height: 2.1;
+		color: var(--text-body);
+		padding-top: 12px;
+		margin: 0;
+	}
+
+	.chapter__verses a {
+		color: inherit;
+	}
+
+	.chapter__verses a:hover {
+		color: var(--text-heading);
+	}
+
+	.chapter__sep {
+		color: var(--text-meta);
+	}
+
+	/* --- the verses --- */
+	.reading {
+		width: 100%;
+		max-width: var(--reading-max);
+		margin-top: 100px;
+		padding-top: 88px;
+		border-top: var(--border-hairline-w) solid var(--border-soft);
+	}
+
+	@media (max-width: 760px) {
+		.chapters {
+			grid-template-columns: 1fr;
+			gap: 40px;
+		}
+
+		.reading {
+			margin-top: 64px;
+			padding-top: 56px;
+		}
+	}
+</style>

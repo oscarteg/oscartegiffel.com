@@ -1,0 +1,581 @@
+---
+import Body from "../components/Body.astro";
+import {
+	education,
+	experience,
+	person,
+	profile,
+	projects,
+	skills,
+} from "../content/resume";
+
+/**
+ * The résumé, on paper and on screen. The same markup prints to A4: the
+ * site chrome drops away, the type tightens, and each entry refuses to
+ * split across a page. Cmd/Ctrl+P works without the button; the button is
+ * only a shortcut to the same dialog.
+ */
+---
+
+<Body title="Résumé — Oscar te Giffel" description={profile.lead}>
+  <article class="resume">
+    <header class="head">
+      <div>
+        <p class="label label--wide head__eyebrow">Résumé</p>
+        <h1 class="head__name">{person.name}<span class="stop">.</span></h1>
+        <p class="head__title">{person.title}</p>
+      </div>
+      <div class="head__side">
+        <ul class="contacts">
+          <li class="contacts__row">{person.location}</li>
+          {
+            person.contacts.map((contact) => (
+              <li class="contacts__row">
+                <a href={contact.href}>{contact.value}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <button type="button" class="print" data-print hidden>Save as PDF ↓</button>
+      </div>
+    </header>
+
+    <section class="section section--profile">
+      <p class="profile__lead">{profile.lead}</p>
+      <p class="profile__body">{profile.body}</p>
+    </section>
+
+    <section class="section">
+      <h2 class="section__title">Experience<span class="stop">.</span></h2>
+      {
+        experience.map((entry) => (
+          <article class="entry">
+            <div class="entry__main">
+              <p class="label label--tight entry__period">
+                {entry.period}
+                {entry.via && <> · {entry.via}</>}
+              </p>
+              <h3 class="entry__title">
+                {entry.role} · {entry.company}
+              </h3>
+              <p class="entry__summary">{entry.summary}</p>
+              <ul class="entry__bullets">
+                {entry.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+            <p class="label label--tight entry__stack">{entry.stack.join(" · ")}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section">
+      <h2 class="section__title">Skills<span class="stop">.</span></h2>
+      <dl class="skills">
+        {
+          skills.map((skill) => (
+            <div class="skills__row">
+              <dt class="label label--tight">{skill.label}</dt>
+              <dd>{skill.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <div class="section section--split">
+      <section>
+        <h2 class="section__title">Projects<span class="stop">.</span></h2>
+        {
+          projects.map((project) => (
+            <article class="cell">
+              <p class="label label--tight cell__label">{project.stack}</p>
+              <h3 class="cell__title">{project.name}</h3>
+              <p class="cell__body">{project.description}</p>
+            </article>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2 class="section__title">Education<span class="stop">.</span></h2>
+        {
+          education.map((group) => (
+            <div class="cell">
+              <p class="label label--tight cell__label">{group.label}</p>
+              <ul class="edu">
+                {group.entries.map((item) => (
+                  <li>
+                    <span class="edu__title">{item.title}</span>
+                    {item.meta && <span class="edu__meta">{item.meta}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </section>
+    </div>
+  </article>
+</Body>
+
+<script>
+	// Enhancement only: the button just opens the print dialog. Without JS
+	// the button stays hidden and Cmd/Ctrl+P does the same thing.
+	function initPrint(): void {
+		const button = document.querySelector<HTMLButtonElement>("[data-print]");
+		if (!button) return;
+		button.hidden = false;
+		button.addEventListener("click", () => window.print());
+	}
+
+	initPrint();
+	document.addEventListener("astro:page-load", initPrint);
+</script>
+
+<style>
+	/* --- masthead --- */
+	.head {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 48px;
+		align-items: end;
+		padding: 88px 0 40px;
+		border-bottom: var(--border-hairline-w) solid var(--border-strong);
+	}
+
+	.head__eyebrow {
+		margin: 0 0 32px;
+	}
+
+	.head__name {
+		font: var(--type-title);
+		letter-spacing: var(--track-display);
+		color: var(--text-heading);
+		margin: 0 0 12px;
+	}
+
+	.head__title {
+		font: var(--type-small);
+		color: var(--text-body);
+		margin: 0;
+	}
+
+	.head__side {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 24px;
+	}
+
+	.contacts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		min-width: 260px;
+	}
+
+	.contacts__row {
+		padding: 8px 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label);
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.contacts__row:last-child {
+		border-bottom: none;
+	}
+
+	.contacts__row a {
+		color: inherit;
+	}
+
+	.contacts__row a:hover {
+		color: var(--text-heading);
+	}
+
+	.print {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 14px;
+		padding: 13px 18px;
+		border: none;
+		border-radius: var(--radius-chip);
+		background: var(--surface-ink);
+		color: var(--text-on-ink);
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label);
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+
+	.print:hover {
+		background: var(--ink-soft);
+	}
+
+	.print:active {
+		background: var(--accent-press);
+	}
+
+	/* --- sections --- */
+	.section {
+		padding: 64px 0 0;
+	}
+
+	.section--profile {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 440px;
+		gap: 64px;
+		padding-top: 48px;
+	}
+
+	.section__title {
+		font: var(--type-h2-sm);
+		letter-spacing: var(--track-heading);
+		color: var(--text-heading);
+		margin: 0 0 40px;
+	}
+
+	.profile__lead {
+		font: var(--type-lead);
+		font-size: 18px;
+		color: var(--text-heading);
+		margin: 0;
+		max-width: 34ch;
+	}
+
+	.profile__body {
+		font: var(--type-small);
+		color: var(--text-body);
+		margin: 0;
+	}
+
+	/* --- experience --- */
+	.entry {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 220px;
+		gap: 24px;
+		align-items: start;
+		padding: 0 0 22px;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		margin-bottom: 26px;
+		break-inside: avoid;
+	}
+
+	.entry:last-child {
+		margin-bottom: 0;
+	}
+
+	.entry__period {
+		margin: 0 0 8px;
+	}
+
+	.entry__title {
+		font: var(--type-entry);
+		letter-spacing: var(--track-entry);
+		color: var(--text-heading);
+		margin: 0;
+	}
+
+	.entry__summary {
+		font: var(--type-small);
+		color: var(--text-body);
+		max-width: var(--measure);
+		margin: 8px 0 0;
+	}
+
+	.entry__bullets {
+		list-style: none;
+		margin: 14px 0 0;
+		padding: 0;
+		max-width: 66ch;
+		font: var(--type-fine);
+		color: var(--text-muted);
+	}
+
+	.entry__bullets li {
+		display: flex;
+		gap: 10px;
+		margin-top: 4px;
+	}
+
+	.entry__bullets li::before {
+		content: "—";
+		color: var(--text-meta);
+		flex-shrink: 0;
+	}
+
+	.entry__stack {
+		text-align: right;
+		margin: 0;
+		line-height: 1.7;
+	}
+
+	/* --- skills --- */
+	.skills {
+		margin: 0;
+	}
+
+	.skills__row {
+		display: grid;
+		grid-template-columns: 160px minmax(0, 1fr);
+		gap: 28px;
+		padding: 12px 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-hairline);
+		break-inside: avoid;
+	}
+
+	.skills__row:first-child {
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
+	}
+
+	.skills__row dt {
+		padding-top: 2px;
+	}
+
+	.skills__row dd {
+		font: var(--type-small);
+		color: var(--text-body);
+		margin: 0;
+	}
+
+	/* --- projects + education --- */
+	.section--split {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 64px;
+	}
+
+	.cell {
+		border-top: var(--border-hairline-w) solid var(--border-hairline);
+		padding: 16px 0 24px;
+		break-inside: avoid;
+	}
+
+	.cell__label {
+		margin: 0 0 8px;
+	}
+
+	.cell__title {
+		font: var(--type-card);
+		letter-spacing: var(--track-card);
+		color: var(--text-heading);
+		margin: 0;
+	}
+
+	.cell__body {
+		font: var(--type-fine);
+		color: var(--text-muted);
+		margin: 6px 0 0;
+	}
+
+	.edu {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.edu li {
+		margin-top: 6px;
+	}
+
+	.edu__title {
+		display: block;
+		font: var(--type-small);
+		color: var(--text-heading);
+	}
+
+	.edu__meta {
+		display: block;
+		font: var(--type-fine);
+		color: var(--text-meta);
+	}
+
+	/* --- narrow --- */
+	@media (max-width: 900px) {
+		.head,
+		.section--profile,
+		.section--split {
+			grid-template-columns: 1fr;
+			gap: 32px;
+		}
+
+		.head {
+			padding-top: 48px;
+		}
+
+		.head__side {
+			align-items: flex-start;
+		}
+
+		.entry {
+			grid-template-columns: 1fr;
+			gap: 12px;
+		}
+
+		.entry__stack {
+			text-align: left;
+		}
+
+		.skills__row {
+			grid-template-columns: 1fr;
+			gap: 4px;
+		}
+	}
+
+	/* --- paper --- */
+	@media print {
+		@page {
+			size: A4;
+			margin: 12mm 14mm;
+		}
+
+		/* Paper is narrower than the 900px breakpoint; keep the two columns. */
+		.head {
+			grid-template-columns: minmax(0, 1fr) auto;
+			padding: 0 0 10pt;
+			gap: 24pt;
+			border-bottom-color: #1a1a19;
+		}
+
+		.head__side {
+			align-items: flex-end;
+		}
+
+		.head__eyebrow {
+			margin-bottom: 8pt;
+		}
+
+		.head__name {
+			font-size: 24pt;
+			margin-bottom: 4pt;
+		}
+
+		.head__title {
+			font-size: 9.5pt;
+		}
+
+		.contacts {
+			min-width: 0;
+		}
+
+		.contacts__row {
+			padding: 3pt 0;
+			font-size: 7.5pt;
+			border: none;
+		}
+
+		.print {
+			display: none;
+		}
+
+		.section {
+			padding-top: 18pt;
+		}
+
+		.section--profile {
+			grid-template-columns: minmax(0, 1fr) 260pt;
+			gap: 24pt;
+			padding-top: 12pt;
+		}
+
+		.section__title {
+			font-size: 15pt;
+			margin-bottom: 10pt;
+			break-after: avoid;
+		}
+
+		.profile__lead {
+			font-size: 11pt;
+			line-height: 1.4;
+		}
+
+		.profile__body {
+			font-size: 9pt;
+			line-height: 1.5;
+		}
+
+		.entry {
+			grid-template-columns: minmax(0, 1fr) 150pt;
+			gap: 16pt;
+			padding-bottom: 8pt;
+			margin-bottom: 8pt;
+		}
+
+		.entry__period {
+			font-size: 7.5pt;
+			margin-bottom: 3pt;
+		}
+
+		.entry__title {
+			font-size: 12pt;
+		}
+
+		.entry__summary {
+			font-size: 9pt;
+			line-height: 1.45;
+			margin-top: 3pt;
+		}
+
+		.entry__bullets {
+			font-size: 8.5pt;
+			line-height: 1.45;
+			margin-top: 6pt;
+		}
+
+		.entry__bullets li {
+			margin-top: 2pt;
+		}
+
+		.entry__stack {
+			font-size: 7.5pt;
+			line-height: 1.6;
+		}
+
+		.skills__row {
+			grid-template-columns: 100pt minmax(0, 1fr);
+			gap: 12pt;
+			padding: 5pt 0;
+		}
+
+		.skills__row dt {
+			font-size: 7.5pt;
+		}
+
+		.skills__row dd {
+			font-size: 9pt;
+			line-height: 1.45;
+		}
+
+		.section--split {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 24pt;
+		}
+
+		.cell {
+			padding: 8pt 0 10pt;
+		}
+
+		.cell__label {
+			font-size: 7.5pt;
+			margin-bottom: 3pt;
+		}
+
+		.cell__title {
+			font-size: 11pt;
+		}
+
+		.cell__body,
+		.edu__meta {
+			font-size: 8.5pt;
+		}
+
+		.edu__title {
+			font-size: 9pt;
+		}
+	}
+</style>

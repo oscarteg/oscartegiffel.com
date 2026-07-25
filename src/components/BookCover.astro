@@ -100,10 +100,8 @@ const spine = cover ? await getImage({ src: cover, width: 320 }) : undefined;
 		transform: rotateY(-90deg);
 	}
 
-	/* No jacket to take a colour from, so the fill has to carry it — and it
-	   can't go through the dimming above. Darkening a flat paper tone reads
-	   as a spine on light paper but sinks it into the page on dark, where the
-	   whole ramp has already inverted. The token flips instead. */
+	/* No jacket to take a colour from, so a flat fill carries it — and it
+	   can't go through the dimming above. */
 	.cover__spine--blank {
 		background-color: var(--spine-blank);
 		filter: none;

@@ -1,43 +1,44 @@
 ---
 /**
- * Halo dot + uppercase mono label. Signals availability / live status.
- * One of the system's two brand ornaments (the other is the square marker).
+ * Dot + uppercase label. `live` is the green availability dot; anything
+ * else (a draft, a scheduled post) takes the accent.
  */
 export type Props = {
-	label?: string | undefined;
-	showDot?: boolean | undefined;
-	accent?: boolean | undefined;
+	label: string;
+	tone?: "live" | "accent" | undefined;
 };
 
-const { label = "Available", showDot = true, accent = false } = Astro.props;
+const { label, tone = "accent" } = Astro.props;
 ---
 
-<span class:list={["status-badge", accent && "status-badge--accent"]}>
-  {showDot && <span class="status-badge__dot" aria-hidden="true"></span>}
+<span class:list={["status", `status--${tone}`]}>
+  <span class="status__dot" aria-hidden="true"></span>
   {label}
 </span>
 
 <style>
-	.status-badge {
+	.status {
 		display: inline-flex;
 		align-items: center;
-		gap: 9px;
-		font: var(--text-mono-sm);
-		letter-spacing: 0.1em;
+		gap: 8px;
+		font: var(--type-label-sm);
+		letter-spacing: var(--track-label);
 		text-transform: uppercase;
 		color: var(--text-muted);
 	}
 
-	.status-badge--accent {
-		color: var(--accent-fg);
+	.status__dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: currentColor;
 	}
 
-	.status-badge__dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		background: var(--accent);
-		/* The halo is a ring, not a shadow — elevation is never blurred here. */
-		box-shadow: 0 0 0 4px var(--accent-tint);
+	.status--live .status__dot {
+		background: var(--live);
+	}
+
+	.status--accent {
+		color: var(--accent-fg);
 	}
 </style>

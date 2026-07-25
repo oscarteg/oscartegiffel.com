@@ -1,0 +1,89 @@
+---
+/**
+ * The masthead: wordmark left, a row of uppercase links right. The current
+ * section reads in ink, the rest in body grey. No hamburger — the row wraps
+ * on narrow screens instead of hiding.
+ */
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+	href === "/" ? path === "/" : path.startsWith(href);
+
+const items = [
+	{ label: "Work", href: "/" },
+	{ label: "Writing", href: "/blog" },
+	{ label: "Books", href: "/books" },
+	{ label: "Taste", href: "/taste" },
+	{ label: "Resume", href: "/resume" },
+].map((item) => ({ ...item, active: isActive(item.href) }));
+---
+
+<header class="masthead">
+  <a href="/" class="wordmark">Oscar te Giffel<span class="wordmark__mark">®</span></a>
+  <nav class="masthead__nav" aria-label="Primary">
+    {
+      items.map((item) => (
+        <a href={item.href} aria-current={item.active ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<style>
+	.masthead {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 16px 24px;
+		padding: 28px 0;
+	}
+
+	.wordmark {
+		font: var(--type-label);
+		font-weight: var(--weight-semibold);
+		letter-spacing: var(--track-label-tight);
+		text-transform: uppercase;
+		color: var(--text-heading);
+		white-space: nowrap;
+	}
+
+	.wordmark__mark {
+		font-size: 8px;
+		vertical-align: super;
+	}
+
+	.masthead__nav {
+		margin-left: auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px 26px;
+		font: var(--type-label);
+		letter-spacing: var(--track-label-tight);
+		text-transform: uppercase;
+	}
+
+	.masthead__nav a {
+		color: var(--text-body);
+	}
+
+	.masthead__nav a:hover {
+		color: var(--text-meta);
+	}
+
+	.masthead__nav a[aria-current="page"] {
+		color: var(--text-heading);
+	}
+
+	@media (max-width: 640px) {
+		.masthead {
+			padding: 22px 0;
+		}
+
+		.masthead__nav {
+			margin-left: 0;
+			width: 100%;
+			gap: 10px 18px;
+		}
+	}
+</style>

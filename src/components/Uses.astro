@@ -1,16 +1,23 @@
 ---
 import { uses } from "../config";
-import SkillColumn from "./SkillColumn.astro";
+
+/**
+ * Two ruled columns of categories, each a label over a rule and a list of
+ * items separated by hairlines. Items with a one-liner keep it on the same
+ * line; longer notes drop underneath.
+ */
+const isShort = (description: string) => description.length <= 60;
 ---
 
 <div class="not-prose uses">
   {
     uses.map((category) => (
-      <div class="uses__column">
-        <SkillColumn title={category.title}>
+      <section class="category">
+        <h2 class="label category__label">{category.title}</h2>
+        <ul class="category__items">
           {category.items.map((item) => (
-            <div class="uses__item">
-              <h3>
+            <li class:list={["item", item.description && !isShort(item.description) && "item--stacked"]}>
+              <span class="item__name">
                 {item.href ? (
                   <a href={item.href} target="_blank" rel="noopener noreferrer">
                     {item.name} ↗
@@ -18,12 +25,12 @@ import SkillColumn from "./SkillColumn.astro";
                 ) : (
                   item.name
                 )}
-              </h3>
-              {item.description && <p>{item.description}</p>}
-            </div>
+              </span>
+              {item.description && <span class="item__note"> {item.description}</span>}
+            </li>
           ))}
-        </SkillColumn>
-      </div>
+        </ul>
+      </section>
     ))
   }
 </div>
@@ -33,43 +40,69 @@ import SkillColumn from "./SkillColumn.astro";
 	   letting them flow beats a grid full of holes. */
 	.uses {
 		width: 100%;
-		margin-top: 48px;
 		columns: 2;
-		column-gap: 40px;
+		column-gap: 64px;
 	}
 
-	.uses__column {
+	.category {
 		break-inside: avoid;
-		margin-bottom: 40px;
+		margin-bottom: 52px;
 	}
 
-	.uses__item {
-		display: block;
-	}
-
-	.uses__item h3 {
-		font: var(--text-small);
-		font-weight: var(--weight-semibold);
-		color: var(--text-heading);
+	.category__label {
+		padding-bottom: 12px;
 		margin: 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-strong);
 	}
 
-	.uses__item a {
+	.category__items {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.item {
+		padding: 14px 0;
+		border-bottom: var(--border-hairline-w) solid var(--border-soft);
+	}
+
+	.item:last-child {
+		border-bottom: none;
+	}
+
+	.item__name {
+		font: var(--type-item);
 		color: var(--text-heading);
-		text-decoration: none;
 	}
 
-	.uses__item a:hover {
-		color: var(--link-hover);
+	.item__name a {
+		color: inherit;
 	}
 
-	.uses__item p {
-		font: var(--text-small);
-		color: var(--text-muted);
-		margin: 2px 0 0;
+	.item__name a:hover {
+		color: var(--text-meta);
 	}
 
-	@media (max-width: 900px) {
+	.item__note {
+		font: var(--type-small);
+		font-size: 12.5px;
+		color: var(--text-meta);
+	}
+
+	.item__note::before {
+		content: "— ";
+	}
+
+	.item--stacked .item__note {
+		display: block;
+		margin-top: 5px;
+	}
+
+	.item--stacked .item__note::before {
+		content: none;
+	}
+
+	@media (max-width: 760px) {
 		.uses {
 			columns: 1;
 		}
