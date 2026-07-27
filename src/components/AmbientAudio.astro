@@ -152,12 +152,33 @@
 			(window as unknown as { webkitAudioContext?: typeof AudioContext })
 				.webkitAudioContext;
 
+		type Chord = { bass: number; triad: [number, number, number] };
+
 		const listeners = new Set<(playing: boolean) => void>();
 		let ctx: AudioContext | null = null;
 		let master: GainNode | null = null;
 		let delay: DelayNode | null = null;
+		let padVoices: OscillatorNode[] = [];
 		let playing = false;
-		let bellTimer = 0;
+		let schedulerTimer = 0;
+		let step = 0;
+		let nextStepTime = 0;
+		let melodyIndex = 3;
+
+		// I–V–vi–IV in C major — a warm, resolved four-bar loop.
+		const progression: Chord[] = [
+			{ bass: 65.41, triad: [130.81, 164.81, 196.0] },
+			{ bass: 98.0, triad: [196.0, 246.94, 293.66] },
+			{ bass: 110.0, triad: [220.0, 261.63, 329.63] },
+			{ bass: 87.31, triad: [174.61, 220.0, 261.63] },
+		];
+		// C-major pentatonic — consonant over every chord above, so no wrong notes.
+		const scale = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 587.33, 659.25];
+		const walk = [-2, -1, -1, 0, 1, 1, 2];
+
+		const beat = 60 / 72; // ~72 BPM
+		const stepDur = beat / 2; // eighth notes
+		const stepsPerBar = 8;
 
 		function emit(): void {
 			for (const listener of listeners) listener(playing);
@@ -166,79 +187,119 @@
 		function build(context: AudioContext): void {
 			const bus = context.createGain();
 			bus.gain.value = 0;
-			bus.connect(context.destination);
+			const comp = context.createDynamicsCompressor();
+			bus.connect(comp);
+			comp.connect(context.destination);
 			master = bus;
 
-			// Evolving pad: a few detuned voices through a slow-moving low-pass.
-			const filter = context.createBiquadFilter();
-			filter.type = "lowpass";
-			filter.frequency.value = 720;
-			filter.Q.value = 4;
-			const padGain = context.createGain();
-			padGain.gain.value = 0.5;
-			filter.connect(padGain);
-			padGain.connect(bus);
-
-			const voices = [110, 164.81, 220];
-			voices.forEach((frequency, index) => {
-				const osc = context.createOscillator();
-				osc.type = index === 2 ? "triangle" : "sine";
-				osc.frequency.value = frequency;
-				osc.detune.value = (index - 1) * 6;
-				const voiceGain = context.createGain();
-				voiceGain.gain.value = index === 0 ? 0.6 : 0.32;
-				osc.connect(voiceGain);
-				voiceGain.connect(filter);
-				osc.start();
-			});
-
-			const cutoffLfo = context.createOscillator();
-			cutoffLfo.type = "sine";
-			cutoffLfo.frequency.value = 0.05;
-			const cutoffDepth = context.createGain();
-			cutoffDepth.gain.value = 240;
-			cutoffLfo.connect(cutoffDepth);
-			cutoffDepth.connect(filter.frequency);
-			cutoffLfo.start();
-
-			const breathLfo = context.createOscillator();
-			breathLfo.type = "sine";
-			breathLfo.frequency.value = 0.08;
-			const breathDepth = context.createGain();
-			breathDepth.gain.value = 0.16;
-			breathLfo.connect(breathDepth);
-			breathDepth.connect(padGain.gain);
-			breathLfo.start();
-
-			// A little space for the bell notes.
+			// Shared space for the lead and bass.
 			const echo = context.createDelay(1);
-			echo.delayTime.value = 0.38;
+			echo.delayTime.value = 0.36;
 			const feedback = context.createGain();
-			feedback.gain.value = 0.32;
+			feedback.gain.value = 0.3;
 			echo.connect(feedback);
 			feedback.connect(echo);
 			echo.connect(bus);
 			delay = echo;
+
+			// Sustained chord pad through a warm low-pass; it glides between chords.
+			const filter = context.createBiquadFilter();
+			filter.type = "lowpass";
+			filter.frequency.value = 1200;
+			filter.Q.value = 2;
+			const padGain = context.createGain();
+			padGain.gain.value = 0.16;
+			filter.connect(padGain);
+			padGain.connect(bus);
+
+			const opening = progression[0];
+			const triad = opening ? opening.triad : [130.81, 164.81, 196.0];
+			padVoices = triad.map((frequency, index) => {
+				const osc = context.createOscillator();
+				osc.type = index === 0 ? "sine" : "triangle";
+				osc.frequency.value = frequency;
+				osc.detune.value = (index - 1) * 4;
+				const voiceGain = context.createGain();
+				voiceGain.gain.value = index === 0 ? 0.5 : 0.34;
+				osc.connect(voiceGain);
+				voiceGain.connect(filter);
+				osc.start();
+				return osc;
+			});
+
+			// A slow breath so held chords never sit perfectly still.
+			const breathLfo = context.createOscillator();
+			breathLfo.type = "sine";
+			breathLfo.frequency.value = 0.07;
+			const breathDepth = context.createGain();
+			breathDepth.gain.value = 0.05;
+			breathLfo.connect(breathDepth);
+			breathDepth.connect(padGain.gain);
+			breathLfo.start();
 		}
 
-		function playBell(): void {
-			if (!ctx || !master || !delay || !playing) return;
-			const notes = [220, 261.63, 293.66, 329.63, 392, 440, 523.25];
-			const frequency = notes[Math.floor(Math.random() * notes.length)] ?? 220;
+		/** One plucked voice with a soft attack and an exponential tail. */
+		function pluck(
+			frequency: number,
+			time: number,
+			type: OscillatorType,
+			peak: number,
+			release: number,
+			wet: boolean,
+		): void {
+			if (!ctx || !master) return;
 			const osc = ctx.createOscillator();
-			osc.type = "sine";
+			osc.type = type;
 			osc.frequency.value = frequency;
 			const gain = ctx.createGain();
-			const now = ctx.currentTime;
-			gain.gain.setValueAtTime(0, now);
-			gain.gain.linearRampToValueAtTime(0.16, now + 0.02);
-			gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.2);
+			gain.gain.setValueAtTime(0.0001, time);
+			gain.gain.linearRampToValueAtTime(peak, time + 0.012);
+			gain.gain.exponentialRampToValueAtTime(0.0001, time + release);
 			osc.connect(gain);
 			gain.connect(master);
-			gain.connect(delay);
-			osc.start(now);
-			osc.stop(now + 3.3);
-			bellTimer = window.setTimeout(playBell, 3200 + Math.random() * 4800);
+			if (wet && delay) gain.connect(delay);
+			osc.start(time);
+			osc.stop(time + release + 0.05);
+		}
+
+		function scheduleStep(index: number, time: number): void {
+			const bar = Math.floor(index / stepsPerBar) % progression.length;
+			const chord = progression[bar];
+			if (!chord) return;
+			const inBar = index % stepsPerBar;
+
+			if (inBar === 0) {
+				// Glide the pad to the new chord and land the bass root.
+				padVoices.forEach((osc, i) => {
+					const target = chord.triad[i];
+					if (target !== undefined) {
+						osc.frequency.setTargetAtTime(target, time, 0.25);
+					}
+				});
+				pluck(chord.bass, time, "sine", 0.13, 2.2, false);
+			} else if (inBar === 4) {
+				// A soft octave pulse mid-bar keeps a gentle sense of time.
+				pluck(chord.bass * 2, time, "sine", 0.06, 1.4, false);
+			}
+
+			// Melody: a pentatonic random walk with rests, so it phrases.
+			if (Math.random() < 0.62) {
+				const delta = walk[Math.floor(Math.random() * walk.length)] ?? 0;
+				melodyIndex = Math.min(Math.max(melodyIndex + delta, 0), scale.length - 1);
+				const note = scale[melodyIndex];
+				if (note !== undefined) pluck(note, time, "triangle", 0.1, 1.5, true);
+			}
+		}
+
+		function runScheduler(): void {
+			if (!ctx) return;
+			// Schedule everything a little ahead so timing stays tight.
+			while (nextStepTime < ctx.currentTime + 0.12) {
+				scheduleStep(step, nextStepTime);
+				nextStepTime += stepDur;
+				step += 1;
+			}
+			schedulerTimer = window.setTimeout(runScheduler, 25);
 		}
 
 		async function start(): Promise<boolean> {
@@ -254,8 +315,9 @@
 			const now = ctx.currentTime;
 			master.gain.cancelScheduledValues(now);
 			master.gain.setValueAtTime(master.gain.value, now);
-			master.gain.linearRampToValueAtTime(0.18, now + 1.4);
-			bellTimer = window.setTimeout(playBell, 1400 + Math.random() * 2000);
+			master.gain.linearRampToValueAtTime(0.8, now + 1.6);
+			nextStepTime = now + 0.15;
+			runScheduler();
 			emit();
 			return true;
 		}
@@ -263,7 +325,7 @@
 		function stop(): boolean {
 			if (!playing || !ctx || !master) return false;
 			playing = false;
-			window.clearTimeout(bellTimer);
+			window.clearTimeout(schedulerTimer);
 			const now = ctx.currentTime;
 			master.gain.cancelScheduledValues(now);
 			master.gain.setValueAtTime(master.gain.value, now);
