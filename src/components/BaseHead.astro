@@ -4,6 +4,7 @@ import { buildGraph } from "../json-ld";
 import type { Post } from "../models";
 import "../styles/global.css";
 import JsonLd from "./JsonLd.astro";
+import { ClientRouter } from "astro:transitions";
 
 export type Props = {
 	title?: string | undefined;
@@ -38,6 +39,9 @@ const jsonLdGraph = post
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+<!-- Client-side routing (View Transitions) so ambient audio survives navigation. -->
+<ClientRouter />
+
 <!--
   The design system themes on [data-theme], so the attribute has to exist
   before first paint or the page flashes light before going dark. Inline and
@@ -51,6 +55,8 @@ const jsonLdGraph = post
 		};
 		apply(query.matches);
 		query.addEventListener("change", (event) => apply(event.matches));
+		// ClientRouter swaps the document; re-assert the theme before paint.
+		document.addEventListener("astro:after-swap", () => apply(query.matches));
 	})();
 </script>
 

@@ -3,6 +3,8 @@ import BaseHead from "../components/BaseHead.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import { siteMetadata } from "../config";
 import type { Post, RailNavItem } from "../models";
+import AmbientAudio from "./AmbientAudio.astro";
+import CursorField from "./CursorField.astro";
 import RailNav from "./RailNav.astro";
 import StatusBadge from "./StatusBadge.astro";
 
@@ -43,6 +45,9 @@ const socials = siteMetadata.socials.filter(
   </head>
 
   <body>
+    <CursorField />
+    <AmbientAudio />
+
     <div class="shell">
       <!-- Identity / menu rail. No logo: the brand mark is the name in the grotesk. -->
       <aside class="rail">

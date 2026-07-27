@@ -1,0 +1,244 @@
+---
+/**
+ * CursorField — a faint field of soft shapes drifting behind all content and
+ * easing toward the pointer. Decorative only: hidden from assistive tech, off
+ * under `prefers-reduced-motion`, paused while the tab is hidden, and persisted
+ * across ClientRouter navigations so it never restarts. The palette is read from
+ * the Rams design tokens, so it follows light/dark automatically.
+ */
+---
+
+<canvas id="cursor-field" aria-hidden="true" transition:persist="cursor-field"></canvas>
+
+<style>
+	#cursor-field {
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	@media print {
+		#cursor-field {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	type Tone = "paper" | "ink" | "accent";
+
+	type Shape = {
+		/** Base position as a fraction of the viewport (0..1). */
+		x: number;
+		y: number;
+		/** Autonomous drift in viewport-fractions per second. */
+		vx: number;
+		vy: number;
+		/** Radius as a fraction of the viewport's shorter side. */
+		radius: number;
+		/** Parallax strength toward the pointer (0..1). */
+		depth: number;
+		tone: Tone;
+		alpha: number;
+		ring: boolean;
+		/** Eased pointer offset, in px. */
+		ox: number;
+		oy: number;
+	};
+
+	type Palette = Record<Tone, string>;
+
+	function hexToRgba(hex: string, alpha: number): string {
+		const clean = hex.replace("#", "").trim();
+		const value =
+			clean.length === 3
+				? clean
+						.split("")
+						.map((char) => char + char)
+						.join("")
+				: clean;
+		const r = Number.parseInt(value.slice(0, 2), 16) || 0;
+		const g = Number.parseInt(value.slice(2, 4), 16) || 0;
+		const b = Number.parseInt(value.slice(4, 6), 16) || 0;
+		return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+	}
+
+	function readPalette(): Palette {
+		const style = getComputedStyle(document.documentElement);
+		const read = (name: string, fallback: string): string =>
+			style.getPropertyValue(name).trim() || fallback;
+		return {
+			paper: read("--paper", "#efebe3"),
+			ink: read("--ink", "#1b1917"),
+			accent: read("--accent", "#dc4b12"),
+		};
+	}
+
+	function createShapes(): Shape[] {
+		// A small, hand-tuned set: enough to feel alive, few enough to stay cheap.
+		const specs: Array<{
+			x: number;
+			y: number;
+			radius: number;
+			depth: number;
+			tone: Tone;
+			alpha: number;
+			ring: boolean;
+		}> = [
+			{ x: 0.18, y: 0.22, radius: 0.34, depth: 0.9, tone: "accent", alpha: 0.05, ring: false },
+			{ x: 0.82, y: 0.28, radius: 0.28, depth: 0.6, tone: "ink", alpha: 0.045, ring: false },
+			{ x: 0.7, y: 0.75, radius: 0.4, depth: 1, tone: "accent", alpha: 0.04, ring: false },
+			{ x: 0.28, y: 0.8, radius: 0.3, depth: 0.75, tone: "ink", alpha: 0.05, ring: true },
+			{ x: 0.5, y: 0.46, radius: 0.5, depth: 0.4, tone: "ink", alpha: 0.03, ring: false },
+			{ x: 0.9, y: 0.6, radius: 0.22, depth: 0.85, tone: "accent", alpha: 0.055, ring: true },
+		];
+		return specs.map((spec) => ({
+			...spec,
+			vx: (Math.random() - 0.5) * 0.012,
+			vy: (Math.random() - 0.5) * 0.012,
+			ox: 0,
+			oy: 0,
+		}));
+	}
+
+	function initCursorField(): void {
+		const element = document.getElementById("cursor-field");
+		if (!(element instanceof HTMLCanvasElement)) return;
+		// The node is persisted across navigations; only wire it once.
+		if (element.dataset.ready === "true") return;
+		element.dataset.ready = "true";
+
+		const context = element.getContext("2d");
+		if (!context) return;
+
+		// Bind the narrowed, non-null handles so the render closures keep the types.
+		const canvas = element;
+		const ctx = context;
+
+		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const shapes = createShapes();
+		let palette = readPalette();
+
+		let width = 0;
+		let height = 0;
+		let raf = 0;
+		let last = 0;
+		// Pointer target, in px offset from the viewport centre.
+		let targetX = 0;
+		let targetY = 0;
+
+		function resize(): void {
+			const dpr = Math.min(window.devicePixelRatio || 1, 2);
+			width = window.innerWidth;
+			height = window.innerHeight;
+			canvas.width = Math.round(width * dpr);
+			canvas.height = Math.round(height * dpr);
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		}
+
+		function draw(): void {
+			ctx.clearRect(0, 0, width, height);
+			const min = Math.min(width, height);
+			for (const shape of shapes) {
+				const cx = shape.x * width + shape.ox;
+				const cy = shape.y * height + shape.oy;
+				const r = shape.radius * min;
+				const color = palette[shape.tone];
+				if (shape.ring) {
+					ctx.beginPath();
+					ctx.arc(cx, cy, r, 0, Math.PI * 2);
+					ctx.lineWidth = 1;
+					ctx.strokeStyle = hexToRgba(color, shape.alpha * 2.4);
+					ctx.stroke();
+				} else {
+					const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+					gradient.addColorStop(0, hexToRgba(color, shape.alpha));
+					gradient.addColorStop(1, hexToRgba(color, 0));
+					ctx.fillStyle = gradient;
+					ctx.beginPath();
+					ctx.arc(cx, cy, r, 0, Math.PI * 2);
+					ctx.fill();
+				}
+			}
+		}
+
+		function frame(now: number): void {
+			const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
+			last = now;
+			for (const shape of shapes) {
+				shape.x += shape.vx * dt;
+				shape.y += shape.vy * dt;
+				if (shape.x < -0.2) shape.x = 1.2;
+				if (shape.x > 1.2) shape.x = -0.2;
+				if (shape.y < -0.2) shape.y = 1.2;
+				if (shape.y > 1.2) shape.y = -0.2;
+				const wantX = targetX * shape.depth;
+				const wantY = targetY * shape.depth;
+				shape.ox += (wantX - shape.ox) * Math.min(dt * 3, 1);
+				shape.oy += (wantY - shape.oy) * Math.min(dt * 3, 1);
+			}
+			draw();
+			raf = window.requestAnimationFrame(frame);
+		}
+
+		function start(): void {
+			if (raf || reduceMotion.matches || document.hidden) return;
+			raf = window.requestAnimationFrame(frame);
+		}
+
+		function stop(): void {
+			if (raf) window.cancelAnimationFrame(raf);
+			raf = 0;
+			last = 0;
+		}
+
+		function renderStatic(): void {
+			for (const shape of shapes) {
+				shape.ox = 0;
+				shape.oy = 0;
+			}
+			draw();
+		}
+
+		resize();
+		window.addEventListener("pointermove", (event: PointerEvent) => {
+			targetX = (event.clientX / width - 0.5) * 60;
+			targetY = (event.clientY / height - 0.5) * 60;
+		}, { passive: true });
+		window.addEventListener("resize", () => {
+			resize();
+			if (reduceMotion.matches || document.hidden) renderStatic();
+		});
+		reduceMotion.addEventListener("change", () => {
+			if (reduceMotion.matches) {
+				stop();
+				renderStatic();
+			} else {
+				start();
+			}
+		});
+		// The site themes on the OS colour scheme, so refresh the palette with it.
+		window
+			.matchMedia("(prefers-color-scheme: dark)")
+			.addEventListener("change", () => {
+				palette = readPalette();
+				if (reduceMotion.matches || document.hidden) renderStatic();
+			});
+		document.addEventListener("astro:after-swap", () => {
+			palette = readPalette();
+		});
+		document.addEventListener("visibilitychange", () => {
+			if (document.hidden) stop();
+			else start();
+		});
+
+		if (reduceMotion.matches) renderStatic();
+		else start();
+	}
+
+	initCursorField();
+	document.addEventListener("astro:page-load", initCursorField);
+</script>

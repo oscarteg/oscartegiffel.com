@@ -1,0 +1,314 @@
+---
+/**
+ * AmbientAudio — a small Easter-egg button (top-right) that toggles a calm,
+ * generative Web Audio soundscape: a slowly evolving pad plus occasional soft
+ * pentatonic notes. Nothing is pre-recorded. The engine is a session singleton
+ * on `window` and the button is persisted across ClientRouter navigations, so
+ * the sound keeps playing as you move around the site.
+ */
+---
+
+<button
+	id="ambient-toggle"
+	type="button"
+	class="ambient"
+	aria-pressed="false"
+	aria-label="Play ambient sound"
+	title="Ambient sound"
+	transition:persist="ambient-audio"
+>
+	<span class="ambient__icons" aria-hidden="true">
+		<svg class="ambient__icon ambient__icon--muted" viewBox="0 0 24 24">
+			<path d="M11 5 6 9H3v6h3l5 4z" />
+			<path d="m16 9 5 6" />
+			<path d="m21 9-5 6" />
+		</svg>
+		<svg class="ambient__icon ambient__icon--on" viewBox="0 0 24 24">
+			<path d="M11 5 6 9H3v6h3l5 4z" />
+			<path class="ambient__wave" d="M15.5 8.5a5 5 0 0 1 0 7" />
+			<path class="ambient__wave" d="M18 6a9 9 0 0 1 0 12" />
+		</svg>
+	</span>
+</button>
+
+<style>
+	.ambient {
+		position: fixed;
+		top: 18px;
+		right: 18px;
+		z-index: 50;
+		display: grid;
+		place-items: center;
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		color: var(--text-meta);
+		background: color-mix(in srgb, var(--surface-card) 72%, transparent);
+		border: var(--border-hairline-w) solid var(--border-hairline);
+		border-radius: var(--radius);
+		cursor: pointer;
+		-webkit-backdrop-filter: blur(6px);
+		backdrop-filter: blur(6px);
+		transition:
+			color var(--dur) var(--ease),
+			background-color var(--dur) var(--ease),
+			border-color var(--dur) var(--ease),
+			transform var(--dur) var(--ease);
+	}
+
+	.ambient:hover {
+		color: var(--text-heading);
+		border-color: var(--border-strong);
+	}
+
+	.ambient:active {
+		transform: scale(0.96);
+	}
+
+	.ambient:focus-visible {
+		outline: var(--border-strong-w) solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	.ambient[aria-pressed="true"] {
+		color: var(--accent);
+		border-color: var(--accent);
+		background: var(--accent-tint);
+	}
+
+	.ambient__icons {
+		position: relative;
+		width: 18px;
+		height: 18px;
+	}
+
+	.ambient__icon {
+		position: absolute;
+		inset: 0;
+		width: 18px;
+		height: 18px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		transition:
+			opacity var(--dur-move) var(--ease),
+			transform var(--dur-move) var(--ease),
+			filter var(--dur-move) var(--ease);
+	}
+
+	/* Icon cross-fade — scale 0.25→1, opacity 0→1, blur 4px→0 on the firm ease. */
+	.ambient__icon--on {
+		opacity: 0;
+		transform: scale(0.25);
+		filter: blur(4px);
+	}
+
+	.ambient[aria-pressed="true"] .ambient__icon--muted {
+		opacity: 0;
+		transform: scale(0.25);
+		filter: blur(4px);
+	}
+
+	.ambient[aria-pressed="true"] .ambient__icon--on {
+		opacity: 1;
+		transform: scale(1);
+		filter: blur(0);
+	}
+
+	/* The sound waves breathe only while playing, and only if motion is welcome. */
+	@media (prefers-reduced-motion: no-preference) {
+		.ambient[aria-pressed="true"] .ambient__wave {
+			animation: ambient-wave 1.9s var(--ease) infinite;
+		}
+
+		.ambient__wave:last-of-type {
+			animation-delay: 0.2s;
+		}
+	}
+
+	@keyframes ambient-wave {
+		0%,
+		100% {
+			opacity: 0.35;
+		}
+		50% {
+			opacity: 1;
+		}
+	}
+</style>
+
+<script>
+	type AmbientEngine = {
+		toggle: () => Promise<boolean>;
+		isPlaying: () => boolean;
+		subscribe: (listener: (playing: boolean) => void) => void;
+	};
+
+	function createEngine(): AmbientEngine {
+		const AudioCtor =
+			window.AudioContext ??
+			(window as unknown as { webkitAudioContext?: typeof AudioContext })
+				.webkitAudioContext;
+
+		const listeners = new Set<(playing: boolean) => void>();
+		let ctx: AudioContext | null = null;
+		let master: GainNode | null = null;
+		let delay: DelayNode | null = null;
+		let playing = false;
+		let bellTimer = 0;
+
+		function emit(): void {
+			for (const listener of listeners) listener(playing);
+		}
+
+		function build(context: AudioContext): void {
+			const bus = context.createGain();
+			bus.gain.value = 0;
+			bus.connect(context.destination);
+			master = bus;
+
+			// Evolving pad: a few detuned voices through a slow-moving low-pass.
+			const filter = context.createBiquadFilter();
+			filter.type = "lowpass";
+			filter.frequency.value = 720;
+			filter.Q.value = 4;
+			const padGain = context.createGain();
+			padGain.gain.value = 0.5;
+			filter.connect(padGain);
+			padGain.connect(bus);
+
+			const voices = [110, 164.81, 220];
+			voices.forEach((frequency, index) => {
+				const osc = context.createOscillator();
+				osc.type = index === 2 ? "triangle" : "sine";
+				osc.frequency.value = frequency;
+				osc.detune.value = (index - 1) * 6;
+				const voiceGain = context.createGain();
+				voiceGain.gain.value = index === 0 ? 0.6 : 0.32;
+				osc.connect(voiceGain);
+				voiceGain.connect(filter);
+				osc.start();
+			});
+
+			const cutoffLfo = context.createOscillator();
+			cutoffLfo.type = "sine";
+			cutoffLfo.frequency.value = 0.05;
+			const cutoffDepth = context.createGain();
+			cutoffDepth.gain.value = 240;
+			cutoffLfo.connect(cutoffDepth);
+			cutoffDepth.connect(filter.frequency);
+			cutoffLfo.start();
+
+			const breathLfo = context.createOscillator();
+			breathLfo.type = "sine";
+			breathLfo.frequency.value = 0.08;
+			const breathDepth = context.createGain();
+			breathDepth.gain.value = 0.16;
+			breathLfo.connect(breathDepth);
+			breathDepth.connect(padGain.gain);
+			breathLfo.start();
+
+			// A little space for the bell notes.
+			const echo = context.createDelay(1);
+			echo.delayTime.value = 0.38;
+			const feedback = context.createGain();
+			feedback.gain.value = 0.32;
+			echo.connect(feedback);
+			feedback.connect(echo);
+			echo.connect(bus);
+			delay = echo;
+		}
+
+		function playBell(): void {
+			if (!ctx || !master || !delay || !playing) return;
+			const notes = [220, 261.63, 293.66, 329.63, 392, 440, 523.25];
+			const frequency = notes[Math.floor(Math.random() * notes.length)] ?? 220;
+			const osc = ctx.createOscillator();
+			osc.type = "sine";
+			osc.frequency.value = frequency;
+			const gain = ctx.createGain();
+			const now = ctx.currentTime;
+			gain.gain.setValueAtTime(0, now);
+			gain.gain.linearRampToValueAtTime(0.16, now + 0.02);
+			gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.2);
+			osc.connect(gain);
+			gain.connect(master);
+			gain.connect(delay);
+			osc.start(now);
+			osc.stop(now + 3.3);
+			bellTimer = window.setTimeout(playBell, 3200 + Math.random() * 4800);
+		}
+
+		async function start(): Promise<boolean> {
+			if (playing) return true;
+			if (!AudioCtor) return false;
+			if (!ctx) {
+				ctx = new AudioCtor();
+				build(ctx);
+			}
+			await ctx.resume();
+			if (!master) return false;
+			playing = true;
+			const now = ctx.currentTime;
+			master.gain.cancelScheduledValues(now);
+			master.gain.setValueAtTime(master.gain.value, now);
+			master.gain.linearRampToValueAtTime(0.18, now + 1.4);
+			bellTimer = window.setTimeout(playBell, 1400 + Math.random() * 2000);
+			emit();
+			return true;
+		}
+
+		function stop(): boolean {
+			if (!playing || !ctx || !master) return false;
+			playing = false;
+			window.clearTimeout(bellTimer);
+			const now = ctx.currentTime;
+			master.gain.cancelScheduledValues(now);
+			master.gain.setValueAtTime(master.gain.value, now);
+			master.gain.linearRampToValueAtTime(0, now + 0.6);
+			emit();
+			return false;
+		}
+
+		return {
+			toggle: () => (playing ? Promise.resolve(stop()) : start()),
+			isPlaying: () => playing,
+			subscribe: (listener) => {
+				listeners.add(listener);
+			},
+		};
+	}
+
+	function getEngine(): AmbientEngine {
+		const store = window as unknown as { __ambientEngine?: AmbientEngine };
+		if (!store.__ambientEngine) store.__ambientEngine = createEngine();
+		return store.__ambientEngine;
+	}
+
+	function initAmbientToggle(): void {
+		const button = document.getElementById("ambient-toggle");
+		if (!(button instanceof HTMLButtonElement)) return;
+		// Persisted across navigations; wire the click and subscription once.
+		if (button.dataset.ready === "true") return;
+		button.dataset.ready = "true";
+
+		const engine = getEngine();
+		const sync = (playing: boolean): void => {
+			button.setAttribute("aria-pressed", String(playing));
+			button.setAttribute(
+				"aria-label",
+				playing ? "Stop ambient sound" : "Play ambient sound",
+			);
+		};
+		engine.subscribe(sync);
+		sync(engine.isPlaying());
+		button.addEventListener("click", () => {
+			void engine.toggle();
+		});
+	}
+
+	initAmbientToggle();
+	document.addEventListener("astro:page-load", initAmbientToggle);
+</script>
