@@ -88,17 +88,22 @@
 			alpha: number;
 			ring: boolean;
 		}> = [
-			{ x: 0.18, y: 0.22, radius: 0.34, depth: 0.9, tone: "accent", alpha: 0.05, ring: false },
-			{ x: 0.82, y: 0.28, radius: 0.28, depth: 0.6, tone: "ink", alpha: 0.045, ring: false },
-			{ x: 0.7, y: 0.75, radius: 0.4, depth: 1, tone: "accent", alpha: 0.04, ring: false },
-			{ x: 0.28, y: 0.8, radius: 0.3, depth: 0.75, tone: "ink", alpha: 0.05, ring: true },
-			{ x: 0.5, y: 0.46, radius: 0.5, depth: 0.4, tone: "ink", alpha: 0.03, ring: false },
-			{ x: 0.9, y: 0.6, radius: 0.22, depth: 0.85, tone: "accent", alpha: 0.055, ring: true },
+			{ x: 0.15, y: 0.2, radius: 0.36, depth: 0.95, tone: "accent", alpha: 0.09, ring: false },
+			{ x: 0.85, y: 0.24, radius: 0.3, depth: 0.65, tone: "ink", alpha: 0.07, ring: false },
+			{ x: 0.72, y: 0.74, radius: 0.42, depth: 1, tone: "accent", alpha: 0.075, ring: false },
+			{ x: 0.26, y: 0.8, radius: 0.32, depth: 0.8, tone: "ink", alpha: 0.08, ring: true },
+			{ x: 0.5, y: 0.44, radius: 0.55, depth: 0.4, tone: "ink", alpha: 0.05, ring: false },
+			{ x: 0.92, y: 0.6, radius: 0.24, depth: 0.9, tone: "accent", alpha: 0.1, ring: true },
+			{ x: 0.08, y: 0.62, radius: 0.26, depth: 0.7, tone: "accent", alpha: 0.08, ring: false },
+			{ x: 0.4, y: 0.15, radius: 0.2, depth: 1.1, tone: "ink", alpha: 0.07, ring: true },
+			{ x: 0.6, y: 0.9, radius: 0.22, depth: 0.85, tone: "accent", alpha: 0.09, ring: false },
+			{ x: 0.35, y: 0.55, radius: 0.3, depth: 0.55, tone: "ink", alpha: 0.06, ring: false },
+			{ x: 0.78, y: 0.42, radius: 0.18, depth: 1, tone: "accent", alpha: 0.1, ring: true },
 		];
 		return specs.map((spec) => ({
 			...spec,
-			vx: (Math.random() - 0.5) * 0.012,
-			vy: (Math.random() - 0.5) * 0.012,
+			vx: (Math.random() - 0.5) * 0.02,
+			vy: (Math.random() - 0.5) * 0.02,
 			ox: 0,
 			oy: 0,
 		}));
@@ -205,8 +210,8 @@
 
 		resize();
 		window.addEventListener("pointermove", (event: PointerEvent) => {
-			targetX = (event.clientX / width - 0.5) * 60;
-			targetY = (event.clientY / height - 0.5) * 60;
+			targetX = (event.clientX / width - 0.5) * 100;
+			targetY = (event.clientY / height - 0.5) * 100;
 		}, { passive: true });
 		window.addEventListener("resize", () => {
 			resize();
