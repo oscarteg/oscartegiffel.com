@@ -1,10 +1,12 @@
 ---
 /**
- * CursorField — a faint field of soft shapes drifting behind all content and
- * easing toward the pointer. Decorative only: hidden from assistive tech, off
- * under `prefers-reduced-motion`, paused while the tab is hidden, and persisted
- * across ClientRouter navigations so it never restarts. The palette is read from
- * the Rams design tokens, so it follows light/dark automatically.
+ * CursorField — a full-viewport WebGL2 ordered-dither field behind all content,
+ * in the spirit of paper-design's dithered backgrounds: animated, domain-warped
+ * fBm noise quantised through a Bayer dither into a fine grid of ink dots over a
+ * transparent canvas (so the real paper shows through), disturbed locally by the
+ * pointer. Decorative only — hidden from assistive tech, static under
+ * `prefers-reduced-motion`, paused while the tab is hidden, persisted across
+ * navigations, and its dot colour read from the Rams tokens so it follows theme.
  */
 ---
 
@@ -28,164 +30,182 @@
 </style>
 
 <script>
-	type Tone = "paper" | "ink" | "accent";
+	type Rgb = [number, number, number];
 
-	type Shape = {
-		/** Base position as a fraction of the viewport (0..1). */
-		x: number;
-		y: number;
-		/** Autonomous drift in viewport-fractions per second. */
-		vx: number;
-		vy: number;
-		/** Radius as a fraction of the viewport's shorter side. */
-		radius: number;
-		/** Parallax strength toward the pointer (0..1). */
-		depth: number;
-		tone: Tone;
-		alpha: number;
-		ring: boolean;
-		/** Eased pointer offset, in px. */
-		ox: number;
-		oy: number;
-	};
-
-	type Palette = Record<Tone, string>;
-
-	function hexToRgba(hex: string, alpha: number): string {
+	function hexToRgb(hex: string, fallback: Rgb): Rgb {
 		const clean = hex.replace("#", "").trim();
-		const value =
-			clean.length === 3
-				? clean
-						.split("")
-						.map((char) => char + char)
-						.join("")
-				: clean;
-		const r = Number.parseInt(value.slice(0, 2), 16) || 0;
-		const g = Number.parseInt(value.slice(2, 4), 16) || 0;
-		const b = Number.parseInt(value.slice(4, 6), 16) || 0;
-		return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+		const value = clean.length === 3 ? clean.replace(/(.)/g, "$1$1") : clean;
+		if (value.length < 6) return fallback;
+		const r = Number.parseInt(value.slice(0, 2), 16);
+		const g = Number.parseInt(value.slice(2, 4), 16);
+		const b = Number.parseInt(value.slice(4, 6), 16);
+		if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) return fallback;
+		return [r / 255, g / 255, b / 255];
 	}
 
-	function readPalette(): Palette {
+	function readPalette(): { ink: Rgb; accent: Rgb } {
 		const style = getComputedStyle(document.documentElement);
-		const read = (name: string, fallback: string): string =>
-			style.getPropertyValue(name).trim() || fallback;
 		return {
-			paper: read("--paper", "#efebe3"),
-			ink: read("--ink", "#1b1917"),
-			accent: read("--accent", "#dc4b12"),
+			ink: hexToRgb(style.getPropertyValue("--ink").trim(), [0.11, 0.1, 0.09]),
+			accent: hexToRgb(style.getPropertyValue("--accent").trim(), [0.86, 0.29, 0.07]),
 		};
 	}
 
-	function createShapes(): Shape[] {
-		// A small, hand-tuned set: enough to feel alive, few enough to stay cheap.
-		const specs: Array<{
-			x: number;
-			y: number;
-			radius: number;
-			depth: number;
-			tone: Tone;
-			alpha: number;
-			ring: boolean;
-		}> = [
-			{ x: 0.15, y: 0.2, radius: 0.36, depth: 0.95, tone: "accent", alpha: 0.09, ring: false },
-			{ x: 0.85, y: 0.24, radius: 0.3, depth: 0.65, tone: "ink", alpha: 0.07, ring: false },
-			{ x: 0.72, y: 0.74, radius: 0.42, depth: 1, tone: "accent", alpha: 0.075, ring: false },
-			{ x: 0.26, y: 0.8, radius: 0.32, depth: 0.8, tone: "ink", alpha: 0.08, ring: true },
-			{ x: 0.5, y: 0.44, radius: 0.55, depth: 0.4, tone: "ink", alpha: 0.05, ring: false },
-			{ x: 0.92, y: 0.6, radius: 0.24, depth: 0.9, tone: "accent", alpha: 0.1, ring: true },
-			{ x: 0.08, y: 0.62, radius: 0.26, depth: 0.7, tone: "accent", alpha: 0.08, ring: false },
-			{ x: 0.4, y: 0.15, radius: 0.2, depth: 1.1, tone: "ink", alpha: 0.07, ring: true },
-			{ x: 0.6, y: 0.9, radius: 0.22, depth: 0.85, tone: "accent", alpha: 0.09, ring: false },
-			{ x: 0.35, y: 0.55, radius: 0.3, depth: 0.55, tone: "ink", alpha: 0.06, ring: false },
-			{ x: 0.78, y: 0.42, radius: 0.18, depth: 1, tone: "accent", alpha: 0.1, ring: true },
-		];
-		return specs.map((spec) => ({
-			...spec,
-			vx: (Math.random() - 0.5) * 0.02,
-			vy: (Math.random() - 0.5) * 0.02,
-			ox: 0,
-			oy: 0,
-		}));
-	}
+	const VERT = `#version 300 es
+in vec2 a_position;
+void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
+
+	const FRAG = `#version 300 es
+precision highp float;
+out vec4 fragColor;
+uniform vec2 u_resolution;
+uniform float u_time;
+uniform vec2 u_mouse;
+uniform vec3 u_ink;
+uniform vec3 u_accent;
+uniform float u_cell;
+uniform float u_strength;
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
+float noise(vec2 p){
+	vec2 i = floor(p), f = fract(p);
+	vec2 u = f * f * (3.0 - 2.0 * f);
+	return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+	           mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
+}
+float fbm(vec2 p){
+	float a = 0.5, s = 0.0;
+	for (int i = 0; i < 5; i++){ s += a * noise(p); p = p * 2.02 + 7.0; a *= 0.5; }
+	return s;
+}
+const float bayer[16] = float[16](
+	0.0, 8.0, 2.0, 10.0, 12.0, 4.0, 14.0, 6.0,
+	3.0, 11.0, 1.0, 9.0, 15.0, 7.0, 13.0, 5.0
+);
+float ordered(vec2 cell){
+	int x = int(mod(cell.x, 4.0));
+	int y = int(mod(cell.y, 4.0));
+	return (bayer[y * 4 + x] + 0.5) / 16.0;
+}
+void main(){
+	vec2 frag = gl_FragCoord.xy;
+	vec2 uv = frag / u_resolution;
+	float aspect = u_resolution.x / u_resolution.y;
+	vec2 p = vec2(uv.x * aspect, uv.y);
+	float t = u_time * 0.05;
+	vec2 warp = vec2(fbm(p * 2.0 + t), fbm(p * 2.0 - t + 5.0));
+	float n = fbm(p * 3.0 + warp * 0.6 + vec2(t, -t));
+	float v = smoothstep(0.32, 0.72, n);
+	vec2 m = vec2(u_mouse.x * aspect, u_mouse.y);
+	float near = smoothstep(0.35, 0.0, distance(p, m));
+	v += near * 0.35;
+	vec2 cell = floor(frag / u_cell);
+	vec2 local = (frag - (cell + 0.5) * u_cell) / u_cell;
+	float thr = ordered(cell);
+	float on = smoothstep(thr - 0.08, thr + 0.08, v);
+	float d = length(local) * 2.0;
+	float aa = fwidth(d) + 0.02;
+	float disk = 1.0 - smoothstep(0.72 - aa, 0.72 + aa, d);
+	vec3 color = mix(u_ink, u_accent, near * 0.5);
+	fragColor = vec4(color, on * disk * u_strength);
+}`;
 
 	function initCursorField(): void {
 		const element = document.getElementById("cursor-field");
 		if (!(element instanceof HTMLCanvasElement)) return;
-		// The node is persisted across navigations; only wire it once.
 		if (element.dataset.ready === "true") return;
 		element.dataset.ready = "true";
 
-		const context = element.getContext("2d");
+		const context = element.getContext("webgl2", {
+			alpha: true,
+			premultipliedAlpha: false,
+			// Keep the last frame so the static (reduced-motion) render persists.
+			preserveDrawingBuffer: true,
+		});
 		if (!context) return;
-
-		// Bind the narrowed, non-null handles so the render closures keep the types.
+		// Bind the narrowed, non-null handles so the closures keep the types.
+		const gl = context;
 		const canvas = element;
-		const ctx = context;
+
+		function build(ctx: WebGL2RenderingContext): WebGLProgram | null {
+			const compile = (type: number, src: string): WebGLShader | null => {
+				const shader = ctx.createShader(type);
+				if (!shader) return null;
+				ctx.shaderSource(shader, src);
+				ctx.compileShader(shader);
+				return ctx.getShaderParameter(shader, ctx.COMPILE_STATUS) ? shader : null;
+			};
+			const vs = compile(ctx.VERTEX_SHADER, VERT);
+			const fs = compile(ctx.FRAGMENT_SHADER, FRAG);
+			if (!vs || !fs) return null;
+			const created = ctx.createProgram();
+			if (!created) return null;
+			ctx.attachShader(created, vs);
+			ctx.attachShader(created, fs);
+			ctx.linkProgram(created);
+			return ctx.getProgramParameter(created, ctx.LINK_STATUS) ? created : null;
+		}
+
+		const program = build(gl);
+		if (!program) return;
+		gl.useProgram(program);
+
+		const buffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+		gl.bufferData(
+			gl.ARRAY_BUFFER,
+			new Float32Array([-1, -1, 3, -1, -1, 3]),
+			gl.STATIC_DRAW,
+		);
+		const position = gl.getAttribLocation(program, "a_position");
+		gl.enableVertexAttribArray(position);
+		gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+		const uniform = (name: string) => gl.getUniformLocation(program, name);
+		const uResolution = uniform("u_resolution");
+		const uTime = uniform("u_time");
+		const uMouse = uniform("u_mouse");
+		const uInk = uniform("u_ink");
+		const uAccent = uniform("u_accent");
+		const uCell = uniform("u_cell");
+		const uStrength = uniform("u_strength");
+
+		gl.enable(gl.BLEND);
+		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
 		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-		const shapes = createShapes();
 		let palette = readPalette();
-
 		let width = 0;
 		let height = 0;
+		let dpr = 1;
+		let mouseX = 0.5;
+		let mouseY = 0.5;
 		let raf = 0;
-		let last = 0;
-		// Pointer target, in px offset from the viewport centre.
-		let targetX = 0;
-		let targetY = 0;
+		const started = performance.now();
 
 		function resize(): void {
-			const dpr = Math.min(window.devicePixelRatio || 1, 2);
+			dpr = Math.min(window.devicePixelRatio || 1, 2);
 			width = window.innerWidth;
 			height = window.innerHeight;
 			canvas.width = Math.round(width * dpr);
 			canvas.height = Math.round(height * dpr);
-			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+			gl.viewport(0, 0, canvas.width, canvas.height);
 		}
 
-		function draw(): void {
-			ctx.clearRect(0, 0, width, height);
-			const min = Math.min(width, height);
-			for (const shape of shapes) {
-				const cx = shape.x * width + shape.ox;
-				const cy = shape.y * height + shape.oy;
-				const r = shape.radius * min;
-				const color = palette[shape.tone];
-				if (shape.ring) {
-					ctx.beginPath();
-					ctx.arc(cx, cy, r, 0, Math.PI * 2);
-					ctx.lineWidth = 1;
-					ctx.strokeStyle = hexToRgba(color, shape.alpha * 2.4);
-					ctx.stroke();
-				} else {
-					const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-					gradient.addColorStop(0, hexToRgba(color, shape.alpha));
-					gradient.addColorStop(1, hexToRgba(color, 0));
-					ctx.fillStyle = gradient;
-					ctx.beginPath();
-					ctx.arc(cx, cy, r, 0, Math.PI * 2);
-					ctx.fill();
-				}
-			}
+		function render(now: number): void {
+			gl.uniform2f(uResolution, canvas.width, canvas.height);
+			gl.uniform1f(uTime, (now - started) / 1000);
+			gl.uniform2f(uMouse, mouseX, mouseY);
+			gl.uniform3f(uInk, palette.ink[0], palette.ink[1], palette.ink[2]);
+			gl.uniform3f(uAccent, palette.accent[0], palette.accent[1], palette.accent[2]);
+			gl.uniform1f(uCell, 5 * dpr);
+			gl.uniform1f(uStrength, 0.55);
+			gl.clearColor(0, 0, 0, 0);
+			gl.clear(gl.COLOR_BUFFER_BIT);
+			gl.drawArrays(gl.TRIANGLES, 0, 3);
 		}
 
 		function frame(now: number): void {
-			const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
-			last = now;
-			for (const shape of shapes) {
-				shape.x += shape.vx * dt;
-				shape.y += shape.vy * dt;
-				if (shape.x < -0.2) shape.x = 1.2;
-				if (shape.x > 1.2) shape.x = -0.2;
-				if (shape.y < -0.2) shape.y = 1.2;
-				if (shape.y > 1.2) shape.y = -0.2;
-				const wantX = targetX * shape.depth;
-				const wantY = targetY * shape.depth;
-				shape.ox += (wantX - shape.ox) * Math.min(dt * 3, 1);
-				shape.oy += (wantY - shape.oy) * Math.min(dt * 3, 1);
-			}
-			draw();
+			render(now);
 			raf = window.requestAnimationFrame(frame);
 		}
 
@@ -197,40 +217,35 @@
 		function stop(): void {
 			if (raf) window.cancelAnimationFrame(raf);
 			raf = 0;
-			last = 0;
-		}
-
-		function renderStatic(): void {
-			for (const shape of shapes) {
-				shape.ox = 0;
-				shape.oy = 0;
-			}
-			draw();
 		}
 
 		resize();
-		window.addEventListener("pointermove", (event: PointerEvent) => {
-			targetX = (event.clientX / width - 0.5) * 100;
-			targetY = (event.clientY / height - 0.5) * 100;
-		}, { passive: true });
+		render(started);
+		window.addEventListener(
+			"pointermove",
+			(event: PointerEvent) => {
+				mouseX = event.clientX / width;
+				mouseY = 1 - event.clientY / height;
+			},
+			{ passive: true },
+		);
 		window.addEventListener("resize", () => {
 			resize();
-			if (reduceMotion.matches || document.hidden) renderStatic();
+			if (reduceMotion.matches || document.hidden) render(performance.now());
 		});
 		reduceMotion.addEventListener("change", () => {
 			if (reduceMotion.matches) {
 				stop();
-				renderStatic();
+				render(performance.now());
 			} else {
 				start();
 			}
 		});
-		// The site themes on the OS colour scheme, so refresh the palette with it.
 		window
 			.matchMedia("(prefers-color-scheme: dark)")
 			.addEventListener("change", () => {
 				palette = readPalette();
-				if (reduceMotion.matches || document.hidden) renderStatic();
+				if (reduceMotion.matches || document.hidden) render(performance.now());
 			});
 		document.addEventListener("astro:after-swap", () => {
 			palette = readPalette();
@@ -240,8 +255,7 @@
 			else start();
 		});
 
-		if (reduceMotion.matches) renderStatic();
-		else start();
+		if (!reduceMotion.matches) start();
 	}
 
 	initCursorField();
