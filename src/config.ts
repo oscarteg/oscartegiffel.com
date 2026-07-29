@@ -199,6 +199,11 @@ export const uses: UseCategory[] = [
 		title: "Workstation",
 		items: [
 			{ name: "MacBook Pro M4 16-inch 2024" },
+			{
+				name: "UGREEN Revodok Max 213",
+				description:
+					"13-in-1 Thunderbolt 4 dock, 40 Gbps — dual 4K at 60 Hz or single 8K.",
+			},
 			{ name: "LG Ergo 32UN880", description: "Monitor." },
 			{ name: "Samsung Odyssey G7 LS32BG700EUXEN", description: "Monitor." },
 			{ name: "Keychron Q10" },
