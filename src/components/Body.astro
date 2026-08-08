@@ -42,6 +42,7 @@ const socials = siteMetadata.socials.filter(
 <html lang="en" class="scroll-smooth antialiased">
   <head>
     <BaseHead title={title} description={description} post={post} />
+    <slot name="head" />
   </head>
 
   <body>

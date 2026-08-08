@@ -12,6 +12,10 @@ type Props = {
 	frontmatter?: {
 		title?: string;
 		description?: string;
+		/** Title-page eyebrow, printed above the title on an edition page. */
+		subtitle?: string;
+		/** Edition date. Its presence is what turns a page into a title page. */
+		edition?: string;
 		toc?: boolean;
 		markdownUrl?: string;
 		/** Pins each `##` group label while its section scrolls past. */
@@ -33,12 +37,27 @@ const description =
 	propsDescription || frontmatter?.description || SITE_DESCRIPTION;
 const toc = frontmatter?.toc === true;
 const markdownUrl = frontmatter?.markdownUrl;
+const subtitle = frontmatter?.subtitle;
+const edition = frontmatter?.edition;
 ---
 
 <Body title={title} description={description} headings={headings} toc={toc} post={post}>
+  {markdownUrl && <Fragment slot="head"><link rel="alternate" type="text/markdown" href={new URL(markdownUrl, Astro.site).href} /></Fragment>}
+
   <!-- The shell owns the <main> landmark; this is just the prose scope. -->
   <div class:list={[prose && "prose", frontmatter?.stickyGroups && "prose--sticky-groups"]}>
     <article class="reading">
+      {
+        /* An edition date turns the page into a title page: eyebrow and
+           edition stamp printed above the title. */
+        edition && (
+          <Fragment>
+            {subtitle && <p class="reading__subtitle">{subtitle}</p>}
+            <p class="reading__edition">First edition · {edition}</p>
+          </Fragment>
+        )
+      }
+
       {
         title && (
           <div class="reading__head">
@@ -69,6 +88,22 @@ const markdownUrl = frontmatter?.markdownUrl;
 	.reading {
 		width: 100%;
 		max-width: 720px;
+	}
+
+	/* Title-page chrome. Same kicker voice as the rail: type and rules only,
+	   no box, no colour of its own. */
+	.reading__subtitle {
+		font: var(--text-mono-sm);
+		color: var(--text-muted);
+		margin: 0 0 4px;
+	}
+
+	.reading__edition {
+		font: var(--text-kicker);
+		letter-spacing: var(--track-kicker);
+		text-transform: uppercase;
+		color: var(--text-meta);
+		margin: 0 0 16px;
 	}
 
 	.reading__head {
