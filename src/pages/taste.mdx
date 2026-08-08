@@ -236,4 +236,68 @@ The most important work isn't always the most visible. Sometimes the greatest im
 
 Think in systems, not features.
 
+## Chapter 6 — Concrete Taste
+
+*This chapter is a working draft — I am still editing it.*
+
+### 6:1 Prefer strict TypeScript, ban `any` and enums
+
+I run TypeScript in strict mode on every project. `any` is a type-system lie — it silences the compiler and pushes errors into runtime. Enums are a leaky abstraction that compile to objects you can't easily introspect; union types and `as const` objects do the same job with less magic.
+
+If you can't type it without `any`, that's a signal the design needs work, not a reason to opt out of safety.
+
+### 6:2 Named exports only
+
+I never use default exports. Named exports make refactoring reliable — the editor finds every reference without guesswork, and the module's public surface is explicit. Default exports encourage inconsistent naming across import sites and hide what a module actually exposes.
+
+If a module exports one thing, name it and export it by name.
+
+### 6:3 Named function components, never arrow assignments
+
+I write React components as named function declarations. Arrow-assigned components lose their name in stack traces and devtools, which makes debugging harder. Named functions are also easier to move, split, and test in isolation.
+
+`const Foo = () => {}` looks like a component but behaves like an anonymous function. `function Foo() {}` is unambiguous.
+
+### 6:4 Type aliases over interfaces
+
+I use `type` for everything. Interfaces were designed for declaration merging — a feature I almost never need and occasionally find surprising. Type aliases are more consistent, support unions and intersections naturally, and compose the same way across the entire codebase.
+
+When the whole team uses one form, the codebase is easier to read.
+
+### 6:5 Parse at the boundary, don't validate inside
+
+I validate at system boundaries — network responses, form inputs, environment variables — using Valibot schemas. Once data passes that boundary, the rest of the code treats it as fully typed and asks no further questions.
+
+Scattering `if (x !== undefined)` guards through business logic means the parsing failed: something unknown entered the system and you're managing it with runtime checks instead of types.
+
+### 6:6 Integration tests over unit tests
+
+I test user behaviour, not implementation details. An integration test that exercises a full slice of the system — from input to output — gives me confidence that the feature works. A unit test that checks a private function gives me confidence that the function works, which is rarely the thing I care about.
+
+Unit tests make refactoring harder; integration tests make it safer.
+
+### 6:7 Self-documenting code first, TSDoc where it counts
+
+I name things so the code reads as a statement of intent. A comment that explains what the code does is a signal that the code should be clearer. A comment that explains why a constraint exists — a hidden invariant, an upstream quirk — is worth writing.
+
+TSDoc belongs on public APIs where the caller can't see the implementation. Everywhere else, the code is the documentation.
+
+### 6:8 Declarative over imperative
+
+I reach for imperative code only when the abstraction doesn't exist yet. Declarative code describes what should happen; the reader doesn't have to simulate execution to understand it. When I find myself writing a loop to build a list, I ask whether `map`, `filter`, or `reduce` says the same thing more directly.
+
+The right abstraction makes intent visible and detail invisible.
+
+### 6:9 Composition over inheritance
+
+I build behaviour by combining small, focused pieces — not by reaching up an inheritance chain. Inheritance couples you to an ancestor you don't fully control; composition lets you swap parts independently. Most of the time, a hook, a higher-order component, or a plain function covers what inheritance would have done with less ceremony.
+
+I treat extending a class as a last resort, not a default pattern.
+
+### 6:10 Duplication is cheaper than the wrong abstraction
+
+I don't reach for an abstraction until I see the same shape three times and understand exactly what varies. A premature abstraction couples unrelated callers through a shared interface neither of them chose. When that interface needs to change for one caller, it breaks the others.
+
+Copy the code. Wait. When the pattern is clear, the right abstraction is obvious.
+
 ## Revisions
