@@ -16,11 +16,16 @@ export default defineConfig({
 		port: 8080,
 		host: "0.0.0.0",
 	},
+	// /principles became /taste. Keep the old URL working, but keep it out of
+	// the sitemap so crawlers only see the canonical one.
+	redirects: {
+		"/principles": "/taste",
+	},
 	integrations: [
 		mdx({
 			drafts: true,
 		}),
-		sitemap(),
+		sitemap({ filter: (page) => !page.includes("/principles") }),
 	],
 	markdown: {
 		remarkPlugins: [
