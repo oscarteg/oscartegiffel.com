@@ -3,8 +3,8 @@ import { SITE_DESCRIPTION, SITE_LOGO, SITE_TITLE, SITE_URL } from "../config";
 import { buildGraph } from "../json-ld";
 import type { Post } from "../models";
 import "../styles/global.css";
-import JsonLd from "./JsonLd.astro";
 import { ClientRouter } from "astro:transitions";
+import JsonLd from "./JsonLd.astro";
 
 export type Props = {
 	title?: string | undefined;
