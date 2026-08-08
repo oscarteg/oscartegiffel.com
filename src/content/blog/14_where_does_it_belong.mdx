@@ -39,7 +39,7 @@ Move up one layer. Check the count in your repository code before inserting.
 
 Use Redis for the counting, keep your database for persistence.
 
-**Upside:** Now we're cooking. Redis is designed for exactly this. Your database isn't being hammered. Atomic increments solve the race condition. The right data structure made the algorithm obvious. [Let data drive your design](/principles#let-data-drive-your-design). The logic is testable and the errors are clear.
+**Upside:** Now we're cooking. Redis is designed for exactly this. Your database isn't being hammered. Atomic increments solve the race condition. The right data structure made the algorithm obvious. [Let data drive your design](/taste#210-let-data-drive-your-design). The logic is testable and the errors are clear.
 
 **Downside:** Eventual consistency. Redis says 4,998 requests, your database says 5,000. For rate limiting, being off by a few is probably fine. But you've added a dependency. Redis goes down, your API stops working. You need fallback logic, monitoring, and someone who knows how to run Redis in production.
 
@@ -49,7 +49,7 @@ Push it to your infrastructure. Nginx, Envoy, or whatever sits in front of your 
 
 **Upside:** Requests never reach your application. Microseconds instead of milliseconds. The most performant option by far.
 
-**Downside:** Your gateway doesn't know about subscription tiers. It can rate limit by IP or header, but it doesn't understand your business rules. Want to add a burst feature for Black Friday? You're editing config files and restarting infrastructure instead of deploying code. And if you're picking this layer for "performance," have you actually [measured](/principles#measure-before-you-optimize) that the application layer is too slow? Don't optimize for a bottleneck you haven't proven exists.
+**Downside:** Your gateway doesn't know about subscription tiers. It can rate limit by IP or header, but it doesn't understand your business rules. Want to add a burst feature for Black Friday? You're editing config files and restarting infrastructure instead of deploying code. And if you're picking this layer for "performance," have you actually [measured](/taste#27-measure-before-you-optimize) that the application layer is too slow? Don't optimize for a bottleneck you haven't proven exists.
 
 ### The Client SDK
 
@@ -65,7 +65,7 @@ Three questions I ask myself:
 
 **What are my constraints?** 100 requests a day? Database triggers are fine. 100,000 a second? You need gateway-level or Redis. No ops team? Stay in the application layer where your team is comfortable.
 
-**What changes together?** If rate limits change with subscription tiers, that's application logic, not infrastructure. If limits are purely defensive against DDoS, that's infrastructure. [Things that change together should live together](/principles#the-code-that-changes-together-stays-together).
+**What changes together?** If rate limits change with subscription tiers, that's application logic, not infrastructure. If limits are purely defensive against DDoS, that's infrastructure. [Things that change together should live together](/taste#25-the-code-that-changes-together-stays-together).
 
 **What's the failure mode?** Database failures are catastrophic. Application failures are recoverable. Gateway failures are silent from the client's perspective. Where do you want your system to fail, and how visibly?
 
@@ -75,7 +75,7 @@ Real systems rarely pick just one layer. Defense in depth works: gateway for DDo
 
 I learned this the hard way. I once implemented rate limiting in database triggers at a startup. Clean, impossible to bypass, single source of truth. Then the product team wanted a grace period for customers whose payments failed. Simple requirement.
 
-It turned into a two-day database migration across three tables with a maintenance window. A five-line code change in the application layer became an infrastructure event. I'd chosen the wrong layer. Not because triggers are bad, but because my context (a startup where business logic changed weekly) made them the wrong choice. I picked clever when I should have picked [simple](/principles#choose-simple-over-clever).
+It turned into a two-day database migration across three tables with a maintenance window. A five-line code change in the application layer became an infrastructure event. I'd chosen the wrong layer. Not because triggers are bad, but because my context (a startup where business logic changed weekly) made them the wrong choice. I picked clever when I should have picked [simple](/taste#29-choose-simple-over-clever).
 
 Junior engineers ask "where does this go?" Senior engineers ask "what happens if I put it here instead?" The difference isn't knowledge. It's curiosity about consequences.
 
@@ -83,4 +83,4 @@ The Germans have a word for this: *Fingerspitzengefühl*. Fingertip feeling. The
 
 The right layer isn't about technical superiority. It's about honest assessment of your constraints. The startup choosing database triggers because they lack ops expertise isn't wrong. The enterprise choosing gateway-level limiting because they have a platform team isn't over-engineering. Both are making the right call for their context.
 
-Where does it belong? It depends on who you are, what you're building, and what you're willing to trade. [Adapt your approach to the context](/principles#adapt-your-approach-to-the-context).
+Where does it belong? It depends on who you are, what you're building, and what you're willing to trade. [Adapt your approach to the context](/taste#55-adapt-your-approach-to-the-context).
