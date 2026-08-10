@@ -26,3 +26,4 @@ pnpm-debug.log*
 .astro
 
 .omo/
+.playwright-mcp/
