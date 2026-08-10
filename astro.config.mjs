@@ -7,7 +7,7 @@ import remarkMath from "remark-math";
 import remarkToc from "remark-toc";
 import { SITE_URL } from "./src/config";
 
-import { remarkModifiedTime } from "./src/utils";
+import { rehypeBookHeadings, remarkModifiedTime } from "./src/utils";
 
 export default defineConfig({
 	site: SITE_URL,
@@ -33,7 +33,7 @@ export default defineConfig({
 			remarkMath,
 			[remarkToc, { heading: "toc", maxDepth: 3 }],
 		],
-		rehypePlugins: [rehypeKatex],
+		rehypePlugins: [rehypeKatex, rehypeBookHeadings],
 		shikiConfig: {
 			wrap: true,
 			// Muted themes, so code doesn't compete with the single Braun-orange

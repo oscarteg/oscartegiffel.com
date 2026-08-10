@@ -54,6 +54,70 @@ export const remarkModifiedTime: RehypePlugin = () => (_, file) => {
 	(file.data.astro as any).frontmatter.lastModified = result.toString();
 };
 
+const BOOK_SOURCE = "src/pages/taste.mdx";
+
+const BOOK_HEADINGS = {
+	h2: {
+		pattern: /^(Chapter \d+)( — )/,
+		parts: ["chapter__label", "chapter__sep", "chapter__title"],
+	},
+	h3: {
+		pattern: /^(\d+:\d+)( )/,
+		parts: ["verse__num", "verse__sep", "verse__title"],
+	},
+} as const;
+
+type HastNode = {
+	type: string;
+	tagName?: string;
+	value?: string;
+	properties?: Record<string, unknown>;
+	children?: HastNode[];
+};
+
+function span(className: string, children: HastNode[]): HastNode {
+	return {
+		type: "element",
+		tagName: "span",
+		properties: { className: [className] },
+		children,
+	};
+}
+
+function splitBookHeading(node: HastNode): void {
+	const rule = BOOK_HEADINGS[node.tagName as keyof typeof BOOK_HEADINGS];
+	const [lead, ...rest] = node.children ?? [];
+	if (!rule || lead?.type !== "text" || typeof lead.value !== "string") return;
+
+	const match = lead.value.match(rule.pattern);
+	if (!match) return;
+
+	const [prefix, label, separator] = match;
+	const [labelClass, separatorClass, titleClass] = rule.parts;
+	const remainder = lead.value.slice(prefix.length);
+
+	node.children = [
+		span(labelClass, [{ type: "text", value: label ?? "" }]),
+		span(separatorClass, [{ type: "text", value: separator ?? "" }]),
+		span(titleClass, [{ type: "text", value: remainder }, ...rest]),
+	];
+}
+
+function walk(node: HastNode, visit: (node: HastNode) => void): void {
+	visit(node);
+	for (const child of node.children ?? []) walk(child, visit);
+}
+
+/**
+ * The separator span looks redundant and is not: Astro derives heading slugs
+ * from concatenated text, so dropping the ` — ` or the space would silently
+ * rewrite every anchor on the page.
+ */
+export const rehypeBookHeadings: RehypePlugin = () => (tree, file) => {
+	if (!file.history[0]?.endsWith(BOOK_SOURCE)) return;
+	walk(tree as HastNode, splitBookHeading);
+};
+
 type GroupBy<T> = {
 	[key: string]: T[];
 };

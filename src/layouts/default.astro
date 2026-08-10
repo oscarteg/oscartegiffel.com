@@ -12,14 +12,7 @@ type Props = {
 	frontmatter?: {
 		title?: string;
 		description?: string;
-		/** Title-page eyebrow, printed above the title on an edition page. */
-		subtitle?: string;
-		/** Edition date. Its presence is what turns a page into a title page. */
-		edition?: string;
 		toc?: boolean;
-		markdownUrl?: string;
-		/** Pins each `##` group label while its section scrolls past. */
-		stickyGroups?: boolean;
 	};
 };
 
@@ -36,42 +29,16 @@ const title = propsTitle || frontmatter?.title || SITE_TITLE;
 const description =
 	propsDescription || frontmatter?.description || SITE_DESCRIPTION;
 const toc = frontmatter?.toc === true;
-const markdownUrl = frontmatter?.markdownUrl;
-const subtitle = frontmatter?.subtitle;
-const edition = frontmatter?.edition;
 ---
 
 <Body title={title} description={description} headings={headings} toc={toc} post={post}>
-  {markdownUrl && <Fragment slot="head"><link rel="alternate" type="text/markdown" href={new URL(markdownUrl, Astro.site).href} /></Fragment>}
-
   <!-- The shell owns the <main> landmark; this is just the prose scope. -->
-  <div class:list={[prose && "prose", frontmatter?.stickyGroups && "prose--sticky-groups"]}>
+  <div class:list={[prose && "prose"]}>
     <article class="reading">
-      {
-        /* An edition date turns the page into a title page: eyebrow and
-           edition stamp printed above the title. */
-        edition && (
-          <Fragment>
-            {subtitle && <p class="reading__subtitle">{subtitle}</p>}
-            <p class="reading__edition">First edition · {edition}</p>
-          </Fragment>
-        )
-      }
-
       {
         title && (
           <div class="reading__head">
             <h1>{title}</h1>
-            {markdownUrl && (
-              <a
-                class="reading__md"
-                href={markdownUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View as .md ↗
-              </a>
-            )}
           </div>
         )
       }
@@ -90,22 +57,6 @@ const edition = frontmatter?.edition;
 		max-width: 720px;
 	}
 
-	/* Title-page chrome. Same kicker voice as the rail: type and rules only,
-	   no box, no colour of its own. */
-	.reading__subtitle {
-		font: var(--text-mono-sm);
-		color: var(--text-muted);
-		margin: 0 0 4px;
-	}
-
-	.reading__edition {
-		font: var(--text-kicker);
-		letter-spacing: var(--track-kicker);
-		text-transform: uppercase;
-		color: var(--text-meta);
-		margin: 0 0 16px;
-	}
-
 	.reading__head {
 		display: flex;
 		align-items: baseline;
@@ -119,18 +70,6 @@ const edition = frontmatter?.edition;
 		letter-spacing: var(--track-tight);
 		color: var(--text-heading);
 		margin: 0 0 8px;
-	}
-
-	.reading__md {
-		font: var(--text-mono-sm);
-		color: var(--link);
-		text-decoration: none;
-		white-space: nowrap;
-		flex-shrink: 0;
-	}
-
-	.reading__md:hover {
-		color: var(--link-hover);
 	}
 
 	.reading__description {
@@ -194,21 +133,5 @@ const edition = frontmatter?.edition;
 
 	.prose .katex-display {
 		color: var(--tw-prose-body);
-	}
-
-	/* Group labels ride along with their section: a mono kicker over a 2px ink
-	   rule, pinned while the entries beneath it scroll past. */
-	.prose--sticky-groups :where(h2) {
-		position: sticky;
-		top: 0;
-		z-index: 1;
-		background: var(--surface-page);
-		border-bottom: var(--border-strong-w) solid var(--border-strong);
-		font: var(--text-kicker);
-		letter-spacing: var(--track-kicker);
-		text-transform: uppercase;
-		color: var(--text-muted);
-		padding: 12px 0 10px;
-		margin-bottom: 24px;
 	}
 </style>

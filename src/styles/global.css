@@ -13,7 +13,11 @@
    Only layer 1 is re-pointed for dark; every alias inherits.
    ============================================================ */
 
-:root {
+/* `.book` opts out of the theme by taking the ramp here and never being
+   matched by the dark rules below, which only ever target the root element.
+   A book is an object, not a surface: it stays paper on a dark desk. */
+:root,
+.book {
 	/* --- base neutrals (warm paper stack) --- */
 	--paper: #efebe3; /* page background */
 	--paper-raised: #e8e3d9; /* cards, code chips, raised fills */
@@ -223,6 +227,14 @@
 @theme {
 	--font-sans: "Helvetica Neue", Helvetica, "Archivo", system-ui, sans-serif;
 	--font-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
+
+	/* The deliberate exception to "the system has no serif": /taste is an
+	   object, not a page, so it gets a text face. Same strategy as
+	   --font-sans, and no webfont — a book that arrives late is worse than
+	   one set in Georgia. */
+	--font-serif:
+		"Iowan Old Style", Charter, "Charter BT", Palatino, "Palatino Linotype",
+		Georgia, serif;
 }
 
 /* Nothing authors against `dark:` — the semantic aliases handle the theme on
