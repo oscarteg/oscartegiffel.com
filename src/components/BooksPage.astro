@@ -1,4 +1,5 @@
 ---
+
 import { getCollection } from "astro:content";
 import Body from "./Body.astro";
 import BookCover from "./BookCover.astro";
@@ -73,7 +74,7 @@ const stars = (rating: number) => "★".repeat(rating);
         current && (
           <>
             Currently reading <strong>{current.data.title}</strong> by {current.data.author}
-            {reading.length > 1 ? `, and ${reading.length - 1} more.` : "."}
+                      {reading.length > 1 ? `, and ${reading.length - 1} more.` : "."}
           </>
         )
       }
@@ -96,25 +97,6 @@ const stars = (rating: number) => "★".repeat(rating);
             </li>
           ))}
         </ul>
-
-        <dl class="facts">
-          <div>
-            <dt class="label facts__label">Reading</dt>
-            <dd class="facts__value">
-              {reading.length > 0
-                ? reading.map((book) => `${book.data.title} — ${book.data.author}`).join(", ")
-                : "Between books"}
-            </dd>
-          </div>
-          <div>
-            <dt class="label facts__label">Shelf</dt>
-            <dd class="facts__value">Read, reading and to-read — with ratings where I felt strongly</dd>
-          </div>
-          <div>
-            <dt class="label facts__label">Source</dt>
-            <dd class="facts__value">One YAML file, the source of truth</dd>
-          </div>
-        </dl>
       </section>
     )
   }

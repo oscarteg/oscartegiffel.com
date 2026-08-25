@@ -1,5 +1,6 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
+
 	"css": {
 		"parser": {
 			"cssModules": true,
@@ -14,6 +15,9 @@
 	},
 	"linter": {
 		"enabled": true
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true
 	},
 	"overrides": [
 		{
