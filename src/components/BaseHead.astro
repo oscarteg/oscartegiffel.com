@@ -1,5 +1,5 @@
 ---
-import { SITE_DESCRIPTION, SITE_LOGO, SITE_TITLE, SITE_URL } from "../config";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../config";
 import { buildGraph } from "../json-ld";
 import type { Post } from "../models";
 import "../styles/global.css";
@@ -9,8 +9,6 @@ import JsonLd from "./JsonLd.astro";
 export type Props = {
 	title?: string | undefined;
 	description?: string | undefined;
-	image?: string;
-	logo?: string;
 	post?: Post | undefined;
 };
 
@@ -19,12 +17,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
 	title = SITE_TITLE,
 	description = SITE_DESCRIPTION,
-	logo = SITE_LOGO,
 	post,
 } = Astro.props;
 
 const path = Astro.url.pathname;
 const pageUrl = `${SITE_URL}${path}`;
+
+/* Every page shares a card except the ones that earned their own: each post
+   and the taste bible. Rendered at build by /og/[slug].png. */
+const ogSlug = post
+	? post.id
+	: path.replace(/\/$/, "") === "/taste"
+		? "taste"
+		: "home";
+const ogImage = new URL(`/og/${ogSlug}.png`, Astro.site);
 
 const jsonLdGraph = post
 	? buildGraph({ type: "blog-post", post, url: pageUrl })
@@ -46,7 +52,7 @@ const jsonLdGraph = post
 <!-- Paper only: form controls and scrollbars stay light. -->
 <meta name="color-scheme" content="light" />
 
-<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 <!--
   The grotesk carries every page; preloading the latin subset avoids a
@@ -77,14 +83,16 @@ const jsonLdGraph = post
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(logo, Astro.url)} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(logo, Astro.url)} />
+<meta property="twitter:image" content={ogImage} />
 
 <meta content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw" name="google-site-verification" />
 

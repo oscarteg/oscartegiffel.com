@@ -47,7 +47,7 @@ export const personNode = {
 	image: {
 		"@type": "ImageObject",
 		"@id": PERSON_IMAGE_ID,
-		url: `${SITE_URL}/logo.png`,
+		url: `${SITE_URL}/og/home.png`,
 		caption: "Oscar te Giffel",
 	},
 	sameAs: siteMetadata.socials.map((s) => s.url),

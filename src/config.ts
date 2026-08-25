@@ -1,7 +1,7 @@
 export const SITE_TITLE = "Oscar te Giffel";
 export const SITE_DESCRIPTION = "Finding meaning in code, life and humans";
 export const SITE_URL = "https://oscartegiffel.com";
-export const SITE_LOGO = "/logo.png";
+export const SITE_LOGO = "/og/home.png";
 
 export const siteMetadata = {
 	title: SITE_TITLE,
