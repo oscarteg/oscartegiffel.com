@@ -33,11 +33,11 @@ export const siteMetadata = {
 				company: "DPG Media",
 				via: "Freelance",
 				description:
-					"Started as a Senior Developer for the Freemium brands (AD, HLN); became the person teams across the company reach out to for a second opinion on code, vision and architecture. Introduced React best practices — and frontend as a whole.",
+					"Started as a Senior Developer for the Publishing Services; became the person teams across the company reach out to for a second opinion on code, vision and architecture. Introduced React best practices and frontend development as a whole.",
 				highlights: [
 					{
 						title: "Legacy migration",
-						body: "led the Thymeleaf → Next.js transition for high-traffic article and dossier pages, with heavy emphasis on performance and stability.",
+						body: "led the Javascript → React transition for high-traffic article and dossier pages, with heavy emphasis on developer experience.",
 					},
 					{
 						title: "Design bridge",
@@ -45,11 +45,7 @@ export const siteMetadata = {
 					},
 					{
 						title: "Guardrail for quality",
-						body: "gatekeeper for the Next.js and UI repositories; no shortcuts that hurt us later, even when the pressure was on.",
-					},
-					{
-						title: "Team rhythm",
-						body: "re-energized a team in a rut by shifting focus to solid, high-quality software instead of just rushing to hit deadlines.",
+						body: "gatekeeper for the React and UI repositories; no shortcuts that hurt us later, even when the pressure was on.",
 					},
 				],
 				stack: ["React", "Next.js", "TypeScript", "Kotlin"],
@@ -196,7 +192,11 @@ export const uses: UseCategory[] = [
 	{
 		title: "Gear",
 		items: [
-			{ name: "Backpack" },
+			{
+				name: "Arc'teryx Mantis 26",
+				description: "Daily backpack.",
+				href: "https://arcteryx.com/products/mantis-26-backpack",
+			},
 			{
 				name: "Bellroy Tech Kit Compact",
 				description: "Cable case.",

@@ -1,9 +1,9 @@
 ---
+
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../config";
 import { buildGraph } from "../json-ld";
 import type { Post } from "../models";
 import "../styles/global.css";
-import { ClientRouter } from "astro:transitions";
 import JsonLd from "./JsonLd.astro";
 
 export type Props = {
@@ -44,9 +44,6 @@ const jsonLdGraph = post
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-<!-- Client-side routing (View Transitions) so ambient audio survives navigation. -->
-<ClientRouter />
 
 
 <!-- Paper only: form controls and scrollbars stay light. -->

@@ -404,8 +404,7 @@ pre.astro-code {
 	}
 
 	.masthead,
-	.colophon,
-	.ambient {
+	.colophon {
 		display: none !important;
 	}
 

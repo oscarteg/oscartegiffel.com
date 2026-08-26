@@ -1,4 +1,5 @@
 ---
+
 import Body from "../components/Body.astro";
 import {
 	education,
@@ -124,15 +125,11 @@ import {
 <script>
 	// Enhancement only: the button just opens the print dialog. Without JS
 	// the button stays hidden and Cmd/Ctrl+P does the same thing.
-	function initPrint(): void {
-		const button = document.querySelector<HTMLButtonElement>("[data-print]");
-		if (!button) return;
+	const button = document.querySelector<HTMLButtonElement>("[data-print]");
+	if (button) {
 		button.hidden = false;
 		button.addEventListener("click", () => window.print());
 	}
-
-	initPrint();
-	document.addEventListener("astro:page-load", initPrint);
 </script>
 
 <style>

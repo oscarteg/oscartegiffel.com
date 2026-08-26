@@ -1,7 +1,7 @@
 ---
+
 import BaseHead from "../components/BaseHead.astro";
 import type { Post } from "../models";
-import AmbientAudio from "./AmbientAudio.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 
@@ -21,8 +21,6 @@ const { title, description, post } = Astro.props;
   </head>
 
   <body>
-    <AmbientAudio />
-
     <div class="shell">
       <SiteHeader />
 
