@@ -205,6 +205,21 @@ export const uses: UseCategory[] = [
 		],
 	},
 	{
+		title: "Cable pouch",
+		items: [
+			{ name: "Apple MagSafe Duo Charger" },
+			{ name: "4-in-1 GaN charger", description: "100 W." },
+			{ name: "UGREEN Nexode power bank", description: "25,000 mAh, 200 W." },
+			{ name: "SanDisk USB stick", description: "256 GB." },
+			{ name: "UGREEN USB-C cable", description: "240 W, 1 m." },
+			{ name: "UGREEN USB-C charging cable", description: "2 m." },
+			{ name: "USB-C to USB-A cable" },
+			{ name: "OWC Thunderbolt 4 cable" },
+			{ name: "USB-A to micro-USB cable" },
+			{ name: "USB-C to MagSafe 3 cable" },
+		],
+	},
+	{
 		title: "Accessories",
 		items: [
 			{ name: "iPhone 15 Pro" },
