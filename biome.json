@@ -1,11 +1,28 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
 
 	"css": {
 		"parser": {
 			"cssModules": true,
 			"tailwindDirectives": true
 		}
+	},
+	"files": {
+		"includes": [
+			"**",
+			"!**/*.astro",
+			"!.astro",
+			"!.claude",
+			"!.codegraph",
+			"!.devbox",
+			"!.jj",
+			"!.omo",
+			"!.vscode",
+			"!devbox.json",
+			"!dist",
+			"!node_modules",
+			"!public"
+		]
 	},
 	"formatter": {
 		"enabled": true

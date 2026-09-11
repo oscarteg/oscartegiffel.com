@@ -12,5 +12,6 @@
 			"@layouts/*": ["./src/layouts/*"]
 		},
 		"jsx": "preserve"
-	}
+	},
+	"exclude": ["apps"]
 }

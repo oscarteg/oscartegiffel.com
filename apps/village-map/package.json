@@ -1,0 +1,33 @@
+{
+  "name": "village-map",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "check": "biome check --write .",
+    "fetch-villages": "bun scripts/fetch-villages.ts"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.16.1",
+    "@tailwindcss/vite": "4.3.0",
+    "maplibre-gl": "^5.24.0",
+    "solid-js": "^1.9.13",
+    "tailwindcss": "4.3.0",
+    "valibot": "^1.4.1"
+  },
+  "devDependencies": {
+    "@turf/boolean-point-in-polygon": "^7.3.5",
+    "@turf/helpers": "^7.3.5",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^26.0.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.16",
+    "vite-plugin-solid": "^2.11.12",
+    "wretch": "^3.0.9"
+  }
+}
