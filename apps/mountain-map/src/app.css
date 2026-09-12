@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+@theme {
+  --color-rock-50: #f6f6f5;
+  --color-rock-100: #e7e7e4;
+  --color-rock-200: #d0d0ca;
+  --color-rock-400: #9a9a90;
+  --color-rock-600: #5f5f57;
+  --color-rock-800: #33332e;
+  --color-rock-900: #1f1f1c;
+  --color-rock-950: #141412;
+
+  --color-glacier-300: #8fc7d8;
+  --color-glacier-500: #3d8fa8;
+  --color-glacier-700: #235d70;
+
+  --color-summit-400: #e0a34a;
+  --color-summit-500: #c9822a;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-rock-950 text-rock-100;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-glacier-300;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
