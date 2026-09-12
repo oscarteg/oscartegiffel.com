@@ -12,10 +12,7 @@ env:
 
 jobs:
   build-and-push:
-    # Self-hosted: the content fetch below talks to the CMS at scriptorium:1337
-    # on the internal network. Authelia gates it at the edge, so a GitHub-hosted
-    # runner cannot reach it.
-    runs-on: [self-hosted, citadel]
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
