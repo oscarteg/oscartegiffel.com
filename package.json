@@ -9,7 +9,9 @@
 		"dev": "bunx --bun astro dev",
 		"preview": "bunx --bun astro preview",
 		"astro": "bunx --bun astro",
-		"build": "bunx --bun astro check && tsc --noEmit && bunx --bun astro build",
+		"build": "bun run fetch-content && bunx --bun astro check && tsc --noEmit && bunx --bun astro build",
+		"fetch-content": "bun scripts/fetch-content.ts",
+		"test": "bun test",
 		"format": "biome format --write src/",
 		"lint": "biome lint --write src/",
 		"check": "biome check --write src/",
@@ -41,7 +43,9 @@
 		"sharp": "^0.35.3",
 		"tailwind-merge": "^3.6.0",
 		"tailwindcss": "^4.3.0",
-		"tiny-invariant": "^1.3.3"
+		"tiny-invariant": "^1.3.3",
+		"wretch": "^3.0.9",
+		"zod": "^4.4.3"
 	},
 	"devDependencies": {
 		"@astrojs/tailwind": "6.0.2",

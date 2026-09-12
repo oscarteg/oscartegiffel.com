@@ -7,6 +7,7 @@
 			}
 		],
 		"strictNullChecks": true,
+		"types": ["bun"],
 		"paths": {
 			"@components/*": ["./src/components/*"],
 			"@layouts/*": ["./src/layouts/*"]
