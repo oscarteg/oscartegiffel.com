@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import ky from "ky";
+import wretch from "wretch";
+import { retry } from "wretch/middlewares";
 import * as v from "valibot";
 import {
   type MetadataResponse,
@@ -17,7 +18,7 @@ const WDQS_URL = "https://query.wikidata.org/sparql";
 const USER_AGENT = "peaks-pipeline/1.0 (https://github.com/oscarteg)";
 const REQUEST_INTERVAL_MS = 1_100;
 const METADATA_BATCH_SIZE = 100;
-const OUTPUT_PATH = resolve(import.meta.dir, "../data/peaks.json");
+const OUTPUT_PATH = resolve(import.meta.dir, "../public/data/peaks.json");
 
 const ELEVATION_BANDS = [
   { label: "4000-5000", minimum: 4_000, maximum: 5_000 },
@@ -106,17 +107,26 @@ ORDER BY ?item
 `;
 }
 
+// WDQS enforces a 60s query timeout and rate-limits aggressively, so stay just
+// under it and back off on the statuses it uses to shed load.
+const WDQS_TIMEOUT_MS = 59_000;
+const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504]);
+
 async function requestQuery(query: string): Promise<unknown> {
-  return ky
-    .get(WDQS_URL, {
-      headers: {
-        Accept: "application/sparql-results+json",
-        "User-Agent": USER_AGENT,
-      },
-      searchParams: { query },
-      timeout: 59_000,
-      retry: { limit: 2, methods: ["get"], statusCodes: [429, 500, 502, 503, 504] },
+  return wretch(`${WDQS_URL}?${new URLSearchParams({ query })}`)
+    .middlewares([
+      retry({
+        maxAttempts: 2,
+        retryOnNetworkError: true,
+        until: (response) => !!response && !RETRYABLE_STATUS.has(response.status),
+      }),
+    ])
+    .headers({
+      Accept: "application/sparql-results+json",
+      "User-Agent": USER_AGENT,
     })
+    .options({ signal: AbortSignal.timeout(WDQS_TIMEOUT_MS) })
+    .get()
     .json<unknown>();
 }
 

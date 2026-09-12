@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { applyFilters, bandOf, emptyFilterState, stateOf } from "./filters";
 import type { BandId, FilterState, PeakState } from "./filters";
 import type { Ascent, Peak } from "./schemas";
