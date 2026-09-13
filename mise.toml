@@ -1,0 +1,5 @@
+# Dev toolchain, managed by mise. Run: mise trust && mise install
+
+[tools]
+pnpm = "latest"
+node = "latest"

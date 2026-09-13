@@ -1,4 +1,3 @@
-import { afterEach, describe, expect, test } from "bun:test";
 import {
 	access,
 	mkdir,
@@ -9,6 +8,7 @@ import {
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { afterEach, describe, expect, test } from "vitest";
 import { type Article, type Book, regenerateContent } from "./fetch-content";
 
 const temporaryRoots: string[] = [];
@@ -66,12 +66,12 @@ describe("regenerateContent", () => {
 				await readFile(join(root, "src/content/books/books.yaml"), "utf8")
 			).match(/^- id:/gm),
 		).toHaveLength(245);
-		expect(
-			await access(join(root, "src/content/blog/images/article-0.webp")),
-		).toBeNull();
-		expect(
-			await access(join(root, "src/content/books/covers/book-0.jpg")),
-		).toBeNull();
+		await expect(
+			access(join(root, "src/content/blog/images/article-0.webp")),
+		).resolves.toBeUndefined();
+		await expect(
+			access(join(root, "src/content/books/covers/book-0.jpg")),
+		).resolves.toBeUndefined();
 	});
 
 	test("keeps existing content when a media download fails", async () => {

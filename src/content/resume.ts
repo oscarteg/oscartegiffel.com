@@ -1,6 +1,6 @@
 /**
  * The résumé, as data. Edit this file to change /resume; the page and the
- * print stylesheet read from it. Ported from the old standalone resume app.
+ * print stylesheet read from it.
  */
 
 export type Contact = { label: string; value: string; href: string };
@@ -50,7 +50,7 @@ export const person = {
 
 export const profile = {
 	lead: "Hi, I'm Oscar — Freelance Tech Lead through Createch and currently senior frontend at DPG Media. Previously IT Tech Lead at Pixcelium (MedTech compliance SaaS) and Chapter Lead Frontend at HeadFWD.",
-	body: "Eight years shipping systems — Vanilla JS → React, PHP → Kotlin, monolith → microservices, CRUD forms → xState machines. I care about more than the stack: aligning teams and building a healthy engineering culture is where I do my best work. Depth in frontend architecture, Domain-Driven Design, TypeScript, and team leadership. Next step: principal / staff work — technical strategy and mentoring.",
+	body: "Eight years shipping systems, from Vanilla JS → React, PHP → Kotlin, monolith → microservices, CRUD forms → xState machines. I care about more than the stack: aligning teams and teaching best practices. Depth in frontend architecture, Domain-Driven Design, TypeScript. Next step: principal / staff work — technical strategy and mentoring.",
 };
 
 export const skills: Skill[] = [

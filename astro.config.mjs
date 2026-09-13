@@ -1,5 +1,6 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import solidJs from "@astrojs/solid-js";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
@@ -25,7 +26,11 @@ export default defineConfig({
 		mdx({
 			drafts: true,
 		}),
-		sitemap({ filter: (page) => !page.includes("/principles") }),
+		sitemap({
+			filter: (page) =>
+				!page.includes("/principles") && !page.includes("/village-map/v/"),
+		}),
+		solidJs(),
 	],
 	markdown: {
 		remarkPlugins: [

@@ -5,10 +5,12 @@ Source for [oscartegiffel.com](https://oscartegiffel.com) — Astro + TailwindCS
 ## Development
 
 ```sh
-bun install
-bun run dev       # local dev server
-bun run build     # astro check + tsc + astro build
-bun run check     # biome format + lint + organize imports
+mise install      # Node + pnpm from mise.toml
+pnpm install
+pnpm dev          # local dev server
+pnpm build        # astro check + tsc + astro build
+pnpm check        # biome format + lint + organize imports
+pnpm test         # vitest
 ```
 
 ## Committing & pushing with jj
@@ -26,7 +28,7 @@ jj log                                  # recent revisions
 jj describe -m "feat: add work experience section"
 
 # 3. Run checks before publishing
-bun run check && bun run build
+pnpm check && pnpm build
 
 # 4. Start a new empty change on top, advance main, push
 jj new

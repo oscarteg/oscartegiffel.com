@@ -7,12 +7,12 @@
 			}
 		],
 		"strictNullChecks": true,
-		"types": ["bun"],
+		"types": ["node"],
 		"paths": {
 			"@components/*": ["./src/components/*"],
 			"@layouts/*": ["./src/layouts/*"]
 		},
-		"jsx": "preserve"
-	},
-	"exclude": ["apps"]
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js"
+	}
 }

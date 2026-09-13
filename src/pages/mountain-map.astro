@@ -1,0 +1,13 @@
+---
+
+import { App as MountainMap } from "../features/mountain-map/App";
+import "../features/mountain-map/app.css";
+import Standalone from "../layouts/standalone.astro";
+---
+
+<Standalone
+  title="Mountain map"
+  description="A world map of mountain peaks above 4000 metres, and a log of the ones I have climbed."
+>
+  <MountainMap client:only="solid-js" />
+</Standalone>

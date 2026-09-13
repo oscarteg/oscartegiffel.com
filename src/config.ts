@@ -37,15 +37,11 @@ export const siteMetadata = {
 				highlights: [
 					{
 						title: "Legacy migration",
-						body: "led the Javascript → React transition for high-traffic article and dossier pages, with heavy emphasis on developer experience.",
-					},
-					{
-						title: "Design bridge",
-						body: "initiated a multidimensional token system that works across brands, built with designers on Style Dictionary and Token Studio.",
+						body: "led the Javascript → React transition for pages and embeds in articles with emphasis developer experience.",
 					},
 					{
 						title: "Guardrail for quality",
-						body: "gatekeeper for the React and UI repositories; no shortcuts that hurt us later, even when the pressure was on.",
+						body: "gatekeeper for the React and UI repositories",
 					},
 				],
 				stack: ["React", "Next.js", "TypeScript", "Kotlin"],
@@ -72,7 +68,7 @@ export const siteMetadata = {
 			},
 		],
 		projectsIntro:
-			"Side projects double as my lab — each one solves a real problem for myself or my family.",
+			"Side projects double as my lab each one solves a real problem for myself or my family.",
 		projects: [
 			{
 				name: "JustWhisk",

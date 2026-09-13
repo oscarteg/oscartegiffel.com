@@ -54,7 +54,7 @@ export function serializeBooks(books: readonly Book[]): string {
 			: []),
 		...(book.featured ? ["  featured: true"] : []),
 	]);
-	return `# Generated from Strapi. Run \`bun run fetch-content\` to refresh.\n\n${entries.join("\n")}\n`;
+	return `# Generated from Strapi. Run \`pnpm fetch-content\` to refresh.\n\n${entries.join("\n")}\n`;
 }
 
 function quote(value: string): string {

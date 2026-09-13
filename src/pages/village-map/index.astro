@@ -1,0 +1,10 @@
+---
+
+import { App as VillageMap } from "../../features/village-map/app";
+import "../../features/village-map/styles/app.css";
+import Standalone from "../../layouts/standalone.astro";
+---
+
+<Standalone title="Village Map">
+  <VillageMap client:only="solid-js" />
+</Standalone>

@@ -1,0 +1,26 @@
+---
+
+import type { InferGetStaticPropsType } from "astro";
+import villages from "../../../../public/village-map/data/villages.json";
+import { App as VillageMap } from "../../../features/village-map/app";
+import "../../../features/village-map/styles/app.css";
+import Standalone from "../../../layouts/standalone.astro";
+
+/** One page per village, so /village-map/v/<id> deep links work on any static host. */
+export function getStaticPaths() {
+	return villages.villages
+		.filter((village) => village.type !== "hamlet")
+		.map((village) => ({
+			params: { id: village.id },
+			props: { villageId: village.id },
+		}));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { villageId } = Astro.props;
+---
+
+<Standalone title="Village Map">
+  <VillageMap client:only="solid-js" villageId={villageId} />
+</Standalone>

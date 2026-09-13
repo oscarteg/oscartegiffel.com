@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import {
 	type Article,
 	type Book,
@@ -106,7 +106,7 @@ describe("serializeBooks", () => {
 				featured: false,
 			},
 		];
-		const expected = `# Generated from Strapi. Run \`bun run fetch-content\` to refresh.
+		const expected = `# Generated from Strapi. Run \`pnpm fetch-content\` to refresh.
 
 - id: "a-book"
   title: "A Book: With Punctuation"
