@@ -12,7 +12,6 @@ const isActive = (href: string) =>
 const items = [
 	{ label: "Work", href: "/" },
 	{ label: "Writing", href: "/blog" },
-	{ label: "Books", href: "/books" },
 	{ label: "Taste", href: "/taste" },
 	{ label: "Resume", href: "/resume" },
 ].map((item) => ({ ...item, active: isActive(item.href) }));
